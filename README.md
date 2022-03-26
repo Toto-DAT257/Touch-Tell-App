@@ -16,3 +16,4 @@ To be added...
 
 ## Documentation
 All documentations can be found [here](documents).
+The design can be found [here](https://www.figma.com/file/MEnIyDx8N99qo5V0hlLP9L/Design-Theme?node-id=0%3A1).
