@@ -1,8 +1,0 @@
-1. what do I want to learn or understand better?
-  Hur man använder Github och andra hemsidor för att få projektet att fungera så smidigt som möjligt
-2. how can I help someone else, or the entire team, to learn something new?
-  Genom att ställa frågor och vara engagerad i allt vi gör. Dessutom ska jag försöka vara påläst på det som ska göras.
-3. what is my contribution towards the team’s use of Scrum?
-  Denna vecka har mest handlat om att komma in I allt och därför har jag nog inte bidragit med så mycket mer än att jag fixade ett gemensamt schema där vi kan lägga in deadlines, möten och när folk är iväg.
-4. what is my contribution towards the team’s deliveries?
-  Jag skulle säga att det är samma som ovan, samt att jag har försökt hålla mig aktiv i vår gemensamma chatt-kanal
