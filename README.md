@@ -17,5 +17,5 @@ _This project is created by the group Toto. It is apart of the course Agile soft
 To be added...
 
 ## Documentation
-All documentations can be found [here](documents).
+All documentations can be found [here](Documentation).
 The design can be found [here](https://www.figma.com/file/MEnIyDx8N99qo5V0hlLP9L/Design-Theme?node-id=0%3A1).
