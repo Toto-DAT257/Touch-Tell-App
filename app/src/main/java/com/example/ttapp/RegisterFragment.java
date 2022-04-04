@@ -1,0 +1,53 @@
+package com.example.ttapp;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+
+public class RegisterFragment extends Fragment {
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
+
+        // Get views
+        EditText codeEditText = view.findViewById(R.id.editTextIdCode);
+        Button confirmButton = view.findViewById(R.id.buttonConfirmIdCode);
+
+        confirmButton.setOnClickListener(view1 -> {
+            String code = codeEditText.getText().toString();
+
+            if (code.isEmpty()) { // TODO Check if code is valid
+                // display error message
+            } else {
+                // Save code in activity preferences
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("code", code);
+                editor.apply();
+
+                // Go to survey fragment
+                // Navigation.findNavController(view).navigate(R.id.);
+            }
+
+
+        });
+
+
+
+        return view;
+    }
+
+}
