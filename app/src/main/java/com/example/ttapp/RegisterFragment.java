@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class RegisterFragment extends Fragment {
@@ -25,13 +26,18 @@ public class RegisterFragment extends Fragment {
         // Get views
         EditText codeEditText = view.findViewById(R.id.editTextIdCode);
         Button confirmButton = view.findViewById(R.id.buttonConfirmIdCode);
+        TextView errorCodeIsEmpty = view.findViewById(R.id.error_code_is_empty);
 
         confirmButton.setOnClickListener(view1 -> {
             String code = codeEditText.getText().toString();
 
-            if (code.isEmpty()) { // TODO Check if code is valid
+            if (code.isEmpty()) {
                 // display error message
+                errorCodeIsEmpty.setVisibility(View.VISIBLE);
             } else {
+                // hide error message
+                errorCodeIsEmpty.setVisibility(View.INVISIBLE);
+
                 // Save code in activity preferences
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
@@ -44,9 +50,6 @@ public class RegisterFragment extends Fragment {
 
 
         });
-
-
-
         return view;
     }
 

@@ -3,4 +3,5 @@
     <string name="app_name">TTApp</string>
     <string name="enter_code">Ange din ID kod</string>
     <string name="confirm_button">Bekräfta</string>
+    <string name="error_code_is_empty">Inte giltig: du behöver skriva in din kod</string>
 </resources>
