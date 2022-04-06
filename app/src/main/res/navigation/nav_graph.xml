@@ -9,5 +9,13 @@
         android:id="@+id/registerFragment"
         android:name="com.example.ttapp.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_firstQuestionFragment"
+            app:destination="@id/firstQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstQuestionFragment"
+        android:name="com.example.ttapp.fragments.FirstQuestionFragment"
+        android:label="FirstQuestionFragment" />
 </navigation>
