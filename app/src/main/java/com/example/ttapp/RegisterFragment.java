@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class RegisterFragment extends Fragment {
                 editor.apply();
 
                 // Go to survey fragment
-                // Navigation.findNavController(view).navigate(R.id.);
+                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
             }
 
 
