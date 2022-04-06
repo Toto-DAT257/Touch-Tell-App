@@ -30,13 +30,24 @@ public class FirstQuestionFragment extends QuestionFragment{
 
     @Override
     protected void setQuestion() {
+        // is probably going to be changed further on
+        question1 = view.findViewById(R.id.question1);
 
     }
 
     @Override
     protected void setAnsweroptions() {
+        // is probably going to be changed further on
+
         firstQAnsweroption1 = view.findViewById(R.id.firstQAnsweroption1);
         firstQAnsweroption2 = view.findViewById(R.id.firstQAnsweroption2);
     }
+
+    @Override
+    protected void setAnsweroptionsOnclicklisteners() {
+        // here the onclicklisteners should be set
+
+    }
+
 
 }
