@@ -9,4 +9,7 @@
     <string name="first_q_answeroption1">Yes</string>
     <string name="first_q_answeroption2">No</string>
 
+    <!-- done with survey response -->
+    <string name="done_with_survey_response_text">Thanks for your participation!</string>
+
 </resources>
