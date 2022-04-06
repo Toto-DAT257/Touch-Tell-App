@@ -1,4 +1,4 @@
-package com.example.ttapp;
+package com.example.ttapp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
