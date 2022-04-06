@@ -6,4 +6,7 @@
 
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>
+    <string name="first_q_answeroption1">Yes</string>
+    <string name="first_q_answeroption2">No</string>
+
 </resources>

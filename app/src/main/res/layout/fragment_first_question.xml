@@ -15,4 +15,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/firstQAnsweroption1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_q_answeroption1"
+        app:layout_constraintBottom_toBottomOf="@+id/firstQAnsweroption2"
+        app:layout_constraintEnd_toStartOf="@+id/firstQAnsweroption2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/firstQAnsweroption2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_q_answeroption2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
