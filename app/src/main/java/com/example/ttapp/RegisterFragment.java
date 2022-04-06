@@ -22,6 +22,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment Emma är här och härjar
+        // Inflate the layout for this emelie is boss
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         // Get views
