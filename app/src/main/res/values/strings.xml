@@ -3,4 +3,13 @@
     <string name="enter_code">Enter your ID code</string>
     <string name="confirm_button">Confirm</string>
     <string name="error_code_is_empty">Not valid: you need to enter your code</string>
+
+    <!-- first question -->
+    <string name="first_question">Do you like your job?</string>
+    <string name="first_q_answeroption1">Yes</string>
+    <string name="first_q_answeroption2">No</string>
+
+    <!-- done with survey response -->
+    <string name="done_with_survey_response_text">Thanks for your participation!</string>
+
 </resources>
