@@ -19,6 +19,8 @@
     <fragment
         android:id="@+id/firstQuestionFragment"
         android:name="com.example.ttapp.fragments.FirstQuestionFragment"
+        android:label="FirstQuestionFragment"
+        tools:layout="@layout/fragment_first_question"/>
         android:label="FirstQuestionFragment" >
         <action
             android:id="@+id/action_firstQuestionFragment_to_doneWithSurveyFragment"
