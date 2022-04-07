@@ -11,6 +11,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ttapp.viewmodel.SurveyViewModel;
 
+/**
+ * An abstract class for a base fragment with a question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg, Amanda Cyrén
+ */
 public abstract class QuestionFragment extends Fragment {
 
     View view;

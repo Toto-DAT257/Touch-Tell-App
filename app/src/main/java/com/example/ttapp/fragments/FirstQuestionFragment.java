@@ -1,14 +1,24 @@
 package com.example.ttapp.fragments;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
+
 import com.example.ttapp.R;
 import com.example.ttapp.viewmodel.SurveyViewModel;
 
+/**
+ * Class for a fragment that presents the first question in the survey
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg, Amanda Cyrén
+ */
 public class FirstQuestionFragment extends QuestionFragment{
 
     private TextView question1;
@@ -26,7 +36,6 @@ public class FirstQuestionFragment extends QuestionFragment{
     protected void setQuestion() {
         // is probably going to be changed further on
         question1 = view.findViewById(R.id.question1);
-
     }
 
     @Override
@@ -37,10 +46,15 @@ public class FirstQuestionFragment extends QuestionFragment{
         firstQAnsweroption2 = view.findViewById(R.id.firstQAnsweroption2);
     }
 
+    // Now it only navigates to the final response fragment
     @Override
     protected void setAnsweroptionsOnclicklisteners() {
-        // here the onclicklisteners should be set
-
+        firstQAnsweroption1.setOnClickListener(view1 -> {
+            //Navigation.findNavController(view).navigate(R.id.);
+        });
+        firstQAnsweroption2.setOnClickListener(view1 -> {
+            //Navigation.findNavController(view).navigate(R.id.);
+        });
     }
 
 
