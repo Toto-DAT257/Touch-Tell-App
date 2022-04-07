@@ -17,5 +17,13 @@
     <fragment
         android:id="@+id/firstQuestionFragment"
         android:name="com.example.ttapp.fragments.FirstQuestionFragment"
-        android:label="FirstQuestionFragment" />
+        android:label="FirstQuestionFragment" >
+        <action
+            android:id="@+id/action_firstQuestionFragment_to_doneWithSurveyFragment"
+            app:destination="@id/doneWithSurveyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doneWithSurveyFragment"
+        android:name="com.example.ttapp.fragments.DoneWithSurveyFragment"
+        android:label="DoneWithSurveyFragment" />
 </navigation>
