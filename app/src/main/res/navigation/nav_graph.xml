@@ -12,18 +12,23 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_firstQuestionFragment"
-            app:destination="@id/firstQuestionFragment" />
+            app:destination="@id/firstQuestionFragment"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
+
     <fragment
         android:id="@+id/firstQuestionFragment"
         android:name="com.example.ttapp.fragments.FirstQuestionFragment"
         android:label="FirstQuestionFragment" >
         <action
             android:id="@+id/action_firstQuestionFragment_to_doneWithSurveyFragment"
-            app:destination="@id/doneWithSurveyFragment" />
+            app:destination="@id/doneWithSurveyFragment"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
+
     <fragment
         android:id="@+id/doneWithSurveyFragment"
         android:name="com.example.ttapp.fragments.DoneWithSurveyFragment"
         android:label="DoneWithSurveyFragment" />
+
 </navigation>
