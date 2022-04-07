@@ -50,10 +50,10 @@ public class FirstQuestionFragment extends QuestionFragment{
     @Override
     protected void setAnsweroptionsOnclicklisteners() {
         firstQAnsweroption1.setOnClickListener(view1 -> {
-            //Navigation.findNavController(view).navigate(R.id.);
+            Navigation.findNavController(view).navigate(R.id.action_firstQuestionFragment_to_doneWithSurveyFragment);
         });
         firstQAnsweroption2.setOnClickListener(view1 -> {
-            //Navigation.findNavController(view).navigate(R.id.);
+            Navigation.findNavController(view).navigate(R.id.action_firstQuestionFragment_to_doneWithSurveyFragment);
         });
     }
 
