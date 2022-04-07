@@ -1,4 +1,4 @@
-package com.example.ttapp;
+package com.example.ttapp.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,17 +14,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.ttapp.R;
 
+/**
+ * Class for a fragment that presents the sign in screen
+ *
+ * @author Emelie Edberg
+ */
 public class RegisterFragment extends Fragment {
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        // Get views
         EditText codeEditText = view.findViewById(R.id.editTextIdCode);
         Button confirmButton = view.findViewById(R.id.buttonConfirmIdCode);
         TextView errorCodeIsEmpty = view.findViewById(R.id.error_code_is_empty);
@@ -48,10 +51,7 @@ public class RegisterFragment extends Fragment {
                 // Go to survey fragment
                 Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
             }
-
-
         });
         return view;
     }
-
 }
