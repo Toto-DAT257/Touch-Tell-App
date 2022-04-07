@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
+
 import com.example.ttapp.R;
 import com.example.ttapp.viewmodel.SurveyViewModel;
 
@@ -35,7 +37,6 @@ public class FirstQuestionFragment extends QuestionFragment{
     protected void setQuestion() {
         // is probably going to be changed further on
         question1 = view.findViewById(R.id.question1);
-
     }
 
     @Override
@@ -46,10 +47,15 @@ public class FirstQuestionFragment extends QuestionFragment{
         firstQAnsweroption2 = view.findViewById(R.id.firstQAnsweroption2);
     }
 
+    // Now it only navigates to the final response fragment
     @Override
     protected void setAnsweroptionsOnclicklisteners() {
-        // here the onclicklisteners should be set
-
+        firstQAnsweroption1.setOnClickListener(view1 -> {
+            //Navigation.findNavController(view).navigate(R.id.);
+        });
+        firstQAnsweroption2.setOnClickListener(view1 -> {
+            //Navigation.findNavController(view).navigate(R.id.);
+        });
     }
 
 
