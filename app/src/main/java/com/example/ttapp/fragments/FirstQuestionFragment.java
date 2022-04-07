@@ -11,7 +11,6 @@ import com.example.ttapp.viewmodel.SurveyViewModel;
 
 public class FirstQuestionFragment extends QuestionFragment{
 
-    private View view;
     private TextView question1;
     private Button firstQAnsweroption1;
     private Button firstQAnsweroption2;
