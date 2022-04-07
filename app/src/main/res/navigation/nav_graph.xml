@@ -20,8 +20,7 @@
         android:id="@+id/firstQuestionFragment"
         android:name="com.example.ttapp.fragments.FirstQuestionFragment"
         android:label="FirstQuestionFragment"
-        tools:layout="@layout/fragment_first_question"/>
-        android:label="FirstQuestionFragment" >
+        tools:layout="@layout/fragment_first_question" >
         <action
             android:id="@+id/action_firstQuestionFragment_to_doneWithSurveyFragment"
             app:destination="@id/doneWithSurveyFragment"
@@ -31,6 +30,8 @@
     <fragment
         android:id="@+id/doneWithSurveyFragment"
         android:name="com.example.ttapp.fragments.DoneWithSurveyFragment"
-        android:label="DoneWithSurveyFragment" />
+        android:label="DoneWithSurveyFragment"
+        tools:layout="@layout/fragment_done_with_survey" >
+    </fragment>
 
 </navigation>
