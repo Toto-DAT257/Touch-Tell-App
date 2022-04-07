@@ -9,6 +9,15 @@ import android.widget.TextView;
 import com.example.ttapp.R;
 import com.example.ttapp.viewmodel.SurveyViewModel;
 
+/**
+ * Class for a fragment that presents the first question in the survey
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg, Amanda Cyrén
+ */
 public class FirstQuestionFragment extends QuestionFragment{
 
     private TextView question1;

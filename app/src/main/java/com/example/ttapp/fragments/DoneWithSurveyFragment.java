@@ -11,6 +11,15 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.ttapp.R;
 import com.example.ttapp.viewmodel.SurveyViewModel;
 
+/**
+ * Class for a fragment that is shown when a survey is done
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg, Amanda Cyrén
+ */
 public class DoneWithSurveyFragment extends Fragment {
 
     private View view;
