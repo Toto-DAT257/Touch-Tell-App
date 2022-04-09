@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="@string/enter_code"
-        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextIdCode"
         app:layout_constraintEnd_toEndOf="parent"
