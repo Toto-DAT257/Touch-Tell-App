@@ -12,7 +12,6 @@
     <string name="enter_code">Enter your ID code</string>
     <string name="confirm_button">Confirm</string>
     <string name="error_code_is_empty">Not valid: you need to enter your code</string>
-    <string name="error_identifier_not_found">Identifier does not exist</string>
 
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>
