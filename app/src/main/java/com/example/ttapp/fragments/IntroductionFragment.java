@@ -7,12 +7,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ttapp.R;
@@ -34,20 +32,16 @@ public class IntroductionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_introduction, container, false);
 
-
         // Creating shared preferences in order to keep track if the application has been run before
         SharedPreferences settings = getActivity().getPreferences(Context.MODE_PRIVATE);
-        settings.edit().putBoolean("my_first_time", true).apply();
 
         if (settings.getBoolean("my_first_time", true)) {
             TextView introductionHeader = view.findViewById(R.id.introductonHeader);
             TextView introductionText = view.findViewById(R.id.introductionText);
             Button introductionButton = view.findViewById(R.id.introductionButton);
-            introductionHeader.setText("Welcome to the Touch&Tell App");
-            introductionText.setText("This is a cooperation between your company and Touch&Tell. " +
-                    "By answering questions regarding your work you will get the chance to have an impact on your work environment and workload. " +
-                    "All your answers will be anonymous.");
-
+            introductionHeader.setText(getString(R.string.introduction_header));
+            introductionText.setText(getString(R.string.introduction_text));
+            introductionButton.setText(R.string.introduction_buttom);
 
             introductionButton.setOnClickListener(view1 -> {
 
@@ -55,12 +49,8 @@ public class IntroductionFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_introductionFragment_to_registerFragment2);
             });
 
-
-        }
-        else {
+        } else {
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_introductionFragment_to_registerFragment2);
-
-        }
-        return view;
+        } return view;
     }
 }
