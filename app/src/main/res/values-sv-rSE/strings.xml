@@ -5,6 +5,8 @@
     <string name="confirm_button">Bekräfta</string>
     <string name="error_code_is_empty">Inte giltig: du behöver skriva in din kod</string>
     <string name="error_identifier_not_found">Identifiera finns ej</string>
+    <string name="SessionExpiredToast">Sessionen har utgått, vänligen försök igen</string>
+
 
     <!-- first question -->
     <string name="first_question">Gillar du ditt jobb?</string>
