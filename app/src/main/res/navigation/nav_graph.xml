@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/introductionFragment">
 
     <fragment
         android:id="@+id/registerFragment"
@@ -32,6 +32,15 @@
         android:name="com.example.ttapp.fragments.DoneWithSurveyFragment"
         android:label="DoneWithSurveyFragment"
         tools:layout="@layout/fragment_done_with_survey" >
+    </fragment>
+    <fragment
+        android:id="@+id/introductionFragment"
+        android:name="com.example.ttapp.fragments.IntroductionFragment"
+        android:label="fragment_introduction"
+        tools:layout="@layout/fragment_introduction" >
+        <action
+            android:id="@+id/action_introductionFragment_to_registerFragment2"
+            app:destination="@id/registerFragment" />
     </fragment>
 
 </navigation>
