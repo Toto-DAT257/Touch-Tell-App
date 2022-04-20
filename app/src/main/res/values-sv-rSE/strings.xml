@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- introduction page -->
+    <string name="introduction_header">Välkommen till applikationen Touch&amp;Tell </string>
+    <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell.
+                    Genom att svara på frågor om ditt arbete kommer du ha chansen att påverka din
+                    arbetsmiljö och din arbetsbelastning.
+                    Alla dina svar kommer vara anonyma.</string>
+    <string name="introduction_buttom">Ta mig vidare</string>
+
     <string name="app_name">TTApp</string>
     <string name="enter_code">Ange din ID kod</string>
     <string name="confirm_button">Bekräfta</string>

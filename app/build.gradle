@@ -2,12 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-apply plugin: "realm-android"
-
-realm {
-    syncEnabled = true
-}
-
 android {
     compileSdk 31
 
@@ -30,9 +24,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildFeatures {
-        viewBinding true
     }
 }
 
@@ -64,6 +55,4 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
-
-
 }
