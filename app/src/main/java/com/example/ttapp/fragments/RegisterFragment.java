@@ -36,7 +36,7 @@ import io.realm.mongodb.User;
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
-    private RegisterViewModel registerViewModel;
+    //private RegisterViewModel registerViewModel;
     private String identifier;
     EditText codeEditText;
     Button confirmButton;
@@ -80,7 +80,7 @@ public class RegisterFragment extends Fragment {
         if (identifier.isEmpty()) {
             errorCodeIsEmpty.setVisibility(View.VISIBLE);
         } else {
-            registerViewModel.identify(identifier);
+            //registerViewModel.identify(identifier);
             errorCodeIsEmpty.setVisibility(View.INVISIBLE);
         }
     }
