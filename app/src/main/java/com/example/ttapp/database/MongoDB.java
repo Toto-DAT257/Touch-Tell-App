@@ -63,12 +63,7 @@ public class MongoDB {
         if (APP.currentUser() == null) {
             Log.v("LOGIN", "User was null, trying to log in");
             APP.login(Credentials.anonymous());
-        }
-//        else if (APP.currentUser().isLoggedIn()) {
-//            Log.v("LOGIN", "User was not logged in, trying to log in");
-//            APP.login(Credentials.anonymous());
-//        }
-        else {
+        } else {
             Log.v("LOGIN", "User was logged in:" + APP.currentUser().getId());
         }
     }
@@ -77,8 +72,7 @@ public class MongoDB {
         if (APP == null) {
             APP = new App(new AppConfiguration.Builder(APP_ID)
                     .build());
-        }
-        else {
+        } else {
             Log.v("DATABASE", "App was not null");
         }
     }
@@ -100,10 +94,14 @@ public class MongoDB {
         userRepo = new MongoUserRepo();
     }
 
+    /**
+     * Used to ensure that the user is logged in and can access the database.
+     * If that is not the case it will run a new thread trying to log the user in before continuing.
+     */
     public static void assertDatabaseAccess() {
         boolean access = false;
         try {
-            if (APP.currentUser().isLoggedIn()); {
+            if (APP.currentUser().isLoggedIn()) {
                 access = true;
             }
         } catch (NullPointerException e) {
