@@ -13,7 +13,7 @@
     <string name="confirm_button">Confirm</string>
     <string name="error_code_is_empty">Not valid: you need to enter your code</string>
     <string name="error_identifier_not_found">Identifier does not exist</string>
-    <string name="SessionExpiredToast">Session expired, please try again</string>
+    <string name="session_expired_toast">Session expired, please try again</string>
 
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>

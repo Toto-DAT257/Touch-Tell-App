@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -70,7 +69,7 @@ public class RegisterFragment extends Fragment {
     private void observeDatabaseAccess() {
         registerViewModel.getDatabaseAccess().observe(getViewLifecycleOwner(), databaseAccess -> {
             if (!databaseAccess) {
-                Toast.makeText(getContext(), R.string.SessionExpiredToast, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.session_expired_toast, Toast.LENGTH_SHORT).show();
             }
         });
     }
