@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -18,10 +20,13 @@ import android.widget.TextView;
 import com.example.ttapp.R;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.databinding.FragmentRegisterBinding;
+import com.example.ttapp.viewmodel.RegisterViewModel;
 
 import org.bson.Document;
 
+import io.realm.mongodb.App;
 import io.realm.mongodb.RealmResultTask;
+import io.realm.mongodb.User;
 
 /**
  * Class for a fragment that presents the sign in screen
@@ -30,32 +35,62 @@ import io.realm.mongodb.RealmResultTask;
  */
 public class RegisterFragment extends Fragment {
 
-    FragmentRegisterBinding binding;
+    private FragmentRegisterBinding binding;
+    private RegisterViewModel registerViewModel;
+    private String identifier;
+    EditText codeEditText;
+    Button confirmButton;
+    TextView errorCodeIsEmpty;
+    TextView errorIdentifierNotFound;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
+        //registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
 
 
-        EditText codeEditText = binding.editTextIdCode;
-        Button confirmButton = binding.buttonConfirmIdCode;
-        TextView errorCodeIsEmpty = binding.errorCodeIsEmpty;
-        TextView errorIdentifierNotFound = binding.errorIdentifierNotFound;
+        codeEditText = binding.editTextIdCode;
+        confirmButton = binding.buttonConfirmIdCode;
+        errorCodeIsEmpty = binding.errorCodeIsEmpty;
+        errorIdentifierNotFound = binding.errorIdentifierNotFound;
 
-        confirmButton.setOnClickListener(view1 -> login(root, codeEditText, errorCodeIsEmpty, errorIdentifierNotFound));
+        confirmButton.setOnClickListener(view1 -> {
+            //identify();
+            login(root, codeEditText, errorCodeIsEmpty, errorIdentifierNotFound);
+        });
+//        registerViewModel.getIdentified().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(Boolean identification) {
+//                if (identification) {
+//                    saveIdentifier(identifier);
+//                    Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
+//                }
+//                else {
+//                    errorIdentifierNotFound.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
         return root;
+    }
+
+    private void identify() {
+        identifier = codeEditText.getText().toString();
+        if (identifier.isEmpty()) {
+            errorCodeIsEmpty.setVisibility(View.VISIBLE);
+        } else {
+            registerViewModel.identify(identifier);
+            errorCodeIsEmpty.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void login(View root, EditText codeEditText, TextView errorCodeIsEmpty, TextView errorIdentifierNotFound) {
         String identifier = codeEditText.getText().toString();
 
         if (identifier.isEmpty()) {
-            // display error message
             errorCodeIsEmpty.setVisibility(View.VISIBLE);
         } else {
-            // hide error message
             errorCodeIsEmpty.setVisibility(View.INVISIBLE);
             MongoDB db = MongoDB.getDatabase(getContext());
             RealmResultTask<Document> task = db.getDeviceIdTask(identifier);
@@ -73,6 +108,7 @@ public class RegisterFragment extends Fragment {
                 }
                 else {
                     Log.v("LOGIN", "Database access failed." + result.getError().toString());
+                    MongoDB.getMongoApp().currentUser().logOutAsync(result1 -> Log.v("LOGOUT:", String.valueOf(result1.isSuccess())));
                 }
             });
         }

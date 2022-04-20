@@ -5,6 +5,8 @@ import android.util.Log;
 
 import org.bson.Document;
 
+import java.util.Arrays;
+
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -58,17 +60,16 @@ public class MongoDB {
 
     public static void assertLoggedIn() {
         assertAppNotNull();
-        if (APP.currentUser().isLoggedIn()) {
-            APP.loginAsync(Credentials.anonymous(), result -> {
-                if (result.isSuccess()) {
-                    Log.v("LOGIN", "Successfully authenticated");
-                } else {
-                    Log.v("LOGIN", "Failed to log in");
-                }
-            });
+        if (APP.currentUser() == null) {
+            Log.v("LOGIN", "User was null, trying to log in");
+            APP.login(Credentials.anonymous());
         }
+//        else if (APP.currentUser().isLoggedIn()) {
+//            Log.v("LOGIN", "User was not logged in, trying to log in");
+//            APP.login(Credentials.anonymous());
+//        }
         else {
-            Log.v("LOGIN", "APP was unexpectedly null");
+            Log.v("LOGIN", "User was logged in:" + APP.currentUser().getId());
         }
     }
 
@@ -84,20 +85,44 @@ public class MongoDB {
 
     private MongoDB(Context context) {
         Realm.init(context);
-        if (APP == null) {
-            APP = new App(new AppConfiguration.Builder(APP_ID)
-                    .build());
-        }
-        if (!APP.currentUser().isLoggedIn()) {
-            APP.loginAsync(Credentials.anonymous(), result -> {
-                if (result.isSuccess()) {
-                    Log.v("LOGIN", "Successfully authenticated");
-                } else {
-                    Log.v("LOGIN", "Failed to log in");
-                }
-            });
+        Thread t = new Thread() {
+            public void run() {
+                assertAppNotNull();
+                assertLoggedIn();
+            }
+        };
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            Log.v("THREAD", "Thread was interrupted");
         }
         userRepo = new MongoUserRepo();
+    }
+
+    public static void assertDatabaseAccess() {
+        boolean access = false;
+        try {
+            if (APP.currentUser().isLoggedIn()); {
+                access = true;
+            }
+        } catch (NullPointerException e) {
+            Log.v("DATABASE-ACCESS:", "Either realm-app was or current user was null. See stacktrace" + Arrays.toString(e.getStackTrace()));
+        }
+        if (!access) {
+            Thread t = new Thread() {
+                public void run() {
+                    assertAppNotNull();
+                    assertLoggedIn();
+                }
+            };
+            t.start();
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                Log.v("THREAD", "Thread was interrupted");
+            }
+        }
     }
 
     /**
@@ -107,7 +132,6 @@ public class MongoDB {
      * @return returns task to find device id.
      */
     public RealmResultTask<Document> getDeviceIdTask(String identifier) {
-        //assertLoggedIn();
         return userRepo.getDeviceIdTask(identifier);
     }
 }

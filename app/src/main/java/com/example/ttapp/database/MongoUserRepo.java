@@ -31,6 +31,7 @@ public class MongoUserRepo implements IUserRepo {
 
     private MongoCollection<Document> getCollection() {
         // TODO null error handling
+        MongoDB.assertDatabaseAccess();
         User u = MongoDB.getMongoApp().currentUser();
         MongoClient mongoClient = u.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase(DATABASE);
