@@ -36,7 +36,7 @@ import io.realm.mongodb.User;
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
-    //private RegisterViewModel registerViewModel;
+    private RegisterViewModel registerViewModel;
     private String identifier;
     EditText codeEditText;
     Button confirmButton;
@@ -48,8 +48,8 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
-        //registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
-
+        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
+        registerViewModel.setDatabase(MongoDB.getDatabase(getContext()));
 
         codeEditText = binding.editTextIdCode;
         confirmButton = binding.buttonConfirmIdCode;
@@ -57,21 +57,21 @@ public class RegisterFragment extends Fragment {
         errorIdentifierNotFound = binding.errorIdentifierNotFound;
 
         confirmButton.setOnClickListener(view1 -> {
-            //identify();
-            login(root, codeEditText, errorCodeIsEmpty, errorIdentifierNotFound);
+            identify();
+            //login(root, codeEditText, errorCodeIsEmpty, errorIdentifierNotFound);
         });
-//        registerViewModel.getIdentified().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(Boolean identification) {
-//                if (identification) {
-//                    saveIdentifier(identifier);
-//                    Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
-//                }
-//                else {
-//                    errorIdentifierNotFound.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+        registerViewModel.getIdentified().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean identification) {
+                if (identification) {
+                    saveIdentifier(identifier);
+                    Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
+                }
+                else {
+                    errorIdentifierNotFound.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         return root;
     }
 
@@ -80,7 +80,7 @@ public class RegisterFragment extends Fragment {
         if (identifier.isEmpty()) {
             errorCodeIsEmpty.setVisibility(View.VISIBLE);
         } else {
-            //registerViewModel.identify(identifier);
+            registerViewModel.identify(identifier);
             errorCodeIsEmpty.setVisibility(View.INVISIBLE);
         }
     }
