@@ -1,4 +1,13 @@
 <resources>
+
+    <!-- introduction page -->
+    <string name="introduction_header">Welcome to the Touch&amp;Tell App</string>
+    <string name="introduction_text">This is a cooperation between your company and Touch&amp;Tell.
+                    By answering questions regarding your work you will get the chance to have an
+                    impact on your work environment and workload.
+                    All your answers will be anonymous.</string>
+    <string name="introduction_buttom">Move on</string>
+
     <string name="app_name">TTApp</string>
     <string name="enter_code">Enter your ID code</string>
     <string name="confirm_button">Confirm</string>
@@ -11,5 +20,7 @@
 
     <!-- done with survey response -->
     <string name="done_with_survey_response_text">Thanks for your participation!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
