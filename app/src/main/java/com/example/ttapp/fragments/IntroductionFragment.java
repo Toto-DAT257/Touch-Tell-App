@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,15 @@ import android.widget.TextView;
 
 import com.example.ttapp.R;
 
-
+/**
+ * Class for a fragment that presents the introduction page to the application
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Alva Jansson, Fanny Söderling & Simon Holst
+ */
 public class IntroductionFragment extends Fragment {
 
     @Override
@@ -25,34 +34,32 @@ public class IntroductionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_introduction, container, false);
 
+
         // Creating shared preferences in order to keep track if the application has been run before
         SharedPreferences settings = getActivity().getPreferences(Context.MODE_PRIVATE);
+        settings.edit().putBoolean("my_first_time", true).apply();
+
         if (settings.getBoolean("my_first_time", true)) {
             TextView introductionHeader = view.findViewById(R.id.introductonHeader);
             TextView introductionText = view.findViewById(R.id.introductionText);
             Button introductionButton = view.findViewById(R.id.introductionButton);
             introductionHeader.setText("Welcome to the Touch&Tell App");
-            introductionText.setText("Lorem Ipsum is simply dummy text of the " +
-                    "printing and typesetting industry. " +
-                    "Lorem Ipsum has been the industry's standard dummy text ever " +
-                    "since the 1500s, when an unknown printer took a galley of type " +
-                    "and scrambled it to make a type specimen book. " +
-                    "It has survived not only five centuries, but also" +
-                    " the leap into electronic typesetting, remaining essentially" +
-                    " unchanged. It was popularised in the 1960s with" +
-                    " the release of Letraset sheets containing Lorem Ipsum" +
-                    " passages, and more recently with desktop publishing software" +
-                    " like Aldus PageMaker including versions of Lorem Ipsum.");
+            introductionText.setText("This is a cooperation between your company and Touch&Tell. " +
+                    "By answering questions regarding your work you will get the chance to have an impact on your work environment and workload. " +
+                    "All your answers will be anonymous.");
+
 
             introductionButton.setOnClickListener(view1 -> {
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("my_first_time", false);
-                editor.apply();
-                // settings.edit().putBoolean("not_my_first_time", true).apply();
+
+                settings.edit().putBoolean("my_first_time", false).apply();
                 Navigation.findNavController(view).navigate(R.id.action_introductionFragment_to_registerFragment2);
             });
-        } else {
-            Navigation.findNavController(view).navigate(R.id.action_introductionFragment_to_registerFragment2);
+
+
+        }
+        else {
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_introductionFragment_to_registerFragment2);
+
         }
         return view;
     }
