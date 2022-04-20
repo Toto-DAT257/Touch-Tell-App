@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -13,8 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ttapp.R;
+import com.example.ttapp.database.MongoDB;
+import com.example.ttapp.databinding.FragmentRegisterBinding;
+import com.example.ttapp.viewmodel.RegisterViewModel;
 
 /**
  * Class for a fragment that presents the sign in screen
@@ -23,35 +28,67 @@ import com.example.ttapp.R;
  */
 public class RegisterFragment extends Fragment {
 
+    private RegisterViewModel registerViewModel;
+    private String identifier;
+    EditText codeEditText;
+    Button confirmButton;
+    TextView errorCodeIsEmpty;
+    TextView errorIdentifierNotFound;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
+        FragmentRegisterBinding binding = FragmentRegisterBinding.inflate(getLayoutInflater());
+        View root = binding.getRoot();
 
-        EditText codeEditText = view.findViewById(R.id.editTextIdCode);
-        Button confirmButton = view.findViewById(R.id.buttonConfirmIdCode);
-        TextView errorCodeIsEmpty = view.findViewById(R.id.error_code_is_empty);
+        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
+        registerViewModel.setDatabase(MongoDB.getDatabase(getContext()));
 
-        confirmButton.setOnClickListener(view1 -> {
-            String code = codeEditText.getText().toString();
+        codeEditText = binding.editTextIdCode;
+        confirmButton = binding.buttonConfirmIdCode;
+        errorCodeIsEmpty = binding.errorCodeIsEmpty;
+        errorIdentifierNotFound = binding.errorIdentifierNotFound;
 
-            if (code.isEmpty()) {
-                // display error message
-                errorCodeIsEmpty.setVisibility(View.VISIBLE);
+        confirmButton.setOnClickListener(view1 -> identify());
+
+        observeIdentification(root);
+        observeDatabaseAccess();
+        return root;
+    }
+
+    private void observeIdentification(View root) {
+        registerViewModel.getIdentified().observe(getViewLifecycleOwner(), identification -> {
+            if (identification) {
+                saveIdentifier(identifier);
+                Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
             } else {
-                // hide error message
-                errorCodeIsEmpty.setVisibility(View.INVISIBLE);
-
-                // Save code in activity preferences
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("code", code);
-                editor.apply();
-
-                // Go to survey fragment
-                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
+                errorIdentifierNotFound.setVisibility(View.VISIBLE);
             }
         });
-        return view;
+    }
+
+    private void observeDatabaseAccess() {
+        registerViewModel.getDatabaseAccess().observe(getViewLifecycleOwner(), databaseAccess -> {
+            if (!databaseAccess) {
+                Toast.makeText(getContext(), R.string.session_expired_toast, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void identify() {
+        identifier = codeEditText.getText().toString();
+        if (identifier.isEmpty()) {
+            errorCodeIsEmpty.setVisibility(View.VISIBLE);
+        } else {
+            registerViewModel.identify(identifier);
+            errorCodeIsEmpty.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void saveIdentifier(String identifier) {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("identifier", identifier);
+        editor.apply();
     }
 }
