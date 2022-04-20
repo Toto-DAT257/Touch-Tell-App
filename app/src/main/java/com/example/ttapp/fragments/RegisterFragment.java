@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ttapp.R;
+import com.example.ttapp.database.MongoDB;
+import com.example.ttapp.databinding.FragmentRegisterBinding;
+
+import org.bson.Document;
+
+import io.realm.mongodb.RealmResultTask;
 
 /**
  * Class for a fragment that presents the sign in screen
@@ -23,35 +30,58 @@ import com.example.ttapp.R;
  */
 public class RegisterFragment extends Fragment {
 
+    FragmentRegisterBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
+        binding = FragmentRegisterBinding.inflate(getLayoutInflater());
+        View root = binding.getRoot();
 
-        EditText codeEditText = view.findViewById(R.id.editTextIdCode);
-        Button confirmButton = view.findViewById(R.id.buttonConfirmIdCode);
-        TextView errorCodeIsEmpty = view.findViewById(R.id.error_code_is_empty);
 
-        confirmButton.setOnClickListener(view1 -> {
-            String code = codeEditText.getText().toString();
+        EditText codeEditText = binding.editTextIdCode;
+        Button confirmButton = binding.buttonConfirmIdCode;
+        TextView errorCodeIsEmpty = binding.errorCodeIsEmpty;
+        TextView errorIdentifierNotFound = binding.errorIdentifierNotFound;
 
-            if (code.isEmpty()) {
-                // display error message
-                errorCodeIsEmpty.setVisibility(View.VISIBLE);
-            } else {
-                // hide error message
-                errorCodeIsEmpty.setVisibility(View.INVISIBLE);
+        confirmButton.setOnClickListener(view1 -> login(root, codeEditText, errorCodeIsEmpty, errorIdentifierNotFound));
+        return root;
+    }
 
-                // Save code in activity preferences
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("code", code);
-                editor.apply();
+    private void login(View root, EditText codeEditText, TextView errorCodeIsEmpty, TextView errorIdentifierNotFound) {
+        String identifier = codeEditText.getText().toString();
 
-                // Go to survey fragment
-                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
-            }
-        });
-        return view;
+        if (identifier.isEmpty()) {
+            // display error message
+            errorCodeIsEmpty.setVisibility(View.VISIBLE);
+        } else {
+            // hide error message
+            errorCodeIsEmpty.setVisibility(View.INVISIBLE);
+            MongoDB db = MongoDB.getDatabase(getContext());
+            RealmResultTask<Document> task = db.getDeviceIdTask(identifier);
+            task.getAsync(result -> {
+                if (result.isSuccess()) {
+                    if (result.get() != null) {
+                        saveIdentifier(identifier);
+                        Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
+                        Log.v("LOGIN", "Identifier " + result.get().toString());
+                    }
+                    else {
+                        Log.v("LOGIN", "Identifier not registered");
+                        errorIdentifierNotFound.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    Log.v("LOGIN", "Database access failed." + result.getError().toString());
+                }
+            });
+        }
+    }
+
+    private void saveIdentifier(String identifier) {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("identifier", identifier);
+        editor.apply();
     }
 }

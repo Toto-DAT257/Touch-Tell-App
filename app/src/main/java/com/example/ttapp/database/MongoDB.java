@@ -10,14 +10,27 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.RealmResultTask;
-import io.realm.mongodb.User;
 
+
+/**
+ * Singleton class for communicating with the database. This class should be used by client to
+ * communicate with the database.
+ * <p>
+ * "Get" methods will return a {@link RealmResultTask} of the object rather than the object itself.
+ * They need to be used asynchronously.
+ */
 public class MongoDB {
 
     private static final String APP_ID = "touchandtellmobile-zbhsu";
     private static App APP;
-    private final IUserRepo userRepo;
+    private static MongoDB singleton;
+    private static IUserRepo userRepo;
 
+    /**
+     * Gets the app for the database
+     *
+     * @return the app
+     */
     public static App getMongoApp() {
         if (APP == null) {
             APP = new App(new AppConfiguration.Builder(APP_ID)
@@ -26,28 +39,47 @@ public class MongoDB {
         return APP;
     }
 
-    public MongoDB(Context context) {
+    /**
+     * Gets the singleton of the database. If the database is not yet initialized it will initialize
+     * it and then return the ready to use database.
+     *
+     * @param context required to initialize the Mongo Realm.
+     *                Example:
+     *                From an activity use 'this'
+     *                From a fragment use 'getActivity()' or 'getContext()'
+     * @return the database
+     */
+    public static MongoDB getDatabase(Context context) {
+        if (singleton == null) {
+            singleton = new MongoDB(context);
+        }
+        return singleton;
+    }
+
+    private MongoDB(Context context) {
         Realm.init(context);
         if (APP == null) {
             APP = new App(new AppConfiguration.Builder(APP_ID)
                     .build());
         }
         if (APP.currentUser() != null) {
-            APP.loginAsync(Credentials.anonymous(), new App.Callback<User>() {
-                @Override
-                public void onResult(App.Result<User> result) {
-                    if (result.isSuccess()) {
-                        Log.v("LOGIN", "Successfully authenticated");
-                    }
-                    else {
-                        Log.v("LOGIN", "Failed to log in");
-                    }
+            APP.loginAsync(Credentials.anonymous(), result -> {
+                if (result.isSuccess()) {
+                    Log.v("LOGIN", "Successfully authenticated");
+                } else {
+                    Log.v("LOGIN", "Failed to log in");
                 }
             });
         }
         userRepo = new MongoUserRepo();
     }
 
+    /**
+     * Returns the task for finding the device id necessary to collect questions.
+     *
+     * @param identifier the unique identifier associated with the user.
+     * @return returns task to find device id.
+     */
     public RealmResultTask<Document> getDeviceIdTask(String identifier) {
         return userRepo.getDeviceIdTask(identifier);
     }

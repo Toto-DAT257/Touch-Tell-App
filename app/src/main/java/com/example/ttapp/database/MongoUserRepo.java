@@ -1,13 +1,16 @@
 package com.example.ttapp.database;
 
 import org.bson.Document;
+
 import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
 
-
+/**
+ * Implementation of {@link IUserRepo} for MongoDB Realm.
+ */
 public class MongoUserRepo implements IUserRepo {
 
     private static final String DATABASE = "TouchAndTell";
@@ -26,12 +29,13 @@ public class MongoUserRepo implements IUserRepo {
 
     private MongoCollection<Document> getCollection() {
         User u = MongoDB.getMongoApp().currentUser();
+        // TODO null error handling
         MongoClient mongoClient = u.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase(DATABASE);
-        MongoCollection<Document> userCollection = mongoDatabase.getCollection(COLLECTION);
-        return userCollection;
+        return mongoDatabase.getCollection(COLLECTION);
     }
 
-
+    MongoUserRepo() {
+    }
 
 }
