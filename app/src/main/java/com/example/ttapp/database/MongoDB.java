@@ -56,13 +56,39 @@ public class MongoDB {
         return singleton;
     }
 
+    public static void assertLoggedIn() {
+        assertAppNotNull();
+        if (APP.currentUser().isLoggedIn()) {
+            APP.loginAsync(Credentials.anonymous(), result -> {
+                if (result.isSuccess()) {
+                    Log.v("LOGIN", "Successfully authenticated");
+                } else {
+                    Log.v("LOGIN", "Failed to log in");
+                }
+            });
+        }
+        else {
+            Log.v("LOGIN", "APP was unexpectedly null");
+        }
+    }
+
+    private static void assertAppNotNull() {
+        if (APP == null) {
+            APP = new App(new AppConfiguration.Builder(APP_ID)
+                    .build());
+        }
+        else {
+            Log.v("DATABASE", "App was not null");
+        }
+    }
+
     private MongoDB(Context context) {
         Realm.init(context);
         if (APP == null) {
             APP = new App(new AppConfiguration.Builder(APP_ID)
                     .build());
         }
-        if (APP.currentUser() != null) {
+        if (!APP.currentUser().isLoggedIn()) {
             APP.loginAsync(Credentials.anonymous(), result -> {
                 if (result.isSuccess()) {
                     Log.v("LOGIN", "Successfully authenticated");
@@ -81,6 +107,7 @@ public class MongoDB {
      * @return returns task to find device id.
      */
     public RealmResultTask<Document> getDeviceIdTask(String identifier) {
+        //assertLoggedIn();
         return userRepo.getDeviceIdTask(identifier);
     }
 }

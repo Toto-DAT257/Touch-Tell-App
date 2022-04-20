@@ -1,5 +1,7 @@
 package com.example.ttapp.database;
 
+import android.util.Log;
+
 import org.bson.Document;
 
 import io.realm.mongodb.RealmResultTask;
@@ -28,8 +30,8 @@ public class MongoUserRepo implements IUserRepo {
     }
 
     private MongoCollection<Document> getCollection() {
-        User u = MongoDB.getMongoApp().currentUser();
         // TODO null error handling
+        User u = MongoDB.getMongoApp().currentUser();
         MongoClient mongoClient = u.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase(DATABASE);
         return mongoDatabase.getCollection(COLLECTION);
