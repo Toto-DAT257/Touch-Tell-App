@@ -10,10 +10,10 @@
     <string name="introduction_buttom">Ta mig vidare</string>
 
     <string name="app_name">TTApp</string>
-    <string name="enter_code">Ange din ID kod</string>
+    <string name="enter_id">Ange din mail</string>
     <string name="confirm_button">Bekräfta</string>
-    <string name="error_code_is_empty">Inte giltig: du behöver skriva in din kod</string>
-    <string name="error_identifier_not_found">Identifiera finns ej</string>
+    <string name="error_id_is_empty">Inte giltig: Du behöver skriva in din mail</string>
+    <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
     <string name="session_expired_toast">Sessionen har utgått, vänligen försök igen</string>
 
 
