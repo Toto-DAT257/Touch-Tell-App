@@ -59,7 +59,7 @@ public class RegisterFragment extends Fragment {
         registerViewModel.getIdentified().observe(getViewLifecycleOwner(), identification -> {
             if (identification) {
                 saveIdentifier(identifier);
-                Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_homeFragment);
+                Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_surveyFragment);
             } else {
                 errorIdentifierNotFound.setVisibility(View.VISIBLE);
             }
