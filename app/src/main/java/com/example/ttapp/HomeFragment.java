@@ -50,16 +50,20 @@ public class HomeFragment extends Fragment {
         MongoDB db = MongoDB.getDatabase(getContext());
         RealmResultTask<Document> task = db.getDeviceIdTask(identifier);
         task.getAsync(result -> {
-            if (result.isSuccess()){
-                if (result.get() != null){
+            if (result.isSuccess()) {
+                if (result.get() != null) {
                     Log.e("DEVICE ID", result.get().toString());
                     // In here is were you have access to the deviceID, cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
                     String API = getAPILink(deviceId);
                     requestFromAPI(API);
 
-                } else { Log.e("Database", "Identifier not found"); }
-            } else { Log.e("Database", "No access"); }
+                } else {
+                    Log.e("Database", "Identifier not found");
+                }
+            } else {
+                Log.e("Database", "No access");
+            }
         });
     }
 
@@ -70,24 +74,21 @@ public class HomeFragment extends Fragment {
                 Request.Method.GET,
                 API,
                 null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e("Rest Response", response.toString());
-                        // In here is were you have access to the JSON response, cannot return, due to async
-                        String json = response.toString();
-                        textView.setText(json);
+                response -> {
+                    Log.e("Rest Response", response.toString());
+                    // In here is were you have access to the JSON response, cannot return, due to async
+                    String json = response.toString();
+                    textView.setText(json);
 
-                        // Not used now, can be good to se how to query JSON in the future
-                        /*
-                        JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
-                        JsonArray questions = convertedObject.getAsJsonArray("questions");
-                        JsonObject q1 = questions.get(0).getAsJsonObject();
-                        String text = q1.getAsJsonArray("text").get(0).getAsJsonObject().get("text").getAsString();
-                        String type1 = q1.get("type").getAsString();
-                        */
+                    // Not used now, can be good to se how to query JSON in the future
+                    /*
+                    JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
+                    JsonArray questions = convertedObject.getAsJsonArray("questions");
+                    JsonObject q1 = questions.get(0).getAsJsonObject();
+                    String text = q1.getAsJsonArray("text").get(0).getAsJsonObject().get("text").getAsString();
+                    String type1 = q1.get("type").getAsString();
+                    */
 
-                    }
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -102,15 +103,12 @@ public class HomeFragment extends Fragment {
 
     @NonNull
     private String getAPILink(String deviceId) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://api.touch-and-tell.se/checkin/");
-        sb.append(deviceId);
-        return sb.toString();
+        String sb = "https://api.touch-and-tell.se/checkin/" + deviceId;
+        return sb;
     }
 
     private String getIdentifier() {
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
         return sharedPref.getString("identifier", null);
     }
 }
