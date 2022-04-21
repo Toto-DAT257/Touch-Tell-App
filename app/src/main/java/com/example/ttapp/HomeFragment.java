@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -39,62 +40,72 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         textView = view.findViewById(R.id.text);
-        extracted();
+        getQuestions();
         return view;
     }
-    private void extracted() {
+
+    private void getQuestions() {
         String identifier = getIdentifier();
+
         MongoDB db = MongoDB.getDatabase(getContext());
         RealmResultTask<Document> task = db.getDeviceIdTask(identifier);
         task.getAsync(result -> {
             if (result.isSuccess()){
                 if (result.get() != null){
+                    Log.e("DEVICE ID", result.get().toString());
+                    // In here is were you have access to the deviceID, cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
-                    Log.e("LOGIN", "Identifier " + result.get().toString());
+                    String API = getAPILink(deviceId);
+                    requestFromAPI(API);
 
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("https://api.touch-and-tell.se/checkin/");
-                    sb.append(deviceId);
-                    String API = sb.toString();
-
-                    RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-                    JsonObjectRequest objectRequest = new JsonObjectRequest(
-                            Request.Method.GET,
-                            API,
-                            null,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    Log.e("Rest Response", response.toString());
-                                    String json = response.toString();
-                                    textView.setText(json);
-
-                                    JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
-                                    JsonArray questions = convertedObject.getAsJsonArray("questions");
-                                    JsonObject q1 = questions.get(0).getAsJsonObject();
-                                    String text = q1.getAsJsonArray("text").get(0).getAsJsonObject().get("text").getAsString();
-                                    String type1 = q1.get("type").getAsString();
-                                    //question.setText(text);
-                                    //type.setText(type1);
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Log.e("Rest Response", error.toString());
-                                }
-                            }
-                    );
-
-                    requestQueue.add(objectRequest);
-                } else {
-                    Log.e("Null", "Null");
-                }
-            } else {
-                Log.e("Database", "Not success");
-            }
+                } else { Log.e("Database", "Identifier not found"); }
+            } else { Log.e("Database", "No access"); }
         });
+    }
+
+    private void requestFromAPI(String API) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                API,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Rest Response", response.toString());
+                        // In here is were you have access to the JSON response, cannot return, due to async
+                        String json = response.toString();
+                        textView.setText(json);
+
+                        // Not used now, can be good to se how to query JSON in the future
+                        /*
+                        JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
+                        JsonArray questions = convertedObject.getAsJsonArray("questions");
+                        JsonObject q1 = questions.get(0).getAsJsonObject();
+                        String text = q1.getAsJsonArray("text").get(0).getAsJsonObject().get("text").getAsString();
+                        String type1 = q1.get("type").getAsString();
+                        */
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Rest Response", error.toString());
+                    }
+                }
+        );
+
+        requestQueue.add(objectRequest);
+    }
+
+    @NonNull
+    private String getAPILink(String deviceId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://api.touch-and-tell.se/checkin/");
+        sb.append(deviceId);
+        return sb.toString();
     }
 
     private String getIdentifier() {
