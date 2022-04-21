@@ -13,7 +13,11 @@ import android.widget.TextView;
 import com.example.ttapp.R;
 import com.example.ttapp.viewmodel.SurveyViewModel;
 
-
+/**
+ * Class for a fragment that fetches the survey questions.
+ *
+ * @author Simon Holst, Amanda Cyrén, Emma Stålberg
+ */
 public class SurveyFragment extends Fragment {
 
     SurveyViewModel surveyViewModel;

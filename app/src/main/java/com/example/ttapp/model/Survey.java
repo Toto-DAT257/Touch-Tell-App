@@ -19,10 +19,20 @@ import org.bson.Document;
 
 import io.realm.mongodb.RealmResultTask;
 
+/**
+ * Class for a survey, fetching and storing the information about the questions for the currently logged in user.
+ *
+ * @author Simon Holst, Amanda Cyrén, Emma Stålberg
+ */
 public class Survey {
 
-    String json;
+    private String json;
 
+    /**
+     * Loads the questions from the Touch&Tell API for the logged in user.
+     * @param context the fragment that will present the questions context.
+     * @param activity the fragment that will present the questions context.
+     */
     public void loadQuestions(Context context, FragmentActivity activity) {
         String identifier = getIdentifier(activity);
 
@@ -31,7 +41,7 @@ public class Survey {
         task.getAsync(result -> {
             if (result.isSuccess()) {
                 if (result.get() != null) {
-                    Log.e("DEVICE ID", result.get().toString());
+                    Log.i("DEVICE ID", result.get().toString());
                     // In here is where you have access to the deviceID. Cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
                     String API = getAPILink(deviceId);
@@ -54,7 +64,7 @@ public class Survey {
                 API,
                 null,
                 response -> {
-                    Log.e("Rest Response", response.toString());
+                    Log.i("Rest Response", response.toString());
                     // In here is were you have access to the JSON response, cannot return, due to async
                     json = response.toString();
                     //textView.setText(json);
@@ -82,8 +92,7 @@ public class Survey {
 
     @NonNull
     private String getAPILink(String deviceId) {
-        String sb = "https://api.touch-and-tell.se/checkin/" + deviceId;
-        return sb;
+        return "https://api.touch-and-tell.se/checkin/" + deviceId;
     }
 
     private String getIdentifier(FragmentActivity activity) {
