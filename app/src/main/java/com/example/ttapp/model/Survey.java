@@ -23,7 +23,7 @@ public class Survey {
 
     String json;
 
-    private void loadQuestions(Context context, FragmentActivity activity) {
+    public void loadQuestions(Context context, FragmentActivity activity) {
         String identifier = getIdentifier(activity);
 
         MongoDB db = MongoDB.getDatabase(context);
@@ -89,6 +89,11 @@ public class Survey {
     private String getIdentifier(FragmentActivity activity) {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         return sharedPref.getString("identifier", null);
+    }
+
+    // Might be a possible solution for getting the questions
+    public String getQuestions() {
+        return json;
     }
 
 }
