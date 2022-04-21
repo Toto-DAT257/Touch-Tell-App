@@ -84,12 +84,8 @@ public class RegisterFragment extends Fragment {
         if (identifier.isEmpty()) {
             // No identifier have been entered
             errorIdIsEmpty.setVisibility(View.VISIBLE);
-        } else if (false) {
-            // TODO: Check if the id is registered
-            // The entered identifier is not registered
-            errorIdNotFound.setVisibility(View.VISIBLE);
         } else {
-            // The entered identifier was a success
+            // Identification is done by RegisterViewModel
             registerViewModel.identify(identifier);
         }
     }
