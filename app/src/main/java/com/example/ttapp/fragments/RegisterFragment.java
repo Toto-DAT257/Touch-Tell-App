@@ -3,11 +3,6 @@ package com.example.ttapp.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
 import com.example.ttapp.database.MongoDB;
@@ -30,23 +30,23 @@ public class RegisterFragment extends Fragment {
 
     private RegisterViewModel registerViewModel;
     private String identifier;
-    EditText codeEditText;
+    EditText idEditText;
     Button confirmButton;
-    TextView errorCodeIsEmpty;
-    TextView errorIdentifierNotFound;
+    TextView errorIdIsEmpty;
+    TextView errorIdNotFound;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentRegisterBinding binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
         registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
         registerViewModel.setDatabase(MongoDB.getDatabase(getContext()));
 
-        codeEditText = binding.editTextIdCode;
+        idEditText = binding.editTextId;
         confirmButton = binding.buttonConfirmIdCode;
-        errorCodeIsEmpty = binding.errorCodeIsEmpty;
-        errorIdentifierNotFound = binding.errorIdentifierNotFound;
+        errorIdIsEmpty = binding.errorIdIsEmpty;
+        errorIdNotFound = binding.errorIdNotFound;
 
         confirmButton.setOnClickListener(view1 -> identify());
 
@@ -61,7 +61,7 @@ public class RegisterFragment extends Fragment {
                 saveIdentifier(identifier);
                 Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_firstQuestionFragment);
             } else {
-                errorIdentifierNotFound.setVisibility(View.VISIBLE);
+                errorIdNotFound.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -76,17 +76,22 @@ public class RegisterFragment extends Fragment {
 
 
     private void identify() {
-        identifier = codeEditText.getText().toString();
+        // Reset error messages
+        errorIdIsEmpty.setVisibility(View.INVISIBLE);
+        errorIdNotFound.setVisibility(View.INVISIBLE);
+
+        identifier = idEditText.getText().toString();
         if (identifier.isEmpty()) {
-            errorCodeIsEmpty.setVisibility(View.VISIBLE);
+            // No identifier have been entered
+            errorIdIsEmpty.setVisibility(View.VISIBLE);
         } else {
+            // Identification is done by RegisterViewModel
             registerViewModel.identify(identifier);
-            errorCodeIsEmpty.setVisibility(View.INVISIBLE);
         }
     }
 
     private void saveIdentifier(String identifier) {
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("identifier", identifier);
         editor.apply();

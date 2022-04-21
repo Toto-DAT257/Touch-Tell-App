@@ -9,10 +9,10 @@
     <string name="introduction_buttom">Move on</string>
 
     <string name="app_name">TTApp</string>
-    <string name="enter_code">Enter your ID code</string>
+    <string name="enter_id">Enter your mail</string>
     <string name="confirm_button">Confirm</string>
-    <string name="error_code_is_empty">Not valid: you need to enter your code</string>
-    <string name="error_identifier_not_found">Identifier does not exist</string>
+    <string name="error_id_is_empty">Not valid: You need to enter your mail</string>
+    <string name="error_id_not_found">Not valid: Mail is not registered</string>
     <string name="session_expired_toast">Session expired, please try again</string>
 
     <!-- first question -->
