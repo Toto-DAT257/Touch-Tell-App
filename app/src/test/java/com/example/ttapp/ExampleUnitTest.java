@@ -4,6 +4,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.ttapp.jsonparsing.Question;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -11,7 +21,19 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void jsonTest() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        byte[] bytes = new byte[0];
+        try {
+            bytes = Files.readAllBytes(Paths.get("C:\\Users\\selin\\AndroidStudioProjects\\TTApp\\app\\src\\test\\java\\com\\example\\ttapp\\response.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String json = new String(bytes);
+        JsonNode rootNode = mapper.readTree(json);
+        Question q = mapper.readValue(rootNode.get("questions").get(0).toString(), Question.class);
+        System.out.println(q.questionId);
+        System.out.println(q.questionText.swedish);
     }
 }
