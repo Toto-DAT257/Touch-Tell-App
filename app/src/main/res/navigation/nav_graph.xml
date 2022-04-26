@@ -11,12 +11,8 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_registerFragment_to_firstQuestionFragment"
-            app:destination="@id/firstQuestionFragment"
-            app:enterAnim="@android:anim/fade_in" />
-        <action
-            android:id="@+id/action_registerFragment_to_surveyFragment"
-            app:destination="@id/surveyFragment" />
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -50,5 +46,14 @@
         android:name="com.example.ttapp.fragments.SurveyFragment"
         android:label="fragment_survey"
         tools:layout="@layout/fragment_survey" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.ttapp.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_firstQuestionFragment"
+            app:destination="@id/firstQuestionFragment" />
+    </fragment>
 
 </navigation>
