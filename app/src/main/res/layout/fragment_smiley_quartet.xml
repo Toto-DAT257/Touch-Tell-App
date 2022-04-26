@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".survey.fragments.YesNoFragment" >
+    tools:context=".survey.fragments.SmileyQuartetFragment" >
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,18 +17,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/yesnoAnsweroption1"
+            android:id="@+id/smileyqAnsweroption1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/answeroptionsmargin"
             android:layout_weight="1"
-            android:text="@string/yesno_answeroption1" />
+            android:text="@string/smileyq_answeroption1" />
 
         <Button
-            android:id="@+id/yesnoAnsweroption2"
+            android:id="@+id/smileyqAnsweroption2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/yesno_answeroption2" />
+            android:text="@string/smileyq_answeroption2" />
+
+        <Button
+            android:id="@+id/smileyqAnsweroption3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/smileyq_answeroption3" />
+
+        <Button
+            android:id="@+id/smileyqAnsweroption4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/smileyq_answeroption4" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

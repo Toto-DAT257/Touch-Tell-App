@@ -23,4 +23,17 @@
     <!-- done with survey response -->
     <string name="done_with_survey_response_text">Thanks for your participation!</string>
 
+    <!-- yes no question -->
+    <string name="yesno_answeroption1">Yes</string>
+    <string name="yesno_answeroption2">No</string>
+
+    <!-- smiley quartet question -->
+    <string name="smileyq_answeroption1">Very sad</string>
+    <string name="smileyq_answeroption2">Sad</string>
+    <string name="smileyq_answeroption3">Happy</string>
+    <string name="smileyq_answeroption4">Very happy</string>
+
+    <!-- comment question -->
+    <string name="comment_hinttext">Write your answer here</string>
+
 </resources>
