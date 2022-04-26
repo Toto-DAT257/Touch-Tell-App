@@ -2,10 +2,8 @@ package com.example.ttapp;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-import com.example.ttapp.jsonparsing.Question;
-import com.example.ttapp.jsonparsing.Survey;
+import com.example.ttapp.survey.model.jsonparsing.Question;
+import com.example.ttapp.survey.model.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
