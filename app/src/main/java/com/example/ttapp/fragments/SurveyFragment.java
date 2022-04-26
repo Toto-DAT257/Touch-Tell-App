@@ -52,11 +52,11 @@ public class SurveyFragment extends Fragment {
     }
 
     private void next() {
-        // TODO: attempt to move to next question
+        surveyViewModel.nextQuestion();
     }
 
     private void previous() {
-        // TODO: attempt to move to previous question
+        surveyViewModel.previousQuestion();
     }
 
 }

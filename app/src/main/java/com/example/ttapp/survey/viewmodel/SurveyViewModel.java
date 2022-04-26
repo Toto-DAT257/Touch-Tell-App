@@ -98,13 +98,25 @@ public class SurveyViewModel extends ViewModel {
         return sharedPref.getString("identifier", null);
     }
 
+    public void putAnswer(String questionId, String answerInJson) {
+        survey.putAnswer(questionId, answerInJson);
+    }
+
+    public void nextQuestion() {
+        survey.nextQuestion();
+    }
+
+    public void previousQuestion() {
+        survey.previousQuestion();
+    }
+
     // Might be a possible solution for getting the
     public MutableLiveData<String> getQuestions() {
         return json;
     }
 
     public MutableLiveData<String> getCurrentQuestion() {
-        questionText.setValue(survey.getCurrentQuestion());
+        questionText.setValue(survey.getCurrentQuestionText());
         return questionText;
     }
 
