@@ -11,16 +11,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import java.time.Instant;
-
 @JsonIgnoreProperties(IAnswer.QUESTION_TYPE)
 public class YesNoAnswer implements IAnswer {
 
-    public static boolean YES = true;
-    public static boolean NO = false;
+    public static int YES = 2;
+    public static int NO = 1;
 
     @JsonProperty(IAnswer.VALUE)
-    public boolean answerIsYes;
+    public int answerValue;
 
     @JsonProperty(IAnswer.QUESTION)
     public String questionId;
@@ -28,8 +26,8 @@ public class YesNoAnswer implements IAnswer {
     private final String questionType = QuestionType.YES_NO;
 
 
-    public YesNoAnswer(boolean answerIsYes, String questionId) {
-        this.answerIsYes = answerIsYes;
+    public YesNoAnswer(int answerValue, String questionId) {
+        this.answerValue = answerValue;
         this.questionId = questionId;
     }
 
@@ -41,7 +39,7 @@ public class YesNoAnswer implements IAnswer {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode answer = mapper.createObjectNode();
         answer.put(IAnswer.QUESTION, questionId);
-        answer.put(IAnswer.VALUE, answerIsYes ? 1 : 0);
+        answer.put(IAnswer.VALUE, answerValue);
         answer.put(IAnswer.QUESTION_TYPE, questionType);
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(answer);
     }
@@ -51,7 +49,7 @@ public class YesNoAnswer implements IAnswer {
         return this.questionType;
     }
 
-    public void setAnswerTo(boolean yesOrNo) {
-        this.answerIsYes = yesOrNo;
+    public void setAnswerTo(int yesOrNo) {
+        this.answerValue = yesOrNo;
     }
 }
