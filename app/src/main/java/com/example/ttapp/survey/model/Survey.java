@@ -27,6 +27,7 @@ import io.realm.mongodb.RealmResultTask;
 public class Survey {
 
     private String json;
+    private String currentQuestion;
 
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
@@ -105,4 +106,7 @@ public class Survey {
         return json;
     }
 
+    public String getCurrentQuestion() {
+        return currentQuestion;
+    }
 }
