@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ttapp.R;
-import com.example.ttapp.viewmodel.SurveyViewModel;
+import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
  * Class for a fragment that is shown when a survey is done
