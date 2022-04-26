@@ -30,11 +30,13 @@ public class SurveyViewModel extends ViewModel {
 
     private Survey survey;
     private final MutableLiveData<String> questionText;
+    private final MutableLiveData<String> questionType;
     private final MutableLiveData<String> json;
 
     public SurveyViewModel() {
         json = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
+        questionType = new MutableLiveData<>();
     }
 
     /**
@@ -115,10 +117,16 @@ public class SurveyViewModel extends ViewModel {
         return json;
     }
 
-    public MutableLiveData<String> getCurrentQuestion() {
+    public MutableLiveData<String> getCurrentQuestionText() {
         questionText.setValue(survey.getCurrentQuestionText());
         return questionText;
     }
+
+    public MutableLiveData<String> getCurrentQuestionType() {
+        questionType.setValue(survey.getCurrentQuestionType());
+        return questionType;
+    }
+
 
     public String getCurrentQuestionId() {
         return survey.getCurrentQuestionId();

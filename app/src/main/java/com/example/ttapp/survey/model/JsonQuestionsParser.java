@@ -1,5 +1,7 @@
 package com.example.ttapp.survey.model;
 
+import com.example.ttapp.survey.model.jsonparsing.Condition;
+import com.example.ttapp.survey.model.jsonparsing.Languages;
 import com.example.ttapp.survey.model.jsonparsing.Question;
 import com.example.ttapp.survey.model.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,6 +19,8 @@ public class JsonQuestionsParser {
     private List<String> questionOrder;
     private Survey survey;
 
+    private static String SWEDISH = "sv";
+
     public  JsonQuestionsParser(String json) throws JsonProcessingException {
         this.json = json;
         this.survey = createSurveyObject(json);
@@ -26,7 +30,6 @@ public class JsonQuestionsParser {
     private Survey createSurveyObject(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        JsonNode rootNode = mapper.readTree(json);
         return mapper.readValue(json, Survey.class);
     }
 
@@ -88,11 +91,31 @@ public class JsonQuestionsParser {
     }
 
     public String getQuestionText(String id){
-        return survey.questions.get(getQuestionNumber(id)).questionText.swedish;
+        for (Languages l : getQuestion(id).questionText){
+            if (l.language.equals(SWEDISH)){
+                return l.text;
+            }
+        }
+        throw new IndexOutOfBoundsException("swedish translation does not exist");
+    }
+
+    private Question getQuestion(String id){
+        return survey.questions.get(getQuestionNumber(id));
     }
 
     public String getType(String id){
         return survey.questions.get(getQuestionNumber(id)).questionType;
+    }
+
+    public boolean conditionExist(String id){
+        return getQuestion(id).conditions != null;
+    }
+
+    public List<Condition> getConditions(String id){
+        if (!conditionExist(id)){
+            throw new IllegalArgumentException("This question has no conditions");
+        }
+        return getQuestion(id).conditions;
     }
 
 }

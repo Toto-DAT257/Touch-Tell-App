@@ -25,15 +25,15 @@ public class ExampleUnitTest {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         byte[] bytes = new byte[0];
         try {
-            bytes = Files.readAllBytes(Paths.get("src/test/java/com/example/ttapp/response.json"));
+            bytes = Files.readAllBytes(Paths.get("src/test/java/com/example/ttapp/responseNew.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         String json = new String(bytes);
         JsonNode rootNode = mapper.readTree(json);
         Survey s = mapper.readValue(json, Survey.class);
-        Question q = mapper.readValue(rootNode.get("questions").get(0).toString(), Question.class);
-        System.out.println(q.questionId);
-        System.out.println(q.questionText.swedish);
+        //Question q = mapper.readValue(rootNode.get("questions").get(0).toString(), Question.class);
+        //System.out.println(q.questionId);
+        //System.out.println(q.questionText.swedish);
     }
 }

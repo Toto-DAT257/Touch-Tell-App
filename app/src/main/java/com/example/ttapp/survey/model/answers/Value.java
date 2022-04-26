@@ -1,17 +1,15 @@
-package com.example.ttapp.survey.model.jsonparsing;
+package com.example.ttapp.survey.model.answers;
 
+import com.example.ttapp.survey.model.answers.IAnswer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 @JsonIgnoreProperties
-public class Answers {
+public class Value {
 
-    @JsonProperty("value")
+    @JsonProperty(IAnswer.VALUE)
     public int value;
-
-    @JsonProperty("text")
-    public List<Languages> answerText;
 
 }
