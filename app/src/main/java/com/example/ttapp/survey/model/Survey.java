@@ -51,12 +51,16 @@ public class Survey {
         questionsToSend = new ArrayList<>();
     }
 
-    public String getCurrentQuestion() {
+    public String getCurrentQuestionId() {
         return currentQuestion;
     }
 
     public String getCurrentQuestionText() {
         return jsonQuestionsParser.getQuestionText(currentQuestion);
+    }
+
+    public String getCurrentQuestionType() {
+        return jsonQuestionsParser.getType(currentQuestion);
     }
 
     public void nextQuestion() {
