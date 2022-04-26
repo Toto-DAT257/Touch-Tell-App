@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -13,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ttapp.R;
-import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.databinding.FragmentHomeBinding;
-import com.example.ttapp.viewmodel.RegisterViewModel;
 
 /**
  * Class for a fragment that presents the home page to the application
@@ -37,9 +34,7 @@ public class HomeFragment extends Fragment {
 
         buttonStartSurvey = binding.buttonStartSurvey;
 
-        buttonStartSurvey.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_homeFragment_to_firstQuestionFragment);
-        });
+        buttonStartSurvey.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.action_homeFragment_to_firstQuestionFragment));
 
         return root;
     }

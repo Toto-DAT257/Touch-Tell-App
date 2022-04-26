@@ -9,7 +9,7 @@
         android:id="@+id/registerFragment"
         android:name="com.example.ttapp.fragments.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -19,7 +19,7 @@
         android:id="@+id/firstQuestionFragment"
         android:name="com.example.ttapp.fragments.FirstQuestionFragment"
         android:label="FirstQuestionFragment"
-        tools:layout="@layout/fragment_first_question" >
+        tools:layout="@layout/fragment_first_question">
         <action
             android:id="@+id/action_firstQuestionFragment_to_doneWithSurveyFragment"
             app:destination="@id/doneWithSurveyFragment"
@@ -30,13 +30,13 @@
         android:id="@+id/doneWithSurveyFragment"
         android:name="com.example.ttapp.fragments.DoneWithSurveyFragment"
         android:label="DoneWithSurveyFragment"
-        tools:layout="@layout/fragment_done_with_survey" >
+        tools:layout="@layout/fragment_done_with_survey">
     </fragment>
     <fragment
         android:id="@+id/introductionFragment"
         android:name="com.example.ttapp.fragments.IntroductionFragment"
         android:label="fragment_introduction"
-        tools:layout="@layout/fragment_introduction" >
+        tools:layout="@layout/fragment_introduction">
         <action
             android:id="@+id/action_introductionFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
@@ -50,7 +50,7 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ttapp.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_firstQuestionFragment"
             app:destination="@id/firstQuestionFragment" />
