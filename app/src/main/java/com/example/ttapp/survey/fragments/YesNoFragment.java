@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.fragments;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -40,6 +41,14 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        yesNoViewModel.answer.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                surveyViewModel.putAnswer(s);
+            }
+        });
+
         return inflater.inflate(R.layout.fragment_yes_no, container, false);
     }
 
@@ -79,7 +88,8 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     public void onStop() {
         super.onStop();
-        yesNoViewModel.SaveAnswer(answer, surveyViewModel.getQuestionid());
+        yesNoViewModel.SaveAnswer(answer, surveyViewModel.getCurrentQuestionId());
     }
+
 
 }
