@@ -6,15 +6,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ttapp.R;
-import com.example.ttapp.survey.NpsViewModel;
-import com.example.ttapp.survey.viewmodel.YesNoViewModel;
+import com.example.ttapp.survey.viewmodel.NpsViewModel;
 
 /**
  * Class for a fragment that presents a nps-question
