@@ -13,11 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ttapp.R;
-import com.example.ttapp.survey.viewmodel.SurveyViewModel;
+import com.example.ttapp.survey.NpsViewModel;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 
 /**
- * Class for a fragment that presents a yes no question
+ * Class for a fragment that presents a nps-question
  *
  * Used by: -
  * Uses: -
@@ -25,24 +25,24 @@ import com.example.ttapp.survey.viewmodel.YesNoViewModel;
  * Created by
  * @author Emma Stålberg
  */
-public class YesNoFragment extends QuestionFragment {
+public class NpsFragment extends QuestionFragment {
 
-    private YesNoViewModel yesNoViewModel;
+    private NpsViewModel npsViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_yes_no, container, false);
+        return inflater.inflate(R.layout.fragment_nps, container, false);
     }
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
-        view = inflater.inflate(R.layout.fragment_yes_no, container, false);
+        view = inflater.inflate(R.layout.fragment_nps, container, false);
     }
 
     @Override
     protected void setViewModel() {
-        yesNoViewModel = new ViewModelProvider(requireActivity()).get(YesNoViewModel.class);
+        npsViewModel = new ViewModelProvider(requireActivity()).get(NpsViewModel.class);
     }
 
 }
