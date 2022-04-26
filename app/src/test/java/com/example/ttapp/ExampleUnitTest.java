@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.example.ttapp.jsonparsing.Question;
+import com.example.ttapp.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -32,6 +33,7 @@ public class ExampleUnitTest {
         }
         String json = new String(bytes);
         JsonNode rootNode = mapper.readTree(json);
+        Survey s = mapper.readValue(json, Survey.class);
         Question q = mapper.readValue(rootNode.get("questions").get(0).toString(), Question.class);
         System.out.println(q.questionId);
         System.out.println(q.questionText.swedish);
