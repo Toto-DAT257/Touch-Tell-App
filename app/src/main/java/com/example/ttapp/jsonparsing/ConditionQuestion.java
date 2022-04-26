@@ -11,6 +11,7 @@ public class ConditionQuestion {
     @JsonProperty("id")
     public List<ConditionQuestion> conditionQquestionsId;
 
-
+    @JsonProperty("options")
+    public List<Integer> options;
 
 }

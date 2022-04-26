@@ -8,6 +8,6 @@ import java.util.List;
 @JsonIgnoreProperties
 public class Condition {
 
-    @JsonProperty("questions")
+    @JsonProperty("questions") // not finished
     public List<ConditionQuestion> conditionQuestion;
 }
