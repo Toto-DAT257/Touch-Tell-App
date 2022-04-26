@@ -33,4 +33,7 @@
     <string name="smileyq_answeroption3">Happy</string>
     <string name="smileyq_answeroption4">Very happy</string>
 
+    <!-- comment question -->
+    <string name="comment_hinttext">Write your answer here</string>
+
 </resources>

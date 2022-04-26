@@ -35,4 +35,7 @@
     <string name="smileyq_answeroption3">Glad</string>
     <string name="smileyq_answeroption4">Jätteglad</string>
 
+    <!-- comment question -->
+    <string name="comment_hinttext">Skriv ditt svar här</string>
+
 </resources>
