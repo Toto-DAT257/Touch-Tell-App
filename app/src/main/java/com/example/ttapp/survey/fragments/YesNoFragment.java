@@ -13,15 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ttapp.R;
+import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 
-public class YesNoFragment extends Fragment {
+/**
+ * Class for a fragment that presents a yes no question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
+public class YesNoFragment extends QuestionFragment {
 
-    private YesNoViewModel mViewModel;
-
-    public static YesNoFragment newInstance() {
-        return new YesNoFragment();
-    }
+    private YesNoViewModel yesNoViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -30,10 +36,14 @@ public class YesNoFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(YesNoViewModel.class);
-        // TODO: Use the ViewModel
+    protected void setView(LayoutInflater inflater, ViewGroup container) {
+        view = inflater.inflate(R.layout.fragment_yes_no, container, false);
     }
+
+    @Override
+    protected void setViewModel() {
+        yesNoViewModel = new ViewModelProvider(requireActivity()).get(YesNoViewModel.class);
+    }
+
 
 }
