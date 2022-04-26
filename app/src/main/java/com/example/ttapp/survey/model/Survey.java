@@ -1,4 +1,4 @@
-package com.example.ttapp.model;
+package com.example.ttapp.survey.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
