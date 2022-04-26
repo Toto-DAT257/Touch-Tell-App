@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ttapp.databinding.FragmentSurveyBinding;
+import com.example.ttapp.survey.model.QuestionType;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
@@ -43,7 +44,26 @@ public class SurveyFragment extends Fragment {
         questionFragmentContainer = binding.questionFragmentContainer;
         questionTextView = binding.questionTextView;
 
-        surveyViewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), questionTextView::setText);
+        surveyViewModel.getCurrentQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
+
+        surveyViewModel.getCurrentQuestionType().observe(getViewLifecycleOwner(), questionType -> {
+            // TODO: Might not recognize change between two identical question types
+            switch (questionType) {
+                case "smiley-quartet":
+                    // TODO: Populate the FragmentContainer with appropriate QuestionFragment
+                    // supportFragmentManager.beginTransaction().add(R.id.fragment_container_view, myFragmentInstance).commit()
+                case QuestionType.YES_NO:
+                case QuestionType.NPS:
+                case "multiple-choice":
+                case "select-many":
+                case "comment":
+                case "short-text":
+                case "typeahead":
+                case "number":
+                case "email":
+                case "smiley-comment":
+            }
+        });
         backButton.setOnClickListener(click -> previous());
         nextButton.setOnClickListener(click -> next());
 
