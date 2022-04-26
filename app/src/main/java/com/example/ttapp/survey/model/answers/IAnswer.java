@@ -15,6 +15,6 @@ public interface IAnswer {
     String VALUE = "value";
 
     String getAnswerJson() throws JsonProcessingException;
-    QuestionType getAnswerEnum();
+    String getAnswerType();
 
 }
