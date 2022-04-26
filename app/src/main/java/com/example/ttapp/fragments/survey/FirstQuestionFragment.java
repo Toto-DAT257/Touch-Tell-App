@@ -1,4 +1,4 @@
-package com.example.ttapp.fragments;
+package com.example.ttapp.fragments.survey;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
