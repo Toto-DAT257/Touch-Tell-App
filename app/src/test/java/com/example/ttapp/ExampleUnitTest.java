@@ -26,7 +26,7 @@ public class ExampleUnitTest {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         byte[] bytes = new byte[0];
         try {
-            bytes = Files.readAllBytes(Paths.get("C:\\Users\\selin\\AndroidStudioProjects\\TTApp\\app\\src\\test\\java\\com\\example\\ttapp\\response.json"));
+            bytes = Files.readAllBytes(Paths.get("/Users/emelieedberg/AndroidStudioProjects/Touch-Tell-App/app/src/test/java/com/example/ttapp/response.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
