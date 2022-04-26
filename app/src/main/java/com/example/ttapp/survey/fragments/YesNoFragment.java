@@ -28,6 +28,7 @@ import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 public class YesNoFragment extends QuestionFragment {
 
     private YesNoViewModel yesNoViewModel;
+    private String questionId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

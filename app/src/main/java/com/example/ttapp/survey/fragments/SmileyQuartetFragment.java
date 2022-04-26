@@ -26,6 +26,7 @@ import com.example.ttapp.survey.viewmodel.SmileyQuartetViewModel;
 public class SmileyQuartetFragment extends QuestionFragment {
 
     private SmileyQuartetViewModel smileyQuartetViewModel;
+    private String questionId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

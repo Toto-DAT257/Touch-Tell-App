@@ -26,6 +26,7 @@ import com.example.ttapp.survey.viewmodel.NpsViewModel;
 public class NpsFragment extends QuestionFragment {
 
     private NpsViewModel npsViewModel;
+    private String questionId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

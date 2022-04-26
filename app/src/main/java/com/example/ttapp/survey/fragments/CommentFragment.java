@@ -26,6 +26,7 @@ import com.example.ttapp.survey.viewmodel.CommentViewModel;
 public class CommentFragment extends QuestionFragment {
 
     private CommentViewModel commentViewModel;
+    private String questionId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

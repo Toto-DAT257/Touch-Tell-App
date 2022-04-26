@@ -25,4 +25,8 @@
     <!-- done with survey response -->
     <string name="done_with_survey_response_text">Tack för ditt deltagande!</string>
 
+    <!-- yes no question -->
+    <string name="yesno_answeroption1">Ja</string>
+    <string name="yesno_answeroption2">Nej</string>
+
 </resources>
