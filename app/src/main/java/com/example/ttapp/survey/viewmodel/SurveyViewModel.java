@@ -98,8 +98,8 @@ public class SurveyViewModel extends ViewModel {
         return sharedPref.getString("identifier", null);
     }
 
-    public void putAnswer(String questionId, String answerInJson) {
-        survey.putAnswer(questionId, answerInJson);
+    public void putAnswer(String answerInJson) {
+        survey.putAnswer(getCurrentQuestionId(), answerInJson);
     }
 
     public void nextQuestion() {
@@ -118,6 +118,10 @@ public class SurveyViewModel extends ViewModel {
     public MutableLiveData<String> getCurrentQuestion() {
         questionText.setValue(survey.getCurrentQuestionText());
         return questionText;
+    }
+
+    public String getCurrentQuestionId() {
+        return survey.getCurrentQuestionId();
     }
 
 }
