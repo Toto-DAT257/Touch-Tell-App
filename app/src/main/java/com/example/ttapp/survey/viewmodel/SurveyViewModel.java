@@ -107,4 +107,5 @@ public class SurveyViewModel extends ViewModel {
         questionText.setValue(survey.getCurrentQuestion());
         return questionText;
     }
+
 }

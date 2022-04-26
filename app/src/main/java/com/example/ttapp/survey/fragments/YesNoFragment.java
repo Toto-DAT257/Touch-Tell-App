@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ttapp.R;
+import com.example.ttapp.survey.model.answers.YesNoAnswer;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 
@@ -34,6 +35,8 @@ public class YesNoFragment extends QuestionFragment {
     private Button yesnoAnsweroption1;
     private Button yesnoAnsweroption2;
 
+    private Boolean answer;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -48,6 +51,35 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     protected void setViewModel() {
         yesNoViewModel = new ViewModelProvider(requireActivity()).get(YesNoViewModel.class);
+    }
+
+    @Override
+    protected void initAnsweroptions() {
+        yesnoAnsweroption1 = view.findViewById(R.id.yesnoAnsweroption1);
+        yesnoAnsweroption2 = view.findViewById(R.id.yesnoAnsweroption2);
+        initOnClickListeners();
+    }
+
+    private void initOnClickListeners() {
+        yesnoAnsweroption1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answer = YesNoAnswer.YES;
+            }
+        });
+
+        yesnoAnsweroption2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answer = YesNoAnswer.NO;
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        yesNoViewModel.SaveAnswer(answer, surveyViewModel.getQuestionid());
     }
 
 }

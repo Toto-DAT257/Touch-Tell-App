@@ -28,10 +28,10 @@
     <string name="yesno_answeroption2">No</string>
 
     <!-- smiley quartet question -->
-    <string name="smileyq_answeroption1">Very sad</string>
+    <string name="smileyq_answeroption1">Saddest</string>
     <string name="smileyq_answeroption2">Sad</string>
     <string name="smileyq_answeroption3">Happy</string>
-    <string name="smileyq_answeroption4">Very happy</string>
+    <string name="smileyq_answeroption4">Happiest</string>
 
     <!-- comment question -->
     <string name="comment_hinttext">Write your answer here</string>
