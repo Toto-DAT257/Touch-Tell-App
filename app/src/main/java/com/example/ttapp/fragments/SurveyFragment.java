@@ -2,6 +2,7 @@ package com.example.ttapp.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,7 +31,7 @@ public class SurveyFragment extends Fragment {
     TextView questionTextView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentSurveyBinding.inflate(getLayoutInflater());
@@ -42,16 +43,19 @@ public class SurveyFragment extends Fragment {
         questionFragmentContainer = binding.questionFragmentContainer;
         questionTextView = binding.questionTextView;
 
-        // TODO: add observer listening after change in the question text 
-
-
-
-
-        // TODO: Remove at some point
-        surveyViewModel.loadQuestions(getContext(), getActivity());
-
+        surveyViewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), questionTextView::setText);
+        backButton.setOnClickListener(click -> previous());
+        nextButton.setOnClickListener(click -> next());
 
         return root;
+    }
+
+    private void next() {
+        // TODO: attempt to move to next question
+    }
+
+    private void previous() {
+        // TODO: attempt to move to previous question
     }
 
 }
