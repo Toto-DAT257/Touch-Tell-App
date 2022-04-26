@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 
 public class JsonQuestionsParser {
 
@@ -90,6 +91,8 @@ public class JsonQuestionsParser {
         return survey.questions.get(getQuestionNumber(id)).questionText.swedish;
     }
 
-
+    public String getType(String id){
+        return survey.questions.get(getQuestionNumber(id)).questionType;
+    }
 
 }
