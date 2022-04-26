@@ -12,7 +12,7 @@ public class Question {
     public String questionId;
 
     @JsonProperty("text")
-    public Languages questionText;
+    public List<Languages> questionText;
 
     @JsonProperty("type")
     public String questionType;

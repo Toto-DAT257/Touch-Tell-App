@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties
 public class Languages {
 
-    @JsonProperty("se")
-    public String swedish;
+    @JsonProperty("language")
+    public String language;
 
-    @JsonProperty("en")
-    public String english;
+    @JsonProperty("text")
+    public String text;
 
 }
 
