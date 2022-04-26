@@ -47,6 +47,7 @@ public class SurveyFragment extends Fragment {
         backButton.setOnClickListener(click -> previous());
         nextButton.setOnClickListener(click -> next());
 
+        surveyViewModel.loadQuestions(getContext(), getActivity());
         return root;
     }
 
