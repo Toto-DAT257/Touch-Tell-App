@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
@@ -29,6 +30,9 @@ public class YesNoFragment extends QuestionFragment {
 
     private YesNoViewModel yesNoViewModel;
     private String questionId;
+
+    private Button yesnoAnsweroption1;
+    private Button yesnoAnsweroption2;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

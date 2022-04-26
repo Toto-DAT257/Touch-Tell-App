@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.CommentViewModel;
@@ -27,6 +28,8 @@ public class CommentFragment extends QuestionFragment {
 
     private CommentViewModel commentViewModel;
     private String questionId;
+
+    private TextView commentAnswer;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

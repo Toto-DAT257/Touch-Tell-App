@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.SmileyQuartetViewModel;
@@ -27,6 +28,11 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
     private SmileyQuartetViewModel smileyQuartetViewModel;
     private String questionId;
+
+    private Button smileyqAnsweroption1;
+    private Button smileyqAnsweroption2;
+    private Button smileyqAnsweroption3;
+    private Button smileyqAnsweroption4;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

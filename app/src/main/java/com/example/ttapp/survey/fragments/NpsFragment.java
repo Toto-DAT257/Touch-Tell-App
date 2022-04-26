@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.NpsViewModel;
@@ -27,6 +28,8 @@ public class NpsFragment extends QuestionFragment {
 
     private NpsViewModel npsViewModel;
     private String questionId;
+
+    private SeekBar npsSeekbar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
