@@ -21,4 +21,7 @@ public class Question {
     @JsonProperty("values")
     public List<Answers> answers;
 
+    @JsonProperty("conditions")
+    public List<Condition> conditions;
+
 }
