@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ttapp.R;
-import com.example.ttapp.survey.viewmodel.SurveyViewModel;
-import com.example.ttapp.survey.viewmodel.YesNoViewModel;
+import com.example.ttapp.survey.viewmodel.SmileyQuartetViewModel;
 
 /**
- * Class for a fragment that presents a yes no question
+ * Class for a fragment that presents a smiley-quartet question
  *
  * Used by: -
  * Uses: -
@@ -26,28 +24,30 @@ import com.example.ttapp.survey.viewmodel.YesNoViewModel;
  * Created by
  * @author Emma Stålberg
  */
-public class YesNoFragment extends QuestionFragment {
+public class SmileyQuartetFragment extends QuestionFragment {
 
-    private YesNoViewModel yesNoViewModel;
+    private SmileyQuartetViewModel smileyQuartetViewModel;
     private String questionId;
 
-    private Button yesnoAnsweroption1;
-    private Button yesnoAnsweroption2;
+    private Button smileyqAnsweroption1;
+    private Button smileyqAnsweroption2;
+    private Button smileyqAnsweroption3;
+    private Button smileyqAnsweroption4;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_yes_no, container, false);
+        return inflater.inflate(R.layout.fragment_smiley_quartet, container, false);
     }
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
-        view = inflater.inflate(R.layout.fragment_yes_no, container, false);
+        view = inflater.inflate(R.layout.fragment_smiley_quartet, container, false);
     }
 
     @Override
     protected void setViewModel() {
-        yesNoViewModel = new ViewModelProvider(requireActivity()).get(YesNoViewModel.class);
+        smileyQuartetViewModel = new ViewModelProvider(requireActivity()).get(SmileyQuartetViewModel.class);
     }
 
 }

@@ -33,29 +33,34 @@ public class FirstQuestionFragment extends QuestionFragment{
     }
 
     @Override
-    protected void setQuestion() {
-        // is probably going to be changed further on
-        question1 = view.findViewById(R.id.question1);
+    protected void setViewModel() {
+        // not relevant here. Only still here because of testing.
     }
 
-    @Override
-    protected void setAnsweroptions() {
-        // is probably going to be changed further on
+//    @Override
+//    protected void setQuestion() {
+//        // is probably going to be changed further on
+//        question1 = view.findViewById(R.id.question1);
+//    }
 
-        firstQAnsweroption1 = view.findViewById(R.id.firstQAnsweroption1);
-        firstQAnsweroption2 = view.findViewById(R.id.firstQAnsweroption2);
-    }
+//    @Override
+//    protected void setAnsweroptions() {
+//        // is probably going to be changed further on
+//
+//        firstQAnsweroption1 = view.findViewById(R.id.firstQAnsweroption1);
+//        firstQAnsweroption2 = view.findViewById(R.id.firstQAnsweroption2);
+//    }
 
-    // Now it only navigates to the final response fragment
-    @Override
-    protected void setAnsweroptionsOnclicklisteners() {
-        firstQAnsweroption1.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(R.id.action_firstQuestionFragment_to_doneWithSurveyFragment);
-        });
-        firstQAnsweroption2.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(R.id.action_firstQuestionFragment_to_doneWithSurveyFragment);
-        });
-    }
+//    // Now it only navigates to the final response fragment
+//    @Override
+//    protected void setAnsweroptionsOnclicklisteners() {
+//        firstQAnsweroption1.setOnClickListener(view1 -> {
+//            Navigation.findNavController(view).navigate(R.id.action_firstQuestionFragment_to_doneWithSurveyFragment);
+//        });
+//        firstQAnsweroption2.setOnClickListener(view1 -> {
+//            Navigation.findNavController(view).navigate(R.id.action_firstQuestionFragment_to_doneWithSurveyFragment);
+//        });
+//    }
 
 
 }
