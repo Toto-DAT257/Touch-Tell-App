@@ -35,7 +35,7 @@ public class YesNoFragment extends QuestionFragment {
     private Button yesnoAnsweroption1;
     private Button yesnoAnsweroption2;
 
-    private Boolean answer;
+    private int answer;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

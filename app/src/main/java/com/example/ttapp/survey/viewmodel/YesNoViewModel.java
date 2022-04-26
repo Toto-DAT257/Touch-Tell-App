@@ -15,8 +15,9 @@ public class YesNoViewModel extends ViewModel {
 
     public MutableLiveData<IAnswer> answer = new MutableLiveData<>();
 
-    public void SaveAnswer(Int answerOption, String questionID) {
+    public void SaveAnswer(int answerOption, String questionID) {
         YesNoAnswer answerObject = new YesNoAnswer(answerOption, questionID);
+        answer.setValue(answerObject);
     }
 
 
