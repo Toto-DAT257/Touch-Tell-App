@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.model;
 
+import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.Languages;
 import com.example.ttapp.survey.model.jsonparsing.Question;
 import com.example.ttapp.survey.model.jsonparsing.Survey;
@@ -90,7 +91,7 @@ public class JsonQuestionsParser {
     }
 
     public String getQuestionText(String id){
-        for (Languages l : survey.questions.get(getQuestionNumber(id)).questionText){
+        for (Languages l : getQuestion(id).questionText){
             if (l.language.equals(SWEDISH)){
                 return l.text;
             }
@@ -98,8 +99,23 @@ public class JsonQuestionsParser {
         throw new IndexOutOfBoundsException("swedish translation does not exist");
     }
 
+    private Question getQuestion(String id){
+        return survey.questions.get(getQuestionNumber(id));
+    }
+
     public String getType(String id){
         return survey.questions.get(getQuestionNumber(id)).questionType;
+    }
+
+    public boolean conditionExist(String id){
+        return getQuestion(id).conditions != null;
+    }
+
+    public List<Condition> getConditions(String id){
+        if (!conditionExist(id)){
+            throw new IllegalArgumentException("This question has no conditions");
+        }
+        return getQuestion(id).conditions;
     }
 
 }
