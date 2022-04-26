@@ -3,6 +3,7 @@ package com.example.ttapp.survey.viewmodel;
 import android.content.Context;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.ttapp.survey.model.Survey;
@@ -14,7 +15,12 @@ import com.example.ttapp.survey.model.Survey;
  */
 public class SurveyViewModel extends ViewModel {
 
-    private Survey survey = new Survey();
+    private final Survey survey = new Survey();
+    private final MutableLiveData<String> questionText;
+
+    public SurveyViewModel() {
+        questionText = new MutableLiveData<>();
+    }
 
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
@@ -25,7 +31,8 @@ public class SurveyViewModel extends ViewModel {
         survey.loadQuestions(context, activity);
     }
 
-    public String getQuestions() {
-        return survey.getQuestions();
+    public MutableLiveData<String> getCurrentQuestion() {
+        questionText.setValue(survey.getCurrentQuestion());
+        return questionText;
     }
 }
