@@ -1,11 +1,11 @@
-package com.example.ttapp.viewmodel;
+package com.example.ttapp.survey.viewmodel;
 
 import android.content.Context;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModel;
 
-import com.example.ttapp.model.Survey;
+import com.example.ttapp.survey.model.Survey;
 
 /**
  * ViewModel for {@link com.example.ttapp.fragments.SurveyFragment}

@@ -1,4 +1,4 @@
-package com.example.ttapp.fragments.survey;
+package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
-import com.example.ttapp.viewmodel.SurveyViewModel;
+import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
  * Class for a fragment that presents the first question in the survey

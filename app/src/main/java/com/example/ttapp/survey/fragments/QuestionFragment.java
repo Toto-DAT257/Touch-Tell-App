@@ -1,4 +1,4 @@
-package com.example.ttapp.fragments.survey;
+package com.example.ttapp.survey.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.ttapp.viewmodel.SurveyViewModel;
+import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
  * An abstract class for a base fragment with a question

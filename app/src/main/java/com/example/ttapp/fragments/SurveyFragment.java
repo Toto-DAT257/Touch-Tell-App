@@ -8,10 +8,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.ttapp.R;
-import com.example.ttapp.viewmodel.SurveyViewModel;
+import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
  * Class for a fragment that fetches the survey questions.

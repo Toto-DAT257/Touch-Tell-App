@@ -1,4 +1,4 @@
-package com.example.ttapp.fragments.survey;
+package com.example.ttapp.survey.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ttapp.R;
-import com.example.ttapp.viewmodel.YesNoViewModel;
+import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 
 public class YesNoFragment extends Fragment {
 

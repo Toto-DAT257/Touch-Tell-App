@@ -1,4 +1,4 @@
-package com.example.ttapp.viewmodel;
+package com.example.ttapp.survey.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
