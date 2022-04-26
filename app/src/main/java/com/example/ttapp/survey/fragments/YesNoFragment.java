@@ -1,8 +1,10 @@
 package com.example.ttapp.survey.fragments;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import com.example.ttapp.R;
 import com.example.ttapp.survey.model.answers.YesNoAnswer;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * Class for a fragment that presents a yes no question
@@ -85,10 +88,16 @@ public class YesNoFragment extends QuestionFragment {
         });
     }
 
+    // TODO change try catch
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStop() {
         super.onStop();
-        yesNoViewModel.SaveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+        try {
+            yesNoViewModel.SaveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
 
