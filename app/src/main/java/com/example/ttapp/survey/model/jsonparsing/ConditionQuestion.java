@@ -9,8 +9,9 @@ import java.util.List;
 public class ConditionQuestion {
 
     @JsonProperty("id")
-    public List<ConditionQuestion> conditionQquestionsId;
+    public String conditionQquestionsId;
 
-
+    @JsonProperty("options")
+    public List<Integer> options;
 
 }

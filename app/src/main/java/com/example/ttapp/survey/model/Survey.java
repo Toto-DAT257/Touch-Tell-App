@@ -14,8 +14,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.bson.Document;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import io.realm.mongodb.RealmResultTask;
 
@@ -27,6 +33,20 @@ import io.realm.mongodb.RealmResultTask;
 public class Survey {
 
     private String json;
+    // TODO: create JsonQuestionParser class instance here
+    private ArrayList<String> questionsToSend;
+    private String currentQuestion;
+    // TODO: create Map<String, Answer> when the Answer interface is created
+
+    public Survey(String json) {
+        this.json = json;
+        JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
+        JsonArray questions = convertedObject.getAsJsonArray("questions");
+        JsonObject q1 = questions.get(0).getAsJsonObject();
+        currentQuestion = q1.getAsJsonArray("text").get(0).getAsJsonObject().get("text").getAsString();
+        // String type1 = q1.get("type").getAsString();
+        questionsToSend = new ArrayList<>();
+    }
 
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
@@ -105,4 +125,7 @@ public class Survey {
         return json;
     }
 
+    public String getCurrentQuestion() {
+        return currentQuestion;
+    }
 }
