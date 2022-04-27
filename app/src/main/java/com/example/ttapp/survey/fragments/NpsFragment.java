@@ -18,6 +18,8 @@ import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.NpsViewModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.util.ArrayList;
+
 /**
  * Class for a fragment that presents a nps-question
  *
@@ -32,13 +34,7 @@ public class NpsFragment extends QuestionFragment {
     private NpsViewModel npsViewModel;
 
     private SeekBar npsSeekbar;
-    private int answer;
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_nps, container, false);
-    }
+    private ArrayList<Integer> answer;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -53,12 +49,13 @@ public class NpsFragment extends QuestionFragment {
     @Override
     protected void initAnsweroptions() {
         npsSeekbar = view.findViewById(R.id.npsSeekbar);
-        answer = npsSeekbar.getProgress();
+        answer = new ArrayList<Integer>();
+        answer.set(0, npsSeekbar.getProgress());
 
         npsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                answer = npsSeekbar.getProgress();
+                answer.set(0, npsSeekbar.getProgress());
             }
 
             @Override
@@ -73,16 +70,10 @@ public class NpsFragment extends QuestionFragment {
         });
     }
 
-    // TODO change try catch
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStop() {
         super.onStop();
-        try {
-            npsViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        surveyViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
     }
 
 }

@@ -88,7 +88,6 @@ public class YesNoFragment extends QuestionFragment {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStop() {
         super.onStop();
