@@ -7,12 +7,12 @@
     tools:context=".survey.fragments.CommentFragment">
 
     <EditText
-        android:id="@+id/commentAnswer"
+        android:id="@+id/commentResponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:editable="true"
         android:hint="@string/comment_hinttext"
-        android:textSize="@dimen/answertext"
+        android:textSize="@dimen/responsetext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

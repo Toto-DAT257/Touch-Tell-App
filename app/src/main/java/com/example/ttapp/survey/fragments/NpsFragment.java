@@ -25,7 +25,7 @@ public class NpsFragment extends QuestionFragment {
     private NpsViewModel npsViewModel;
 
     private SeekBar npsSeekbar;
-    private ArrayList<Integer> answer = new ArrayList<>();
+    private ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -38,18 +38,18 @@ public class NpsFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initAnsweroptions() {
+    protected void initResponseoptions() {
         npsSeekbar = view.findViewById(R.id.npsSeekbar);
-        if (answer.isEmpty()) {
-            answer.add(npsSeekbar.getProgress());
+        if (response.isEmpty()) {
+            response.add(npsSeekbar.getProgress());
         } else {
-            answer.set(0, npsSeekbar.getProgress());
+            response.set(0, npsSeekbar.getProgress());
         }
 
         npsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                answer.set(0, npsSeekbar.getProgress());
+                response.set(0, npsSeekbar.getProgress());
             }
 
             @Override
@@ -67,7 +67,7 @@ public class NpsFragment extends QuestionFragment {
     @Override
     public void onStop() {
         super.onStop();
-        surveyViewModel.saveAnswer(answer);
+        surveyViewModel.saveResponse(response);
     }
 
 }

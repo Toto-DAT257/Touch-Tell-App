@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ttapp.R;
-import com.example.ttapp.survey.model.answers.YesNoAnswer;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 
 import java.util.ArrayList;
@@ -25,24 +24,10 @@ public class YesNoFragment extends QuestionFragment {
 
     private YesNoViewModel yesNoViewModel;
 
-    private Button yesnoAnsweroption1;
-    private Button yesnoAnsweroption2;
+    private Button yesnoResponseoption1;
+    private Button yesnoResponseoption2;
 
-    private ArrayList<Integer> answer = new ArrayList<>();
-
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-//                             @Nullable Bundle savedInstanceState) {
-//
-//        yesNoViewModel.answer.observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(String s) {
-//                surveyViewModel.putAnswer(s);
-//            }
-//        });
-//
-//        return inflater.inflate(R.layout.fragment_yes_no, container, false);
-//    }
+    private ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -55,20 +40,20 @@ public class YesNoFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initAnsweroptions() {
-        yesnoAnsweroption1 = view.findViewById(R.id.yesnoAnsweroption1);
-        yesnoAnsweroption2 = view.findViewById(R.id.yesnoAnsweroption2);
+    protected void initResponseoptions() {
+        yesnoResponseoption1 = view.findViewById(R.id.yesnoResponseoption1);
+        yesnoResponseoption2 = view.findViewById(R.id.yesnoResponseoption2);
         initOnClickListeners();
     }
 
     private void initOnClickListeners() {
-        yesnoAnsweroption1.setOnClickListener(view -> {
-            answer.set(0, YesNoAnswer.YES);
+        yesnoResponseoption1.setOnClickListener(view -> {
+            response.set(0, 1);
             surveyViewModel.nextQuestion();
         });
 
-        yesnoAnsweroption2.setOnClickListener(view -> {
-            answer.set(0, YesNoAnswer.YES);
+        yesnoResponseoption2.setOnClickListener(view -> {
+            response.set(0, 2);
             surveyViewModel.nextQuestion();
         });
     }
@@ -76,7 +61,7 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     public void onStop() {
         super.onStop();
-        surveyViewModel.saveAnswer(answer);
+        surveyViewModel.saveResponse(response);
     }
 
 }

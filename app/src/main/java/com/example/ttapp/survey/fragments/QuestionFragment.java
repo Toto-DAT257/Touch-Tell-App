@@ -32,9 +32,7 @@ public abstract class QuestionFragment extends Fragment {
         setView(inflater, container);
         setSurveyViewModel();
         setViewModel();
-        initAnsweroptions();
-        // setQuestion();
-        // setUpAnsweroptions();
+        initResponseoptions();
 
         return view;
     }
@@ -47,17 +45,6 @@ public abstract class QuestionFragment extends Fragment {
 
     protected abstract void setViewModel();
 
-    protected abstract void initAnsweroptions();
-
-    //protected abstract void setQuestion();
-
-    //protected void setUpAnsweroptions() {
-    //    setAnsweroptions();
-    //    setAnsweroptionsOnclicklisteners();
-    //};
-
-    // protected abstract void setAnsweroptions();
-
-    // protected abstract void setAnsweroptionsOnclicklisteners();
+    protected abstract void initResponseoptions();
 
 }

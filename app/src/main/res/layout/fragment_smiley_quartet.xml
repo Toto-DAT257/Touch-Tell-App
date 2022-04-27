@@ -17,31 +17,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/smileyqAnsweroption1"
+            android:id="@+id/smileyqResponseoption1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/smileyq_answeroption1" />
+            android:text="@string/smileyq_responseoption1" />
 
         <Button
-            android:id="@+id/smileyqAnsweroption2"
+            android:id="@+id/smileyqResponseoption2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/smileyq_answeroption2" />
+            android:text="@string/smileyq_responseoption2" />
 
         <Button
-            android:id="@+id/smileyqAnsweroption3"
+            android:id="@+id/smileyqResponseoption3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/smileyq_answeroption3" />
+            android:text="@string/smileyq_responseoption3" />
 
         <Button
-            android:id="@+id/smileyqAnsweroption4"
+            android:id="@+id/smileyqResponseoption4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/smileyq_answeroption4" />
+            android:text="@string/smileyq_responseoption4" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

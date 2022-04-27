@@ -20,7 +20,7 @@
             android:id="@+id/question1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/answeroptionsmargin"
+            android:layout_marginBottom="@dimen/responseoptionsmargin"
             android:text="@string/first_question"
             android:textSize="@dimen/questiontext" />
 
@@ -33,14 +33,14 @@
                 android:id="@+id/firstQAnsweroption1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/answeroptionsmargin"
-                android:text="@string/first_q_answeroption1" />
+                android:layout_marginEnd="@dimen/responseoptionsmargin"
+                android:text="@string/first_q_responseoption1" />
 
             <Button
                 android:id="@+id/firstQAnsweroption2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/first_q_answeroption2" />
+                android:text="@string/first_q_responseoption2" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

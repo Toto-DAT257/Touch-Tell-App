@@ -156,16 +156,16 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         }
     }
 
-    public void saveAnswer(ArrayList<Integer> answeroption) {
-        saveAnswer(answeroption, null);
+    public void saveResponse(ArrayList<Integer> responseoption) {
+        saveResponse(responseoption, null);
     }
 
-    public void saveAnswer(String comment) {
-        saveAnswer(null, comment);
+    public void saveResponse(String comment) {
+        saveResponse(null, comment);
     }
 
-    public void saveAnswer(ArrayList<Integer> answeroption, String comment) {
-        survey.saveResponse(answeroption, comment);
+    public void saveResponse(ArrayList<Integer> responseoption, String comment) {
+        survey.saveResponse(responseoption, comment);
     }
 
 }

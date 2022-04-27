@@ -2,8 +2,8 @@
 <resources>
     <dimen name="questiontext">36dp</dimen>
 
-    <dimen name="answertext">36dp</dimen>
-    <dimen name="answeroptionsmargin">20dp</dimen>
+    <dimen name="responsetext">36dp</dimen>
+    <dimen name="responseoptionsmargin">20dp</dimen>
 
     <!-- nps -->
     <dimen name="npsSeekbarMargin">36dp</dimen>
