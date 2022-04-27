@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
+import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.model.SurveyEvent;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import io.realm.mongodb.RealmResultTask;
 
 /**
- * ViewModel for {@link com.example.ttapp.fragments.SurveyFragment}
+ * ViewModel for {@link SurveyFragment}
  *
  * @author Simon Holst, Amanda Cyrén, Emma Stålberg
  */

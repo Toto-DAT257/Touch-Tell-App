@@ -1,4 +1,4 @@
-package com.example.ttapp.fragments;
+package com.example.ttapp.survey.fragments;
 
 import android.os.Bundle;
 
