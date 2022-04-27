@@ -12,11 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Class for a survey, fetching and storing the information about the questions for the currently logged in user.
- *
- * @author Simon Holst, Amanda Cyrén, Emma Stålberg
- */
+
 public class Survey {
 
     private String json;
@@ -155,9 +151,4 @@ public class Survey {
     public void submitAnswers() {
         // TODO: Submit answers
     }
-
-
-
-
-   
 }
