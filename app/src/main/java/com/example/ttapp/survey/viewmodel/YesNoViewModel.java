@@ -21,7 +21,7 @@ public class YesNoViewModel extends ViewModel {
 
     // TODO handle exception
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void SaveAnswer(int answerOption, String questionID) throws JsonProcessingException {
+    public void saveAnswer(int answerOption, String questionID) throws JsonProcessingException {
         YesNoAnswer answerObject = new YesNoAnswer(answerOption, questionID);
         answer.setValue(answerObject.getAnswerJson());
     }

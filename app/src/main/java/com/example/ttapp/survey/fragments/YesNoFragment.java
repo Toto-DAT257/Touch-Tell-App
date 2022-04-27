@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.Button;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.model.answers.YesNoAnswer;
-import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -93,7 +91,7 @@ public class YesNoFragment extends QuestionFragment {
     public void onStop() {
         super.onStop();
         try {
-            yesNoViewModel.SaveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+            yesNoViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -79,7 +79,7 @@ public class NpsFragment extends QuestionFragment {
     public void onStop() {
         super.onStop();
         try {
-            npsViewModel.SaveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+            npsViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
