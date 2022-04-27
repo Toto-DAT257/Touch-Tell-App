@@ -58,9 +58,9 @@ public class SurveyFragment extends Fragment {
     }
 
     private void thingsToDoAfterJsonIsSet() {
-        surveyViewModel.getCurrentQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
+        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
 
-        surveyViewModel.getCurrentQuestionType().observe(getViewLifecycleOwner(), questionType -> {
+        surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             switch (questionType) {
                 case "smiley-quartet": navigate(new SmileyQuartetFragment()); break;
                 case QuestionType.YES_NO: navigate(new YesNoFragment()); break;
