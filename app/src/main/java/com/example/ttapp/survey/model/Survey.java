@@ -4,6 +4,10 @@ import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +25,8 @@ public class Survey {
     private ArrayList<String> questionsToSend;
     private String currentQuestionId;
     private Map<String, QuestionResponse> responses;
+    private PropertyChangeSupport support;
+    private Map<String, Response> responses;
 
     public Survey(String json) {
         responses = new HashMap<>();
@@ -32,6 +38,15 @@ public class Survey {
         }
         currentQuestionId = jsonQuestionsParser.getFirstQuestionId();
         questionsToSend = new ArrayList<>();
+        this.support = new PropertyChangeSupport(this);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
     }
 
     public String getCurrentQuestionId() {
@@ -50,24 +65,27 @@ public class Survey {
         boolean isLastQuestion = jsonQuestionsParser.isLastQuestion(currentQuestionId);
         if (isLastQuestion) {
             submitAnswers();
+            support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;
         }
-        currentQuestionId = jsonQuestionsParser.getNextQuestionId(currentQuestionId);
-        if (!allConditionsAreMet()){
-            nextQuestion();
+        String nextQuestionId = jsonQuestionsParser.getNextQuestionId(currentQuestionId);
+        if (allConditionsAreMet(nextQuestionId)){
+            support.firePropertyChange(SurveyEvent.NEW_QUESTION, currentQuestionId, nextQuestionId);
+            currentQuestionId = nextQuestionId;
+            return;
         }
+        nextQuestion();
     }
 
-    private boolean allConditionsAreMet() {
-        if (jsonQuestionsParser.conditionExist(currentQuestionId)){
-            for (Condition c : jsonQuestionsParser.getConditions(currentQuestionId)){
+    private boolean allConditionsAreMet(String questionId) {
+        if (!jsonQuestionsParser.conditionExist(questionId)) return true;
+            for (Condition c : jsonQuestionsParser.getConditions(questionId)){
                 for (ConditionQuestion q : c.conditionQuestion){
                     if (!conditionIsMet(q.conditionQquestionsId, q.options)){
                         return false;
                     }
                 }
             }
-        }
         return true;
     }
 
@@ -88,8 +106,8 @@ public class Survey {
         currentQuestionId = jsonQuestionsParser.getPreviousQuestionId(currentQuestionId);
     }
 
-    public void putAnswer(String questionId, QuestionResponse questionResponse) {
-        responses.put(questionId, questionResponse);
+    public void putAnswer(String questionId, QuestionResponse response) {
+        responses.put(questionId, response);
     }
 
     public QuestionResponse getResponse(String questionId) {

@@ -17,8 +17,12 @@ import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
+import com.example.ttapp.survey.model.SurveyEvent;
 
 import org.bson.Document;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import io.realm.mongodb.RealmResultTask;
 
@@ -27,7 +31,7 @@ import io.realm.mongodb.RealmResultTask;
  *
  * @author Simon Holst, Amanda Cyrén, Emma Stålberg
  */
-public class SurveyViewModel extends ViewModel {
+public class SurveyViewModel extends ViewModel implements PropertyChangeListener {
 
     private Survey survey;
     private final MutableLiveData<String> questionText;
@@ -79,6 +83,7 @@ public class SurveyViewModel extends ViewModel {
                     Log.i("Rest Response", response.toString());
                     // In here is were you have access to the JSON response, cannot return, due to async
                     survey = new Survey(response.toString());
+                    survey.addPropertyChangeListener(this);
                     jsonIsRecieved.setValue(true);
                 },
                 new Response.ErrorListener() {
@@ -137,4 +142,15 @@ public class SurveyViewModel extends ViewModel {
         return survey.getCurrentQuestionId();
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        switch (propertyChangeEvent.getPropertyName()) {
+            case SurveyEvent.SURVEY_DONE: {
+                break;
+            }
+            case SurveyEvent.NEW_QUESTION: {
+                break;
+            }
+        }
+    }
 }
