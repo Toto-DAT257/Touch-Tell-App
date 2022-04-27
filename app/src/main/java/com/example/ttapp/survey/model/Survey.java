@@ -23,6 +23,11 @@ public class Survey {
     private JsonQuestionsParser jsonQuestionsParser;
     private ArrayList<String> questionsToSend;
     private String currentQuestionId;
+
+    // currentId is already changed when saving the answer to the previous question
+    // so we save the old id in this variable responseQuestionId
+    private String responseQuestionId;
+
     private Map<String, QuestionResponse> responses;
     private PropertyChangeSupport support;
 
@@ -55,6 +60,14 @@ public class Survey {
         return jsonQuestionsParser.getQuestionText(currentQuestionId);
     }
 
+    public String getResponseQuestionId(){
+        return responseQuestionId;
+    }
+
+    public String getResponseQuestionType(){
+        return jsonQuestionsParser.getType(responseQuestionId);
+    }
+
     public String getCurrentQuestionType() {
         return jsonQuestionsParser.getType(currentQuestionId);
     }
@@ -67,6 +80,7 @@ public class Survey {
             return;
         }
         String oldQuestionId = currentQuestionId;
+        responseQuestionId = currentQuestionId;
         currentQuestionId = calcNextQuestion(currentQuestionId);
         support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
     }
@@ -101,7 +115,7 @@ public class Survey {
 
     private boolean conditionIsMet(String id, List<Integer> conditionOptions)  {
         if (responses.containsKey(id) && responses.get(id).getAnsweredOptions() != null){
-            for (int a : Objects.requireNonNull(responses.get(id)).getAnsweredOptions()){
+            for (int a : responses.get(id).getAnsweredOptions()){
                 if (conditionOptions.contains(a)){
                     return true;
                 }
@@ -128,17 +142,23 @@ public class Survey {
     }
 
     public void saveResponse(ArrayList<Integer> answeroption, String comment) {
-        if (!answeroption.isEmpty() || comment != null) {
+        int i = 2;
+        if (comment != null || !answeroption.isEmpty()) {
             QuestionResponse questionResponse = createResponseObject(answeroption, comment);
-            putResponse(getCurrentQuestionId(), questionResponse);
+            putResponse(getResponseQuestionId(), questionResponse);
         }
     }
 
     private QuestionResponse createResponseObject(ArrayList<Integer> answeroption, String comment) {
-        return new QuestionResponse(answeroption, comment, getCurrentQuestionType(), getCurrentQuestionId());
+        return new QuestionResponse(answeroption, comment, getResponseQuestionType(), getResponseQuestionId());
     }
 
     public void submitAnswers() {
         // TODO: Submit answers
     }
+
+
+
+
+   
 }
