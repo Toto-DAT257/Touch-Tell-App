@@ -50,7 +50,7 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         surveyViewModel.loadQuestions(getContext(), getActivity());
-        surveyViewModel.getJsonIsRecievedIndicator().observe(getViewLifecycleOwner(), bool ->{
+        surveyViewModel.getJsonIsRecievedIndicator().observe(getViewLifecycleOwner(), bool -> {
             thingsToDoAfterJsonIsSet();
         });
 
@@ -62,17 +62,32 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             switch (questionType) {
-                case "smiley-quartet": navigate(new SmileyQuartetFragment()); break;
-                case QuestionType.YES_NO: navigate(new YesNoFragment()); break;
-                case QuestionType.NPS: navigate(new NpsFragment()); break;
-                case "multiple-choice":
-                case "select-many":
-                case "comment": navigate(new CommentFragment()); break;
-                case "short-text":
-                case "typeahead":
-                case "number":
-                case "email":
-                case "smiley-comment":
+                case QuestionType.SMILEY_QUARTET:
+                    navigate(new SmileyQuartetFragment());
+                    break;
+                case QuestionType.YES_NO:
+                    navigate(new YesNoFragment());
+                    break;
+                case QuestionType.NPS:
+                    navigate(new NpsFragment());
+                    break;
+                case QuestionType.MULTIPLE_CHOICE:
+                    break;
+                case QuestionType.SELECT_MANY:
+                    break;
+                case QuestionType.COMMENT:
+                    navigate(new CommentFragment());
+                    break;
+                case QuestionType.SHORT_TEXT:
+                    break;
+                case QuestionType.TYPE_AHEAD:
+                    break;
+                case QuestionType.NUMBER:
+                    break;
+                case QuestionType.EMAIL:
+                    break;
+                case QuestionType.SMILEY_COMMENT:
+                    break;
             }
         });
         backButton.setOnClickListener(click -> previous());
@@ -87,7 +102,7 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.previousQuestion();
     }
 
-    private void navigate(Fragment fragment){
+    private void navigate(Fragment fragment) {
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
     }
 
