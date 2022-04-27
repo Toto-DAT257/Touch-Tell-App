@@ -62,5 +62,4 @@ public class FirstQuestionFragment extends QuestionFragment{
 //        });
 //    }
 
-
 }

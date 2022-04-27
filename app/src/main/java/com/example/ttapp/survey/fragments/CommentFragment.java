@@ -27,9 +27,9 @@ import com.example.ttapp.survey.viewmodel.CommentViewModel;
 public class CommentFragment extends QuestionFragment {
 
     private CommentViewModel commentViewModel;
-    private String questionId;
 
     private TextView commentAnswer;
+    private String answer;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -45,6 +45,18 @@ public class CommentFragment extends QuestionFragment {
     @Override
     protected void setViewModel() {
         commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
+    }
+
+    @Override
+    protected void initAnsweroptions() {
+        commentAnswer = view.findViewById(R.id.commentAnswer);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        answer = commentAnswer.getText().toString();
+        commentViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
     }
 
 }
