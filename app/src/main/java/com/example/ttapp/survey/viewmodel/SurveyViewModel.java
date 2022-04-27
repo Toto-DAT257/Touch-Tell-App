@@ -136,4 +136,9 @@ public class SurveyViewModel extends ViewModel {
         return survey.getCurrentQuestionId();
     }
 
+    //TODO to be implemented
+    public void saveAnswer(int answeroption, String comment) {
+
+    }
+
 }
