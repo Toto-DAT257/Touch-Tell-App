@@ -19,7 +19,6 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/questionFragmentContainer"
-        android:name="questionFragmentContainer"
         android:layout_width="410dp"
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"

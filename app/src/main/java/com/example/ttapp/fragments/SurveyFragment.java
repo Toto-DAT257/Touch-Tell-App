@@ -13,7 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
+import com.example.ttapp.survey.fragments.NpsFragment;
+import com.example.ttapp.survey.fragments.SmileyQuartetFragment;
+import com.example.ttapp.survey.fragments.YesNoFragment;
 import com.example.ttapp.survey.model.QuestionType;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
@@ -38,22 +42,32 @@ public class SurveyFragment extends Fragment {
         binding = FragmentSurveyBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
-        surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         backButton = binding.surveyBackButton;
         nextButton = binding.surveyNextButton;
         questionFragmentContainer = binding.questionFragmentContainer;
         questionTextView = binding.questionTextView;
 
+        surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
+        surveyViewModel.loadQuestions(getContext(), getActivity());
+        surveyViewModel.getJsonIsRecievedIndcator().observe(getViewLifecycleOwner(), bool ->{
+            thingsToDoAfterJsonIsSet();
+        });
+
+        return root;
+    }
+
+    private void thingsToDoAfterJsonIsSet() {
         surveyViewModel.getCurrentQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
 
         surveyViewModel.getCurrentQuestionType().observe(getViewLifecycleOwner(), questionType -> {
-            // TODO: Might not recognize change between two identical question types
             switch (questionType) {
                 case "smiley-quartet":
                     // TODO: Populate the FragmentContainer with appropriate QuestionFragment
-                    // supportFragmentManager.beginTransaction().add(R.id.fragment_container_view, myFragmentInstance).commit()
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, new SmileyQuartetFragment()).commit();
                 case QuestionType.YES_NO:
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, new YesNoFragment()).commit();
                 case QuestionType.NPS:
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, new NpsFragment()).commit();
                 case "multiple-choice":
                 case "select-many":
                 case "comment":
@@ -66,9 +80,6 @@ public class SurveyFragment extends Fragment {
         });
         backButton.setOnClickListener(click -> previous());
         nextButton.setOnClickListener(click -> next());
-
-        surveyViewModel.loadQuestions(getContext(), getActivity());
-        return root;
     }
 
     private void next() {

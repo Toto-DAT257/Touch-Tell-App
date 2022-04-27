@@ -31,10 +31,10 @@ public class SurveyViewModel extends ViewModel {
     private Survey survey;
     private final MutableLiveData<String> questionText;
     private final MutableLiveData<String> questionType;
-    private final MutableLiveData<String> json;
+    private final MutableLiveData<Boolean> jsonIsRecieved;
 
     public SurveyViewModel() {
-        json = new MutableLiveData<>();
+        jsonIsRecieved = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
         questionType = new MutableLiveData<>();
     }
@@ -77,8 +77,8 @@ public class SurveyViewModel extends ViewModel {
                 response -> {
                     Log.i("Rest Response", response.toString());
                     // In here is were you have access to the JSON response, cannot return, due to async
-                    json.setValue(response.toString());
-                    survey = new Survey(json.getValue());
+                    survey = new Survey(response.toString());
+                    jsonIsRecieved.setValue(true);
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -113,8 +113,8 @@ public class SurveyViewModel extends ViewModel {
     }
 
     // Might be a possible solution for getting the
-    public MutableLiveData<String> getQuestions() {
-        return json;
+    public MutableLiveData<Boolean> getJsonIsRecievedIndcator() {
+        return jsonIsRecieved;
     }
 
     public MutableLiveData<String> getCurrentQuestionText() {
