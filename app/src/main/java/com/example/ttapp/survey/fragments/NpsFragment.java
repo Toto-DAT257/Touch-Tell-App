@@ -41,7 +41,11 @@ public class NpsFragment extends QuestionFragment {
     protected void initAnsweroptions() {
         npsSeekbar = view.findViewById(R.id.npsSeekbar);
         answer = new ArrayList<>();
-        answer.set(0, npsSeekbar.getProgress());
+        if (answer.isEmpty()) {
+            answer.add(npsSeekbar.getProgress());
+        } else {
+            answer.set(0, npsSeekbar.getProgress());
+        }
 
         npsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
