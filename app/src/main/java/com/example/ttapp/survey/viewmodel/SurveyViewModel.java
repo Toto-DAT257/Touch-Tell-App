@@ -137,7 +137,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     }
 
 
-    public String getCurrentQuestionId() {
+    private String getCurrentQuestionId() {
         return survey.getCurrentQuestionId();
     }
 
@@ -154,6 +154,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
             }
         }
     }
+
     public void saveAnswer(ArrayList<Integer> answeroption) {
         saveAnswer(answeroption, null);
     }
@@ -162,9 +163,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         saveAnswer(null, comment);
     }
 
-    //TODO to be implemented
     public void saveAnswer(ArrayList<Integer> answeroption, String comment) {
-
+        survey.saveAnswer(answeroption, comment);
     }
 
 }
