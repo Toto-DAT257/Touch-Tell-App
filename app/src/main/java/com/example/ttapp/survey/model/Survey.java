@@ -73,7 +73,16 @@ public class Survey {
             currentQuestionId = nextQuestionId;
             return;
         }
+        currentQuestionId = nextQuestionId;
         nextQuestion();
+    }
+
+    private String calcNextQuestion(String questionId) {
+        String nextQuestionId = jsonQuestionsParser.getNextQuestionId(questionId);
+        if (allConditionsAreMet(nextQuestionId)){
+            return nextQuestionId;
+        }
+        return calcNextQuestion(nextQuestionId);
     }
 
     private boolean allConditionsAreMet(String questionId) {
@@ -102,7 +111,9 @@ public class Survey {
     public void previousQuestion() {
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
         if (isFirstQuestion) { return; }
-        currentQuestionId = jsonQuestionsParser.getPreviousQuestionId(currentQuestionId);
+        String previousQuestionId = jsonQuestionsParser.getPreviousQuestionId(currentQuestionId);
+        support.firePropertyChange(SurveyEvent.NEW_QUESTION, currentQuestionId, previousQuestionId);
+        currentQuestionId = previousQuestionId;
     }
 
     public void putAnswer(String questionId, QuestionResponse response) {
