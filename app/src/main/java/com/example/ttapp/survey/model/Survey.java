@@ -2,10 +2,7 @@ package com.example.ttapp.survey.model;
 
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
-import com.example.ttapp.survey.model.answers.Value;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +20,7 @@ public class Survey {
     private JsonQuestionsParser jsonQuestionsParser;
     private ArrayList<String> questionsToSend;
     private String currentQuestionId;
-    private Map<String, Response> responses;
+    private Map<String, QuestionResponse> responses;
 
     public Survey(String json) {
         responses = new HashMap<>();
@@ -91,11 +88,11 @@ public class Survey {
         currentQuestionId = jsonQuestionsParser.getPreviousQuestionId(currentQuestionId);
     }
 
-    public void putAnswer(String questionId, Response response) {
-        responses.put(questionId, response);
+    public void putAnswer(String questionId, QuestionResponse questionResponse) {
+        responses.put(questionId, questionResponse);
     }
 
-    public Response getResponse(String questionId) {
+    public QuestionResponse getResponse(String questionId) {
         return responses.get(questionId);
     }
 
