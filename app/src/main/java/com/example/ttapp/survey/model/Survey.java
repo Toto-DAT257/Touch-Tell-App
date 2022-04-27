@@ -4,9 +4,7 @@ import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,7 +119,7 @@ public class Survey {
         support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
     }
 
-    public void putAnswer(String questionId, QuestionResponse response) {
+    public void putResponse(String questionId, QuestionResponse response) {
         responses.put(questionId, response);
     }
 
@@ -129,9 +127,11 @@ public class Survey {
         return responses.get(questionId);
     }
 
-    public void saveAnswer(ArrayList<Integer> answeroption, String comment) {
-        QuestionResponse questionResponse = createResponseObject(answeroption, comment);
-        putAnswer(getCurrentQuestionId(), questionResponse);
+    public void saveResponse(ArrayList<Integer> answeroption, String comment) {
+        if (!answeroption.isEmpty() || comment != null) {
+            QuestionResponse questionResponse = createResponseObject(answeroption, comment);
+            putResponse(getCurrentQuestionId(), questionResponse);
+        }
     }
 
     private QuestionResponse createResponseObject(ArrayList<Integer> answeroption, String comment) {
