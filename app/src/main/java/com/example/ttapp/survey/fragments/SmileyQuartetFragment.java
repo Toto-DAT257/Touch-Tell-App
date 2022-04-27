@@ -31,7 +31,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
     private Button smileyqAnsweroption3;
     private Button smileyqAnsweroption4;
 
-    private ArrayList<Integer> answer;
+    private ArrayList<Integer> answer = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -49,8 +49,6 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqAnsweroption2 = view.findViewById(R.id.smileyqAnsweroption2);
         smileyqAnsweroption3 = view.findViewById(R.id.smileyqAnsweroption3);
         smileyqAnsweroption4 = view.findViewById(R.id.smileyqAnsweroption4);
-
-        answer = new ArrayList<>();
 
         initOnClickListeners();
     }

@@ -3,7 +3,6 @@ package com.example.ttapp.survey.fragments;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
@@ -29,7 +28,7 @@ public class YesNoFragment extends QuestionFragment {
     private Button yesnoAnsweroption1;
     private Button yesnoAnsweroption2;
 
-    private ArrayList<Integer> answer;
+    private ArrayList<Integer> answer = new ArrayList<>();
 
 //    @Override
 //    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -57,7 +56,6 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initAnsweroptions() {
-        answer = new ArrayList<>();
         yesnoAnsweroption1 = view.findViewById(R.id.yesnoAnsweroption1);
         yesnoAnsweroption2 = view.findViewById(R.id.yesnoAnsweroption2);
         initOnClickListeners();

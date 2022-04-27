@@ -25,7 +25,7 @@ public class NpsFragment extends QuestionFragment {
     private NpsViewModel npsViewModel;
 
     private SeekBar npsSeekbar;
-    private ArrayList<Integer> answer;
+    private ArrayList<Integer> answer = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -40,7 +40,6 @@ public class NpsFragment extends QuestionFragment {
     @Override
     protected void initAnsweroptions() {
         npsSeekbar = view.findViewById(R.id.npsSeekbar);
-        answer = new ArrayList<>();
         if (answer.isEmpty()) {
             answer.add(npsSeekbar.getProgress());
         } else {
