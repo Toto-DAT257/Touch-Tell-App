@@ -1,7 +1,9 @@
 package com.example.ttapp.survey.fragments;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.widget.SeekBar;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.NpsViewModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * Class for a fragment that presents a nps-question
@@ -27,9 +30,9 @@ import com.example.ttapp.survey.viewmodel.NpsViewModel;
 public class NpsFragment extends QuestionFragment {
 
     private NpsViewModel npsViewModel;
-    private String questionId;
 
     private SeekBar npsSeekbar;
+    private int answer;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -45,6 +48,41 @@ public class NpsFragment extends QuestionFragment {
     @Override
     protected void setViewModel() {
         npsViewModel = new ViewModelProvider(requireActivity()).get(NpsViewModel.class);
+    }
+
+    @Override
+    protected void initAnsweroptions() {
+        npsSeekbar = view.findViewById(R.id.npsSeekbar);
+        answer = npsSeekbar.getProgress();
+
+        npsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                answer = npsSeekbar.getProgress();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    // TODO change try catch
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onStop() {
+        super.onStop();
+        try {
+            npsViewModel.SaveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
 }
