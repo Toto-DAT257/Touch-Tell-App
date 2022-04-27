@@ -50,6 +50,14 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqResponseoption4 = view.findViewById(R.id.smileyqResponseoption4);
 
         initOnClickListeners();
+        initSaveResponseObserver();
+    }
+
+    @Override
+    protected void initSaveResponseObserver(){
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
     }
 
     private void initOnClickListeners() {
@@ -59,6 +67,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
             } else {
                 response.set(0, 1);
             }
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
@@ -68,6 +77,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
             } else {
                 response.set(0, 2);
             }
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
@@ -77,6 +87,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
             } else {
                 response.set(0, 3);
             }
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
@@ -86,14 +97,9 @@ public class SmileyQuartetFragment extends QuestionFragment {
             } else {
                 response.set(0, 4);
             }
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        surveyViewModel.saveResponse(response);
     }
 
 }

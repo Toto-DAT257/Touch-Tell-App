@@ -42,12 +42,14 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<String> questionType;
     private final MutableLiveData<Boolean> jsonIsRecieved;
     private final MutableLiveData<Boolean> surveyIsDone;
+    private final MutableLiveData<Boolean> saveResponse;
 
     public SurveyViewModel() {
         jsonIsRecieved = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
         questionType = new MutableLiveData<>();
         surveyIsDone = new MutableLiveData<>();
+        saveResponse = new MutableLiveData<>();
     }
 
     /**
@@ -161,15 +163,22 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 //newQuestionType();
                 break;
             }
+            case SurveyEvent.SAVE_RESPONSE:{
+                saveResponse.setValue(true);
+            }
         }
     }
 
+    public MutableLiveData<Boolean> getSaveResponse(){
+        return saveResponse;
+    }
+
     public void saveResponse(ArrayList<Integer> responseoption) {
-        saveResponse(responseoption, null);
+        saveResponse(responseoption, "");
     }
 
     public void saveResponse(String comment) {
-        saveResponse(null, comment);
+        saveResponse(new ArrayList<>(), comment);
     }
 
     public void saveResponse(ArrayList<Integer> responseoption, String comment) {

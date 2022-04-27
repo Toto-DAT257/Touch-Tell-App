@@ -47,4 +47,6 @@ public abstract class QuestionFragment extends Fragment {
 
     protected abstract void initResponseoptions();
 
+    protected abstract void initSaveResponseObserver();
+
 }

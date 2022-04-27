@@ -38,13 +38,15 @@ public class CommentFragment extends QuestionFragment {
     @Override
     protected void initResponseoptions() {
         commentResponse = view.findViewById(R.id.commentResponse);
+        initSaveResponseObserver();
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        response = commentResponse.getText().toString();
-        surveyViewModel.saveResponse(response);
+    protected void initSaveResponseObserver(){
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            response = commentResponse.getText().toString();
+            surveyViewModel.saveResponse(response);
+        });
     }
 
 }

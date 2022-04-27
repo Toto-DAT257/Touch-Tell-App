@@ -46,6 +46,13 @@ public class YesNoFragment extends QuestionFragment {
         initOnClickListeners();
     }
 
+    @Override
+    protected void initSaveResponseObserver() {
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
+    }
+
     private void initOnClickListeners() {
         yesnoResponseoption1.setOnClickListener(view -> {
             if (response.isEmpty()){
@@ -53,6 +60,7 @@ public class YesNoFragment extends QuestionFragment {
             } else {
                 response.set(0, 1);
             }
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
@@ -62,14 +70,9 @@ public class YesNoFragment extends QuestionFragment {
             } else {
                 response.set(0, 2);
             }
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        surveyViewModel.saveResponse(response);
     }
 
 }

@@ -4,5 +4,6 @@ public interface SurveyEvent {
 
     String NEW_QUESTION = "new-question";
     String SURVEY_DONE = "survey-done";
+    String SAVE_RESPONSE = "save-response";
 
 }

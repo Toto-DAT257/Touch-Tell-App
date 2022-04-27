@@ -65,9 +65,12 @@ public class NpsFragment extends QuestionFragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        surveyViewModel.saveResponse(response);
+    protected void initSaveResponseObserver() {
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
     }
+
+
 
 }
