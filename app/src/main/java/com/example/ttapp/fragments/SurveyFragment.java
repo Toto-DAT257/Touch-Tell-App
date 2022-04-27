@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
+import com.example.ttapp.survey.fragments.CommentFragment;
 import com.example.ttapp.survey.fragments.NpsFragment;
 import com.example.ttapp.survey.fragments.SmileyQuartetFragment;
 import com.example.ttapp.survey.fragments.YesNoFragment;
@@ -61,16 +62,12 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.getCurrentQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             switch (questionType) {
-                case "smiley-quartet":
-                    // TODO: Populate the FragmentContainer with appropriate QuestionFragment
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, new SmileyQuartetFragment()).commit();
-                case QuestionType.YES_NO:
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, new YesNoFragment()).commit();
-                case QuestionType.NPS:
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, new NpsFragment()).commit();
+                case "smiley-quartet": navigate(new SmileyQuartetFragment()); break;
+                case QuestionType.YES_NO: navigate(new YesNoFragment()); break;
+                case QuestionType.NPS: navigate(new NpsFragment()); break;
                 case "multiple-choice":
                 case "select-many":
-                case "comment":
+                case "comment": navigate(new CommentFragment()); break;
                 case "short-text":
                 case "typeahead":
                 case "number":
@@ -88,6 +85,10 @@ public class SurveyFragment extends Fragment {
 
     private void previous() {
         surveyViewModel.previousQuestion();
+    }
+
+    private void navigate(Fragment fragment){
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
     }
 
 }
