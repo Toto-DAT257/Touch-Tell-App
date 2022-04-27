@@ -102,7 +102,7 @@ public class Survey {
     }
 
     private boolean conditionIsMet(String id, List<Integer> conditionOptions)  {
-        if (responses.containsKey(id)){
+        if (responses.containsKey(id) && responses.get(id).getAnsweredOptions() != null){
             for (int a : Objects.requireNonNull(responses.get(id)).getAnsweredOptions()){
                 if (conditionOptions.contains(a)){
                     return true;
