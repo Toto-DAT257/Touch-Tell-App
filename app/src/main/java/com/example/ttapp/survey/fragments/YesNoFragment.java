@@ -20,6 +20,8 @@ import com.example.ttapp.survey.model.answers.YesNoAnswer;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.util.ArrayList;
+
 /**
  * Class for a fragment that presents a yes no question
  *
@@ -36,21 +38,21 @@ public class YesNoFragment extends QuestionFragment {
     private Button yesnoAnsweroption1;
     private Button yesnoAnsweroption2;
 
-    private int answer;
+    private ArrayList<Integer> answer;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-        yesNoViewModel.answer.observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                surveyViewModel.putAnswer(s);
-            }
-        });
-
-        return inflater.inflate(R.layout.fragment_yes_no, container, false);
-    }
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+//                             @Nullable Bundle savedInstanceState) {
+//
+//        yesNoViewModel.answer.observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(String s) {
+//                surveyViewModel.putAnswer(s);
+//            }
+//        });
+//
+//        return inflater.inflate(R.layout.fragment_yes_no, container, false);
+//    }
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -64,6 +66,7 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initAnsweroptions() {
+        answer = new ArrayList<Integer>();
         yesnoAnsweroption1 = view.findViewById(R.id.yesnoAnsweroption1);
         yesnoAnsweroption2 = view.findViewById(R.id.yesnoAnsweroption2);
         initOnClickListeners();
@@ -73,28 +76,23 @@ public class YesNoFragment extends QuestionFragment {
         yesnoAnsweroption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer = YesNoAnswer.YES;
+                answer.set(0, YesNoAnswer.YES);
             }
         });
 
         yesnoAnsweroption2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer = YesNoAnswer.NO;
+                answer.set(0, YesNoAnswer.YES);
             }
         });
     }
 
-    // TODO change try catch
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStop() {
         super.onStop();
-        try {
-            yesNoViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        surveyViewModel.saveAnswer(answer);
     }
 
 }
