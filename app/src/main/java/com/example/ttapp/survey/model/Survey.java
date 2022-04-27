@@ -2,10 +2,7 @@ package com.example.ttapp.survey.model;
 
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
-import com.example.ttapp.survey.model.answers.Value;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -27,6 +24,7 @@ public class Survey {
     private JsonQuestionsParser jsonQuestionsParser;
     private ArrayList<String> questionsToSend;
     private String currentQuestionId;
+    private Map<String, QuestionResponse> responses;
     private PropertyChangeSupport support;
     private Map<String, Response> responses;
 
@@ -108,11 +106,11 @@ public class Survey {
         currentQuestionId = jsonQuestionsParser.getPreviousQuestionId(currentQuestionId);
     }
 
-    public void putAnswer(String questionId, Response response) {
+    public void putAnswer(String questionId, QuestionResponse response) {
         responses.put(questionId, response);
     }
 
-    public Response getResponse(String questionId) {
+    public QuestionResponse getResponse(String questionId) {
         return responses.get(questionId);
     }
 

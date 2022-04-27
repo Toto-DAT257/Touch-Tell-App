@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
+import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.model.SurveyEvent;
 
@@ -106,8 +107,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return sharedPref.getString("identifier", null);
     }
 
-    public void putAnswer(String answerInJson) {
-        survey.putAnswer(getCurrentQuestionId(), answerInJson);
+    public void putAnswer(QuestionResponse response) {
+        survey.putAnswer(getCurrentQuestionId(), response);
     }
 
     public void nextQuestion() {
