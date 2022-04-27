@@ -16,6 +16,8 @@ import com.example.ttapp.R;
 import com.example.ttapp.survey.model.answers.SmileyQuartet;
 import com.example.ttapp.survey.viewmodel.SmileyQuartetViewModel;
 
+import java.util.ArrayList;
+
 /**
  * Class for a fragment that presents a smiley-quartet question
  *
@@ -34,13 +36,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
     private Button smileyqAnsweroption3;
     private Button smileyqAnsweroption4;
 
-    private int answer;
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_smiley_quartet, container, false);
-    }
+    private ArrayList<Integer> answer;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -59,6 +55,8 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqAnsweroption3 = view.findViewById(R.id.smileyqAnsweroption3);
         smileyqAnsweroption4 = view.findViewById(R.id.smileyqAnsweroption4);
 
+        answer = new ArrayList<Integer>();
+
         initOnClickListeners();
     }
 
@@ -66,30 +64,36 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqAnsweroption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer = SmileyQuartet.SADDEST;
+                answer.set(0, SmileyQuartet.SADDEST);
             }
         });
 
         smileyqAnsweroption2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer = SmileyQuartet.SAD;
+                answer.set(0, SmileyQuartet.SAD);
             }
         });
 
         smileyqAnsweroption3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer = SmileyQuartet.HAPPY;
+                answer.set(0, SmileyQuartet.HAPPY);
             }
         });
 
         smileyqAnsweroption4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer = SmileyQuartet.HAPPIEST;
+                answer.set(0, SmileyQuartet.HAPPIEST);
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        surveyViewModel.saveAnswer(answer);
     }
 
 }
