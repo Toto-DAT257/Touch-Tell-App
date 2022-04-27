@@ -1,22 +1,13 @@
 package com.example.ttapp.survey.fragments;
 
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Build;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.CommentViewModel;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * Class for a fragment that presents a comment-question

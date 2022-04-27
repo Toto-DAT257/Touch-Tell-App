@@ -1,14 +1,6 @@
 package com.example.ttapp.survey.fragments;
 
-import androidx.annotation.RequiresApi;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Build;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +10,6 @@ import android.widget.Button;
 import com.example.ttapp.R;
 import com.example.ttapp.survey.model.answers.YesNoAnswer;
 import com.example.ttapp.survey.viewmodel.YesNoViewModel;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.ArrayList;
 
@@ -66,26 +57,16 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initAnsweroptions() {
-        answer = new ArrayList<Integer>();
+        answer = new ArrayList<>();
         yesnoAnsweroption1 = view.findViewById(R.id.yesnoAnsweroption1);
         yesnoAnsweroption2 = view.findViewById(R.id.yesnoAnsweroption2);
         initOnClickListeners();
     }
 
     private void initOnClickListeners() {
-        yesnoAnsweroption1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                answer.set(0, YesNoAnswer.YES);
-            }
-        });
+        yesnoAnsweroption1.setOnClickListener(view -> answer.set(0, YesNoAnswer.YES));
 
-        yesnoAnsweroption2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                answer.set(0, YesNoAnswer.YES);
-            }
-        });
+        yesnoAnsweroption2.setOnClickListener(view -> answer.set(0, YesNoAnswer.YES));
     }
 
     @Override

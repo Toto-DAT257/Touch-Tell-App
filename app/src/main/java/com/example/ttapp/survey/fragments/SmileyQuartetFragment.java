@@ -2,11 +2,6 @@ package com.example.ttapp.survey.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,39 +50,19 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqAnsweroption3 = view.findViewById(R.id.smileyqAnsweroption3);
         smileyqAnsweroption4 = view.findViewById(R.id.smileyqAnsweroption4);
 
-        answer = new ArrayList<Integer>();
+        answer = new ArrayList<>();
 
         initOnClickListeners();
     }
 
     private void initOnClickListeners() {
-        smileyqAnsweroption1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                answer.set(0, SmileyQuartet.SADDEST);
-            }
-        });
+        smileyqAnsweroption1.setOnClickListener(view -> answer.set(0, SmileyQuartet.SADDEST));
 
-        smileyqAnsweroption2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                answer.set(0, SmileyQuartet.SAD);
-            }
-        });
+        smileyqAnsweroption2.setOnClickListener(view -> answer.set(0, SmileyQuartet.SAD));
 
-        smileyqAnsweroption3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                answer.set(0, SmileyQuartet.HAPPY);
-            }
-        });
+        smileyqAnsweroption3.setOnClickListener(view -> answer.set(0, SmileyQuartet.HAPPY));
 
-        smileyqAnsweroption4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                answer.set(0, SmileyQuartet.HAPPIEST);
-            }
-        });
+        smileyqAnsweroption4.setOnClickListener(view -> answer.set(0, SmileyQuartet.HAPPIEST));
     }
 
     @Override
