@@ -34,7 +34,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class YesNoFragment extends QuestionFragment {
 
     private YesNoViewModel yesNoViewModel;
-    private String questionId;
 
     private Button yesnoAnsweroption1;
     private Button yesnoAnsweroption2;
@@ -99,6 +98,5 @@ public class YesNoFragment extends QuestionFragment {
             e.printStackTrace();
         }
     }
-
 
 }

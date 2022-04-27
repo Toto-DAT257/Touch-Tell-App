@@ -26,5 +26,4 @@ public class YesNoViewModel extends ViewModel {
         answer.setValue(answerObject.getAnswerJson());
     }
 
-
 }
