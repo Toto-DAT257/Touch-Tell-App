@@ -22,8 +22,8 @@ public class CommentFragment extends QuestionFragment {
 
     private CommentViewModel commentViewModel;
 
-    private EditText commentAnswer;
-    private String answer;
+    private EditText commentResponse;
+    private String response;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -36,15 +36,15 @@ public class CommentFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initAnsweroptions() {
-        commentAnswer = view.findViewById(R.id.commentAnswer);
+    protected void initResponseoptions() {
+        commentResponse = view.findViewById(R.id.commentResponse);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        answer = commentAnswer.getText().toString();
-        surveyViewModel.saveAnswer(answer);
+        response = commentResponse.getText().toString();
+        surveyViewModel.saveResponse(response);
     }
 
 }

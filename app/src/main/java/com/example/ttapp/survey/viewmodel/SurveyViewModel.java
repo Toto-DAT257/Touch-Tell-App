@@ -41,11 +41,13 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<String> questionText;
     private final MutableLiveData<String> questionType;
     private final MutableLiveData<Boolean> jsonIsRecieved;
+    private final MutableLiveData<Boolean> surveyIsDone;
 
     public SurveyViewModel() {
         jsonIsRecieved = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
         questionType = new MutableLiveData<>();
+        surveyIsDone = new MutableLiveData<>();
     }
 
     /**
@@ -137,6 +139,10 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return questionType;
     }
 
+    public LiveData<Boolean> surveyIsDone() {
+        surveyIsDone.setValue(true);
+        return surveyIsDone;
+    }
 
     private String getCurrentQuestionId() {
         return survey.getCurrentQuestionId();
@@ -146,6 +152,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         switch (propertyChangeEvent.getPropertyName()) {
             case SurveyEvent.SURVEY_DONE: {
+                surveyIsDone();
                 break;
             }
             case SurveyEvent.NEW_QUESTION: {
@@ -156,16 +163,16 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         }
     }
 
-    public void saveAnswer(ArrayList<Integer> answeroption) {
-        saveAnswer(answeroption, null);
+    public void saveResponse(ArrayList<Integer> responseoption) {
+        saveResponse(responseoption, null);
     }
 
-    public void saveAnswer(String comment) {
-        saveAnswer(null, comment);
+    public void saveResponse(String comment) {
+        saveResponse(null, comment);
     }
 
-    public void saveAnswer(ArrayList<Integer> answeroption, String comment) {
-        survey.saveResponse(answeroption, comment);
+    public void saveResponse(ArrayList<Integer> responseoption, String comment) {
+        survey.saveResponse(responseoption, comment);
     }
 
 }

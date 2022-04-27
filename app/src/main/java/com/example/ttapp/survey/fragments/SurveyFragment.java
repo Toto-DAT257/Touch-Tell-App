@@ -5,7 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +92,17 @@ public class SurveyFragment extends Fragment {
                     break;
             }
         });
+
+        surveyViewModel.surveyIsDone().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).
+                            navigate(R.id.action_surveyFragment_to_doneWithSurveyFragment);
+                }
+            }
+        });
+
         backButton.setOnClickListener(click -> previous());
         nextButton.setOnClickListener(click -> next());
     }

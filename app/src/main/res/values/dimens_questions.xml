@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="questiontext">36dp</dimen>
+    <dimen name="questiontext">36sp</dimen>
 
-    <dimen name="answertext">36dp</dimen>
-    <dimen name="answeroptionsmargin">20dp</dimen>
+    <dimen name="responsetext">36sp</dimen>
+    <dimen name="responseoptionsmargin">20dp</dimen>
 
     <!-- nps -->
     <dimen name="npsSeekbarMargin">36dp</dimen>

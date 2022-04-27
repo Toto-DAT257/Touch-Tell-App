@@ -3,7 +3,6 @@ package com.example.ttapp.survey.fragments;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
@@ -26,12 +25,12 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
     private SmileyQuartetViewModel smileyQuartetViewModel;
 
-    private Button smileyqAnsweroption1;
-    private Button smileyqAnsweroption2;
-    private Button smileyqAnsweroption3;
-    private Button smileyqAnsweroption4;
+    private Button smileyqResponseoption1;
+    private Button smileyqResponseoption2;
+    private Button smileyqResponseoption3;
+    private Button smileyqResponseoption4;
 
-    private ArrayList<Integer> answer = new ArrayList<>();
+    private ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -44,29 +43,41 @@ public class SmileyQuartetFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initAnsweroptions() {
-        smileyqAnsweroption1 = view.findViewById(R.id.smileyqAnsweroption1);
-        smileyqAnsweroption2 = view.findViewById(R.id.smileyqAnsweroption2);
-        smileyqAnsweroption3 = view.findViewById(R.id.smileyqAnsweroption3);
-        smileyqAnsweroption4 = view.findViewById(R.id.smileyqAnsweroption4);
+    protected void initResponseoptions() {
+        smileyqResponseoption1 = view.findViewById(R.id.smileyqResponseoption1);
+        smileyqResponseoption2 = view.findViewById(R.id.smileyqResponseoption2);
+        smileyqResponseoption3 = view.findViewById(R.id.smileyqResponseoption3);
+        smileyqResponseoption4 = view.findViewById(R.id.smileyqResponseoption4);
 
         initOnClickListeners();
     }
 
     private void initOnClickListeners() {
-        smileyqAnsweroption1.setOnClickListener(view -> answer.set(0, SmileyQuartet.SADDEST));
+        smileyqResponseoption1.setOnClickListener(view -> {
+            response.set(0, 1);
+            surveyViewModel.nextQuestion();
+        });
 
-        smileyqAnsweroption2.setOnClickListener(view -> answer.set(0, SmileyQuartet.SAD));
+        smileyqResponseoption2.setOnClickListener(view -> {
+            response.set(0, 2);
+            surveyViewModel.nextQuestion();
+        });
 
-        smileyqAnsweroption3.setOnClickListener(view -> answer.set(0, SmileyQuartet.HAPPY));
+        smileyqResponseoption3.setOnClickListener(view -> {
+            response.set(0, 3);
+            surveyViewModel.nextQuestion();
+        });
 
-        smileyqAnsweroption4.setOnClickListener(view -> answer.set(0, SmileyQuartet.HAPPIEST));
+        smileyqResponseoption4.setOnClickListener(view -> {
+            response.set(0, 4);
+            surveyViewModel.nextQuestion();
+        });
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        surveyViewModel.saveAnswer(answer);
+        surveyViewModel.saveResponse(response);
     }
 
 }
