@@ -142,7 +142,6 @@ public class Survey {
     }
 
     public void saveResponse(ArrayList<Integer> answeroption, String comment) {
-        int i = 2;
         if (comment != null || !answeroption.isEmpty()) {
             QuestionResponse questionResponse = createResponseObject(answeroption, comment);
             putResponse(getResponseQuestionId(), questionResponse);
