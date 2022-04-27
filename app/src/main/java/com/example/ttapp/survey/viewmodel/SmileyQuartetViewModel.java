@@ -23,8 +23,8 @@ public class SmileyQuartetViewModel extends ViewModel {
     //TODO handle exception
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveAnswer(int answerOption, String questionID) throws JsonProcessingException {
-        SmileyQuartet answerObject = new SmileyQuartet(answerOption, questionID);
-        answer.setValue(answerObject.getAnswerJson());
+        //SmileyQuartet answerObject = new SmileyQuartet(answerOption, questionID);
+        //answer.setValue(answerObject.getAnswerJson());
     }
 
 }
