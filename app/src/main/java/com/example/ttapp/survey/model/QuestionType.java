@@ -1,5 +1,9 @@
 package com.example.ttapp.survey.model;
 
+/**
+ * Interface solely serving as storage for string values to ensure no typos or non-matching
+ * values are present in clients.
+ */
 public interface QuestionType {
     String YES_NO = "yes-no";
     String NPS = "nps";

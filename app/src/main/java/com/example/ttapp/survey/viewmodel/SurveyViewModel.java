@@ -11,13 +11,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
-import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.model.SurveyEvent;
 
@@ -32,6 +29,9 @@ import io.realm.mongodb.RealmResultTask;
 
 /**
  * ViewModel for {@link SurveyFragment}
+ * <p>
+ * This class makes use of the Java Beans PropertyChange-library which lets it subscribe to other
+ * objects and listen to their events.
  *
  * @author Simon Holst, Amanda Cyrén, Emma Stålberg
  */
@@ -40,12 +40,12 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private Survey survey;
     private final MutableLiveData<String> questionText;
     private final MutableLiveData<String> questionType;
-    private final MutableLiveData<Boolean> jsonIsRecieved;
+    private final MutableLiveData<Boolean> jsonIsReceived;
     private final MutableLiveData<Boolean> surveyIsDone;
     private final MutableLiveData<Boolean> saveResponse;
 
     public SurveyViewModel() {
-        jsonIsRecieved = new MutableLiveData<>();
+        jsonIsReceived = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
         questionType = new MutableLiveData<>();
         surveyIsDone = new MutableLiveData<>();
@@ -54,7 +54,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
-     * @param context the fragment that will present the questions context.
+     *
+     * @param context  the fragment that will present the questions context.
      * @param activity the fragment that will present the questions context.
      */
     public void loadQuestions(Context context, FragmentActivity activity) {
@@ -94,14 +95,9 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                     survey.addPropertyChangeListener(this);
                     questionType.setValue(survey.getCurrentQuestionType());
                     questionText.setValue(survey.getCurrentQuestionText());
-                    jsonIsRecieved.setValue(true);
+                    jsonIsReceived.setValue(true);
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Rest Response", error.toString());
-                    }
-                }
+                error -> Log.e("Rest Response", error.toString())
         );
 
         requestQueue.add(objectRequest);
@@ -116,10 +112,6 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return sharedPref.getString("identifier", null);
     }
 
-    public void putAnswer(QuestionResponse response) {
-        survey.putResponse(getCurrentQuestionId(), response);
-    }
-
     public void nextQuestion() {
         survey.nextQuestion();
     }
@@ -129,8 +121,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     }
 
     // Might be a possible solution for getting the
-    public LiveData<Boolean> getJsonIsRecievedIndicator() {
-        return jsonIsRecieved;
+    public LiveData<Boolean> getJsonIsReceivedIndicator() {
+        return jsonIsReceived;
     }
 
     public LiveData<String> newQuestionText() {
@@ -145,10 +137,6 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return surveyIsDone;
     }
 
-    private String getCurrentQuestionId() {
-        return survey.getCurrentQuestionId();
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         switch (propertyChangeEvent.getPropertyName()) {
@@ -159,30 +147,28 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
             case SurveyEvent.NEW_QUESTION: {
                 questionType.setValue(survey.getCurrentQuestionType());
                 questionText.setValue(survey.getCurrentQuestionText());
-                //newQuestionText();
-                //newQuestionType();
                 break;
             }
-            case SurveyEvent.SAVE_RESPONSE:{
+            case SurveyEvent.SAVE_RESPONSE: {
                 saveResponse.setValue(true);
             }
         }
     }
 
-    public MutableLiveData<Boolean> getSaveResponse(){
+    public MutableLiveData<Boolean> getSaveResponse() {
         return saveResponse;
     }
 
-    public void saveResponse(ArrayList<Integer> responseoption) {
-        saveResponse(responseoption, "");
+    public void saveResponse(ArrayList<Integer> responseOption) {
+        saveResponse(responseOption, "");
     }
 
     public void saveResponse(String comment) {
         saveResponse(new ArrayList<>(), comment);
     }
 
-    public void saveResponse(ArrayList<Integer> responseoption, String comment) {
-        survey.saveResponse(responseoption, comment);
+    public void saveResponse(ArrayList<Integer> responseOption, String comment) {
+        survey.saveResponse(responseOption, comment);
     }
 
 }

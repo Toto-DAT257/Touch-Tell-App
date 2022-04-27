@@ -9,5 +9,5 @@ import java.util.List;
 public class Condition {
 
     @JsonProperty("questions")
-    public List<ConditionQuestion> conditionQuestion;
+    public List<ConditionQuestion> conditionQuestions;
 }

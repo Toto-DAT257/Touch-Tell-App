@@ -2,6 +2,9 @@ package com.example.ttapp.survey.model;
 
 import java.util.List;
 
+/**
+ * This class is used to store the an answer to a question while the survey is still being taken.
+ */
 public class QuestionResponse {
 
     private List<Integer> answeredOptions;

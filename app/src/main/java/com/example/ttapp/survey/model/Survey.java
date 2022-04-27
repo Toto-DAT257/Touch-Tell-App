@@ -10,21 +10,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-
+/**
+ * Main class of the model package. This class serves as the interface to be used by clients.
+ * Contains the full logic of traversing a survey.
+ * <p>
+ * This class makes use of the Java Beans PropertyChange-library which lets clients listen to
+ * the events fired by this class.
+ */
 public class Survey {
 
-    private String json;
     private JsonQuestionsParser jsonQuestionsParser;
-    private ArrayList<String> questionsToSend;
+    private final ArrayList<String> questionsToSend;
     private String currentQuestionId;
-    private Map<String, QuestionResponse> responses;
-    private PropertyChangeSupport support;
+    private final Map<String, QuestionResponse> responses;
+    private final PropertyChangeSupport support;
 
     public Survey(String json) {
         responses = new HashMap<>();
-        this.json = json;
         try {
             jsonQuestionsParser = new JsonQuestionsParser(json);
         } catch (JsonProcessingException e) {
@@ -71,7 +74,7 @@ public class Survey {
 
     private String calcNextQuestion(String questionId) {
         String nextQuestionId = jsonQuestionsParser.getNextQuestionId(questionId);
-        if (allConditionsAreMet(nextQuestionId)){
+        if (allConditionsAreMet(nextQuestionId)) {
             return nextQuestionId;
         }
         return calcNextQuestion(nextQuestionId);
@@ -79,7 +82,7 @@ public class Survey {
 
     private String calcPreviousQuestion(String questionId) {
         String previousQuestionId = jsonQuestionsParser.getPreviousQuestionId(questionId);
-        if (allConditionsAreMet(previousQuestionId)){
+        if (allConditionsAreMet(previousQuestionId)) {
             return previousQuestionId;
         }
         return calcPreviousQuestion(previousQuestionId);
@@ -87,20 +90,20 @@ public class Survey {
 
     private boolean allConditionsAreMet(String questionId) {
         if (!jsonQuestionsParser.conditionExist(questionId)) return true;
-            for (Condition c : jsonQuestionsParser.getConditions(questionId)){
-                for (ConditionQuestion q : c.conditionQuestion){
-                    if (!conditionIsMet(q.conditionQquestionsId, q.options)){
-                        return false;
-                    }
+        for (Condition c : jsonQuestionsParser.getConditions(questionId)) {
+            for (ConditionQuestion q : c.conditionQuestions) {
+                if (!conditionIsMet(q.conditionQuestionId, q.options)) {
+                    return false;
                 }
             }
+        }
         return true;
     }
 
-    private boolean conditionIsMet(String id, List<Integer> conditionOptions)  {
-        if (responses.containsKey(id) && responses.get(id).getAnsweredOptions() != null){
-            for (int a : responses.get(id).getAnsweredOptions()){
-                if (conditionOptions.contains(a)){
+    private boolean conditionIsMet(String id, List<Integer> conditionOptions) {
+        if (responses.containsKey(id) && responses.get(id).getAnsweredOptions() != null) {
+            for (int a : responses.get(id).getAnsweredOptions()) {
+                if (conditionOptions.contains(a)) {
                     return true;
                 }
             }
@@ -110,7 +113,9 @@ public class Survey {
 
     public void previousQuestion() {
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
-        if (isFirstQuestion) { return; }
+        if (isFirstQuestion) {
+            return;
+        }
 
         String oldQuestionId = currentQuestionId;
         currentQuestionId = calcPreviousQuestion(currentQuestionId);
@@ -125,15 +130,15 @@ public class Survey {
         return responses.get(questionId);
     }
 
-    public void saveResponse(ArrayList<Integer> answeroption, String comment) {
-        if (!comment.isEmpty() || !answeroption.isEmpty()) {
-            QuestionResponse questionResponse = createResponseObject(answeroption, comment);
+    public void saveResponse(ArrayList<Integer> answerOption, String comment) {
+        if (!comment.isEmpty() || !answerOption.isEmpty()) {
+            QuestionResponse questionResponse = createResponseObject(answerOption, comment);
             putResponse(currentQuestionId, questionResponse);
         }
     }
 
-    private QuestionResponse createResponseObject(ArrayList<Integer> answeroption, String comment) {
-        return new QuestionResponse(answeroption, comment, getCurrentQuestionType(), currentQuestionId);
+    private QuestionResponse createResponseObject(ArrayList<Integer> answerOption, String comment) {
+        return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
     public void submitAnswers() {
