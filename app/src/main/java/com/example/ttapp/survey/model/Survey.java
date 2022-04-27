@@ -75,8 +75,11 @@ public class Survey {
     }
 
     private boolean conditionIsMet(String id, List<Integer> options)  {
-        int answerValue =  getAnswerValue(answers.get(id));
-        return options.contains(answerValue);
+        if (answers.containsKey(id)){
+            int answerValue =  getAnswerValue(answers.get(id));
+            return options.contains(answerValue);
+        }
+        return false;
     }
 
     private int getAnswerValue(String jsonAnswer) {

@@ -106,14 +106,18 @@ public class SurveyViewModel extends ViewModel {
 
     public void nextQuestion() {
         survey.nextQuestion();
+        getCurrentQuestionText();
+        getCurrentQuestionType();
     }
 
     public void previousQuestion() {
         survey.previousQuestion();
+        getCurrentQuestionText();
+        getCurrentQuestionType();
     }
 
     // Might be a possible solution for getting the
-    public MutableLiveData<Boolean> getJsonIsRecievedIndcator() {
+    public MutableLiveData<Boolean> getJsonIsRecievedIndicator() {
         return jsonIsRecieved;
     }
 

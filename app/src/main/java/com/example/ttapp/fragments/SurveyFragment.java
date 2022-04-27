@@ -50,7 +50,7 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         surveyViewModel.loadQuestions(getContext(), getActivity());
-        surveyViewModel.getJsonIsRecievedIndcator().observe(getViewLifecycleOwner(), bool ->{
+        surveyViewModel.getJsonIsRecievedIndicator().observe(getViewLifecycleOwner(), bool ->{
             thingsToDoAfterJsonIsSet();
         });
 
