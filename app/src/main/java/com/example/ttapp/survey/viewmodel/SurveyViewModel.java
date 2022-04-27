@@ -19,6 +19,8 @@ import com.example.ttapp.survey.model.Survey;
 
 import org.bson.Document;
 
+import java.util.ArrayList;
+
 import io.realm.mongodb.RealmResultTask;
 
 /**
@@ -136,8 +138,16 @@ public class SurveyViewModel extends ViewModel {
         return survey.getCurrentQuestionId();
     }
 
+    public void saveAnswer(ArrayList<Integer> answeroption) {
+        saveAnswer(answeroption, null);
+    }
+
+    public void saveAnswer(String comment) {
+        saveAnswer(null, comment);
+    }
+
     //TODO to be implemented
-    public void saveAnswer(int answeroption, String comment) {
+    public void saveAnswer(ArrayList<Integer> answeroption, String comment) {
 
     }
 
