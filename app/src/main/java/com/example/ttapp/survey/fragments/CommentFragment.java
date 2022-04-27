@@ -35,12 +35,6 @@ public class CommentFragment extends QuestionFragment {
     private String answer;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_comment, container, false);
-    }
-
-    @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_comment, container, false);
     }
@@ -55,17 +49,11 @@ public class CommentFragment extends QuestionFragment {
         commentAnswer = view.findViewById(R.id.commentAnswer);
     }
 
-    // TODO change try catch
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStop() {
         super.onStop();
         answer = commentAnswer.getText().toString();
-        try {
-            commentViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        surveyViewModel.saveAnswer(answer);
     }
 
 }
