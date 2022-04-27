@@ -48,12 +48,20 @@ public class YesNoFragment extends QuestionFragment {
 
     private void initOnClickListeners() {
         yesnoResponseoption1.setOnClickListener(view -> {
-            response.set(0, 1);
+            if (response.isEmpty()){
+                response.add(1);
+            } else {
+                response.set(0, 1);
+            }
             surveyViewModel.nextQuestion();
         });
 
         yesnoResponseoption2.setOnClickListener(view -> {
-            response.set(0, 2);
+            if (response.isEmpty()){
+                response.add(2);
+            } else {
+                response.set(0, 2);
+            }
             surveyViewModel.nextQuestion();
         });
     }
