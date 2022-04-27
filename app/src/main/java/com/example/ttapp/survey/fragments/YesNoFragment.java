@@ -62,9 +62,15 @@ public class YesNoFragment extends QuestionFragment {
     }
 
     private void initOnClickListeners() {
-        yesnoAnsweroption1.setOnClickListener(view -> answer.set(0, YesNoAnswer.YES));
+        yesnoAnsweroption1.setOnClickListener(view -> {
+            answer.set(0, YesNoAnswer.YES);
+            surveyViewModel.nextQuestion();
+        });
 
-        yesnoAnsweroption2.setOnClickListener(view -> answer.set(0, YesNoAnswer.YES));
+        yesnoAnsweroption2.setOnClickListener(view -> {
+            answer.set(0, YesNoAnswer.YES);
+            surveyViewModel.nextQuestion();
+        });
     }
 
     @Override
