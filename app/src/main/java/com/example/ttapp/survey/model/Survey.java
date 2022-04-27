@@ -113,6 +113,15 @@ public class Survey {
         return responses.get(questionId);
     }
 
+    public void saveAnswer(ArrayList<Integer> answeroption, String comment) {
+        QuestionResponse questionResponse = createResponseObject(answeroption, comment);
+        putAnswer(getCurrentQuestionId(), questionResponse);
+    }
+
+    private QuestionResponse createResponseObject(ArrayList<Integer> answeroption, String comment) {
+        return new QuestionResponse(answeroption, comment, getCurrentQuestionType(), getCurrentQuestionId());
+    }
+
     public void submitAnswers() {
         // TODO: Submit answers
     }

@@ -67,7 +67,7 @@ public class NpsFragment extends QuestionFragment {
     @Override
     public void onStop() {
         super.onStop();
-        surveyViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+        surveyViewModel.saveAnswer(answer);
     }
 
 }
