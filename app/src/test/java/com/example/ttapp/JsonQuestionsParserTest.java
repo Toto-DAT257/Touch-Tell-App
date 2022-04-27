@@ -41,8 +41,8 @@ public class JsonQuestionsParserTest {
     @Test
     public void condition() throws JsonProcessingException {
         YesNoAnswer o = new YesNoAnswer(3, "626784277ff6bf00040142e1");
-        model.putAnswer("626784277ff6bf00040142e1",o.getAnswerJson());
-        model.nextQuestion();
+        //model.putAnswer("626784277ff6bf00040142e1",o.getAnswerJson());
+        //model.nextQuestion();
     }
 
 }

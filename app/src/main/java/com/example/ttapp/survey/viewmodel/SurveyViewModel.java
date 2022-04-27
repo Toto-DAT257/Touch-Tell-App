@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -15,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
+import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.model.SurveyEvent;
 
@@ -107,33 +109,29 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return sharedPref.getString("identifier", null);
     }
 
-    public void putAnswer(String answerInJson) {
-        survey.putAnswer(getCurrentQuestionId(), answerInJson);
+    public void putAnswer(QuestionResponse response) {
+        survey.putAnswer(getCurrentQuestionId(), response);
     }
 
     public void nextQuestion() {
         survey.nextQuestion();
-        getCurrentQuestionText();
-        getCurrentQuestionType();
     }
 
     public void previousQuestion() {
         survey.previousQuestion();
-        getCurrentQuestionText();
-        getCurrentQuestionType();
     }
 
     // Might be a possible solution for getting the
-    public MutableLiveData<Boolean> getJsonIsRecievedIndicator() {
+    public LiveData<Boolean> getJsonIsRecievedIndicator() {
         return jsonIsRecieved;
     }
 
-    public MutableLiveData<String> getCurrentQuestionText() {
+    public LiveData<String> newQuestionText() {
         questionText.setValue(survey.getCurrentQuestionText());
         return questionText;
     }
 
-    public MutableLiveData<String> getCurrentQuestionType() {
+    public LiveData<String> newQuestionType() {
         questionType.setValue(survey.getCurrentQuestionType());
         return questionType;
     }
@@ -150,6 +148,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 break;
             }
             case SurveyEvent.NEW_QUESTION: {
+                newQuestionText();
+                newQuestionType();
                 break;
             }
         }
