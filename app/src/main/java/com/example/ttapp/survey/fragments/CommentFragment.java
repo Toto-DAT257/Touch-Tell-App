@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.CommentViewModel;
@@ -22,7 +22,7 @@ public class CommentFragment extends QuestionFragment {
 
     private CommentViewModel commentViewModel;
 
-    private TextView commentAnswer;
+    private EditText commentAnswer;
     private String answer;
 
     @Override
