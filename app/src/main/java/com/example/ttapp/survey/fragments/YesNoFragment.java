@@ -55,21 +55,13 @@ public class YesNoFragment extends QuestionFragment {
 
     private void initOnClickListeners() {
         yesnoResponseoption1.setOnClickListener(view -> {
-            if (response.isEmpty()){
-                response.add(1);
-            } else {
-                response.set(0, 1);
-            }
+            response.add(1);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         yesnoResponseoption2.setOnClickListener(view -> {
-            if (response.isEmpty()){
-                response.add(2);
-            } else {
-                response.set(0, 2);
-            }
+            response.add(2);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
