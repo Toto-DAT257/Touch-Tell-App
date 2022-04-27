@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class for a survey, fetching and storing the information about the questions for the currently logged in user.
@@ -67,9 +68,9 @@ public class Survey {
             support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;
         }
-        String nextQuestionId = calcNextQuestion(currentQuestionId);
-        support.firePropertyChange(SurveyEvent.NEW_QUESTION, currentQuestionId, nextQuestionId);
-        currentQuestionId = nextQuestionId;
+        String oldQuestionId = currentQuestionId;
+        currentQuestionId = calcNextQuestion(currentQuestionId);
+        support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
     }
 
     private String calcNextQuestion(String questionId) {
@@ -102,7 +103,7 @@ public class Survey {
 
     private boolean conditionIsMet(String id, List<Integer> conditionOptions)  {
         if (responses.containsKey(id)){
-            for (int a : responses.get(id).getAnsweredOptions()){
+            for (int a : Objects.requireNonNull(responses.get(id)).getAnsweredOptions()){
                 if (conditionOptions.contains(a)){
                     return true;
                 }
@@ -115,9 +116,9 @@ public class Survey {
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
         if (isFirstQuestion) { return; }
 
-        String previousQuestionId = calcPreviousQuestion(currentQuestionId);
-        support.firePropertyChange(SurveyEvent.NEW_QUESTION, currentQuestionId, previousQuestionId);
-        currentQuestionId = previousQuestionId;
+        String oldQuestionId = currentQuestionId;
+        currentQuestionId = calcPreviousQuestion(currentQuestionId);
+        support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
     }
 
     public void putAnswer(String questionId, QuestionResponse response) {
