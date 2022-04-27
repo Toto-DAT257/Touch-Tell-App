@@ -67,14 +67,9 @@ public class Survey {
             support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;
         }
-        String nextQuestionId = jsonQuestionsParser.getNextQuestionId(currentQuestionId);
-        if (allConditionsAreMet(nextQuestionId)){
-            support.firePropertyChange(SurveyEvent.NEW_QUESTION, currentQuestionId, nextQuestionId);
-            currentQuestionId = nextQuestionId;
-            return;
-        }
+        String nextQuestionId = calcNextQuestion(currentQuestionId);
+        support.firePropertyChange(SurveyEvent.NEW_QUESTION, currentQuestionId, nextQuestionId);
         currentQuestionId = nextQuestionId;
-        nextQuestion();
     }
 
     private String calcNextQuestion(String questionId) {
