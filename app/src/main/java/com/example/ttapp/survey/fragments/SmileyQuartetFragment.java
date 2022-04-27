@@ -64,7 +64,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
         smileyqResponseoption2.setOnClickListener(view -> {
             if (response.isEmpty()){
-                response.add(1);
+                response.add(2);
             } else {
                 response.set(0, 2);
             }
@@ -73,7 +73,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
         smileyqResponseoption3.setOnClickListener(view -> {
             if (response.isEmpty()){
-                response.add(1);
+                response.add(3);
             } else {
                 response.set(0, 3);
             }
@@ -82,7 +82,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
         smileyqResponseoption4.setOnClickListener(view -> {
             if (response.isEmpty()){
-                response.add(1);
+                response.add(4);
             } else {
                 response.set(0, 4);
             }
