@@ -53,13 +53,25 @@ public class SmileyQuartetFragment extends QuestionFragment {
     }
 
     private void initOnClickListeners() {
-        smileyqResponseoption1.setOnClickListener(view -> response.set(0, 1));
+        smileyqResponseoption1.setOnClickListener(view -> {
+            response.set(0, 1);
+            surveyViewModel.nextQuestion();
+        });
 
-        smileyqResponseoption2.setOnClickListener(view -> response.set(0, 2));
+        smileyqResponseoption2.setOnClickListener(view -> {
+            response.set(0, 2);
+            surveyViewModel.nextQuestion();
+        });
 
-        smileyqResponseoption3.setOnClickListener(view -> response.set(0, 3));
+        smileyqResponseoption3.setOnClickListener(view -> {
+            response.set(0, 3);
+            surveyViewModel.nextQuestion();
+        });
 
-        smileyqResponseoption4.setOnClickListener(view -> response.set(0, 4));
+        smileyqResponseoption4.setOnClickListener(view -> {
+            response.set(0, 4);
+            surveyViewModel.nextQuestion();
+        });
     }
 
     @Override
