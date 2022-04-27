@@ -26,7 +26,6 @@ public class Survey {
     private String currentQuestionId;
     private Map<String, QuestionResponse> responses;
     private PropertyChangeSupport support;
-    private Map<String, Response> responses;
 
     public Survey(String json) {
         responses = new HashMap<>();
