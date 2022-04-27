@@ -90,6 +90,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                     // In here is were you have access to the JSON response, cannot return, due to async
                     survey = new Survey(response.toString());
                     survey.addPropertyChangeListener(this);
+                    questionType.setValue(survey.getCurrentQuestionType());
+                    questionText.setValue(survey.getCurrentQuestionText());
                     jsonIsRecieved.setValue(true);
                 },
                 new Response.ErrorListener() {
@@ -130,17 +132,14 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     }
 
     public LiveData<String> newQuestionText() {
-        questionText.setValue(survey.getCurrentQuestionText());
         return questionText;
     }
 
     public LiveData<String> newQuestionType() {
-        questionType.setValue(survey.getCurrentQuestionType());
         return questionType;
     }
 
     public LiveData<Boolean> surveyIsDone() {
-        surveyIsDone.setValue(true);
         return surveyIsDone;
     }
 
@@ -152,12 +151,14 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         switch (propertyChangeEvent.getPropertyName()) {
             case SurveyEvent.SURVEY_DONE: {
-                surveyIsDone();
+                surveyIsDone.setValue(true);
                 break;
             }
             case SurveyEvent.NEW_QUESTION: {
-                newQuestionText();
-                newQuestionType();
+                questionType.setValue(survey.getCurrentQuestionType());
+                questionText.setValue(survey.getCurrentQuestionText());
+                //newQuestionText();
+                //newQuestionType();
                 break;
             }
         }
