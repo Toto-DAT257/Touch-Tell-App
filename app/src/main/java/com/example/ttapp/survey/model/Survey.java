@@ -23,10 +23,10 @@ public class Survey {
     private JsonQuestionsParser jsonQuestionsParser;
     private ArrayList<String> questionsToSend;
     private String currentQuestionId;
-    private Map<String, String> answers;
+    private Map<String, Response> responses;
 
     public Survey(String json) {
-        answers = new HashMap<>();
+        responses = new HashMap<>();
         this.json = json;
         try {
             jsonQuestionsParser = new JsonQuestionsParser(json);
@@ -74,26 +74,16 @@ public class Survey {
         return true;
     }
 
-    private boolean conditionIsMet(String id, List<Integer> options)  {
-        if (answers.containsKey(id)){
-            int answerValue =  getAnswerValue(answers.get(id));
-            return options.contains(answerValue);
+    private boolean conditionIsMet(String id, List<Integer> conditionOptions)  {
+        if (responses.containsKey(id)){
+            for (int a : responses.get(id).getAnsweredOptions()){
+                if (conditionOptions.contains(a)){
+                    return true;
+                }
+            }
         }
         return false;
     }
-
-    private int getAnswerValue(String jsonAnswer) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        try {
-            Value answerObject = mapper.readValue(jsonAnswer, Value.class); // using a class Value. works for all questionTypes that can be in a condition
-            return answerObject.value;
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Problem with jackson parsing"); // TODO use better exception maybe
-        }
-    }
-
 
     public void previousQuestion() {
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
@@ -101,12 +91,12 @@ public class Survey {
         currentQuestionId = jsonQuestionsParser.getPreviousQuestionId(currentQuestionId);
     }
 
-    public void putAnswer(String questionId, String answerInJson) {
-        answers.put(questionId, answerInJson);
+    public void putAnswer(String questionId, Response response) {
+        responses.put(questionId, response);
     }
 
     public String getAnswer(String questionId) {
-        return answers.get(questionId);
+        return responses.get(questionId);
     }
 
     public void submitAnswers() {
