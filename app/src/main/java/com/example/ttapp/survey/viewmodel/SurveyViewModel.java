@@ -171,4 +171,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.saveResponse(responseOption, comment);
     }
 
+    public void submitResponse(Context context){
+        survey.submitResponse(context);
+    }
+
 }

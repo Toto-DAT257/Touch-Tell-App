@@ -1,9 +1,17 @@
 package com.example.ttapp.survey.model;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
 import com.fasterxml.jackson.core.JsonProcessingException;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -63,7 +71,6 @@ public class Survey {
 
         boolean isLastQuestion = jsonQuestionsParser.isLastQuestion(currentQuestionId);
         if (isLastQuestion) {
-            submitAnswers();
             support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;
         }
@@ -141,7 +148,44 @@ public class Survey {
         return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
-    public void submitAnswers() {
-        // TODO: Submit answers
+    public void submitResponse(Context context) {
+        final String URL = "https://api.touch-and-tell.se/log";
+        // TODO: build actual json response
+        String json = "{\"deviceId\": \"624b4f6fa23e9500043e154b\",\n" +
+                "\"responders\": [\n" +
+                "{\"responses\": [\n" +
+                "{\"device\": \"624b4f6fa23e9500043e154b\",\n" +
+                "\"question\": \"624c10dca23e9500043e1815\",\n" +
+                "\"questionType\": \"comment\",\n" +
+                "\"comment\": \"taco\",\n" +
+                "\"version\": \"0.0.0\",\n" +
+                "\"time\": \"1650058024286\",\n" +
+                "\"tags\": [\n" +
+                "\"tags1\",\n" +
+                "\"tag2\"\n" +
+                "]\n" +
+                "} ]\n" +
+                "} ]\n" +
+                "}\n";
+        JSONObject toSend = null;
+        try {
+            toSend = new JSONObject(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                URL,
+                toSend,
+                response -> {
+                    Log.v("Rest Response:", response.toString());
+                },
+                error -> {
+                    Log.e("Rest Response", error.toString());
+                }
+        );
+       requestQueue.add(objectRequest);
     }
 }
