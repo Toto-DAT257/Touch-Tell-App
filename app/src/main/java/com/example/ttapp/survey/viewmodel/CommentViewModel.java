@@ -19,9 +19,10 @@ public class CommentViewModel extends ViewModel {
 
     // TODO handle exception
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void saveAnswer(int answerOption, String questionID) throws JsonProcessingException {
-        CommentAnswer answerObject = new CommentAnswer(answerOption, questionID);
-        answer.setValue(answerObject.getAnswerJson());
+    public void saveAnswer(String answerOption, String questionID) throws JsonProcessingException {
+        // TODO uncomment when CommentAnswer class is done
+        // CommentAnswer answerObject = new CommentAnswer(answerOption, questionID);
+        // answer.setValue(answerObject.getAnswerJson());
     }
 
 }

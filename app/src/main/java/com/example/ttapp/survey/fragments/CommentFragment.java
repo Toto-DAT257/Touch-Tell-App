@@ -1,7 +1,9 @@
 package com.example.ttapp.survey.fragments;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.ttapp.R;
 import com.example.ttapp.survey.viewmodel.CommentViewModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * Class for a fragment that presents a comment-question
@@ -52,11 +55,17 @@ public class CommentFragment extends QuestionFragment {
         commentAnswer = view.findViewById(R.id.commentAnswer);
     }
 
+    // TODO change try catch
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStop() {
         super.onStop();
         answer = commentAnswer.getText().toString();
-        commentViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+        try {
+            commentViewModel.saveAnswer(answer, surveyViewModel.getCurrentQuestionId());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
 }
