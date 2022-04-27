@@ -95,7 +95,7 @@ public class Survey {
         responses.put(questionId, response);
     }
 
-    public String getAnswer(String questionId) {
+    public Response getResponse(String questionId) {
         return responses.get(questionId);
     }
 
