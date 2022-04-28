@@ -38,7 +38,7 @@ public class NpsFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initResponseoptions() {
+    protected void initResponseOptions() {
         npsSeekbar = view.findViewById(R.id.npsSeekbar);
         if (response.isEmpty()) {
             response.add(npsSeekbar.getProgress());

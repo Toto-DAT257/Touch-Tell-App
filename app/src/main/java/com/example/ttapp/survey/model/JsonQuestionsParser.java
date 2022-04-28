@@ -7,6 +7,7 @@ import com.example.ttapp.survey.model.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class JsonQuestionsParser {
 
     private static final String SWEDISH = "sv";
 
-    public JsonQuestionsParser(String json) throws JsonProcessingException {
+    protected JsonQuestionsParser(String json) throws JsonProcessingException {
         this.survey = createSurveyObject(json);
         this.questionOrder = createQuestionOrder();
     }

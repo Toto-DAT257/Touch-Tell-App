@@ -39,7 +39,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initResponseoptions() {
+    protected void initResponseOptions() {
         smileyqResponseoption1 = view.findViewById(R.id.smileyqResponseoption1);
         smileyqResponseoption2 = view.findViewById(R.id.smileyqResponseoption2);
         smileyqResponseoption3 = view.findViewById(R.id.smileyqResponseoption3);

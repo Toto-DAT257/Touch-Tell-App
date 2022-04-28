@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * Main class of the model package. This class serves as the interface to be used by clients.
- * Contains the full logic of traversing a survey.
+ * Contains the full logic for traversing a survey.
  * <p>
  * This class makes use of the Java Beans PropertyChange-library which lets clients listen to
  * the events fired by this class.
@@ -61,7 +61,7 @@ public class Survey {
         support.removePropertyChangeListener(pcl);
     }
 
-    public String getCurrentQuestionId() {
+    protected String getCurrentQuestionId() {
         return currentQuestionId;
     }
 
@@ -73,6 +73,18 @@ public class Survey {
         return jsonQuestionsParser.getType(currentQuestionId);
     }
 
+    /**
+     * Changes the current question to the next with one exception; if
+     * the current question is the last one then no change will be made. In the process of doing this
+     * a maximum of three events are announced to listeners:
+     * <ol>
+     *     <li>A save response event telling all listeners they must save their answers now otherwise
+     *     the circumstancing info will be lost. This event is always announced.</li>
+     *     <li>If the current question is the last an event signalling that the survey is completed
+     *     will be fired</li>
+     *     <li>If the question is changed a new question event is fired</li>
+     * </ol>
+     */
     public void nextQuestion() {
         support.firePropertyChange(SurveyEvent.SAVE_RESPONSE, "must write something", "");
 
@@ -125,6 +137,10 @@ public class Survey {
         return false;
     }
 
+    /**
+     * Changes the current question to the previous one and fires a new question event. If the
+     * current question is the first one then nothing is done.
+     */
     public void previousQuestion() {
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
         if (isFirstQuestion) {
@@ -136,7 +152,7 @@ public class Survey {
         support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
     }
 
-    public void putResponse(String questionId, QuestionResponse response) {
+    private void putResponse(String questionId, QuestionResponse response) {
         responses.put(questionId, response);
     }
 
@@ -144,6 +160,11 @@ public class Survey {
         return responses.get(questionId);
     }
 
+    /**
+     * Saves an answer to to the current question.
+     * @param answerOption The answer-values to the question.
+     * @param comment The comment answer to the question.
+     */
     public void saveResponse(ArrayList<Integer> answerOption, String comment) {
         if (!comment.isEmpty() || !answerOption.isEmpty()) {
             QuestionResponse questionResponse = createResponseObject(answerOption, comment);
@@ -155,7 +176,7 @@ public class Survey {
         return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
-    public String buildJsonResponse(Activity activity){
+    private String buildJsonResponse(){
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response = mapper.createObjectNode();
         response.put("deviceId", deviceId);
@@ -197,9 +218,13 @@ public class Survey {
         return s;
     }
 
+    /**
+     * Submits the gathered answers to Touch&Tell.
+     * @param activity context needed for the Volley requestQueue.
+     */
     public void submitResponse(Activity activity) {
         final String URL = "https://api.touch-and-tell.se/log";
-        String json = buildJsonResponse(activity);
+        String json = buildJsonResponse();
         JSONObject toSend = null;
         try {
             toSend = new JSONObject(json);
