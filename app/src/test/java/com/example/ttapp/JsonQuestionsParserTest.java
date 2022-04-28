@@ -28,22 +28,10 @@ public class JsonQuestionsParserTest {
             e.printStackTrace();
         }
         String json = new String(bytes);
-        //jqp = new JsonQuestionsParser(json);
         String deviceId = "624b4f6fa23e9500043e154b";
         model = new Survey(json, deviceId);
     }
 
-    @Test
-    public void getTitle() throws JsonProcessingException {
-        assertThat(model.getCurrentQuestionText()).isEqualTo("Hur mycket gillar du Toto?");
-    }
 
-
-    @Test
-    public void condition() throws JsonProcessingException {
-        YesNoAnswer o = new YesNoAnswer(3, "626784277ff6bf00040142e1");
-        //model.putAnswer("626784277ff6bf00040142e1",o.getAnswerJson());
-        //model.nextQuestion();
-    }
 
 }
