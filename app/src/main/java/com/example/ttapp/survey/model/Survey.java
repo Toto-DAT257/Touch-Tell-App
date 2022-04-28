@@ -59,9 +59,12 @@ public class Survey {
         return jsonQuestionsParser.getType(currentQuestionId);
     }
 
+    public Boolean isLastQuestion() {
+        return jsonQuestionsParser.isLastQuestion(currentQuestionId);
+    }
+
     public void nextQuestion() {
-        boolean isLastQuestion = jsonQuestionsParser.isLastQuestion(currentQuestionId);
-        if (isLastQuestion) {
+        if (isLastQuestion()) {
             submitAnswers();
             support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;

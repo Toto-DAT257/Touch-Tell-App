@@ -42,12 +42,14 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<String> questionType;
     private final MutableLiveData<Boolean> jsonIsRecieved;
     private final MutableLiveData<Boolean> surveyIsDone;
+    private final MutableLiveData<Boolean> isLastQuestion;
 
     public SurveyViewModel() {
         jsonIsRecieved = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
         questionType = new MutableLiveData<>();
         surveyIsDone = new MutableLiveData<>();
+        isLastQuestion = new MutableLiveData<>();
     }
 
     /**
@@ -148,6 +150,11 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return survey.getCurrentQuestionId();
     }
 
+    public LiveData<Boolean> isLastQuestion() {
+        isLastQuestion.setValue(true);
+        return isLastQuestion;
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         switch (propertyChangeEvent.getPropertyName()) {
@@ -156,6 +163,9 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 break;
             }
             case SurveyEvent.NEW_QUESTION: {
+                if (survey.isLastQuestion()) {
+                    isLastQuestion();
+                }
                 newQuestionText();
                 newQuestionType();
                 break;

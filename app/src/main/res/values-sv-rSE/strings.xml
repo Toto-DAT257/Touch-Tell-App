@@ -38,4 +38,9 @@
     <!-- comment question -->
     <string name="comment_hinttext">Skriv ditt svar här</string>
 
+    <!-- survey -->
+    <string name="backbutton">bakåt</string>
+    <string name="nextbutton">nästa</string>
+    <string name="submitbutton">lämna in</string>
+
 </resources>
