@@ -22,8 +22,6 @@ import java.util.ArrayList;
  */
 public class YesNoFragment extends QuestionFragment {
 
-    private YesNoViewModel yesNoViewModel;
-
     private Button yesnoResponseoption1;
     private Button yesnoResponseoption2;
 
@@ -32,11 +30,6 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_yes_no, container, false);
-    }
-
-    @Override
-    protected void setViewModel() {
-        yesNoViewModel = new ViewModelProvider(requireActivity()).get(YesNoViewModel.class);
     }
 
     @Override

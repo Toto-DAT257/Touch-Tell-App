@@ -22,19 +22,12 @@ import java.util.ArrayList;
  */
 public class NpsFragment extends QuestionFragment {
 
-    private NpsViewModel npsViewModel;
-
     private SeekBar npsSeekbar;
     private ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_nps, container, false);
-    }
-
-    @Override
-    protected void setViewModel() {
-        npsViewModel = new ViewModelProvider(requireActivity()).get(NpsViewModel.class);
     }
 
     @Override

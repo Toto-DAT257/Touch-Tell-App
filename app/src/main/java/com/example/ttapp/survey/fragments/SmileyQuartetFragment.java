@@ -23,8 +23,6 @@ import java.util.ArrayList;
  */
 public class SmileyQuartetFragment extends QuestionFragment {
 
-    private SmileyQuartetViewModel smileyQuartetViewModel;
-
     private Button smileyqResponseoption1;
     private Button smileyqResponseoption2;
     private Button smileyqResponseoption3;
@@ -35,11 +33,6 @@ public class SmileyQuartetFragment extends QuestionFragment {
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_smiley_quartet, container, false);
-    }
-
-    @Override
-    protected void setViewModel() {
-        smileyQuartetViewModel = new ViewModelProvider(requireActivity()).get(SmileyQuartetViewModel.class);
     }
 
     @Override

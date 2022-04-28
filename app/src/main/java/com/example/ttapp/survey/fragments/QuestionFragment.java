@@ -31,7 +31,6 @@ public abstract class QuestionFragment extends Fragment {
 
         setView(inflater, container);
         setSurveyViewModel();
-        setViewModel();
         initResponseoptions();
 
         return view;
@@ -42,8 +41,6 @@ public abstract class QuestionFragment extends Fragment {
     private void setSurveyViewModel() {
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
     }
-
-    protected abstract void setViewModel();
 
     protected abstract void initResponseoptions();
 
