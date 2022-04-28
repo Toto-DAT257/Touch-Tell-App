@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -11,13 +12,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
-import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.model.SurveyEvent;
 
@@ -31,30 +29,34 @@ import java.util.ArrayList;
 import io.realm.mongodb.RealmResultTask;
 
 /**
- * ViewModel for {@link SurveyFragment}
- *
- * @author Simon Holst, Amanda Cyrén, Emma Stålberg
+ * ViewModel for {@link SurveyFragment} and all types of question fragments
+ * <p>
+ * This class makes use of the Java Beans PropertyChange-library which lets it subscribe to other
+ * objects and listen to their events.
  */
 public class SurveyViewModel extends ViewModel implements PropertyChangeListener {
 
     private Survey survey;
     private final MutableLiveData<String> questionText;
     private final MutableLiveData<String> questionType;
-    private final MutableLiveData<Boolean> jsonIsRecieved;
+    private final MutableLiveData<Boolean> jsonIsReceived;
     private final MutableLiveData<Boolean> surveyIsDone;
+    private final MutableLiveData<Boolean> saveResponse;
     private final MutableLiveData<Boolean> isLastQuestion;
 
     public SurveyViewModel() {
-        jsonIsRecieved = new MutableLiveData<>();
+        jsonIsReceived = new MutableLiveData<>();
         questionText = new MutableLiveData<>();
         questionType = new MutableLiveData<>();
         surveyIsDone = new MutableLiveData<>();
+        saveResponse = new MutableLiveData<>();
         isLastQuestion = new MutableLiveData<>();
     }
 
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
-     * @param context the fragment that will present the questions context.
+     *
+     * @param context  the fragment that will present the questions context.
      * @param activity the fragment that will present the questions context.
      */
     public void loadQuestions(Context context, FragmentActivity activity) {
@@ -68,8 +70,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                     Log.i("DEVICE ID", result.get().toString());
                     // In here is where you have access to the deviceID. Cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
-                    String API = getAPILink(deviceId);
-                    requestFromAPI(API, activity);
+
+                    requestFromAPI(activity, deviceId, identifier);
 
                 } else {
                     Log.e("Database", "Identifier not found");
@@ -80,7 +82,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         });
     }
 
-    private void requestFromAPI(String API, Context activity) {
+    private void requestFromAPI(Context activity, String deviceId, String identifier) {
+        String API = getAPILink(deviceId);
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -90,16 +93,13 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 response -> {
                     Log.i("Rest Response", response.toString());
                     // In here is were you have access to the JSON response, cannot return, due to async
-                    survey = new Survey(response.toString());
+                    survey = new Survey(response.toString(), deviceId, identifier);
                     survey.addPropertyChangeListener(this);
-                    jsonIsRecieved.setValue(true);
+                    questionType.setValue(survey.getCurrentQuestionType());
+                    questionText.setValue(survey.getCurrentQuestionText());
+                    jsonIsReceived.setValue(true);
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Rest Response", error.toString());
-                    }
-                }
+                error -> Log.e("Rest Response", error.toString())
         );
 
         requestQueue.add(objectRequest);
@@ -126,23 +126,19 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.previousQuestion();
     }
 
-    // Might be a possible solution for getting the
-    public LiveData<Boolean> getJsonIsRecievedIndicator() {
-        return jsonIsRecieved;
+    public LiveData<Boolean> getJsonIsReceivedIndicator() {
+        return jsonIsReceived;
     }
 
     public LiveData<String> newQuestionText() {
-        questionText.setValue(survey.getCurrentQuestionText());
         return questionText;
     }
 
     public LiveData<String> newQuestionType() {
-        questionType.setValue(survey.getCurrentQuestionType());
         return questionType;
     }
 
     public LiveData<Boolean> surveyIsDone() {
-        surveyIsDone.setValue(true);
         return surveyIsDone;
     }
 
@@ -159,30 +155,41 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         switch (propertyChangeEvent.getPropertyName()) {
             case SurveyEvent.SURVEY_DONE: {
-                surveyIsDone();
+                surveyIsDone.setValue(true);
                 break;
             }
             case SurveyEvent.NEW_QUESTION: {
                 if (survey.isLastQuestion()) {
                     isLastQuestion();
                 }
-                newQuestionText();
-                newQuestionType();
+                questionType.setValue(survey.getCurrentQuestionType());
+                questionText.setValue(survey.getCurrentQuestionText());
                 break;
+            }
+            case SurveyEvent.SAVE_RESPONSE: {
+                saveResponse.setValue(true);
             }
         }
     }
 
-    public void saveResponse(ArrayList<Integer> responseoption) {
-        saveResponse(responseoption, null);
+    public MutableLiveData<Boolean> getSaveResponse() {
+        return saveResponse;
+    }
+
+    public void saveResponse(ArrayList<Integer> responseOption) {
+        saveResponse(responseOption, "");
     }
 
     public void saveResponse(String comment) {
-        saveResponse(null, comment);
+        saveResponse(new ArrayList<>(), comment);
     }
 
-    public void saveResponse(ArrayList<Integer> responseoption, String comment) {
-        survey.saveResponse(responseoption, comment);
+    public void saveResponse(ArrayList<Integer> responseOption, String comment) {
+        survey.saveResponse(responseOption, comment);
+    }
+
+    public void submitResponse(Activity context){
+        survey.submitResponse(context);
     }
 
 }

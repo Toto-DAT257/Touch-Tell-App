@@ -3,7 +3,6 @@ package com.example.ttapp.survey.fragments;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
     private Button smileyqResponseoption3;
     private Button smileyqResponseoption4;
 
-    private ArrayList<Integer> response = new ArrayList<>();
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -39,34 +38,40 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqResponseoption4 = view.findViewById(R.id.smileyqResponseoption4);
 
         initOnClickListeners();
+        initSaveResponseObserver();
+    }
+
+    @Override
+    protected void initSaveResponseObserver(){
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
     }
 
     private void initOnClickListeners() {
         smileyqResponseoption1.setOnClickListener(view -> {
-            response.set(0, 1);
+            response.add(1);
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption2.setOnClickListener(view -> {
-            response.set(0, 2);
+            response.add(2);
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption3.setOnClickListener(view -> {
-            response.set(0, 3);
+            response.add(3);
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption4.setOnClickListener(view -> {
-            response.set(0, 4);
+            response.add(4);
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        surveyViewModel.saveResponse(response);
     }
 
 }

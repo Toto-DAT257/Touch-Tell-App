@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * Class used by JsonQuestionParser to turn the JSON-string from Touch&Tell into java objects
+ */
 @JsonIgnoreProperties
 public class Condition {
 
     @JsonProperty("questions")
-    public List<ConditionQuestion> conditionQuestion;
+    public List<ConditionQuestion> conditionQuestions;
 }

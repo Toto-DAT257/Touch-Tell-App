@@ -22,7 +22,7 @@ public class YesNoFragment extends QuestionFragment {
     private Button yesnoResponseoption1;
     private Button yesnoResponseoption2;
 
-    private ArrayList<Integer> response = new ArrayList<>();
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -36,22 +36,25 @@ public class YesNoFragment extends QuestionFragment {
         initOnClickListeners();
     }
 
+    @Override
+    protected void initSaveResponseObserver() {
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
+    }
+
     private void initOnClickListeners() {
         yesnoResponseoption1.setOnClickListener(view -> {
-            response.set(0, 1);
+            response.add(1);
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         yesnoResponseoption2.setOnClickListener(view -> {
-            response.set(0, 2);
+            response.add(2);
+            surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        surveyViewModel.saveResponse(response);
     }
 
 }

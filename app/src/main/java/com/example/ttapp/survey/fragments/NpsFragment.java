@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class NpsFragment extends QuestionFragment {
 
     private SeekBar npsSeekbar;
-    private ArrayList<Integer> response = new ArrayList<>();
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -35,11 +35,13 @@ public class NpsFragment extends QuestionFragment {
         } else {
             response.set(0, npsSeekbar.getProgress());
         }
+        surveyViewModel.saveResponse(response); // save 5 as default TODO give user opportunity to skip question
 
         npsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 response.set(0, npsSeekbar.getProgress());
+                surveyViewModel.saveResponse(response); // save every time on change because listener does not trigger correctly for this fragment
             }
 
             @Override
@@ -55,9 +57,11 @@ public class NpsFragment extends QuestionFragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        surveyViewModel.saveResponse(response);
+    protected void initSaveResponseObserver(){
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response); // Not working, very strange. SmileyQuartet seems to trigger instead but to late. cant find the bug.
+        });
     }
+
 
 }
