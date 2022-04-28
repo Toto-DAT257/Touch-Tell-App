@@ -45,6 +45,7 @@ public class NpsFragment extends QuestionFragment {
         } else {
             response.set(0, npsSeekbar.getProgress());
         }
+        surveyViewModel.saveResponse(response); // save 5 as default TODO give user opportunity to skip question
 
         npsSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
