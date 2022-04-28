@@ -29,7 +29,7 @@ public class JsonQuestionsParserTest {
         }
         String json = new String(bytes);
         String deviceId = "624b4f6fa23e9500043e154b";
-        model = new Survey(json, deviceId);
+        model = new Survey(json, deviceId, "user1");
     }
 
 

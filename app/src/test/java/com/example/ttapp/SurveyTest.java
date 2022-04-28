@@ -30,7 +30,7 @@ public class SurveyTest {
         }
         String json = new String(bytes);
         String deviceId = "624b4f6fa23e9500043e154b";
-        survey = new Survey(json, deviceId);
+        survey = new Survey(json, deviceId, "user1");
     }
 
     @Test
