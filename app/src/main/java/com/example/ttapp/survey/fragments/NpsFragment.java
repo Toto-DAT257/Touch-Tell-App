@@ -69,7 +69,7 @@ public class NpsFragment extends QuestionFragment {
     @Override
     protected void initSaveResponseObserver(){
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response); // Not working, very strange. SmileyQuartet seems to trigger instead. cant find the bug.
+            surveyViewModel.saveResponse(response); // Not working, very strange. SmileyQuartet seems to trigger instead but to late. cant find the bug.
         });
     }
 
