@@ -1,9 +1,8 @@
 package com.example.ttapp.survey.model;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -38,8 +37,9 @@ public class Survey {
     private final Map<String, QuestionResponse> responses;
     private final PropertyChangeSupport support;
     private final String deviceId;
+    private final String identifier;
 
-    public Survey(String json, String deviceId) {
+    public Survey(String json, String deviceId, String identifier) {
         responses = new HashMap<>();
         try {
             jsonQuestionsParser = new JsonQuestionsParser(json);
@@ -49,6 +49,7 @@ public class Survey {
         currentQuestionId = jsonQuestionsParser.getFirstQuestionId();
         questionsToSend = new ArrayList<>();
         this.deviceId = deviceId;
+        this.identifier = identifier;
         this.support = new PropertyChangeSupport(this);
     }
 
@@ -178,9 +179,7 @@ public class Survey {
             question.put("version", "0.0.0");
             long unixTime = System.currentTimeMillis() / 1000L;
             question.put("time", unixTime);
-            SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-            String identity = sharedPref.getString("identifier", "unknown");
-            question.putArray("tags").add(identity);
+            question.putArray("tags").add(identifier);
             questions.add(question);
         }
 

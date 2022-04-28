@@ -69,7 +69,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                     // In here is where you have access to the deviceID. Cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
 
-                    requestFromAPI(activity, deviceId);
+                    requestFromAPI(activity, deviceId, identifier);
 
                 } else {
                     Log.e("Database", "Identifier not found");
@@ -80,7 +80,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         });
     }
 
-    private void requestFromAPI(Context activity, String deviceId) {
+    private void requestFromAPI(Context activity, String deviceId, String identifier) {
         String API = getAPILink(deviceId);
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
@@ -91,7 +91,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 response -> {
                     Log.i("Rest Response", response.toString());
                     // In here is were you have access to the JSON response, cannot return, due to async
-                    survey = new Survey(response.toString(), deviceId);
+                    survey = new Survey(response.toString(), deviceId, identifier);
                     survey.addPropertyChangeListener(this);
                     questionType.setValue(survey.getCurrentQuestionType());
                     questionText.setValue(survey.getCurrentQuestionText());
