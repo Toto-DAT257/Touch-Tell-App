@@ -1,13 +1,10 @@
 package com.example.ttapp.survey.fragments;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import com.example.ttapp.R;
-import com.example.ttapp.survey.viewmodel.NpsViewModel;
 
 import java.util.ArrayList;
 

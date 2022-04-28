@@ -1,14 +1,10 @@
 package com.example.ttapp.survey.fragments;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.ttapp.R;
-import com.example.ttapp.survey.model.answers.SmileyQuartet;
-import com.example.ttapp.survey.viewmodel.SmileyQuartetViewModel;
 
 import java.util.ArrayList;
 
