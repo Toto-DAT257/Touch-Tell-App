@@ -7,10 +7,10 @@ import java.util.List;
  */
 public class QuestionResponse {
 
-    private List<Integer> answeredOptions;
-    private String comment;
-    private String questionType;
-    private String questionId;
+    private final List<Integer> answeredOptions;
+    private final String comment;
+    private final String questionType;
+    private final String questionId;
 
     public QuestionResponse(List<Integer> options, String comment, String questionType, String questionId) {
         this.answeredOptions = options;

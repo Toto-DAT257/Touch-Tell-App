@@ -27,7 +27,7 @@ public class YesNoFragment extends QuestionFragment {
     private Button yesnoResponseoption1;
     private Button yesnoResponseoption2;
 
-    private ArrayList<Integer> response = new ArrayList<>();
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {

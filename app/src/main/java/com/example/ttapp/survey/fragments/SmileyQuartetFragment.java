@@ -1,15 +1,11 @@
 package com.example.ttapp.survey.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.example.ttapp.R;
-import com.example.ttapp.survey.model.answers.SmileyQuartet;
 import com.example.ttapp.survey.viewmodel.SmileyQuartetViewModel;
-
 import java.util.ArrayList;
 
 /**
@@ -30,7 +26,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
     private Button smileyqResponseoption3;
     private Button smileyqResponseoption4;
 
-    private ArrayList<Integer> response = new ArrayList<>();
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {

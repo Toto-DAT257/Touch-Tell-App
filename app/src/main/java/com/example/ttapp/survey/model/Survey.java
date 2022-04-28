@@ -4,20 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
-import com.example.ttapp.survey.model.jsonparsing.Question;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.beans.PropertyChangeListener;
@@ -41,7 +37,7 @@ public class Survey {
     private String currentQuestionId;
     private final Map<String, QuestionResponse> responses;
     private final PropertyChangeSupport support;
-    private String deviceId;
+    private final String deviceId;
 
     public Survey(String json, String deviceId) {
         responses = new HashMap<>();
@@ -216,12 +212,8 @@ public class Survey {
                 Request.Method.POST,
                 URL,
                 toSend,
-                rest_response -> {
-                    Log.v("Rest Response:", rest_response.toString());
-                },
-                error -> {
-                    Log.e("Rest Response", error.toString());
-                }
+                rest_response -> Log.v("Rest Response:", rest_response.toString()),
+                error -> Log.e("Rest Response", error.toString())
         );
        requestQueue.add(objectRequest);
     }

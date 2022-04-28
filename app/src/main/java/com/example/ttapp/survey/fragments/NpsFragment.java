@@ -25,7 +25,7 @@ public class NpsFragment extends QuestionFragment {
     private NpsViewModel npsViewModel;
 
     private SeekBar npsSeekbar;
-    private ArrayList<Integer> response = new ArrayList<>();
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {

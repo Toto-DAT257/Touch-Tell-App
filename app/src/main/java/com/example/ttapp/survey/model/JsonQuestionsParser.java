@@ -6,12 +6,9 @@ import com.example.ttapp.survey.model.jsonparsing.Question;
 import com.example.ttapp.survey.model.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.MissingResourceException;
 
 /**
  * Class for the JSON-string of questions received from Touch&Tell.
@@ -19,14 +16,12 @@ import java.util.MissingResourceException;
  */
 public class JsonQuestionsParser {
 
-    private String json;
-    private List<String> questionOrder;
-    private Survey survey;
+    private final List<String> questionOrder;
+    private final Survey survey;
 
-    private static String SWEDISH = "sv";
+    private static final String SWEDISH = "sv";
 
     public JsonQuestionsParser(String json) throws JsonProcessingException {
-        this.json = json;
         this.survey = createSurveyObject(json);
         this.questionOrder = createQuestionOrder();
     }

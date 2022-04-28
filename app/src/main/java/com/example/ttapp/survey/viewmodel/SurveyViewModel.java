@@ -29,12 +29,10 @@ import java.util.ArrayList;
 import io.realm.mongodb.RealmResultTask;
 
 /**
- * ViewModel for {@link SurveyFragment}
+ * ViewModel for {@link SurveyFragment} and all types of question fragments
  * <p>
  * This class makes use of the Java Beans PropertyChange-library which lets it subscribe to other
  * objects and listen to their events.
- *
- * @author Simon Holst, Amanda Cyrén, Emma Stålberg
  */
 public class SurveyViewModel extends ViewModel implements PropertyChangeListener {
 
@@ -122,7 +120,6 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.previousQuestion();
     }
 
-    // Might be a possible solution for getting the
     public LiveData<Boolean> getJsonIsReceivedIndicator() {
         return jsonIsReceived;
     }
