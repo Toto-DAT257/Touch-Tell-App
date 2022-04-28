@@ -50,6 +50,7 @@ public class NpsFragment extends QuestionFragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 response.set(0, npsSeekbar.getProgress());
+                surveyViewModel.saveResponse(response); // save every time on change because listener does not trigger correctly for this fragment
             }
 
             @Override
@@ -65,12 +66,11 @@ public class NpsFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initSaveResponseObserver() {
+    protected void initSaveResponseObserver(){
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response);
+            surveyViewModel.saveResponse(response); // Not working, very strange. SmileyQuartet seems to trigger instead. cant find the bug.
         });
     }
-
 
 
 }
