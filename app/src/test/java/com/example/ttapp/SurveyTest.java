@@ -29,7 +29,8 @@ public class SurveyTest {
             e.printStackTrace();
         }
         String json = new String(bytes);
-        survey = new Survey(json);
+        String deviceId = "624b4f6fa23e9500043e154b";
+        survey = new Survey(json, deviceId);
     }
 
     @Test

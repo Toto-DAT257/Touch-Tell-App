@@ -1,6 +1,8 @@
 package com.example.ttapp.survey.model;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -9,7 +11,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
+import com.example.ttapp.survey.model.jsonparsing.Question;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.beans.PropertyChangeListener;
@@ -33,8 +41,9 @@ public class Survey {
     private String currentQuestionId;
     private final Map<String, QuestionResponse> responses;
     private final PropertyChangeSupport support;
+    private String deviceId;
 
-    public Survey(String json) {
+    public Survey(String json, String deviceId) {
         responses = new HashMap<>();
         try {
             jsonQuestionsParser = new JsonQuestionsParser(json);
@@ -43,6 +52,7 @@ public class Survey {
         }
         currentQuestionId = jsonQuestionsParser.getFirstQuestionId();
         questionsToSend = new ArrayList<>();
+        this.deviceId = deviceId;
         this.support = new PropertyChangeSupport(this);
     }
 
@@ -148,39 +158,66 @@ public class Survey {
         return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
-    public void submitResponse(Context context) {
+    public String buildJsonResponse(Activity activity){
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode response = mapper.createObjectNode();
+        response.put("deviceId", deviceId);
+
+        ArrayNode questions = mapper.createArrayNode();
+        for (QuestionResponse q : responses.values()){
+            ObjectNode question = mapper.createObjectNode();
+            question.put("device", deviceId);
+            question.put("question", q.getQuestionId());
+            question.put("questionType", q.getQuestionType());
+            if (!q.getComment().isEmpty()){
+                question.put("comment", q.getComment());
+            }
+            if (!q.getAnsweredOptions().isEmpty()){
+                ArrayNode options = mapper.createArrayNode();
+                for (int o : q.getAnsweredOptions()){
+                    options.add(o);
+                }
+                question.set("option", options);
+            }
+            question.put("version", "0.0.0");
+            long unixTime = System.currentTimeMillis() / 1000L;
+            question.put("time", unixTime);
+            SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+            String identity = sharedPref.getString("identifier", "unknown");
+            question.putArray("tags").add(identity);
+            questions.add(question);
+        }
+
+        ObjectNode respondersObject = mapper.createObjectNode();
+        respondersObject.set("responses", questions);
+        response.putArray("responders").add(respondersObject);
+
+        String s = null;
+        try {
+            s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(response);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return s;
+    }
+
+    public void submitResponse(Activity activity) {
         final String URL = "https://api.touch-and-tell.se/log";
-        // TODO: build actual json response
-        String json = "{\"deviceId\": \"624b4f6fa23e9500043e154b\",\n" +
-                "\"responders\": [\n" +
-                "{\"responses\": [\n" +
-                "{\"device\": \"624b4f6fa23e9500043e154b\",\n" +
-                "\"question\": \"624c10dca23e9500043e1815\",\n" +
-                "\"questionType\": \"comment\",\n" +
-                "\"comment\": \"taco\",\n" +
-                "\"version\": \"0.0.0\",\n" +
-                "\"time\": \"1650058024286\",\n" +
-                "\"tags\": [\n" +
-                "\"tags1\",\n" +
-                "\"tag2\"\n" +
-                "]\n" +
-                "} ]\n" +
-                "} ]\n" +
-                "}\n";
+        String json = buildJsonResponse(activity);
         JSONObject toSend = null;
         try {
             toSend = new JSONObject(json);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        RequestQueue requestQueue = Volley.newRequestQueue(activity);
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 URL,
                 toSend,
-                response -> {
-                    Log.v("Rest Response:", response.toString());
+                rest_response -> {
+                    Log.v("Rest Response:", rest_response.toString());
                 },
                 error -> {
                     Log.e("Rest Response", error.toString());

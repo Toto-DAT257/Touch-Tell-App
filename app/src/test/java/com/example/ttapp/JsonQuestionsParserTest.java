@@ -29,7 +29,8 @@ public class JsonQuestionsParserTest {
         }
         String json = new String(bytes);
         //jqp = new JsonQuestionsParser(json);
-        model = new Survey(json);
+        String deviceId = "624b4f6fa23e9500043e154b";
+        model = new Survey(json, deviceId);
     }
 
     @Test

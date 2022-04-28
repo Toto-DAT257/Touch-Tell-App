@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -69,8 +70,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                     Log.i("DEVICE ID", result.get().toString());
                     // In here is where you have access to the deviceID. Cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
-                    String API = getAPILink(deviceId);
-                    requestFromAPI(API, activity);
+
+                    requestFromAPI(activity, deviceId);
 
                 } else {
                     Log.e("Database", "Identifier not found");
@@ -81,7 +82,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         });
     }
 
-    private void requestFromAPI(String API, Context activity) {
+    private void requestFromAPI(Context activity, String deviceId) {
+        String API = getAPILink(deviceId);
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -91,7 +93,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 response -> {
                     Log.i("Rest Response", response.toString());
                     // In here is were you have access to the JSON response, cannot return, due to async
-                    survey = new Survey(response.toString());
+                    survey = new Survey(response.toString(), deviceId);
                     survey.addPropertyChangeListener(this);
                     questionType.setValue(survey.getCurrentQuestionType());
                     questionText.setValue(survey.getCurrentQuestionText());
@@ -171,7 +173,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.saveResponse(responseOption, comment);
     }
 
-    public void submitResponse(Context context){
+    public void submitResponse(Activity context){
         survey.submitResponse(context);
     }
 
