@@ -1,18 +1,13 @@
 package com.example.ttapp;
 
-import com.example.ttapp.survey.model.JsonQuestionsParser;
 import com.example.ttapp.survey.model.Survey;
-import com.example.ttapp.survey.model.answers.NPSAnswer;
-import com.example.ttapp.survey.model.answers.YesNoAnswer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import static org.assertj.core.api.Assertions.*;
 
 public class JsonQuestionsParserTest {
 

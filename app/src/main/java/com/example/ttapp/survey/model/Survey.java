@@ -81,7 +81,7 @@ public class Survey {
         support.firePropertyChange(SurveyEvent.SAVE_RESPONSE, "must write something", "");
 
         if (isLastQuestion()) {
-            submitAnswers();
+            submitResponse();
             support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;
         }
