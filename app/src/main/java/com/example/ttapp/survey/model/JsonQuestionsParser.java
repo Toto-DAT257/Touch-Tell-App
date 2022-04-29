@@ -22,17 +22,28 @@ public class JsonQuestionsParser {
 
     private static final String SWEDISH = "sv";
 
+
     protected JsonQuestionsParser(String json) throws JsonProcessingException {
         this.survey = createSurveyObject(json);
         this.questionOrder = createQuestionOrder();
     }
 
+    /**
+     * Creates a Survey object from a json string using jackson library
+     * @param json the json string
+     * @return Survey object
+     * @throws JsonProcessingException
+     */
     private Survey createSurveyObject(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper.readValue(json, Survey.class);
     }
 
+    /**
+     * Create a list of all the questionId:s in the survey. Used to to know the question order
+     * @return the list of questionId:s
+     */
     private List<String> createQuestionOrder() {
         List<String> ids = new ArrayList<>();
         for (Question q : survey.questions) {
