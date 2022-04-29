@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
-import com.example.ttapp.survey.model.QuestionType;
+import com.example.ttapp.survey.fragments.util.QuestionType;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.ttapp.survey.model;
+package com.example.ttapp.survey.fragments.util;
 
 /**
  * Interface solely serving as storage for string values to ensure no typos or non-matching

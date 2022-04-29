@@ -16,9 +16,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
-import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
-import com.example.ttapp.survey.model.SurveyEvent;
+import com.example.ttapp.survey.util.SurveyEvent;
 
 import org.bson.Document;
 

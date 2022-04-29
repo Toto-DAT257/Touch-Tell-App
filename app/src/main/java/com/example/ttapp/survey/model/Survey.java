@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
+import com.example.ttapp.survey.util.SurveyEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
