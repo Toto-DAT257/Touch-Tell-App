@@ -122,7 +122,7 @@ public class Survey {
         if (!jsonQuestionsParser.conditionExist(questionId)) return true;
         for (Condition c : jsonQuestionsParser.getConditions(questionId)) {
             for (ConditionQuestion q : c.conditionQuestions) {
-                if (!conditionIsMet(q.conditionQuestionId, q.options)) {
+                if (!conditionIsMet(q.conditionQuestionId, q.options) || !allConditionsAreMet(q.conditionQuestionId)) {
                     return false;
                 }
             }
