@@ -1,4 +1,4 @@
-package com.example.ttapp.fragments;
+package com.example.ttapp.survey.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.ttapp.viewmodel.SurveyViewModel;
+import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
  * An abstract class for a base fragment with a question
@@ -31,8 +31,7 @@ public abstract class QuestionFragment extends Fragment {
 
         setView(inflater, container);
         setSurveyViewModel();
-        setQuestion();
-        setUpAnsweroptions();
+        initResponseOptions();
 
         return view;
     }
@@ -43,15 +42,8 @@ public abstract class QuestionFragment extends Fragment {
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
     }
 
-    protected abstract void setQuestion();
+    protected abstract void initResponseOptions();
 
-    protected void setUpAnsweroptions() {
-        setAnsweroptions();
-        setAnsweroptionsOnclicklisteners();
-    };
-
-    protected abstract void setAnsweroptions();
-
-    protected abstract void setAnsweroptionsOnclicklisteners();
+    protected abstract void initSaveResponseObserver();
 
 }

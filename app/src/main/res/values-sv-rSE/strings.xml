@@ -19,10 +19,28 @@
 
     <!-- first question -->
     <string name="first_question">Gillar du ditt jobb?</string>
-    <string name="first_q_answeroption1">Ja</string>
-    <string name="first_q_answeroption2">Nej</string>
+    <string name="first_q_responseoption1">Ja</string>
+    <string name="first_q_responseoption2">Nej</string>
 
     <!-- done with survey response -->
     <string name="done_with_survey_response_text">Tack för ditt deltagande!</string>
+
+    <!-- yes no question -->
+    <string name="yesno_responseoption1">Ja</string>
+    <string name="yesno_responseoption2">Nej</string>
+
+    <!-- smiley quartet question -->
+    <string name="smileyq_responseoption1">Ledsnast</string>
+    <string name="smileyq_responseoption2">Ledsen</string>
+    <string name="smileyq_responseoption3">Glad</string>
+    <string name="smileyq_responseoption4">Gladast</string>
+
+    <!-- comment question -->
+    <string name="comment_hinttext">Skriv ditt svar här</string>
+
+    <!-- survey -->
+    <string name="backbutton">bakåt</string>
+    <string name="nextbutton">nästa</string>
+    <string name="submitbutton">lämna in</string>
 
 </resources>
