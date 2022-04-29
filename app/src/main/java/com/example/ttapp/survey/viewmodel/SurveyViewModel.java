@@ -115,10 +115,6 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return sharedPref.getString("identifier", null);
     }
 
-    public void putResponse(QuestionResponse response) {
-        survey.putResponse(getCurrentQuestionId(), response);
-    }
-
     public void nextQuestion() {
         survey.nextQuestion();
     }
@@ -141,10 +137,6 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     public LiveData<Boolean> surveyIsDone() {
         return surveyIsDone;
-    }
-
-    private String getCurrentQuestionId() {
-        return survey.getCurrentQuestionId();
     }
 
     public LiveData<Boolean> isLastQuestion() {

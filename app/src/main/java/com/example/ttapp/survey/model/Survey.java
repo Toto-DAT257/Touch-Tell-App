@@ -155,7 +155,7 @@ public class Survey {
         support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
     }
 
-    private void putResponse(String questionId, QuestionResponse response) {
+    public void putResponse(String questionId, QuestionResponse response) {
         responses.put(questionId, response);
     }
 
@@ -201,7 +201,7 @@ public class Survey {
                 question.set("option", options);
             }
             question.put("version", "0.0.0");
-            long unixTime = System.currentTimeMillis() / 1000L;
+            long unixTime = System.currentTimeMillis();
             question.put("time", unixTime);
             question.putArray("tags").add(identifier);
             questions.add(question);
