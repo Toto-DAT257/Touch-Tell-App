@@ -15,6 +15,11 @@
     <string name="error_id_not_found">Not valid: Mail is not registered</string>
     <string name="session_expired_toast">Session expired, please try again</string>
 
+    <!-- home page -->
+    <string name="home_header">Home</string>
+    <string name="home_start_survey_button">Start survey</string>
+    <string name="home_settings_button">Settings</string>
+
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>
     <string name="first_q_responseoption1">Yes</string>

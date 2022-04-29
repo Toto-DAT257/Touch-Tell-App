@@ -16,6 +16,10 @@
     <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
     <string name="session_expired_toast">Sessionen har utgått, vänligen försök igen</string>
 
+    <!-- home page -->
+    <string name="home_header">Hem</string>
+    <string name="home_start_survey_button">Starta enkät</string>
+    <string name="home_settings_button">Inställningar</string>
 
     <!-- first question -->
     <string name="first_question">Gillar du ditt jobb?</string>
