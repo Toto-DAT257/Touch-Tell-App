@@ -26,7 +26,7 @@ public class CommentFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initResponseoptions() {
+    protected void initResponseOptions() {
         commentResponse = view.findViewById(R.id.commentResponse);
         initSaveResponseObserver();
     }

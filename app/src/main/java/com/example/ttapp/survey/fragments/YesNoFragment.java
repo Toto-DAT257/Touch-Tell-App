@@ -30,7 +30,7 @@ public class YesNoFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initResponseoptions() {
+    protected void initResponseOptions() {
         yesnoResponseoption1 = view.findViewById(R.id.yesnoResponseoption1);
         yesnoResponseoption2 = view.findViewById(R.id.yesnoResponseoption2);
         initOnClickListeners();

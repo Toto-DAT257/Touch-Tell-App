@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 public class SurveyTest {
 
-    Survey survey;
+    TestSurveyClass survey;
 
     @Before
     public void init() {
@@ -30,7 +30,7 @@ public class SurveyTest {
         }
         String json = new String(bytes);
         String deviceId = "624b4f6fa23e9500043e154b";
-        survey = new Survey(json, deviceId, "user1");
+        survey = new TestSurveyClass(json, deviceId, "user1");
     }
 
     @Test
@@ -49,6 +49,17 @@ public class SurveyTest {
         survey.previousQuestion();
         String previousQuestionId = survey.getCurrentQuestionId();
         assertThat(previousQuestionId).isEqualTo(firstQuestionId);
+    }
+
+    private class TestSurveyClass extends Survey{
+
+        public TestSurveyClass(String json, String deviceId, String identifier) {
+            super(json, deviceId, identifier);
+        }
+
+        public String getCurrentQuestionId() {
+            return super.getCurrentQuestionId();
+        }
     }
 
 }
