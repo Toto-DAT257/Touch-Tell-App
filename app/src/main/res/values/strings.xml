@@ -22,10 +22,28 @@
 
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>
-    <string name="first_q_answeroption1">Yes</string>
-    <string name="first_q_answeroption2">No</string>
+    <string name="first_q_responseoption1">Yes</string>
+    <string name="first_q_responseoption2">No</string>
 
     <!-- done with survey response -->
     <string name="done_with_survey_response_text">Thanks for your participation!</string>
+
+    <!-- yes no question -->
+    <string name="yesno_responseoption1">Yes</string>
+    <string name="yesno_responseoption2">No</string>
+
+    <!-- smiley quartet question -->
+    <string name="smileyq_responseoption1">Saddest</string>
+    <string name="smileyq_responseoption2">Sad</string>
+    <string name="smileyq_responseoption3">Happy</string>
+    <string name="smileyq_responseoption4">Happiest</string>
+
+    <!-- comment question -->
+    <string name="comment_hinttext">Write your answer here</string>
+
+    <!-- survey -->
+    <string name="backbutton">back</string>
+    <string name="nextbutton">next</string>
+    <string name="submitbutton">submit</string>
 
 </resources>
