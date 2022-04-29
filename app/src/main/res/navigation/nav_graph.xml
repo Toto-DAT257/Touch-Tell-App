@@ -11,8 +11,8 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_registerFragment_to_surveyFragment"
-            app:destination="@id/surveyFragment" />
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +38,15 @@
         <action
             android:id="@+id/action_surveyFragment_to_doneWithSurveyFragment"
             app:destination="@id/doneWithSurveyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.ttapp.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment" />
     </fragment>
 
 </navigation>
