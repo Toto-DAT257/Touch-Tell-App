@@ -51,12 +51,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/surveyBackButton" />
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submitbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/surveyNextButton"
-        app:layout_constraintStart_toStartOf="@+id/surveyNextButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

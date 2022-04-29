@@ -37,7 +37,6 @@ public class SurveyFragment extends Fragment {
     SurveyViewModel surveyViewModel;
     Button backButton;
     Button nextButton;
-    Button submitButton;
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
 
@@ -56,8 +55,6 @@ public class SurveyFragment extends Fragment {
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         surveyViewModel.loadQuestions(getContext(), getActivity());
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), bool -> thingsToDoAfterJsonIsSet());
-
-        submitButton.setVisibility(View.VISIBLE);
 
         return root;
     }
@@ -106,7 +103,7 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.isLastQuestion().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-
+                // to be done further on, submitbutton
             }
         });
 
