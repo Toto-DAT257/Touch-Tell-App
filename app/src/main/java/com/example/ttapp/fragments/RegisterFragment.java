@@ -28,6 +28,7 @@ import com.example.ttapp.viewmodel.RegisterViewModel;
  */
 public class RegisterFragment extends Fragment {
 
+    private SharedPreferences sharedPref;
     private RegisterViewModel registerViewModel;
     private String identifier;
     EditText idEditText;
@@ -40,9 +41,18 @@ public class RegisterFragment extends Fragment {
         FragmentRegisterBinding binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
+        sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
         registerViewModel.setDatabase(MongoDB.getDatabase(getContext()));
+        observeIdentification(root);
+        observeDatabaseAccess();
 
+        String previousIdentifier = sharedPref.getString("identifier", "");
+
+        if (!previousIdentifier.isEmpty()) {
+            identifier = previousIdentifier;
+            registerViewModel.identify(previousIdentifier);
+        }
         idEditText = binding.textField;
         confirmButton = binding.buttonConfirmIdCode;
         errorIdIsEmpty = binding.errorIdIsEmpty;
@@ -50,8 +60,6 @@ public class RegisterFragment extends Fragment {
 
         confirmButton.setOnClickListener(view1 -> identify());
 
-        observeIdentification(root);
-        observeDatabaseAccess();
         return root;
     }
 
@@ -91,7 +99,6 @@ public class RegisterFragment extends Fragment {
     }
 
     private void saveIdentifier(String identifier) {
-        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("identifier", identifier);
         editor.apply();

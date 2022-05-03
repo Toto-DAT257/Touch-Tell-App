@@ -50,11 +50,8 @@ public class IntroductionFragment extends Fragment {
             });
 
         } else {
-            if (!settings.getString("identifier", "").equals("")) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_introductionFragment_to_homeFragment);
-            } else {
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_introductionFragment_to_registerFragment2);
-            }
-        } return view;
+        }
+        return view;
     }
 }
