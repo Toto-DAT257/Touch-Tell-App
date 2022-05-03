@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".survey.fragments.NpsFragment">
+    android:orientation="vertical">
 
     <!-- Slider -->
     <com.google.android.material.slider.Slider
@@ -16,7 +16,13 @@
         android:stepSize="1"
         android:value="5"
         android:valueFrom="1"
-        android:valueTo="10" />
+        android:valueTo="10"
+
+        app:thumbColor="@color/toto_10"
+        app:thumbStrokeColor="@color/white"
+        app:thumbStrokeWidth="3dp"
+        app:tickColor="@android:color/transparent"
+        app:trackColor="@color/white" />
 
     <!-- Grid -->
     <LinearLayout
@@ -31,69 +37,79 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1" />
+            android:text="1"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2" />
+            android:text="2"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="3" />
+            android:text="3"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="4" />
+            android:text="4"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="5" />
+            android:text="5"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="6" />
+            android:text="6"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="7" />
+            android:text="7"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="8" />
+            android:text="8"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="9" />
+            android:text="9"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10" />
+            android:text="10"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <!-- Text Labels -->
