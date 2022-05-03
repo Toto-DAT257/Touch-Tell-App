@@ -63,5 +63,4 @@ public class NpsFragment extends QuestionFragment {
         });
     }
 
-
 }
