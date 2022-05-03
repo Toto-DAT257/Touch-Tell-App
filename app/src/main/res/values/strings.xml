@@ -41,6 +41,9 @@
     <!-- comment question -->
     <string name="comment_hinttext">Write your answer here</string>
 
+    <!-- short text question -->
+    <string name="short_text_hinttext">Write your answer here</string>
+
     <!-- survey -->
     <string name="backbutton">back</string>
     <string name="nextbutton">next</string>
