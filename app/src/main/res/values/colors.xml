@@ -9,4 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Touch_and_tell_blue">#009DB9</color>
     <color name="Touch_and_tell_blue_dark">#00738B</color>
+    <color name="toto_background_gradient_blue">#60BFE8</color>
+    <color name="toto_background_gradient_purple">#5231B0</color>
+    <color name="toto_button_purple">#8885DC</color>
+    <color name="toto_card_gradient_light_blue">#33BAF6FF</color>
+    <color name="toto_card_gradient_blue">#336DCBFF</color>
+    <color name="toto_progress_gradient_start">#E99674</color>
+    <color name="toto_progress_gradient_center">#75E9906C</color>
+    <color name="toto_progress_gradient_end">#E9906C</color>
 </resources>
