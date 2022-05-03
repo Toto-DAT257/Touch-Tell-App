@@ -191,8 +191,7 @@ public class Survey {
         return toSend;
     }
 
-    private String buildJsonResponse() {
-        List<QuestionResponse> responsesToSend = getResponsesToSend();
+    private String buildJsonResponse(List<QuestionResponse> responsesToSend) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response = mapper.createObjectNode();
         response.put("deviceId", deviceId);
@@ -241,7 +240,11 @@ public class Survey {
      */
     public void submitResponse(Activity activity) {
         final String URL = "https://api.touch-and-tell.se/log";
-        String json = buildJsonResponse();
+        List<QuestionResponse> responsesToSend = getResponsesToSend();
+        if (responsesToSend.isEmpty()){
+            return;
+        }
+        String json = buildJsonResponse(responsesToSend);
         JSONObject toSend = null;
         try {
             toSend = new JSONObject(json);
