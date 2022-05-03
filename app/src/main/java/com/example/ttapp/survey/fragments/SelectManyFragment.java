@@ -18,7 +18,7 @@ public class SelectManyFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-
+        // TODO implement logic when design is done
     }
 
     @Override
