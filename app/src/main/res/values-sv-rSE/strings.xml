@@ -11,6 +11,7 @@
 
     <string name="app_name">TTApp</string>
     <string name="enter_id">Ange din mail</string>
+    <string name="email_header">E-mail:</string>
     <string name="confirm_button">Bekräfta</string>
     <string name="error_id_is_empty">Inte giltig: Du behöver skriva in din mail</string>
     <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
@@ -46,5 +47,6 @@
     <string name="backbutton">bakåt</string>
     <string name="nextbutton">nästa</string>
     <string name="submitbutton">lämna in</string>
+    <string name="enter_e_mail_here">Ange e-mail…</string>
 
 </resources>

@@ -43,7 +43,7 @@ public class RegisterFragment extends Fragment {
         registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
         registerViewModel.setDatabase(MongoDB.getDatabase(getContext()));
 
-        idEditText = binding.editTextId;
+        idEditText = binding.textField;
         confirmButton = binding.buttonConfirmIdCode;
         errorIdIsEmpty = binding.errorIdIsEmpty;
         errorIdNotFound = binding.errorIdNotFound;
