@@ -17,5 +17,6 @@
     <color name="toto_progress_gradient_start">#E99674</color>
     <color name="toto_progress_gradient_center">#75E9906C</color>
     <color name="toto_progress_gradient_end">#E9906C</color>
-    <color name="toto_pliancy">#33FFFFFF</color>
+    <color name="toto_white_20_percent">#33FFFFFF</color>
+
 </resources>
