@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="70dp"
     android:orientation="vertical">
 
     <!-- Slider -->
@@ -22,7 +23,8 @@
         app:thumbStrokeColor="@color/white"
         app:thumbStrokeWidth="3dp"
         app:tickColor="@android:color/transparent"
-        app:trackColor="@color/white" />
+        app:trackColor="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <!-- Grid -->
     <LinearLayout
