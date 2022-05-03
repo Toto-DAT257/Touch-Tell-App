@@ -10,10 +10,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.ttapp.APIRequester.Response;
+import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.Survey;
@@ -71,7 +69,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                     // In here is where you have access to the deviceID. Cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
 
-                    requestFromAPI(activity, deviceId, identifier);
+                    requestFromAPI(deviceId, identifier);
 
                 } else {
                     Log.e("Database", "Identifier not found");
@@ -82,31 +80,21 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         });
     }
 
-    private void requestFromAPI(Context activity, String deviceId, String identifier) {
-        String API = getAPILink(deviceId);
-        RequestQueue requestQueue = Volley.newRequestQueue(activity);
-
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                API,
-                null,
-                response -> {
-                    Log.i("Rest Response", response.toString());
-                    // In here is were you have access to the JSON response, cannot return, due to async
-                    survey = new Survey(response.toString(), deviceId, identifier);
-                    survey.addPropertyChangeListener(this);
-                    questionType.setValue(survey.getCurrentQuestionType());
-                    questionText.setValue(survey.getCurrentQuestionText());
-                    jsonIsReceived.setValue(true);
-                },
-                error -> Log.e("Rest Response", error.toString())
-        );
-
-        requestQueue.add(objectRequest);
-    }
-
-    private String getAPILink(String deviceId) {
-        return "https://api.touch-and-tell.se/checkin/" + deviceId;
+    private void requestFromAPI(String deviceId, String identifier) {
+        SurveyViewModel listener = this;
+        TTRequester ttRequester = TTRequester.getInstance();
+        ttRequester.requestQuestionJSONString(deviceId, new Response<String>() {
+            @Override
+            public void response(String json) {
+                survey = new Survey(json, deviceId, identifier);
+                survey.addPropertyChangeListener(listener);
+                questionType.setValue(survey.getCurrentQuestionType());
+                questionText.setValue(survey.getCurrentQuestionText());
+                jsonIsReceived.setValue(true);
+            }
+            @Override
+            public void error(String object) { }
+        });
     }
 
     private String getIdentifier(FragmentActivity activity) {
@@ -180,8 +168,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.saveResponse(responseOption, comment);
     }
 
-    public void submitResponse(Activity context){
-        survey.submitResponse(context);
+    public void submitResponse(){
+        survey.submitResponse();
     }
 
 }
