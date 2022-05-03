@@ -40,7 +40,7 @@
     <string name="smileyq_responseoption4">Happiest</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Write your answer here</string>
+    <string name="comment_hinttext">Write your answer here…</string>
 
     <!-- survey -->
     <string name="backbutton">back</string>
