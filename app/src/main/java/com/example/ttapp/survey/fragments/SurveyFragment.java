@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.ttapp.R;
@@ -35,8 +36,9 @@ public class SurveyFragment extends Fragment {
 
     FragmentSurveyBinding binding;
     SurveyViewModel surveyViewModel;
-    Button backButton;
-    Button nextButton;
+    ImageButton backButton;
+    ImageButton nextButton;
+    Button homeButton;
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
 
@@ -51,12 +53,23 @@ public class SurveyFragment extends Fragment {
         nextButton = binding.surveyNextButton;
         questionFragmentContainer = binding.questionFragmentContainer;
         questionTextView = binding.questionTextView;
+        homeButton = binding.home;
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         surveyViewModel.loadQuestions(getContext(), getActivity());
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), bool -> thingsToDoAfterJsonIsSet());
 
+        setHomeOnClickListener();
         return root;
+    }
+
+    private void setHomeOnClickListener(){
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+            }
+        });
     }
 
     private void thingsToDoAfterJsonIsSet() {

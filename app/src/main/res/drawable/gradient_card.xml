@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+
+    <gradient
+        android:startColor="@color/toto_card_gradient_light_blue"
+        android:endColor="@color/toto_card_gradient_blue"
+        android:type="linear"
+        android:angle="270" />
+    <corners android:radius="20dp"/>
+
+
+</shape>
