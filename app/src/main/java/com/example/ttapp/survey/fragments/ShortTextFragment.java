@@ -23,7 +23,10 @@ public class ShortTextFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            response = shortTextResponse.getText().toString();
+            surveyViewModel.saveResponse(response);
+        });
     }
 
 }
