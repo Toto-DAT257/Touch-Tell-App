@@ -1,12 +1,6 @@
 package com.example.ttapp.survey.model;
 
-import android.app.Activity;
-import android.util.Log;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
 import com.example.ttapp.survey.util.SurveyEvent;
@@ -235,13 +229,10 @@ public class Survey {
 
     /**
      * Submits the gathered answers to Touch&Tell.
-     *
-     * @param activity context needed for the Volley requestQueue.
      */
-    public void submitResponse(Activity activity) {
-        final String URL = "https://api.touch-and-tell.se/log";
+    public void submitResponse() {
         List<QuestionResponse> responsesToSend = getResponsesToSend();
-        if (responsesToSend.isEmpty()){
+        if (responsesToSend.isEmpty()) {
             return;
         }
         String json = buildJsonResponse(responsesToSend);
@@ -251,14 +242,7 @@ public class Survey {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        RequestQueue requestQueue = Volley.newRequestQueue(activity);
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                URL,
-                toSend,
-                rest_response -> Log.v("Rest Response:", rest_response.toString()),
-                error -> Log.e("Rest Response", error.toString())
-        );
-        requestQueue.add(objectRequest);
+        TTRequester ttRequester = TTRequester.getInstance();
+        ttRequester.submitResponse(toSend);
     }
 }
