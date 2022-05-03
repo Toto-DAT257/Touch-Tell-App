@@ -14,8 +14,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -33,7 +35,6 @@ import java.util.Map;
 public class Survey {
 
     private JsonQuestionsParser jsonQuestionsParser;
-    private final ArrayList<String> questionsToSend;
     private String currentQuestionId;
     private final Map<String, QuestionResponse> responses;
     private final PropertyChangeSupport support;
@@ -48,7 +49,6 @@ public class Survey {
             e.printStackTrace();
         }
         currentQuestionId = jsonQuestionsParser.getFirstQuestionId();
-        questionsToSend = new ArrayList<>();
         this.deviceId = deviceId;
         this.identifier = identifier;
         this.support = new PropertyChangeSupport(this);
@@ -166,8 +166,9 @@ public class Survey {
 
     /**
      * Saves an answer to to the current question.
+     *
      * @param answerOption The answer-values to the question.
-     * @param comment The comment answer to the question.
+     * @param comment      The comment answer to the question.
      */
     public void saveResponse(ArrayList<Integer> answerOption, String comment) {
         if (!comment.isEmpty() || !answerOption.isEmpty()) {
@@ -180,23 +181,34 @@ public class Survey {
         return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
-    private String buildJsonResponse(){
+    private List<QuestionResponse> getResponsesToSend() {
+        List<QuestionResponse> toSend = new ArrayList<>();
+        for (QuestionResponse r : responses.values()) {
+            if (allConditionsAreMet(r.getQuestionId())) {
+                toSend.add(r);
+            }
+        }
+        return toSend;
+    }
+
+    private String buildJsonResponse() {
+        List<QuestionResponse> responsesToSend = getResponsesToSend();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response = mapper.createObjectNode();
         response.put("deviceId", deviceId);
 
         ArrayNode questions = mapper.createArrayNode();
-        for (QuestionResponse q : responses.values()){
+        for (QuestionResponse q : responsesToSend) {
             ObjectNode question = mapper.createObjectNode();
             question.put("device", deviceId);
             question.put("question", q.getQuestionId());
             question.put("questionType", q.getQuestionType());
-            if (!q.getComment().isEmpty()){
+            if (!q.getComment().isEmpty()) {
                 question.put("comment", q.getComment());
             }
-            if (!q.getAnsweredOptions().isEmpty()){
+            if (!q.getAnsweredOptions().isEmpty()) {
                 ArrayNode options = mapper.createArrayNode();
-                for (int o : q.getAnsweredOptions()){
+                for (int o : q.getAnsweredOptions()) {
                     options.add(o);
                 }
                 question.set("option", options);
@@ -224,6 +236,7 @@ public class Survey {
 
     /**
      * Submits the gathered answers to Touch&Tell.
+     *
      * @param activity context needed for the Volley requestQueue.
      */
     public void submitResponse(Activity activity) {
@@ -243,6 +256,6 @@ public class Survey {
                 rest_response -> Log.v("Rest Response:", rest_response.toString()),
                 error -> Log.e("Rest Response", error.toString())
         );
-       requestQueue.add(objectRequest);
+        requestQueue.add(objectRequest);
     }
 }
