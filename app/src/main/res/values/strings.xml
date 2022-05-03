@@ -9,7 +9,7 @@
     <string name="introduction_buttom">Move on</string>
 
     <string name="app_name">TTApp</string>
-    <string name="enter_id">Enter your mail</string>
+    <string name="enter_id">Registration</string>
     <string name="confirm_button">Confirm</string>
     <string name="error_id_is_empty">Not valid: You need to enter your mail</string>
     <string name="error_id_not_found">Not valid: Mail is not registered</string>
