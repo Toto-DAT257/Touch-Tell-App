@@ -14,25 +14,27 @@ import android.view.ViewGroup;
 
 import com.example.ttapp.R;
 
-public class MultipleChoiceFragment extends Fragment {
+import java.util.ArrayList;
 
-    private MultipleChoiceViewModel mViewModel;
+public class MultipleChoiceFragment extends QuestionFragment {
 
-    public static MultipleChoiceFragment newInstance() {
-        return new MultipleChoiceFragment();
+    private final ArrayList<Integer> response = new ArrayList<>();
+
+    @Override
+    protected void setView(LayoutInflater inflater, ViewGroup container) {
+        view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_multiple_choice, container, false);
+    protected void initResponseOptions() {
+
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MultipleChoiceViewModel.class);
-        // TODO: Use the ViewModel
+    protected void initSaveResponseObserver() {
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
     }
 
 }
