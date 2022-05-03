@@ -53,7 +53,6 @@ public class NpsFragment extends QuestionFragment {
             @Override
             public void onStopTrackingTouch(@NonNull Slider slider) {
                 response.set(0, (int) slider.getValue());
-                // Save every time on change because listener does not trigger correctly for this fragment
                 surveyViewModel.saveResponse(response);
             }
         });
