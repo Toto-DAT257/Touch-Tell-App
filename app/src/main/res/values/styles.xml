@@ -2,25 +2,25 @@
 <resources>
 
     <style name="Header_1">
-        <item name="font">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">32sp</item>
     </style>
 
     <style name="Header_2">
-        <item name="font">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="Button">
-        <item name="font">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">22sp</item>
     </style>
 
     <style name="Body">
-        <item name="font">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">16sp</item>
     </style>
