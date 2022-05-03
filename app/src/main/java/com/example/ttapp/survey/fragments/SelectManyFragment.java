@@ -5,7 +5,11 @@ import android.view.ViewGroup;
 
 import com.example.ttapp.R;
 
+import java.util.ArrayList;
+
 public class SelectManyFragment extends QuestionFragment {
+
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -19,7 +23,9 @@ public class SelectManyFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            surveyViewModel.saveResponse(response);
+        });
     }
 
 }
