@@ -22,12 +22,13 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        linearLayout = view.findViewById(R.id.multipleChoiceLinearLayout);
-        for (int i = 0; i < 5; i++) {
-            CheckBox ch = new CheckBox(requireActivity());
-            ch.setText(i);
-            linearLayout.addView(ch);
-        }
+        // TODO add logic when design is done. Will probably delete what´s below
+//        linearLayout = view.findViewById(R.id.multipleChoiceLinearLayout);
+//        for (int i = 0; i < 5; i++) {
+//            CheckBox ch = new CheckBox(requireActivity());
+//            ch.setText(i);
+//            linearLayout.addView(ch);
+//        }
     }
 
     @Override
