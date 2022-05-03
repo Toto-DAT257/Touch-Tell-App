@@ -46,5 +46,6 @@
     <string name="backbutton">back</string>
     <string name="nextbutton">next</string>
     <string name="submitbutton">submit</string>
+    <string name="enter_e_mail_here">Enter e-mail here…</string>
 
 </resources>
