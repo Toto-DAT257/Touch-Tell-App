@@ -32,6 +32,7 @@ public abstract class QuestionFragment extends Fragment {
         setView(inflater, container);
         setSurveyViewModel();
         initResponseOptions();
+        initSaveResponseObserver();
 
         return view;
     }

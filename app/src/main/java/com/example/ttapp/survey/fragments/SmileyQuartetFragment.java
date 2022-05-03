@@ -38,7 +38,6 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqResponseoption4 = view.findViewById(R.id.smileyqResponseoption4);
 
         initOnClickListeners();
-        initSaveResponseObserver();
     }
 
     @Override
