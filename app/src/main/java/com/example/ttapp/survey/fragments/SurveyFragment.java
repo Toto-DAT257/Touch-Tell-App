@@ -109,7 +109,7 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.surveyIsDone().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_doneWithSurveyFragment);
-                surveyViewModel.submitResponse(getActivity());
+                surveyViewModel.submitResponse();
             }
         });
 
