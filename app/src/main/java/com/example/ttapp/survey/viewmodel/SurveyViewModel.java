@@ -166,4 +166,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.submitResponse();
     }
 
+    public int getProgressPercentage(){
+        return survey.getProgressPercentage();
+    }
+
 }

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.ttapp.R;
@@ -43,6 +44,7 @@ public class SurveyFragment extends Fragment {
     Button homeButton;
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -56,6 +58,8 @@ public class SurveyFragment extends Fragment {
         questionFragmentContainer = binding.questionFragmentContainer;
         questionTextView = binding.questionTextView;
         homeButton = binding.home;
+        progressBar = binding.progressBar;
+
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
@@ -81,6 +85,8 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
+            progressBar.setProgress(surveyViewModel.getProgressPercentage());
+
             switch (questionType) {
                 case QuestionType.SMILEY_QUARTET:
                     navigate(new SmileyQuartetFragment());
