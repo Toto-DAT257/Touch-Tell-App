@@ -8,6 +8,7 @@
     android:layout_marginBottom="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/multiConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="15dp"
@@ -24,8 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="här är ett svarsalternativ"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,13 +34,14 @@
 
         <ImageView
             android:id="@+id/check_multibutton"
-            android:layout_width="43dp"
-            android:layout_height="26dp"
+            android:layout_width="24dp"
+            android:layout_height="16dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_vector_check" />
+            android:background="@drawable/ic_vector_check"
+            android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
