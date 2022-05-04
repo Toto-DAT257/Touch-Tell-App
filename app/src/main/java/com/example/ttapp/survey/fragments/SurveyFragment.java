@@ -72,7 +72,7 @@ public class SurveyFragment extends Fragment {
         return root;
     }
 
-    private void setHomeOnClickListener(){
+    private void setHomeOnClickListener() {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
