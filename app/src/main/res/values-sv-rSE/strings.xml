@@ -56,6 +56,9 @@
     <!-- number question -->
     <string name="number_hinttext">Skriv ditt nummer här</string>
 
+    <!-- email question -->
+    <string name="email_hinttext">Skriv din mail här</string>
+
     <!-- survey -->
     <string name="backbutton">bakåt</string>
     <string name="nextbutton">nästa</string>
