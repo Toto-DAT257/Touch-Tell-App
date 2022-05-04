@@ -92,6 +92,7 @@ public class SurveyFragment extends Fragment {
                     navigate(new NpsFragment());
                     break;
                 case QuestionType.MULTIPLE_CHOICE:
+                    navigate(new MultipleChoiceFragment());
                     break;
                 case QuestionType.SELECT_MANY:
                     break;
