@@ -43,7 +43,7 @@ public class RegisterFragment extends Fragment {
 
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
-        registerViewModel.setDatabase(MongoDB.getDatabase(getContext()));
+        registerViewModel.setDatabase(MongoDB.getInstance());
         observeIdentification(root);
         observeDatabaseAccess();
 
