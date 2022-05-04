@@ -6,11 +6,8 @@
 
     <!-- introduction page -->
     <string name="introduction_header">Välkommen till applikationen Touch&amp;Tell </string>
-    <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell.
-                    Genom att svara på frågor om ditt arbete kommer du ha chansen att påverka din
-                    arbetsmiljö och din arbetsbelastning.
-                    Alla dina svar kommer vara anonyma.</string>
-    <string name="introduction_buttom">Ta mig vidare</string>
+    <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell. Genom att svara på frågor om ditt arbete kommer du ha chansen att påverka din arbetsmiljö och din arbetsbelastning. Alla dina svar kommer vara anonyma.</string>
+    <string name="introduction_button">Ta mig vidare</string>
 
     <!-- Registration -->
     <string name="enter_e_mail_here">Ange e-mail…</string>
@@ -67,10 +64,5 @@
     <string name="submitbutton">lämna in</string>
     <string name="statistics">Statistik</string>
     <string name="start_survey">Starta enkät</string>
-
-    <!-- introduction -->
-    <string name="introductionHeader">Välkommen till Touch&amp;Tell</string>
-    <string name="introductionText">Genom att göra en enkät kan du påverka din arbetsmiljö och arbetsbelastning. Alla dina svar är anonyma.</string>
-    <string name="introductionButton">Continue</string>
 
 </resources>
