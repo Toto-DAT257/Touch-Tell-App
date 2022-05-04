@@ -3,6 +3,7 @@ package com.example.ttapp.survey.model;
 import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
+import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.util.SurveyEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -244,5 +245,9 @@ public class Survey {
         }
         TTRequester ttRequester = TTRequester.getInstance();
         ttRequester.submitResponse(toSend);
+    }
+
+    public List<ResponseValues> getQuestionResponse(){
+        return jsonQuestionsParser.getResponseValues(currentQuestionId);
     }
 }

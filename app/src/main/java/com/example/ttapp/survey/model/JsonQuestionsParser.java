@@ -3,6 +3,7 @@ package com.example.ttapp.survey.model;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.Languages;
 import com.example.ttapp.survey.model.jsonparsing.Question;
+import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.model.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -152,6 +153,11 @@ public class JsonQuestionsParser {
      */
     public String getType(String id) {
         return survey.questions.get(getQuestionNumber(id)).questionType;
+    }
+
+    public List<ResponseValues> getResponseValues(String id){
+        Question q = getQuestion(id);
+        return q.responseValues;
     }
 
     /**
