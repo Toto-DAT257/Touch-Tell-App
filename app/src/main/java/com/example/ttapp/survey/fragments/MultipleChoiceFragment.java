@@ -21,8 +21,6 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
-    private LinearLayout linearLayout;
-
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
@@ -30,13 +28,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        // TODO add logic when design is done. Will probably delete what´s below
-//        linearLayout = view.findViewById(R.id.multipleChoiceLinearLayout);
-//        for (int i = 0; i < 5; i++) {
-//            CheckBox ch = new CheckBox(requireActivity());
-//            ch.setText(i);
-//            linearLayout.addView(ch);
-//        }
+        // TODO add logic when design is done.
     }
 
     @Override
