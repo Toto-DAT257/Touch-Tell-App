@@ -67,5 +67,9 @@
     <string name="statistics">Statistics</string>
     <string name="start_survey">Start Survey</string>
 
+    <!-- introduction -->
+    <string name="introductionHeader">Welcome to Touch&amp;Tell</string>
+    <string name="introductionText">By taking a survey you get to influence your work environment and workload. All your answers will be anonymous.</string>
+    <string name="introductionButton">Continue</string>
 
 </resources>

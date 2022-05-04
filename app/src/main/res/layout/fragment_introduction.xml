@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/introductonHeader"
+        style="@style/Header_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome"
+        android:text="@string/introductionHeader"
         android:textAlignment="center"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,11 @@
 
     <TextView
         android:id="@+id/introductionText"
+        style="@style/Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="BriefIntroduction"
+        android:text="@string/introductionText"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,9 +35,13 @@
 
     <Button
         android:id="@+id/introductionButton"
+        style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:background="@drawable/button"
+        android:includeFontPadding="false"
+        android:text="@string/introductionButton"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
