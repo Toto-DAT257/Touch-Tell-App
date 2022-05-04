@@ -247,7 +247,4 @@ public class Survey {
         ttRequester.submitResponse(toSend);
     }
 
-    public List<ResponseValues> getResponseValues(){
-        return jsonQuestionsParser.getResponseValues(currentQuestionId);
-    }
 }

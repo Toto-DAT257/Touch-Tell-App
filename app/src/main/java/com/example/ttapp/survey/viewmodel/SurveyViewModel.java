@@ -168,8 +168,4 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         survey.submitResponse();
     }
 
-    public List<ResponseValues> getResponseOptions(){
-        return survey.getResponseValues();
-    }
-
 }
