@@ -50,6 +50,15 @@
     <string name="nps_slider_label_right">Extremt</string>
     <string name="nps_slider_label_left">Inte alls</string>
 
+    <!-- short text question -->
+    <string name="short_text_hinttext">Skriv ditt svar här</string>
+
+    <!-- number question -->
+    <string name="number_hinttext">Skriv ditt nummer här</string>
+
+    <!-- email question -->
+    <string name="email_hinttext">Skriv din mail här</string>
+
     <!-- survey -->
     <string name="backbutton">bakåt</string>
     <string name="nextbutton">nästa</string>
