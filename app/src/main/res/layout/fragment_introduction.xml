@@ -8,7 +8,7 @@
     tools:context=".fragments.IntroductionFragment">
 
     <TextView
-        android:id="@+id/introductonHeader"
+        android:id="@+id/introductionHeader"
         style="@style/Header_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,21 +28,22 @@
         app:layout_constraintBottom_toTopOf="@+id/introductionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introductonHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/introductionHeader" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/introductionButton"
         style="@style/Button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/buttonSideMargins"
+        android:layout_marginRight="@dimen/buttonSideMargins"
         android:layout_marginBottom="@dimen/buttonBottomMargin"
         android:background="@drawable/button"
-        android:includeFontPadding="false"
+        android:includeFontPadding="true"
         android:text="@string/introduction_button"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
