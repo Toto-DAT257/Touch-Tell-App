@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">TTApp</string>
+    <string name="confirm_button">Bekräfta</string>
+
     <!-- introduction page -->
     <string name="introduction_header">Välkommen till applikationen Touch&amp;Tell </string>
     <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell.
@@ -9,9 +12,10 @@
                     Alla dina svar kommer vara anonyma.</string>
     <string name="introduction_buttom">Ta mig vidare</string>
 
-    <string name="app_name">TTApp</string>
+    <!-- Registration -->
+    <string name="enter_e_mail_here">Ange e-mail…</string>
     <string name="enter_id">Ange din mail</string>
-    <string name="confirm_button">Bekräfta</string>
+    <string name="email_header">E-mail:</string>
     <string name="error_id_is_empty">Inte giltig: Du behöver skriva in din mail</string>
     <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
     <string name="session_expired_toast">Sessionen har utgått, vänligen försök igen</string>
@@ -40,7 +44,11 @@
     <string name="smileyq_responseoption4">Gladast</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Skriv ditt svar här</string>
+    <string name="comment_hinttext">Skriv ditt svar här…</string>
+
+    <!-- NPS question -->
+    <string name="nps_slider_label_right">Extremt</string>
+    <string name="nps_slider_label_left">Inte alls</string>
 
     <!-- short text question -->
     <string name="short_text_hinttext">Skriv ditt svar här</string>

@@ -14,7 +14,11 @@ _This project is created by the group Toto. It is apart of the course Agile soft
 - Philip Winsnes
 
 ## How To Run The App
-To be added...
+To run this application on your computer:
+1. Download Android Studio and follow the instructions
+2. Clone this repo in Android Studio via "get from version control" or clone it to your computer and open it in Android Studio
+3. Create a "Virtual Device" in AVD Manager
+4. Build the project and then run "app"
 
 ## Documentation
 All documentations can be found [here](Documentation).

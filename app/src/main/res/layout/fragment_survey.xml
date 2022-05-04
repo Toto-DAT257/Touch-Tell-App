@@ -59,7 +59,6 @@
             android:layout_marginTop="46dp"
             android:layout_marginEnd="40dp"
             android:maxHeight="100dp"
-            android:text="This is a question some more filler text two lines title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -68,6 +67,7 @@
             android:id="@+id/questionFragmentContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
