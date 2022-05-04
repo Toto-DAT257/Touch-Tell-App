@@ -1,38 +1,34 @@
 package com.example.ttapp.survey.fragments;
 
-import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ttapp.R;
 
-public class SmileyCommentFragment extends Fragment {
+import java.util.ArrayList;
 
-    private SmileyCommentViewModel mViewModel;
+public class SmileyCommentFragment extends QuestionFragment {
 
-    public static SmileyCommentFragment newInstance() {
-        return new SmileyCommentFragment();
+    ArrayList<Integer> responseOption = new ArrayList<>();
+    String comment;
+
+    @Override
+    protected void setView(LayoutInflater inflater, ViewGroup container) {
+        view = inflater.inflate(R.layout.fragment_smiley_comment, container, false);
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_smiley_comment, container, false);
+    protected void initResponseOptions() {
+        // TODO implement logic when design is done
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SmileyCommentViewModel.class);
-        // TODO: Use the ViewModel
+    protected void initSaveResponseObserver() {
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
+            //comment = smileyCommentResponse.getText().toString(); // TODO change to actual ID when design is done
+            // TODO set responseOption when design is done
+            surveyViewModel.saveResponse(responseOption, comment);
+        });
     }
 
 }
