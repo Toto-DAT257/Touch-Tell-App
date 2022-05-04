@@ -9,10 +9,23 @@
 
     <TextView
         android:id="@+id/textview_multibutton"
+        style="@style/Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginStart="16dp"
+        android:text="här är ett svarsalternativ"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="173dp" />
+        app:layout_constraintVertical_bias="0.506" />
+
+    <ImageView
+        android:id="@+id/checkMultibutton"
+        android:layout_width="43dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_vector_check"
+        tools:layout_editor_absoluteY="38dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
