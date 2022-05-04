@@ -2,13 +2,21 @@ package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
 
+/**
+ * Class for a fragment that presents a multiplechoice-question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
 public class MultipleChoiceFragment extends QuestionFragment {
 
     private final ArrayList<Integer> response = new ArrayList<>();

@@ -7,6 +7,15 @@ import com.example.ttapp.R;
 
 import java.util.ArrayList;
 
+/**
+ * Class for a fragment that presents a selectmany-question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
 public class SelectManyFragment extends QuestionFragment {
 
     private final ArrayList<Integer> response = new ArrayList<>();

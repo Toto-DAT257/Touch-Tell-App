@@ -7,6 +7,15 @@ import com.example.ttapp.R;
 
 import java.util.ArrayList;
 
+/**
+ * Class for a fragment that presents a smileycomment-question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
 public class SmileyCommentFragment extends QuestionFragment {
 
     ArrayList<Integer> responseOption = new ArrayList<>();
