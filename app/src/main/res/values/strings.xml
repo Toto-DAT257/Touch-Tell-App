@@ -53,6 +53,7 @@
     <string name="backbutton">back</string>
     <string name="nextbutton">next</string>
     <string name="submitbutton">submit</string>
+    <string name="statistics">Statistics</string>
 
 
 </resources>
