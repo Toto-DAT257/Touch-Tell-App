@@ -75,7 +75,7 @@
         android:inputType="textEmailAddress" />
 
     <android.widget.Button
-        android:id="@+id/buttonStartSurvey"
+        android:id="@+id/buttonConfirmIdCode"
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
