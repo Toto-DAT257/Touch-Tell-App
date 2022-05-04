@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".survey.fragments.YesNoFragment" >
+    tools:context=".survey.fragments.YesNoFragment">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,19 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/yesnoResponseoption1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/responseoptionsmargin"
             android:layout_weight="1"
-            android:text="@string/yesno_responseoption1" />
+            android:src="@drawable/ic_vector_up" />
 
-        <Button
+        <ImageView
             android:id="@+id/yesnoResponseoption2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/yesno_responseoption2" />
+            android:src="@drawable/ic_vector_down" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
