@@ -1,5 +1,7 @@
 package com.example.ttapp.survey.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,7 +64,10 @@ public class SurveyFragment extends Fragment {
 
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
-        surveyViewModel.loadQuestions(getContext(), getActivity());
+        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        String identifier = sharedPref.getString("identifier", "");
+
+        surveyViewModel.loadQuestions(identifier);
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), bool -> thingsToDoAfterJsonIsSet());
 
         setHomeOnClickListener();

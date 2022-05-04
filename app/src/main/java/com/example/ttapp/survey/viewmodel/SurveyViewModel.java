@@ -1,6 +1,5 @@
 package com.example.ttapp.survey.viewmodel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -54,21 +53,16 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
      *
-     * @param context  the fragment that will present the questions context.
-     * @param activity the fragment that will present the questions context.
+     * @param identifier the identifier for the deviceId you want questions for.
      */
-    public void loadQuestions(Context context, FragmentActivity activity) {
-        String identifier = getIdentifier(activity);
-
-        MongoDB db = MongoDB.getDatabase(context);
+    public void loadQuestions(String identifier) {
+        MongoDB db = MongoDB.getInstance();
         RealmResultTask<Document> task = db.getDeviceIdTask(identifier);
         task.getAsync(result -> {
             if (result.isSuccess()) {
                 if (result.get() != null) {
                     Log.i("DEVICE ID", result.get().toString());
-                    // In here is where you have access to the deviceID. Cannot return, due to async
                     String deviceId = result.get().get("deviceId").toString();
-
                     requestFromAPI(deviceId, identifier);
 
                 } else {

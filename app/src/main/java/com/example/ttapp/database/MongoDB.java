@@ -3,6 +3,8 @@ package com.example.ttapp.database;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.ttapp.APIRequester.TTRequester;
+
 import org.bson.Document;
 
 import java.util.Arrays;
@@ -15,8 +17,8 @@ import io.realm.mongodb.RealmResultTask;
 
 
 /**
- * Singleton class for communicating with the database. This class should be used by client to
- * communicate with the database.
+ * Singleton class for communicating with the database. This class should be used by clients to
+ * communicate with the Mongo Realm database.
  * <p>
  * "Get" methods will return a {@link RealmResultTask} of the object rather than the object itself.
  * They need to be used asynchronously.
@@ -25,7 +27,7 @@ public class MongoDB {
 
     private static final String APP_ID = "touchandtellmobile-zbhsu";
     private static App APP;
-    private static MongoDB singleton;
+    private static MongoDB instance;
     private static IUserRepo userRepo;
 
     /**
@@ -42,8 +44,18 @@ public class MongoDB {
     }
 
     /**
-     * Gets the singleton of the database. If the database is not yet initialized it will initialize
-     * it and then return the ready to use database.
+     * Gets the database instance.
+     * @return the database instance.
+     */
+    public static MongoDB getInstance() {
+        if (instance == null)
+            throw new IllegalStateException(MongoDB.class.getSimpleName() + " is not initialized," +
+                    "call initialize(...) first");
+        return instance;
+    }
+
+    /**
+     * Initializes the database. This is required before using the database.
      *
      * @param context required to initialize the Mongo Realm.
      *                Example:
@@ -51,11 +63,11 @@ public class MongoDB {
      *                From a fragment use 'getActivity()' or 'getContext()'
      * @return the database
      */
-    public static MongoDB getDatabase(Context context) {
-        if (singleton == null) {
-            singleton = new MongoDB(context);
+    public static MongoDB initialize(Context context) {
+        if (instance == null) {
+            instance = new MongoDB(context);
         }
-        return singleton;
+        return instance;
     }
 
     public static void assertLoggedIn() {
