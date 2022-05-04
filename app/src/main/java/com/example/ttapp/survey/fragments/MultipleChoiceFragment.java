@@ -45,7 +45,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     }
 
-    private void initClickOnListItem(){
+    private void initClickOnListItem() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -56,10 +56,9 @@ public class MultipleChoiceFragment extends QuestionFragment {
                 if (multiCheck.getVisibility() == View.INVISIBLE) {
                     multiCheck.setVisibility(View.VISIBLE);
                     multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
-                }
-                else {
+                } else {
                     multiCheck.setVisibility(View.INVISIBLE);
-                    multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton); 
+                    multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton);
                 }
             }
         });
