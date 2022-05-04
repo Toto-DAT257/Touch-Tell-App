@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
+import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class MultipleChoiceFragment extends QuestionFragment {
         view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
 
         List<String> content = new ArrayList<>();
+        //List<ResponseValues> options = surveyViewModel.getResponseOptions();
+
+
         content.add("option 1");
         content.add("option 2");
 
