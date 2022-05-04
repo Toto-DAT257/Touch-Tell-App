@@ -45,6 +45,9 @@
     <!-- short text question -->
     <string name="short_text_hinttext">Skriv ditt svar här</string>
 
+    <!-- number question -->
+    <string name="number_hinttext">Skriv ditt nummer här</string>
+
     <!-- survey -->
     <string name="backbutton">bakåt</string>
     <string name="nextbutton">nästa</string>

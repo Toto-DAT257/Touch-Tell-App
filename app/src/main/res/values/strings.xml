@@ -44,6 +44,9 @@
     <!-- short text question -->
     <string name="short_text_hinttext">Write your answer here</string>
 
+    <!-- number question -->
+    <string name="number_hinttext">Write your number here</string>
+
     <!-- survey -->
     <string name="backbutton">back</string>
     <string name="nextbutton">next</string>
