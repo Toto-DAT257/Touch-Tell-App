@@ -36,6 +36,10 @@ public class ListAdapter extends ArrayAdapter<String> {
                     parent, false);
         }
 
+        String text = getItem(position);
+        TextView textView = convertView.findViewById(R.id.textview_multibutton);
+        textView.setText(text);
+        // getItem
         // position i n list
 
         //TextView name = convertView.findViewById(R.id.category_name);

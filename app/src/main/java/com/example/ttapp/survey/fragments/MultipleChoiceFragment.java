@@ -1,9 +1,16 @@
 package com.example.ttapp.survey.fragments;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
@@ -17,6 +24,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     private LinearLayout linearLayout;
     private ListAdapter adapter;
+    private ListView listView;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -26,10 +34,24 @@ public class MultipleChoiceFragment extends QuestionFragment {
         content.add("option 1");
         content.add("option 2");
 
+        listView = view.findViewById(R.id.multiList);
+
         adapter = new ListAdapter(requireActivity().getApplicationContext(), content);
+        listView.setAdapter(adapter);
 
 
 
+    }
+
+    private void initClickOnListItem(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               // adapterView.getItemAtPosition(i);
+                TextView textView = view.findViewById(R.id.textview_multibutton);
+                textView.setText("Hello World!");
+            }
+        });
     }
 
     @Override
