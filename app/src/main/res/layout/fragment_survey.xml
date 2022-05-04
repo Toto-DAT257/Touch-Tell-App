@@ -78,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/separator"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +86,16 @@
             app:layout_constraintTop_toBottomOf="@+id/questionTextView">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/expand_collapse_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-2dp"
+            android:background="@color/toto_transparent"
+            android:src="@drawable/ic_round_expand_more_24"
+            app:layout_constraintBottom_toTopOf="@+id/seperator"
+            app:layout_constraintEnd_toEndOf="@+id/seperator" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView

@@ -37,12 +37,13 @@ public class SurveyFragment extends Fragment {
 
     FragmentSurveyBinding binding;
     SurveyViewModel surveyViewModel;
-    ImageButton backButton;
-    ImageButton nextButton;
+    ImageButton backButton, nextButton, expandCollapseButton;
     Button homeButton;
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
     ProgressBar progressBar;
+    boolean isExpanded = false;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -57,6 +58,7 @@ public class SurveyFragment extends Fragment {
         questionTextView = binding.questionTextView;
         homeButton = binding.home;
         progressBar = binding.progressBar;
+        expandCollapseButton = binding.expandCollapseButton;
 
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
@@ -64,6 +66,7 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), bool -> thingsToDoAfterJsonIsSet());
 
         setHomeOnClickListener();
+        setExpandCollapseOnClickListener();
         return root;
     }
 
@@ -76,11 +79,37 @@ public class SurveyFragment extends Fragment {
         });
     }
 
+    private void setExpandCollapseOnClickListener(){
+        expandCollapseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isExpanded){
+                    collapseQuestionText();
+                } else {
+                    expandQuestionText();
+                }
+
+            }
+        });
+    }
+
+    private void collapseQuestionText() {
+        questionTextView.setMaxHeight(380);
+        isExpanded = false;
+    }
+
+    private void expandQuestionText() {
+        questionTextView.setMaxHeight(1000);
+        isExpanded = true;
+
+    }
+
     private void thingsToDoAfterJsonIsSet() {
         surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             progressBar.setProgress(surveyViewModel.getProgressPercentage());
+            collapseQuestionText();
 
             switch (questionType) {
                 case QuestionType.SMILEY_QUARTET:
