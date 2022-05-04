@@ -80,26 +80,26 @@ public class SurveyTest {
         ArrayList<Integer> answerOption = new ArrayList<>();
         // Question 1
         answerOption.add(1);
-        survey.saveResponse(answerOption, "");
+        survey.saveResponse(new ArrayList<>(answerOption), "");
         survey.nextQuestion();
         answerOption.clear();
         // Question 2
-        survey.saveResponse(answerOption,"Hej! ;)");
+        survey.saveResponse(new ArrayList<>(answerOption),"Hej! ;)");
         survey.nextQuestion();
         // Question 3
         answerOption.add(2);
-        survey.saveResponse(answerOption, "");
+        survey.saveResponse(new ArrayList<>(answerOption), "");
         survey.nextQuestion();
         answerOption.clear();
         // Question 4 (Conditional)
         answerOption.add(3);
-        survey.saveResponse(answerOption,"");
+        survey.saveResponse(new ArrayList<>(answerOption),"");
         survey.nextQuestion();
         answerOption.clear();
         // Question 5
         String questionIdToBeExcluded = survey.getCurrentQuestionId();
         answerOption.add(2);
-        survey.saveResponse(answerOption,"");
+        survey.saveResponse(new ArrayList<>(answerOption),"");
         survey.nextQuestion();
         answerOption.clear();
         // Move back 2 steps and avoid the conditional
@@ -107,18 +107,18 @@ public class SurveyTest {
         survey.previousQuestion();
         // Question 4 (Conditional)
         answerOption.add(1);
-        survey.saveResponse(answerOption,"");
+        survey.saveResponse(new ArrayList<>(answerOption),"");
         survey.nextQuestion();
         answerOption.clear();
         // Skip to Question 6 directly
         answerOption.add(3);
-        survey.saveResponse(answerOption,"");
+        survey.saveResponse(new ArrayList<>(answerOption),"");
 
         List<QuestionResponse> questionResponses = survey.getResponsesToSend();
-//        for (QuestionResponse qr : questionResponses) {
-//            assertThat(qr.getQuestionId()).isNotEqualTo(questionIdToBeExcluded);
-//        }
-        System.out.println((survey.buildJsonResponse(questionResponses)));
+        for (QuestionResponse qr : questionResponses) {
+            assertThat(qr.getQuestionId()).isNotEqualTo(questionIdToBeExcluded);
+        }
+        assertThat(questionResponses.size()).isEqualTo(5);
     }
 
     private class TestSurveyClass extends Survey{
