@@ -31,7 +31,9 @@
     <string name="first_q_responseoption2">Nej</string>
 
     <!-- done with survey response -->
-    <string name="done_with_survey_response_text">Tack för ditt deltagande!</string>
+    <string name="done_with_survey_header">Bra jobbat!</string>
+    <string name="done_with_survey_body">Genom att göra dessa enkäter kan du och dina kollegor påverka din arbetsmiljö till det bättre.</string>
+    <string name="done_with_survey_button">Klar</string>
 
     <!-- yes no question -->
     <string name="yesno_responseoption1">Ja</string>
