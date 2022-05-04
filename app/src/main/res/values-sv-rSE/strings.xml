@@ -54,5 +54,6 @@
     <string name="backbutton">bakåt</string>
     <string name="nextbutton">nästa</string>
     <string name="submitbutton">lämna in</string>
+    <string name="statistics">Statistik</string>
 
 </resources>
