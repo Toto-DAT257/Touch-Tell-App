@@ -14,7 +14,7 @@
 
     <!-- Registration -->
     <string name="enter_e_mail_here">Ange e-mail…</string>
-    <string name="enter_id">Ange din mail</string>
+    <string name="enter_id">Registrering</string>
     <string name="email_header">E-mail:</string>
     <string name="error_id_is_empty">Inte giltig: Du behöver skriva in din mail</string>
     <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
