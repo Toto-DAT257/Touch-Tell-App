@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -75,6 +76,22 @@ public class SurveyFragment extends Fragment {
         return root;
     }
 
+    private void configureQuestionText(String text){
+        questionTextView.setVisibility(View.INVISIBLE);
+        questionTextView.setText(text);
+
+
+
+        int lines = questionTextView.getLineCount();
+        if (lines > 4){
+            questionTextView.setTextSize(22);
+
+        } else {
+            questionTextView.setTextSize(24);
+        }
+        questionTextView.setVisibility(View.VISIBLE);
+    }
+
     private void setHomeOnClickListener(){
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,18 +116,22 @@ public class SurveyFragment extends Fragment {
     }
 
     private void collapseQuestionText() {
-        questionTextView.setMaxHeight(380);
+        questionTextView.setMaxLines(4);
         isExpanded = false;
+        expandCollapseButton.setImageResource(R.drawable.ic_round_expand_more_24);
     }
 
     private void expandQuestionText() {
-        questionTextView.setMaxHeight(1000);
+        questionTextView.setMaxLines(100);
         isExpanded = true;
+        expandCollapseButton.setImageResource(R.drawable.ic_round_expand_less_24);
 
     }
 
     private void thingsToDoAfterJsonIsSet() {
-        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
+        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), text -> {
+            configureQuestionText(text);
+        });
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             progressBar.setProgress(surveyViewModel.getProgressPercentage());
