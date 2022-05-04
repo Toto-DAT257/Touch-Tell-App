@@ -13,12 +13,8 @@ _This project is created by the group Toto. It is apart of the course Agile soft
 - Simon Holst
 - Philip Winsnes
 
-## How To Run The App
-To run this application on your computer:
-1. Download Android Studio and follow the instructions
-2. Clone this repo in Android Studio via "get from version control" or clone it to your computer and open it in Android Studio
-3. Create a "Virtual Device" in AVD Manager
-4. Build the project and then run "app"
+## Installation
+On an Android device, download the [latest apk build](https://github.com/Toto-DAT257/Touch-Tell-App/releases/download/v1.0.0/tt_app.apk). Follow the instructions and complete the installation.
 
 ## Documentation
 All documentations can be found [here](Documentation).
