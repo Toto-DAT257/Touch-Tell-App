@@ -41,7 +41,7 @@ public class IntroductionFragment extends Fragment {
             Button introductionButton = view.findViewById(R.id.introductionButton);
             introductionHeader.setText(getString(R.string.introduction_header));
             introductionText.setText(getString(R.string.introduction_text));
-            introductionButton.setText(R.string.introduction_buttom);
+            introductionButton.setText(R.string.introduction_button);
 
             introductionButton.setOnClickListener(view1 -> {
 
