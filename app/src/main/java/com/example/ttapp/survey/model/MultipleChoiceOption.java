@@ -5,8 +5,8 @@ package com.example.ttapp.survey.model;
  */
 public class MultipleChoiceOption {
 
-    private String text;
-    private int value;
+    private final String text;
+    private final int value;
 
     public MultipleChoiceOption(String text, int value) {
         this.text = text;

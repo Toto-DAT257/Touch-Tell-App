@@ -107,14 +107,16 @@ public class SurveyFragment extends Fragment {
                     navigate(new CommentFragment());
                     break;
                 case QuestionType.SHORT_TEXT:
-                    break;
-                case QuestionType.TYPE_AHEAD:
+                    navigate(new ShortTextFragment());
                     break;
                 case QuestionType.NUMBER:
+                    navigate(new NumberFragment());
                     break;
                 case QuestionType.EMAIL:
+                    navigate(new EmailFragment());
                     break;
                 case QuestionType.SMILEY_COMMENT:
+                    navigate(new SmileyCommentFragment());
                     break;
             }
         });

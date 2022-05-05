@@ -1,32 +1,30 @@
 package com.example.ttapp.survey.fragments;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
-import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for a fragment that presents a multiplechoice-question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
 public class MultipleChoiceFragment extends QuestionFragment {
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
-    private ListAdapter adapter;
     private ListView listView;
 
     @Override
@@ -52,7 +50,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
     @Override
     protected void initResponseOptions() {
         List<MultipleChoiceOption> options = surveyViewModel.getResponseOptions();
-        adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
+        ListAdapter adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
         listView.setAdapter(adapter);
         initClickOnListItem();
     }

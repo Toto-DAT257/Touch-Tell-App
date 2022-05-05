@@ -31,9 +31,8 @@ public class SelectManyFragment extends QuestionFragment {
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
-    private ListAdapter adapter;
     private ListView listView;
-    private Set<Integer> pressedOptions = new HashSet<>();
+    private final Set<Integer> pressedOptions = new HashSet<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -44,7 +43,7 @@ public class SelectManyFragment extends QuestionFragment {
     @Override
     protected void initResponseOptions() {
         List<MultipleChoiceOption> options = surveyViewModel.getResponseOptions();
-        adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
+        ListAdapter adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
         listView.setAdapter(adapter);
         initClickOnListItem();
     }
