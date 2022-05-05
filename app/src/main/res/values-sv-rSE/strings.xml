@@ -14,7 +14,7 @@
 
     <!-- Registration -->
     <string name="enter_e_mail_here">Ange e-mail…</string>
-    <string name="enter_id">Ange din mail</string>
+    <string name="enter_id">Registrering</string>
     <string name="email_header">E-mail:</string>
     <string name="error_id_is_empty">Inte giltig: Du behöver skriva in din mail</string>
     <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
@@ -31,7 +31,9 @@
     <string name="first_q_responseoption2">Nej</string>
 
     <!-- done with survey response -->
-    <string name="done_with_survey_response_text">Tack för ditt deltagande!</string>
+    <string name="done_with_survey_header">Bra jobbat!</string>
+    <string name="done_with_survey_body">Genom att göra dessa enkäter kan du och dina kollegor påverka din arbetsmiljö till det bättre.</string>
+    <string name="done_with_survey_button">Klar</string>
 
     <!-- yes no question -->
     <string name="yesno_responseoption1">Ja</string>
@@ -54,5 +56,7 @@
     <string name="backbutton">bakåt</string>
     <string name="nextbutton">nästa</string>
     <string name="submitbutton">lämna in</string>
+    <string name="statistics">Statistik</string>
+    <string name="start_survey">Starta enkät</string>
 
 </resources>
