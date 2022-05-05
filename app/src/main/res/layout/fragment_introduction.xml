@@ -12,6 +12,7 @@
         style="@style/Header_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layoutMargin"
         android:text="@string/introduction_header"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

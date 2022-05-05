@@ -2,4 +2,5 @@
 <resources>
     <dimen name="buttonBottomMargin">60dp</dimen>
     <dimen name="buttonSideMargins">120dp</dimen>
+    <dimen name="layoutMargin">30dp</dimen>
 </resources>
