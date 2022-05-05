@@ -95,6 +95,7 @@ public class SurveyFragment extends Fragment {
                     navigate(new MultipleChoiceFragment());
                     break;
                 case QuestionType.SELECT_MANY:
+                    navigate(new SelectManyFragment());
                     break;
                 case QuestionType.COMMENT:
                     navigate(new CommentFragment());
