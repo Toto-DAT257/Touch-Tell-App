@@ -98,21 +98,25 @@ public class SurveyFragment extends Fragment {
                     navigate(new NpsFragment());
                     break;
                 case QuestionType.MULTIPLE_CHOICE:
+                    navigate(new MultipleChoiceFragment());
                     break;
                 case QuestionType.SELECT_MANY:
+                    navigate(new SelectManyFragment());
                     break;
                 case QuestionType.COMMENT:
                     navigate(new CommentFragment());
                     break;
                 case QuestionType.SHORT_TEXT:
-                    break;
-                case QuestionType.TYPE_AHEAD:
+                    navigate(new ShortTextFragment());
                     break;
                 case QuestionType.NUMBER:
+                    navigate(new NumberFragment());
                     break;
                 case QuestionType.EMAIL:
+                    navigate(new EmailFragment());
                     break;
                 case QuestionType.SMILEY_COMMENT:
+                    navigate(new SmileyCommentFragment());
                     break;
             }
         });

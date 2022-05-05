@@ -1,7 +1,6 @@
 package com.example.ttapp.survey.fragments;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -24,7 +23,6 @@ import java.util.ArrayList;
  */
 public class NpsFragment extends QuestionFragment {
 
-    private Slider slider;
     private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
@@ -34,7 +32,7 @@ public class NpsFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        slider = view.findViewById(R.id.slider);
+        Slider slider = view.findViewById(R.id.slider);
         if (response.isEmpty()) {
             response.add((int) slider.getValue());
         } else {

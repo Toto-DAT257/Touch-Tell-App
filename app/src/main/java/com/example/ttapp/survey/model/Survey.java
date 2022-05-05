@@ -254,6 +254,15 @@ public class Survey {
     }
 
     /**
+     * Gets the response option of the current question. Used for multiple choice questions.
+     * @return a list containing the options
+     */
+    public List<MultipleChoiceOption> getResponseOptions(){
+        return jsonQuestionsParser.getResponseOptions(currentQuestionId);
+    }
+
+
+    /**
      * Calculates the survey progress percentage.
      * Adapts the number if conditional questions are skipped to even out the progress jumps between questions.
      * @return the progress percentage 0-100.
