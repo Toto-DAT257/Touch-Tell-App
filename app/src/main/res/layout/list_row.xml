@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="10dp"
         android:background="@drawable/background_multibutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,9 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:text="här är ett svarsalternativ"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/check_multibutton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
