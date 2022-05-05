@@ -12,13 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.ttapp.survey.model.MultipleChoiceOption;
+
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter<String> {
+public class ListAdapter extends ArrayAdapter<MultipleChoiceOption> {
 
     Context context;
 
-    public ListAdapter(@NonNull Context context, @NonNull List<String> list) {
+    public ListAdapter(@NonNull Context context, @NonNull List<MultipleChoiceOption> list) {
         super(context, R.layout.list_row, list);
         this.context = context;
     }
@@ -36,16 +38,10 @@ public class ListAdapter extends ArrayAdapter<String> {
                     parent, false);
         }
 
-        String text = getItem(position);
+        MultipleChoiceOption option = getItem(position);
+        String text = option.getText();
         TextView textView = convertView.findViewById(R.id.textview_multibutton);
         textView.setText(text);
-        // getItem
-        // position i n list
-
-        //TextView name = convertView.findViewById(R.id.category_name);
-        //View circle = convertView.findViewById(R.id.category_circle);
-
-        //name.setText(cat.getName());
 
         return convertView;
     }

@@ -247,4 +247,8 @@ public class Survey {
         ttRequester.submitResponse(toSend);
     }
 
+    public List<MultipleChoiceOption> getResponseOptions(){
+        return jsonQuestionsParser.getResponseOptions(currentQuestionId);
+    }
+
 }

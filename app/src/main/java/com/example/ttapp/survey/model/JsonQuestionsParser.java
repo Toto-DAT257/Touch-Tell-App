@@ -10,7 +10,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class for the JSON-string of questions received from Touch&Tell.
@@ -155,9 +157,30 @@ public class JsonQuestionsParser {
         return survey.questions.get(getQuestionNumber(id)).questionType;
     }
 
-    public List<ResponseValues> getResponseValues(String id){
+    /**
+     * Gets the response options of a question
+     * @param id id of the questions
+     * @return a list of the options ian a object containing the text and option value
+     */
+    public List<MultipleChoiceOption> getResponseOptions(String id){
+        boolean translationExist = false;
         Question q = getQuestion(id);
-        return q.responseValues;
+        List<MultipleChoiceOption> options = new ArrayList<>();
+        for (ResponseValues r : q.responseValues){
+            for (Languages l : r.answerText){
+                if (l.language.equals(SWEDISH)){
+                    options.add(new MultipleChoiceOption(l.text, r.value));
+                    translationExist = true;
+                    break;
+                }
+            }
+            if (!translationExist){
+                throw new IndexOutOfBoundsException("swedish translation does not exist");
+            }
+            translationExist = false;
+
+        }
+        return options;
     }
 
     /**
