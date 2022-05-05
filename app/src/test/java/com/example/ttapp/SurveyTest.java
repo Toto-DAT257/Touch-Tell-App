@@ -79,37 +79,21 @@ public class SurveyTest {
     public void checkThatCorrectAnswersAreSent() {
         ArrayList<Integer> answerOption = new ArrayList<>();
         // Question 1
-        answerOption.add(1);
-        survey.saveResponse(new ArrayList<>(answerOption), "");
-        survey.nextQuestion();
-        answerOption.clear();
+        addAnswerOptionAndSaveAndMoveOn(1, "");
         // Question 2
-        survey.saveResponse(new ArrayList<>(answerOption),"Hej! ;)");
-        survey.nextQuestion();
+        addAnswerOptionAndSaveAndMoveOn(-1, "Hej! ;)");
         // Question 3
-        answerOption.add(2);
-        survey.saveResponse(new ArrayList<>(answerOption), "");
-        survey.nextQuestion();
-        answerOption.clear();
+        addAnswerOptionAndSaveAndMoveOn(2,"");
         // Question 4 (Conditional)
-        answerOption.add(3);
-        survey.saveResponse(new ArrayList<>(answerOption),"");
-        survey.nextQuestion();
-        answerOption.clear();
+        addAnswerOptionAndSaveAndMoveOn(3,"");
         // Question 5
         String questionIdToBeExcluded = survey.getCurrentQuestionId();
-        answerOption.add(2);
-        survey.saveResponse(new ArrayList<>(answerOption),"");
-        survey.nextQuestion();
-        answerOption.clear();
+        addAnswerOptionAndSaveAndMoveOn(2,"");
         // Move back 2 steps and avoid the conditional
         survey.previousQuestion();
         survey.previousQuestion();
         // Question 4 (Conditional)
-        answerOption.add(1);
-        survey.saveResponse(new ArrayList<>(answerOption),"");
-        survey.nextQuestion();
-        answerOption.clear();
+        addAnswerOptionAndSaveAndMoveOn(1,"");
         // Skip to Question 6 directly
         answerOption.add(3);
         survey.saveResponse(new ArrayList<>(answerOption),"");
@@ -119,6 +103,13 @@ public class SurveyTest {
             assertThat(qr.getQuestionId()).isNotEqualTo(questionIdToBeExcluded);
         }
         assertThat(questionResponses.size()).isEqualTo(5);
+    }
+
+    private void addAnswerOptionAndSaveAndMoveOn(int answerOption, String comment) {
+        List<Integer> answerOptions = new ArrayList<>();
+        if (answerOption != -1) answerOptions.add(answerOption);
+        survey.saveResponse(new ArrayList<>(answerOptions), comment);
+        survey.nextQuestion();
     }
 
     private class TestSurveyClass extends Survey{
