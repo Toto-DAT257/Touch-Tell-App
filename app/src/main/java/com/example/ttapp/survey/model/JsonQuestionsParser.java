@@ -160,7 +160,8 @@ public class JsonQuestionsParser {
     /**
      * Gets the response options of a question
      * @param id id of the questions
-     * @return a list of the options ian a object containing the text and option value
+     * @return a list of the options ian a object containing the text and option value.
+     * Trows exception if the question is missing a swedish translation (default language)
      */
     public List<MultipleChoiceOption> getResponseOptions(String id){
         boolean translationExist = false;

@@ -1,5 +1,8 @@
 package com.example.ttapp.survey.model;
 
+/**
+ * Class used for holding a option to a multiple choice question
+ */
 public class MultipleChoiceOption {
 
     private String text;

@@ -247,6 +247,10 @@ public class Survey {
         ttRequester.submitResponse(toSend);
     }
 
+    /**
+     * Gets the response option of the current question. Used for multiple choice questions.
+     * @return a list containing the options
+     */
     public List<MultipleChoiceOption> getResponseOptions(){
         return jsonQuestionsParser.getResponseOptions(currentQuestionId);
     }

@@ -32,11 +32,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
-
-
         listView = view.findViewById(R.id.multiList);
-
-
     }
 
     private void initClickOnListItem() {
@@ -45,25 +41,10 @@ public class MultipleChoiceFragment extends QuestionFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ConstraintLayout multiConstraintLayout = view.findViewById(R.id.multiConstraintLayout);
                 multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
-
                 MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
                 response.add(option.getValue());
                 surveyViewModel.saveResponse(response);
                 surveyViewModel.nextQuestion();
-
-                /*
-                ImageView multiCheck = view.findViewById(R.id.check_multibutton);
-
-
-                if (multiCheck.getVisibility() == View.INVISIBLE) {
-                    multiCheck.setVisibility(View.VISIBLE);
-                    multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
-                } else {
-                    multiCheck.setVisibility(View.INVISIBLE);
-                    multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton);
-                }
-
-                 */
             }
         });
     }
@@ -71,12 +52,9 @@ public class MultipleChoiceFragment extends QuestionFragment {
     @Override
     protected void initResponseOptions() {
         List<MultipleChoiceOption> options = surveyViewModel.getResponseOptions();
-
         adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
         listView.setAdapter(adapter);
-
         initClickOnListItem();
-
     }
 
     @Override

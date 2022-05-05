@@ -57,7 +57,6 @@ public class SelectManyFragment extends QuestionFragment {
                 ConstraintLayout multiConstraintLayout = view.findViewById(R.id.multiConstraintLayout);
                 ImageView multiCheck = view.findViewById(R.id.check_multibutton);
 
-
                 if (multiCheck.getVisibility() == View.INVISIBLE) {
                     multiCheck.setVisibility(View.VISIBLE);
                     multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
@@ -67,8 +66,6 @@ public class SelectManyFragment extends QuestionFragment {
                     multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton);
                     pressedOptions.remove(option.getValue());
                 }
-
-
             }
         });
     }
