@@ -144,7 +144,7 @@ public class SurveyFragment extends Fragment {
     }
 
     private void navigate(Fragment fragment) {
-        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
     }
 
 }
