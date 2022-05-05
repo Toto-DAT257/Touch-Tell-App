@@ -120,35 +120,39 @@ public class SurveyFragment extends Fragment {
         questionTextView.setVisibility(View.INVISIBLE);
         questionTextView.setText(text);
 
-        int lines = questionTextView.getLineCount();
-        if (lines > 4){
-            questionTextView.setTextSize(20);
-            collapseQuestionText(5);
-            questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    if (questionTextView.getLineCount() > 5) {
-                        expandCollapseButton.setVisibility(View.VISIBLE);
 
-                    } else {
-                        expandCollapseButton.setVisibility(View.INVISIBLE);
-                    }
+        questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (questionTextView.getLineCount() > 4) {
+                    questionTextView.setTextSize(20);
+                    collapseQuestionText(5);
+                    questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            if (questionTextView.getLineCount() > 5) {
+                                expandCollapseButton.setVisibility(View.VISIBLE);
 
-                    questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                            } else {
+                                expandCollapseButton.setVisibility(View.INVISIBLE);
+                            }
+                            questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    });
+
+                } else {
+                    questionTextView.setTextSize(24);
+                    expandCollapseButton.setVisibility(View.INVISIBLE);
+                    collapseQuestionText(4);
                 }
-            });
-
-        } else {
-            questionTextView.setTextSize(24);
-            expandCollapseButton.setVisibility(View.INVISIBLE);
-            collapseQuestionText(4);
-        }
-        questionTextView.setVisibility(View.VISIBLE);
+                questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                questionTextView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void thingsToDoAfterJsonIsSet() {
         surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), text -> {
-
             configureQuestionText(text);
         });
 
