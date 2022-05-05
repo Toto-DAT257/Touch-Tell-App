@@ -61,7 +61,7 @@ public class SurveyFragment extends Fragment {
         progressBar = binding.progressBar;
 
 
-        surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
+        surveyViewModel = new ViewModelProvider(this).get(SurveyViewModel.class);
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         String identifier = sharedPref.getString("identifier", "");
 
