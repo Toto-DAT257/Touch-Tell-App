@@ -174,11 +174,15 @@ public class Survey {
         }
     }
 
+    protected Map<String, QuestionResponse> getResponses() {
+        return responses;
+    }
+
     private QuestionResponse createResponseObject(ArrayList<Integer> answerOption, String comment) {
         return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
-    private List<QuestionResponse> getResponsesToSend() {
+    protected List<QuestionResponse> getResponsesToSend() {
         List<QuestionResponse> toSend = new ArrayList<>();
         for (QuestionResponse r : responses.values()) {
             if (allConditionsAreMet(r.getQuestionId())) {
@@ -188,7 +192,7 @@ public class Survey {
         return toSend;
     }
 
-    private String buildJsonResponse(List<QuestionResponse> responsesToSend) {
+    protected String buildJsonResponse(List<QuestionResponse> responsesToSend) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response = mapper.createObjectNode();
         response.put("deviceId", deviceId);
@@ -250,14 +254,22 @@ public class Survey {
     }
 
     /**
+     * Gets the response option of the current question. Used for multiple choice questions.
+     * @return a list containing the options
+     */
+    public List<MultipleChoiceOption> getResponseOptions(){
+        return jsonQuestionsParser.getResponseOptions(currentQuestionId);
+    }
+
+
+    /**
      * Calculates the survey progress percentage.
      * Adapts the number if conditional questions are skipped to even out the progress jumps between questions.
      * @return the progress percentage 0-100.
      */
     public int getProgressPercentage(){
-        int numberOfShownQuestions = numberOfQuestionsShown;
         int questionNumber = jsonQuestionsParser.getQuestionNumber(currentQuestionId);
-        int skipped = questionNumber - numberOfShownQuestions;
+        int skipped = questionNumber - numberOfQuestionsShown;
         int total = jsonQuestionsParser.getNumberOfQuestionsInSurvey();
         int adaptedTotal = total - skipped;
         int adaptedQuestionNumber = questionNumber + skipped;

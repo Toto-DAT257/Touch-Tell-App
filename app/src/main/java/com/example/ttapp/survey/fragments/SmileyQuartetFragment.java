@@ -2,7 +2,6 @@ package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.ttapp.R;
@@ -41,7 +40,6 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqResponseoption4 = view.findViewById(R.id.smileyqResponseoption4);
 
         initOnClickListeners();
-        initSaveResponseObserver();
     }
 
     @Override

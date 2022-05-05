@@ -36,12 +36,12 @@ public class IntroductionFragment extends Fragment {
         SharedPreferences settings = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         if (settings.getBoolean("my_first_time", true)) {
-            TextView introductionHeader = view.findViewById(R.id.introductonHeader);
+            TextView introductionHeader = view.findViewById(R.id.introductionHeader);
             TextView introductionText = view.findViewById(R.id.introductionText);
             Button introductionButton = view.findViewById(R.id.introductionButton);
             introductionHeader.setText(getString(R.string.introduction_header));
             introductionText.setText(getString(R.string.introduction_text));
-            introductionButton.setText(R.string.introduction_buttom);
+            introductionButton.setText(R.string.introduction_button);
 
             introductionButton.setOnClickListener(view1 -> {
 

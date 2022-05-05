@@ -3,6 +3,7 @@ package com.example.ttapp.survey.model;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.Languages;
 import com.example.ttapp.survey.model.jsonparsing.Question;
+import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.model.jsonparsing.Survey;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -152,6 +153,33 @@ public class JsonQuestionsParser {
      */
     public String getType(String id) {
         return survey.questions.get(getQuestionNumber(id)).questionType;
+    }
+
+    /**
+     * Gets the response options of a question
+     * @param id id of the questions
+     * @return a list of the options ian a object containing the text and option value.
+     * Trows exception if the question is missing a swedish translation (default language)
+     */
+    public List<MultipleChoiceOption> getResponseOptions(String id){
+        boolean translationExist = false;
+        Question q = getQuestion(id);
+        List<MultipleChoiceOption> options = new ArrayList<>();
+        for (ResponseValues r : q.responseValues){
+            for (Languages l : r.answerText){
+                if (l.language.equals(SWEDISH)){
+                    options.add(new MultipleChoiceOption(l.text, r.value));
+                    translationExist = true;
+                    break;
+                }
+            }
+            if (!translationExist){
+                throw new IndexOutOfBoundsException("swedish translation does not exist");
+            }
+            translationExist = false;
+
+        }
+        return options;
     }
 
     /**

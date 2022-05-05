@@ -13,7 +13,9 @@ import com.example.ttapp.APIRequester.Response;
 import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
+import com.example.ttapp.survey.model.MultipleChoiceOption;
 import com.example.ttapp.survey.model.Survey;
+import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.util.SurveyEvent;
 
 import org.bson.Document;
@@ -22,6 +24,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.mongodb.RealmResultTask;
 
@@ -170,6 +173,10 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     public void submitResponse(){
         survey.submitResponse();
+    }
+
+    public List<MultipleChoiceOption> getResponseOptions(){
+        return survey.getResponseOptions();
     }
 
     public int getProgressPercentage(){
