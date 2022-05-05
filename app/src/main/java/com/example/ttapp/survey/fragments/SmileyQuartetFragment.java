@@ -3,25 +3,28 @@ package com.example.ttapp.survey.fragments;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
 
 /**
  * Class for a fragment that presents a smiley-quartet question
- *
+ * <p>
  * Used by: -
  * Uses: -
- *
+ * <p>
  * Created by
+ *
  * @author Emma Stålberg
  */
 public class SmileyQuartetFragment extends QuestionFragment {
 
-    private Button smileyqResponseoption1;
-    private Button smileyqResponseoption2;
-    private Button smileyqResponseoption3;
-    private Button smileyqResponseoption4;
+    private ImageView smileyqResponseoption1;
+    private ImageView smileyqResponseoption2;
+    private ImageView smileyqResponseoption3;
+    private ImageView smileyqResponseoption4;
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -41,7 +44,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
     }
 
     @Override
-    protected void initSaveResponseObserver(){
+    protected void initSaveResponseObserver() {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
             surveyViewModel.saveResponse(response);
         });

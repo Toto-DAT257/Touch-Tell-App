@@ -118,7 +118,7 @@ public class JsonQuestionsParser {
         throw new IllegalArgumentException("currentId does not exist in the survey");
     }
 
-    private int getQuestionNumber(String id) {
+    public int getQuestionNumber(String id) {
         int number = 0;
         for (int i = 0; i < questionOrder.size(); i++) {
             if (questionOrder.get(i).equals(id)) {
@@ -204,6 +204,10 @@ public class JsonQuestionsParser {
             throw new IllegalArgumentException("This question has no conditions");
         }
         return getQuestion(id).conditions;
+    }
+
+    public int getNumberOfQuestionsInSurvey(){
+        return questionOrder.size();
     }
 
 }

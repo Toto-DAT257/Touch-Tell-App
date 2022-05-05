@@ -3,24 +3,26 @@ package com.example.ttapp.survey.fragments;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
 
 /**
- * Class for a fragment that presents a yes no question
- *
+ * Class for a fragment that presents a yesno-question
+ * <p>
  * Used by: -
  * Uses: -
- *
+ * <p>
  * Created by
+ *
  * @author Emma Stålberg
  */
 public class YesNoFragment extends QuestionFragment {
 
-    private Button yesnoResponseoption1;
-    private Button yesnoResponseoption2;
+    private ImageView yesnoResponseoption1;
+    private ImageView yesnoResponseoption2;
 
     private final ArrayList<Integer> response = new ArrayList<>();
 

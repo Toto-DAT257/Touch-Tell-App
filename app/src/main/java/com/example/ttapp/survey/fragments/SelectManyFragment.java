@@ -18,6 +18,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Class for a fragment that presents a selectmany-question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
 public class SelectManyFragment extends QuestionFragment {
 
     private final ArrayList<Integer> response = new ArrayList<>();

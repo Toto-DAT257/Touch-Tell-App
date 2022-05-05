@@ -6,6 +6,15 @@ import android.widget.EditText;
 
 import com.example.ttapp.R;
 
+/**
+ * Class for a fragment that presents a shorttext-question
+ *
+ * Used by: -
+ * Uses: -
+ *
+ * Created by
+ * @author Emma Stålberg
+ */
 public class ShortTextFragment extends QuestionFragment {
 
     private EditText shortTextResponse;

@@ -35,6 +35,7 @@ public class Survey {
     private final PropertyChangeSupport support;
     private final String deviceId;
     private final String identifier;
+    private int numberOfQuestionsShown = 0;
 
     public Survey(String json, String deviceId, String identifier) {
         responses = new HashMap<>();
@@ -98,6 +99,7 @@ public class Survey {
     }
 
     private String calcNextQuestion(String questionId) {
+        numberOfQuestionsShown++;
         String nextQuestionId = jsonQuestionsParser.getNextQuestionId(questionId);
         if (allConditionsAreMet(nextQuestionId)) {
             return nextQuestionId;
@@ -106,6 +108,7 @@ public class Survey {
     }
 
     private String calcPreviousQuestion(String questionId) {
+        numberOfQuestionsShown--;
         String previousQuestionId = jsonQuestionsParser.getPreviousQuestionId(questionId);
         if (allConditionsAreMet(previousQuestionId)) {
             return previousQuestionId;
@@ -255,4 +258,20 @@ public class Survey {
         return jsonQuestionsParser.getResponseOptions(currentQuestionId);
     }
 
+
+    /**
+     * Calculates the survey progress percentage.
+     * Adapts the number if conditional questions are skipped to even out the progress jumps between questions.
+     * @return the progress percentage 0-100.
+     */
+    public int getProgressPercentage(){
+        int numberOfShownQuestions = numberOfQuestionsShown;
+        int questionNumber = jsonQuestionsParser.getQuestionNumber(currentQuestionId);
+        int skipped = questionNumber - numberOfShownQuestions;
+        int total = jsonQuestionsParser.getNumberOfQuestionsInSurvey();
+        int adaptedTotal = total - skipped;
+        int adaptedQuestionNumber = questionNumber + skipped;
+        int progress = 100 / adaptedTotal * adaptedQuestionNumber;
+        return progress;
+    }
 }
