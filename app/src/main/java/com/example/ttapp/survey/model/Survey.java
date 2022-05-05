@@ -174,11 +174,15 @@ public class Survey {
         }
     }
 
+    protected Map<String, QuestionResponse> getResponses() {
+        return responses;
+    }
+
     private QuestionResponse createResponseObject(ArrayList<Integer> answerOption, String comment) {
         return new QuestionResponse(answerOption, comment, getCurrentQuestionType(), currentQuestionId);
     }
 
-    private List<QuestionResponse> getResponsesToSend() {
+    protected List<QuestionResponse> getResponsesToSend() {
         List<QuestionResponse> toSend = new ArrayList<>();
         for (QuestionResponse r : responses.values()) {
             if (allConditionsAreMet(r.getQuestionId())) {
@@ -188,7 +192,7 @@ public class Survey {
         return toSend;
     }
 
-    private String buildJsonResponse(List<QuestionResponse> responsesToSend) {
+    protected String buildJsonResponse(List<QuestionResponse> responsesToSend) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response = mapper.createObjectNode();
         response.put("deviceId", deviceId);
