@@ -39,7 +39,7 @@ public abstract class QuestionFragment extends Fragment {
     protected abstract void setView(LayoutInflater inflater, ViewGroup container);
 
     private void setSurveyViewModel() {
-        surveyViewModel = new ViewModelProvider(getParentFragment()).get(SurveyViewModel.class);
+        surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
     }
 
     protected abstract void initResponseOptions();

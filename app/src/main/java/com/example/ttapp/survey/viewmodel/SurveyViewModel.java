@@ -50,6 +50,12 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         isLastQuestion = new MutableLiveData<>();
     }
 
+    public void resetSurvey() {
+        jsonIsReceived.setValue(false);
+        surveyIsDone.setValue(false);
+        isLastQuestion.setValue(false);
+    }
+
     /**
      * Loads the questions from the Touch&Tell API for the logged in user.
      *
