@@ -251,6 +251,7 @@ public class Survey {
         }
         TTRequester ttRequester = TTRequester.getInstance();
         ttRequester.submitResponse(toSend);
+        responses.clear();
     }
 
     /**
