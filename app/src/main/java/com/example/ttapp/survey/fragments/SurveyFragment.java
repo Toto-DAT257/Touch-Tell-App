@@ -59,17 +59,31 @@ public class SurveyFragment extends Fragment {
         questionTextView = binding.questionTextView;
         homeButton = binding.home;
         progressBar = binding.progressBar;
-
+        hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         String identifier = sharedPref.getString("identifier", "");
 
         surveyViewModel.loadQuestions(identifier);
-        surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), bool -> thingsToDoAfterJsonIsSet());
+        surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), aBoolean -> {
+            if (aBoolean) {
+                thingsToDoAfterJsonIsSet();
+            }
+        });
 
         setHomeOnClickListener();
         return root;
+    }
+
+    private void hideQuestion() {
+        questionFragmentContainer.setVisibility(View.INVISIBLE);
+        questionTextView.setVisibility(View.INVISIBLE);
+    }
+
+    private void showQuestion() {
+        questionFragmentContainer.setVisibility(View.VISIBLE);
+        questionTextView.setVisibility(View.VISIBLE);
     }
 
     private void setHomeOnClickListener() {
@@ -86,6 +100,7 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             progressBar.setProgress(surveyViewModel.getProgressPercentage());
+            showQuestion();
 
             switch (questionType) {
                 case QuestionType.SMILEY_QUARTET:
@@ -123,6 +138,8 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.surveyIsDone().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
+                surveyViewModel.resetSurvey();
+                hideQuestion();
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_doneWithSurveyFragment);
                 surveyViewModel.submitResponse();
             }
