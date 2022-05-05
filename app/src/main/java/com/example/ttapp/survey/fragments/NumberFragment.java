@@ -7,7 +7,7 @@ import android.widget.EditText;
 import com.example.ttapp.R;
 
 /**
- * Class for a fragment that presents a comment-question
+ * Class for a fragment that presents a number-question
  *
  * Used by: -
  * Uses: -
@@ -15,25 +15,25 @@ import com.example.ttapp.R;
  * Created by
  * @author Emma Stålberg
  */
-public class CommentFragment extends QuestionFragment {
+public class NumberFragment extends QuestionFragment {
 
-    private EditText commentResponse;
     private String response;
+    private EditText numberResponse;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
-        view = inflater.inflate(R.layout.fragment_comment, container, false);
+        view = inflater.inflate(R.layout.fragment_number, container, false);
     }
 
     @Override
     protected void initResponseOptions() {
-        commentResponse = view.findViewById(R.id.commentResponse);
+        numberResponse = view.findViewById(R.id.numberResponse);
     }
 
     @Override
-    protected void initSaveResponseObserver(){
+    protected void initSaveResponseObserver() {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            response = commentResponse.getText().toString();
+            response = numberResponse.getText().toString();
             surveyViewModel.saveResponse(response);
         });
     }

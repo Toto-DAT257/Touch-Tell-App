@@ -2,12 +2,13 @@ package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.ttapp.R;
 
+import java.util.ArrayList;
+
 /**
- * Class for a fragment that presents a comment-question
+ * Class for a fragment that presents a selectmany-question
  *
  * Used by: -
  * Uses: -
@@ -15,25 +16,23 @@ import com.example.ttapp.R;
  * Created by
  * @author Emma Stålberg
  */
-public class CommentFragment extends QuestionFragment {
+public class SelectManyFragment extends QuestionFragment {
 
-    private EditText commentResponse;
-    private String response;
+    private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
-        view = inflater.inflate(R.layout.fragment_comment, container, false);
+        view = inflater.inflate(R.layout.fragment_select_many, container, false);
     }
 
     @Override
     protected void initResponseOptions() {
-        commentResponse = view.findViewById(R.id.commentResponse);
+        // TODO implement logic when design is done
     }
 
     @Override
-    protected void initSaveResponseObserver(){
+    protected void initSaveResponseObserver() {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            response = commentResponse.getText().toString();
             surveyViewModel.saveResponse(response);
         });
     }

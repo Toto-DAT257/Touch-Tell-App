@@ -6,11 +6,8 @@
 
     <!-- introduction page -->
     <string name="introduction_header">Välkommen till applikationen Touch&amp;Tell </string>
-    <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell.
-                    Genom att svara på frågor om ditt arbete kommer du ha chansen att påverka din
-                    arbetsmiljö och din arbetsbelastning.
-                    Alla dina svar kommer vara anonyma.</string>
-    <string name="introduction_buttom">Ta mig vidare</string>
+    <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell. Genom att svara på frågor om ditt arbete kommer du ha chansen att påverka din arbetsmiljö och din arbetsbelastning. Alla dina svar kommer vara anonyma.</string>
+    <string name="introduction_button">Ta mig vidare</string>
 
     <!-- Registration -->
     <string name="enter_e_mail_here">Ange e-mail…</string>
@@ -51,6 +48,15 @@
     <!-- NPS question -->
     <string name="nps_slider_label_right">Extremt</string>
     <string name="nps_slider_label_left">Inte alls</string>
+
+    <!-- short text question -->
+    <string name="short_text_hinttext">Skriv ditt svar här</string>
+
+    <!-- number question -->
+    <string name="number_hinttext">Skriv ditt nummer här</string>
+
+    <!-- email question -->
+    <string name="email_hinttext">Skriv din mail här</string>
 
     <!-- survey -->
     <string name="backbutton">bakåt</string>
