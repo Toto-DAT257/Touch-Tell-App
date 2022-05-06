@@ -64,5 +64,6 @@
     <string name="submitbutton">lämna in</string>
     <string name="statistics">Statistik</string>
     <string name="start_survey">Starta enkät</string>
+    <string name="home">Hem</string>
 
 </resources>
