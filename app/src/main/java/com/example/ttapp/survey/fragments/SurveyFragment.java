@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,7 +106,7 @@ public class SurveyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isExpanded){
-                    collapseQuestionText(5);
+                    collapseQuestionText();
                 } else {
                     expandQuestionText();
                 }
@@ -114,8 +115,8 @@ public class SurveyFragment extends Fragment {
         });
     }
 
-    private void collapseQuestionText(int lines) {
-        questionTextView.setMaxLines(lines);
+    private void collapseQuestionText() {
+        questionTextView.setMaxLines(5);
         isExpanded = false;
         expandCollapseButton.setImageResource(R.drawable.ic_round_expand_more_24);
         questionFragmentContainer.setVisibility(View.VISIBLE);
@@ -130,38 +131,37 @@ public class SurveyFragment extends Fragment {
     }
 
     private void configureQuestionText(String text){
-        questionTextView.setVisibility(View.INVISIBLE);
+        resetQuestionTextFormat();
         questionTextView.setText(text);
-
 
         questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if (questionTextView.getLineCount() > 4) {
+                    questionTextView.setMaxLines(5);
                     questionTextView.setTextSize(20);
-                    collapseQuestionText(5);
                     questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
                             if (questionTextView.getLineCount() > 5) {
+                                collapseQuestionText();
                                 expandCollapseButton.setVisibility(View.VISIBLE);
-
-                            } else {
-                                expandCollapseButton.setVisibility(View.INVISIBLE);
+                                questionTextView.setEllipsize(TextUtils.TruncateAt.END);
                             }
                             questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                         }
                     });
-
-                } else {
-                    questionTextView.setTextSize(24);
-                    expandCollapseButton.setVisibility(View.INVISIBLE);
-                    collapseQuestionText(4);
                 }
                 questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                questionTextView.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void resetQuestionTextFormat() {
+        questionTextView.setEllipsize(null);
+        questionTextView.setTextSize(24);
+        questionTextView.setMaxLines(4);
+        expandCollapseButton.setVisibility(View.INVISIBLE);
     }
 
     private void thingsToDoAfterJsonIsSet() {
