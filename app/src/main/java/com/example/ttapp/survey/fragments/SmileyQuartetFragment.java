@@ -4,9 +4,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.lifecycle.Observer;
+
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for a fragment that presents a smiley-quartet question
@@ -47,6 +50,53 @@ public class SmileyQuartetFragment extends QuestionFragment {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
             surveyViewModel.saveResponse(response);
         });
+    }
+
+    @Override
+    protected void initResponseObserver() {
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
+            @Override
+            public void onChanged(List<Integer> integers) {
+                switch (integers.get(0)) {
+                    case 1:
+                        setSmiley1Chosen();
+                        break;
+                    case 2:
+                        setSmiley2Chosen();
+                        break;
+                    case 3:
+                        setSmiley3Chosen();
+                        break;
+                    case 4:
+                        setSmiley4Chosen();
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setSmiley1Chosen() {
+        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
+        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
+        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley2Chosen() {
+        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
+        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
+        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley3Chosen() {
+        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
+        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
+        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley4Chosen() {
+        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
+        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
+        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
     }
 
     private void initOnClickListeners() {
