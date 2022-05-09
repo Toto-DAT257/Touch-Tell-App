@@ -157,10 +157,6 @@ public class Survey {
         responses.put(questionId, response);
     }
 
-    public QuestionResponse getResponse(String questionId) {
-        return responses.get(questionId);
-    }
-
     /**
      * Saves an answer to to the current question.
      *
@@ -277,4 +273,13 @@ public class Survey {
         int progress = 100 / adaptedTotal * adaptedQuestionNumber;
         return progress;
     }
+
+    public String getCurrentQResponseComment() {
+        return responses.get(getCurrentQuestionId()).getComment();
+    }
+
+    public List<Integer> getCurrentQResponseAnsweredOptions() {
+        return responses.get(getCurrentQuestionId()).getAnsweredOptions();
+    }
+
 }
