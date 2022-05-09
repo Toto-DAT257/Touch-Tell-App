@@ -44,8 +44,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<Boolean> surveyIsDone;
     private final MutableLiveData<Boolean> saveResponse;
     private final MutableLiveData<Boolean> isLastQuestion;
-    private final MutableLiveData<String> commentResponse;
-    private final MutableLiveData<List<Integer>> answeroptionsResponse;
+    private MutableLiveData<String> commentResponse;
+    private MutableLiveData<List<Integer>> answeroptionsResponse;
 
     public SurveyViewModel() {
         jsonIsReceived = new MutableLiveData<>();
@@ -173,6 +173,12 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     public void saveResponse(ArrayList<Integer> responseOption, String comment) {
         survey.saveResponse(responseOption, comment);
+        clearResponses();
+    }
+
+    private void clearResponses() {
+        commentResponse = new MutableLiveData<>();
+        answeroptionsResponse = new MutableLiveData<>();
     }
 
     public void submitResponse(){
