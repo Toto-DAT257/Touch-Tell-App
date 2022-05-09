@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
 
         buttonStartSurvey = binding.buttonStartSurvey;
 
-        buttonStartSurvey.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.action_homeFragment_to_surveyFragment));
+        buttonStartSurvey.setOnClickListener(view1 -> Navigation.findNavController(root).navigate(R.id.action_homeFragment_to_surveyFragment));
 
         return root;
     }

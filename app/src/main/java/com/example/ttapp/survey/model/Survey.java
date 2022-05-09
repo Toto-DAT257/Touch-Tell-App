@@ -247,6 +247,7 @@ public class Survey {
         }
         TTRequester ttRequester = TTRequester.getInstance();
         ttRequester.submitResponse(toSend);
+        responses.clear();
     }
 
     /**
@@ -264,9 +265,8 @@ public class Survey {
      * @return the progress percentage 0-100.
      */
     public int getProgressPercentage(){
-        int numberOfShownQuestions = numberOfQuestionsShown;
         int questionNumber = jsonQuestionsParser.getQuestionNumber(currentQuestionId);
-        int skipped = questionNumber - numberOfShownQuestions;
+        int skipped = questionNumber - numberOfQuestionsShown;
         int total = jsonQuestionsParser.getNumberOfQuestionsInSurvey();
         int adaptedTotal = total - skipped;
         int adaptedQuestionNumber = questionNumber + skipped;

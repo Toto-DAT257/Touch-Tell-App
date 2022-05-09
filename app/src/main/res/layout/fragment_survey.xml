@@ -110,7 +110,7 @@
         android:layout_marginTop="2dp"
         android:fontFamily="@font/poppins_semibold"
         android:includeFontPadding="false"
-        android:text="Home"
+        android:text="@string/home"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="22sp"
