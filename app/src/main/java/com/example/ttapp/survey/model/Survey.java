@@ -94,7 +94,7 @@ public class Survey {
         }
         String oldQuestionId = currentQuestionId;
         currentQuestionId = calcNextQuestion(currentQuestionId);
-        support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
+        support.firePropertyChange(SurveyEvent.NEXT_QUESTION, oldQuestionId, currentQuestionId);
     }
 
     private String calcNextQuestion(String questionId) {
@@ -150,7 +150,7 @@ public class Survey {
 
         String oldQuestionId = currentQuestionId;
         currentQuestionId = calcPreviousQuestion(currentQuestionId);
-        support.firePropertyChange(SurveyEvent.NEW_QUESTION, oldQuestionId, currentQuestionId);
+        support.firePropertyChange(SurveyEvent.PREVIOUS_QUESTION, oldQuestionId, currentQuestionId);
     }
 
     public void putResponse(String questionId, QuestionResponse response) {
