@@ -191,21 +191,21 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         String currentQResponseComment = survey.getCurrentQResponseComment();
         List<Integer> currentQResponseAnsweredOptions = survey.getCurrentQResponseAnsweredOptions();
         if (!currentQResponseComment.isEmpty()) {
-            containsCommentresponse(currentQResponseComment);
+            commentResponse.setValue(currentQResponseComment);
+            containsCommentresponse();
         }
 
         if(!currentQResponseAnsweredOptions.isEmpty()) {
-            containsAnsweredOptionsResponse(currentQResponseAnsweredOptions);
+            answeroptionsResponse.setValue(currentQResponseAnsweredOptions);
+            containsAnsweredOptionsResponse();
         }
     }
 
-    public LiveData<String> containsCommentresponse(String comment) {
-        commentResponse.setValue(comment);
+    public LiveData<String> containsCommentresponse() {
         return commentResponse;
     }
 
-    public LiveData<List<Integer>> containsAnsweredOptionsResponse(List<Integer> response) {
-        answeroptionsResponse.setValue(response);
+    public LiveData<List<Integer>> containsAnsweredOptionsResponse() {
         return answeroptionsResponse;
     }
 
