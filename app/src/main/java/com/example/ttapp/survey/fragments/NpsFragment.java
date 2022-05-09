@@ -63,4 +63,9 @@ public class NpsFragment extends QuestionFragment {
         });
     }
 
+    @Override
+    protected void initResponseObserver() {
+        // todo
+    }
+
 }

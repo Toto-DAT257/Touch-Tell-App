@@ -56,6 +56,11 @@ public class SelectManyFragment extends QuestionFragment {
         });
     }
 
+    @Override
+    protected void initResponseObserver() {
+        // todo
+    }
+
     private void initClickOnListItem() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

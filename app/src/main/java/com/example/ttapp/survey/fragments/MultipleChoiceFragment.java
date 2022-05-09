@@ -62,4 +62,9 @@ public class MultipleChoiceFragment extends QuestionFragment {
         });
     }
 
+    @Override
+    protected void initResponseObserver() {
+        // todo
+    }
+
 }

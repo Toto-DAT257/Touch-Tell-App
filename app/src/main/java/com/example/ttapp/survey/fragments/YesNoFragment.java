@@ -45,6 +45,11 @@ public class YesNoFragment extends QuestionFragment {
         });
     }
 
+    @Override
+    protected void initResponseObserver() {
+        // todo
+    }
+
     private void initOnClickListeners() {
         yesnoResponseoption1.setOnClickListener(view -> {
             response.add(1);
