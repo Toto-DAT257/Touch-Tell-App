@@ -61,6 +61,7 @@ public class SurveyFragment extends Fragment {
         questionTextView = binding.questionTextView;
         homeButton = binding.home;
         progressBar = binding.progressBar;
+        hideQuestion();
         expandCollapseButton = binding.expandCollapseButton;
 
 
@@ -69,16 +70,28 @@ public class SurveyFragment extends Fragment {
         String identifier = sharedPref.getString("identifier", "");
 
         surveyViewModel.loadQuestions(identifier);
-        surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), bool -> thingsToDoAfterJsonIsSet());
+        surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), aBoolean -> {
+            if (aBoolean) {
+                thingsToDoAfterJsonIsSet();
+            }
+        });
 
         setHomeOnClickListener();
         setExpandCollapseOnClickListener();
         return root;
     }
 
+    private void hideQuestion() {
+        questionFragmentContainer.setVisibility(View.INVISIBLE);
+        questionTextView.setVisibility(View.INVISIBLE);
+    }
 
+    private void showQuestion() {
+        questionFragmentContainer.setVisibility(View.VISIBLE);
+        questionTextView.setVisibility(View.VISIBLE);
+    }
 
-    private void setHomeOnClickListener(){
+    private void setHomeOnClickListener() {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +171,7 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             progressBar.setProgress(surveyViewModel.getProgressPercentage());
-
+            showQuestion();
 
             switch (questionType) {
                 case QuestionType.SMILEY_QUARTET:
@@ -171,27 +184,33 @@ public class SurveyFragment extends Fragment {
                     navigate(new NpsFragment());
                     break;
                 case QuestionType.MULTIPLE_CHOICE:
+                    navigate(new MultipleChoiceFragment());
                     break;
                 case QuestionType.SELECT_MANY:
+                    navigate(new SelectManyFragment());
                     break;
                 case QuestionType.COMMENT:
                     navigate(new CommentFragment());
                     break;
                 case QuestionType.SHORT_TEXT:
-                    break;
-                case QuestionType.TYPE_AHEAD:
+                    navigate(new ShortTextFragment());
                     break;
                 case QuestionType.NUMBER:
+                    navigate(new NumberFragment());
                     break;
                 case QuestionType.EMAIL:
+                    navigate(new EmailFragment());
                     break;
                 case QuestionType.SMILEY_COMMENT:
+                    navigate(new SmileyCommentFragment());
                     break;
             }
         });
 
         surveyViewModel.surveyIsDone().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
+                surveyViewModel.resetSurvey();
+                hideQuestion();
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_doneWithSurveyFragment);
                 surveyViewModel.submitResponse();
             }
@@ -217,7 +236,7 @@ public class SurveyFragment extends Fragment {
     }
 
     private void navigate(Fragment fragment) {
-        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
     }
 
 }

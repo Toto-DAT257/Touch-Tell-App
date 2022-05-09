@@ -5,11 +5,8 @@
 
     <!-- introduction page -->
     <string name="introduction_header">Welcome to the Touch&amp;Tell App</string>
-    <string name="introduction_text">This is a cooperation between your company and Touch&amp;Tell.
-                    By answering questions regarding your work you will get the chance to have an
-                    impact on your work environment and workload.
-                    All your answers will be anonymous.</string>
-    <string name="introduction_buttom">Move on</string>
+    <string name="introduction_text">This is a cooperation between your company and Touch&amp;Tell. By answering questions regarding your work you will get the chance to have an impact on your work environment and workload. All your answers will be anonymous.</string>
+    <string name="introduction_button">Move on</string>
 
     <!-- Registration -->
     <string name="enter_e_mail_here">Enter e-mail here…</string>
@@ -51,12 +48,21 @@
     <string name="nps_slider_label_right">Extremely</string>
     <string name="nps_slider_label_left">Not at all</string>
 
+    <!-- short text question -->
+    <string name="short_text_hinttext">Write your answer here</string>
+
+    <!-- number question -->
+    <string name="number_hinttext">Write your number here</string>
+
+    <!-- email question -->
+    <string name="email_hinttext">Write your email here</string>
+
     <!-- survey -->
     <string name="backbutton">back</string>
     <string name="nextbutton">next</string>
     <string name="submitbutton">submit</string>
     <string name="statistics">Statistics</string>
     <string name="start_survey">Start Survey</string>
-
+    <string name="home">Home</string>
 
 </resources>

@@ -18,4 +18,5 @@ public class MainActivity extends AppCompatActivity {
         TTRequester.initialize(this.getApplicationContext());
         MongoDB.initialize(this.getApplicationContext());
     }
+
 }
