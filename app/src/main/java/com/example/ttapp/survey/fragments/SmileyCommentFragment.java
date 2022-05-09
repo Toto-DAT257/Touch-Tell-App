@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for a fragment that presents a smileycomment-question
@@ -72,7 +73,49 @@ public class SmileyCommentFragment extends QuestionFragment {
             }
         });
 
-        // todo answeredoptions
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
+            @Override
+            public void onChanged(List<Integer> integers) {
+                switch (integers.get(0)) {
+                    case 1:
+                        setSmiley1Chosen();
+                        break;
+                    case 2:
+                        setSmiley2Chosen();
+                        break;
+                    case 3:
+                        setSmiley3Chosen();
+                        break;
+                    case 4:
+                        setSmiley4Chosen();
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setSmiley1Chosen() {
+        smileyCResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
+        smileyCResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
+        smileyCResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley2Chosen() {
+        smileyCResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
+        smileyCResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
+        smileyCResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley3Chosen() {
+        smileyCResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
+        smileyCResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
+        smileyCResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley4Chosen() {
+        smileyCResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
+        smileyCResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
+        smileyCResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
     }
 
 }

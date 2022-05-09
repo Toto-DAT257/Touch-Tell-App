@@ -258,7 +258,6 @@ public class Survey {
         return jsonQuestionsParser.getResponseOptions(currentQuestionId);
     }
 
-
     /**
      * Calculates the survey progress percentage.
      * Adapts the number if conditional questions are skipped to even out the progress jumps between questions.
