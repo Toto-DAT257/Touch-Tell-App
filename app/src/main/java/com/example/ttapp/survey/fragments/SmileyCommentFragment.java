@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.lifecycle.Observer;
+
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
@@ -59,6 +61,18 @@ public class SmileyCommentFragment extends QuestionFragment {
 
     private void initOnClickListeners() {
 
+    }
+
+    @Override
+    protected void initResponseObserver() {
+        surveyViewModel.containsCommentresponse().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                smileyCComment.setText(s);
+            }
+        });
+
+        // todo answeredoptions
     }
 
 }
