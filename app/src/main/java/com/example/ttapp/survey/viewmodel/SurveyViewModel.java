@@ -130,7 +130,6 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     }
 
     public LiveData<Boolean> isLastQuestion() {
-        isLastQuestion.setValue(true);
         return isLastQuestion;
     }
 
@@ -143,7 +142,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
             }
             case SurveyEvent.NEW_QUESTION: {
                 if (survey.isLastQuestion()) {
-                    isLastQuestion();
+                    isLastQuestion.setValue(true);
                 }
                 questionType.setValue(survey.getCurrentQuestionType());
                 questionText.setValue(survey.getCurrentQuestionText());
