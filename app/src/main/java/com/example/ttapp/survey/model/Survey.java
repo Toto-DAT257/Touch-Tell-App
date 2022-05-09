@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Main class of the model package. This class serves as the interface to be used by clients.
@@ -273,12 +274,24 @@ public class Survey {
         return progress;
     }
 
+    // If the survey taker has responded to the question before, the earlier
+    // comment response is returned.
     public String getCurrentQResponseComment() {
-        return responses.get(getCurrentQuestionId()).getComment();
+        if (responses.containsKey(getCurrentQuestionId())) {
+            return Objects.requireNonNull(responses.get(getCurrentQuestionId())).getComment();
+        } else {
+            return "";
+        }
     }
 
+    // If the survey taker has responded to the question before, the earlier
+    // answeroptions response is returned.
     public List<Integer> getCurrentQResponseAnsweredOptions() {
-        return responses.get(getCurrentQuestionId()).getAnsweredOptions();
+        if (responses.containsKey(getCurrentQuestionId())) {
+            return Objects.requireNonNull(responses.get(getCurrentQuestionId())).getAnsweredOptions();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
 }
