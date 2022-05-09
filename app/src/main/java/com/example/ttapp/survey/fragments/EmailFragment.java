@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.lifecycle.Observer;
+
 import com.example.ttapp.R;
 
 /**
@@ -35,6 +37,16 @@ public class EmailFragment extends QuestionFragment {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
             response = emailResponse.getText().toString();
             surveyViewModel.saveResponse(response);
+        });
+    }
+
+    @Override
+    protected void initResponseObserver() {
+        surveyViewModel.containsCommentresponse().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                emailResponse.setText(s);
+            }
         });
     }
 
