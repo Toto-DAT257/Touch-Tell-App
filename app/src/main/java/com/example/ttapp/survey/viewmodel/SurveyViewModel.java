@@ -14,6 +14,7 @@ import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
+import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.util.SurveyEvent;
@@ -43,6 +44,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<Boolean> surveyIsDone;
     private final MutableLiveData<Boolean> saveResponse;
     private final MutableLiveData<Boolean> isLastQuestion;
+    private final MutableLiveData<String> commentResponse;
+    private final MutableLiveData<List<Integer>> answeroptionsResponse;
 
     public SurveyViewModel() {
         jsonIsReceived = new MutableLiveData<>();
@@ -51,6 +54,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         surveyIsDone = new MutableLiveData<>();
         saveResponse = new MutableLiveData<>();
         isLastQuestion = new MutableLiveData<>();
+        commentResponse = new MutableLiveData<>();
+        answeroptionsResponse = new MutableLiveData<>();
     }
 
     /**
@@ -175,6 +180,28 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     public int getProgressPercentage(){
         return survey.getProgressPercentage();
+    }
+
+    public void repopulate() {
+        String currentQResponseComment = survey.getCurrentQResponseComment();
+        List<Integer> currentQResponseAnsweredOptions = survey.getCurrentQResponseAnsweredOptions();
+        if (!currentQResponseComment.isEmpty()) {
+            containsCommentresponse(currentQResponseComment);
+        }
+
+        if(!currentQResponseAnsweredOptions.isEmpty()) {
+            containsAnsweredOptionsResponse(currentQResponseAnsweredOptions);
+        }
+    }
+
+    public LiveData<String> containsCommentresponse(String comment) {
+        commentResponse.setValue(comment);
+        return commentResponse;
+    }
+
+    public LiveData<List<Integer>> containsAnsweredOptionsResponse(List<Integer> response) {
+        answeroptionsResponse.setValue(response);
+        return answeroptionsResponse;
     }
 
 }
