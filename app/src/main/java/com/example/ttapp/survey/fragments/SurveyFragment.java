@@ -6,6 +6,15 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -196,7 +205,8 @@ public class SurveyFragment extends Fragment {
 
             switch (questionType) {
                 case QuestionType.SMILEY_QUARTET:
-                    navigate(new SmileyQuartetFragment());
+                    // start animation
+                    navigate(new SmileyQuartetFragment()); //
                     break;
                 case QuestionType.YES_NO:
                     navigate(new YesNoFragment());
@@ -257,7 +267,20 @@ public class SurveyFragment extends Fragment {
     }
 
     private void navigate(Fragment fragment) {
-        getChildFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
+
+        if (questionFragmentContainer.getFragment() != null) {
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            if (surveyViewModel.isTransitionForward()) {
+                ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+            } else {
+                ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+            ft.replace(R.id.questionFragmentContainer, fragment);
+            ft.commit();
+        } else {
+            getChildFragmentManager().beginTransaction().replace(R.id.questionFragmentContainer, fragment).commit();
+        }
+
     }
 
 }
