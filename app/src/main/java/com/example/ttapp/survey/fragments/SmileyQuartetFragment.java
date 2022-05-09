@@ -76,27 +76,27 @@ public class SmileyQuartetFragment extends QuestionFragment {
     }
 
     private void setSmiley1Chosen() {
-        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
-        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
+        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
+        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
     }
 
     private void setSmiley2Chosen() {
-        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
-        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
+        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
+        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
     }
 
     private void setSmiley3Chosen() {
-        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_most_happy_not_chosen);
+        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
+        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
+        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
     }
 
     private void setSmiley4Chosen() {
-        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_happy_not_chosen);
+        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
+        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
+        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
     }
 
     private void initOnClickListeners() {
