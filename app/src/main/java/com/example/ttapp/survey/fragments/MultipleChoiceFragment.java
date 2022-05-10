@@ -37,8 +37,6 @@ public class MultipleChoiceFragment extends QuestionFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ConstraintLayout multiConstraintLayout = view.findViewById(R.id.multiConstraintLayout);
-                multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
                 MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
                 response.add(option.getValue());
                 surveyViewModel.saveResponse(response);
