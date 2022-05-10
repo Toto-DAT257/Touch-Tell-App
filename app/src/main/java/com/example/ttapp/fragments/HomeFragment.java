@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
 
     private void signOut(View view) {
         forgetIdentifier();
-        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_splashFragment);
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_registerFragment);
     }
 
     public void closeUserSection(View view) {

@@ -26,7 +26,7 @@ public class SplashFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
+        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         registerViewModel.setDatabase(MongoDB.getInstance());
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
         observeIdentification(view);
