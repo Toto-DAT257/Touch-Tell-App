@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_arrow_back"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,RtlSymmetry,SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/surveyNextButton"
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_arrow_next"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,RtlSymmetry,SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/card"
@@ -82,11 +82,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seperator"
+            app:layout_constraintTop_toBottomOf="@+id/separator"
             app:layout_constraintVertical_bias="0.481" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/seperator"
+            android:id="@+id/separator"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="40dp"
@@ -110,7 +110,8 @@
         android:alpha="0.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/touchntell_logo" />
+        app:srcCompat="@drawable/touchntell_logo"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/home"
