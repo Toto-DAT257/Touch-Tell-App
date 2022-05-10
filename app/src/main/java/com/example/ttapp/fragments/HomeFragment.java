@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         userContainer = binding.userContainer;
         textViewHomeHeader = binding.textViewHomeHeader;
 
-        buttonStartSurvey.setOnClickListener(view1 -> Navigation.findNavController(root).navigate(R.id.action_homeFragment_to_registerFragment));
+        buttonStartSurvey.setOnClickListener(view1 -> Navigation.findNavController(root).navigate(R.id.action_homeFragment_to_surveyFragment));
 
         buttonSignOut.setOnClickListener(view -> signOut(root));
 
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void signOut(View view) {
-        //forgetIdentifier();
+        forgetIdentifier();
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_splashFragment);
     }
 
