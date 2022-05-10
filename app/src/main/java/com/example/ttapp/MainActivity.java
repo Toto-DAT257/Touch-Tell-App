@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TTRequester.initialize(this.getApplicationContext());
-        TTRequester.enableLocalSave(this.getPreferences(Context.MODE_PRIVATE));
+        TTRequester.enableLocalStorage(this.getPreferences(Context.MODE_PRIVATE));
         TTRequester.getInstance().sendOldResponses();
         MongoDB.initialize(this.getApplicationContext());
     }

@@ -8,12 +8,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ttapp.survey.model.Survey;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,14 +22,14 @@ public class TTRequester {
     private static final String URL_PREFIX = "https://api.touch-and-tell.se/";
     private static final String URL_CHECK_IN_SUFFIX = "checkin/";
     private static final String URL_LOG_SUFFIX = "log";
-    private static final String RESPONSE_SAVE_PREFIX = "saved-response-number-";
-
+    private static IResponseStorage<JSONObject> storage = null;
     private static TTRequester instance = null;
+
     private RequestQueue requestQueue;
-    private static SharedPreferences sharedPreferences = null;
 
 
-    private TTRequester() {}
+    private TTRequester() {
+    }
 
     private TTRequester(Context context) {
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -40,6 +37,7 @@ public class TTRequester {
 
     /**
      * Initializes the requester, enabling api calls to Touch&Tell.
+     *
      * @param context The application context necessary for Volley.
      * @return returns the requester-singleton.
      */
@@ -50,15 +48,17 @@ public class TTRequester {
         return instance;
     }
 
-    public static synchronized void enableLocalSave(SharedPreferences sharedPreferences) {
-        if (instance == null)
-            throw new IllegalStateException(TTRequester.class.getSimpleName() + " is not initialized," +
-                    "call initialize(...) first");
-        TTRequester.sharedPreferences = sharedPreferences;
+    /**
+     * Enables saving of data locally if a submission fails.
+     * @param sharedPreferences SharedPreference object to determine where the data should be saved.
+     */
+    public static synchronized void enableLocalStorage(SharedPreferences sharedPreferences) {
+        TTRequester.storage = new PreferenceStorage(sharedPreferences);
     }
 
     /**
      * Returns the requester-singleton given that it has been initialized.
+     *
      * @return the requester-singleton
      */
     public static synchronized TTRequester getInstance() {
@@ -70,6 +70,7 @@ public class TTRequester {
 
     /**
      * Makes a request for the survey for the given deviceId.
+     *
      * @param deviceId the deviceId you want questions for.
      * @param response the response-object defined by the client, determining how to evaluate the
      *                 response.
@@ -93,7 +94,9 @@ public class TTRequester {
 
     /**
      * Submits a json-document to Touch&Tells API.
+     *
      * @param jsonObject the document to send.
+     * @param saveLocallyOnFail whether the data should be stored locally if the request fails.
      */
     public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail) {
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -104,50 +107,48 @@ public class TTRequester {
                 error -> {
                     Log.e(TAG, error.toString());
                     if (saveLocallyOnFail) {
-                        onResponseFail(jsonObject);
+                        saveResponse(jsonObject);
                     }
                 }
         );
         requestQueue.add(objectRequest);
     }
 
-
+    /**
+     * Sends all locally saved data to Touch&Tell if possible. If successful the saved data will be
+     * cleared.
+     */
     public void sendOldResponses() {
-
-        if (sharedPreferences == null) {
+        if (storage == null) {
             Log.e("TAG", "Cannot send old responses since local save is not enabled.");
             return;
         }
 
-        List<JSONObject> oldResponses = getOldResponsesToSend();
-        int index = 1;
+        List<JSONObject> oldResponses = storage.getAllResponses();
 
         for (JSONObject oldResponse : oldResponses) {
-
-            int finalIndex = index;
             submitResponse(oldResponse, false, new Response<String>() {
                 @Override
                 public void response(String object) {
-                    removeOldResponse(finalIndex);
+                    storage.removeResponse(oldResponse);
                 }
 
                 @Override
                 public void error(String object) {
-
                 }
             });
-            index++;
         }
     }
 
     /**
      * Submits a json-document to Touch&Tells API.
+     *
      * @param jsonObject the document to send.
-     * @param response the response object defined by the client, determining how to evaluate the
-     *                 response.
+     * @param saveLocallyOnFail whether the data should be stored locally if the request fails.
+     * @param response   the response object defined by the client, determining how to evaluate the
+     *                   response.
      */
     public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail, final Response<String> response) {
-
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 getSubmissionURL(),
@@ -160,7 +161,7 @@ public class TTRequester {
                     response.error(error.toString());
                     Log.e(TAG, error.toString());
                     if (saveLocallyOnFail) {
-                        onResponseFail(jsonObject);
+                        saveResponse(jsonObject);
                     }
                 }
         );
@@ -172,48 +173,12 @@ public class TTRequester {
         return URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
     }
 
-    private void saveResponse(String response) {
-        if (sharedPreferences == null) {
-            Log.e(TAG, "Cannot save response; local save is not enabled");
+    private void saveResponse(JSONObject jsonObject) {
+        if (storage == null) {
+            Log.e("TAG", "Cannot save response since local save is not enabled.");
             return;
         }
-
-        int responseSaveSuffix = 1;
-        String JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
-
-        while (!JSONString.isEmpty()) {
-            responseSaveSuffix++;
-            JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
-        }
-        sharedPreferences.edit().putString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, response).apply();
-    }
-
-    private void removeOldResponse(int index) {
-        sharedPreferences.edit().remove(RESPONSE_SAVE_PREFIX + index).apply();
-    }
-
-    private List<JSONObject> getOldResponsesToSend() {
-        List<JSONObject> oldResponses = new ArrayList<>();
-        int responseSaveSuffix = 1;
-        String JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
-
-        while (!JSONString.isEmpty()) {
-            JSONObject jsonObject = null;
-            try {
-                jsonObject = new JSONObject(JSONString);
-                oldResponses.add(jsonObject);
-            } catch (JSONException e) {
-                Log.e(TAG, "Couldn't serialize saved json response");
-            }
-            responseSaveSuffix++;
-            JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
-        }
-
-        return oldResponses;
-    }
-
-    private void onResponseFail(JSONObject jsonObject) {
-        Log.e(TAG, "response was not sent, saving response in preferences");
-        saveResponse(jsonObject.toString());
+        Log.e(TAG, "response could not be sent, saving response locally instead");
+        storage.saveResponse(jsonObject);
     }
 }
