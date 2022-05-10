@@ -29,7 +29,7 @@
     <!-- done with survey response -->
     <string name="done_with_survey_header">Great work!</string>
     <string name="done_with_survey_body">By taking your surveys, you and your colleagues contributes to a better work environment.</string>
-    <string name="done_with_survey_button">Finish</string>
+    <string name="done_with_survey_button">Return home</string>
 
     <!-- yes no question -->
     <string name="yesno_responseoption1">Yes</string>
