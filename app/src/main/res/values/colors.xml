@@ -27,4 +27,6 @@
     <color name="toto_progress_gradient_center">#75E9906C</color>
     <color name="toto_progress_gradient_end">#E9906C</color>
 
+    <color name="toto_transparent">#00FFFFFF</color>
+
 </resources>

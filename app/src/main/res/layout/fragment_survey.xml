@@ -57,10 +57,13 @@
             style="@style/Header_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="46dp"
-            android:layout_marginEnd="40dp"
-            android:maxHeight="100dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="4"
+            android:minHeight="140dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +72,11 @@
             android:id="@+id/questionFragmentContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="40dp"
+
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,15 +86,26 @@
             android:id="@+id/seperator"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="32dp"
             android:background="@drawable/separator"
+            android:paddingBottom="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/questionTextView">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/expand_collapse_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-2dp"
+            android:background="@color/toto_transparent"
+            android:src="@drawable/ic_round_expand_more_24"
+            app:layout_constraintBottom_toTopOf="@+id/seperator"
+            app:layout_constraintEnd_toEndOf="@+id/seperator" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView

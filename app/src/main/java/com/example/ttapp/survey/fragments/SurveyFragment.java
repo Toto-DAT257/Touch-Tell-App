@@ -2,7 +2,10 @@ package com.example.ttapp.survey.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,10 +18,19 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
@@ -40,12 +52,13 @@ public class SurveyFragment extends Fragment {
 
     FragmentSurveyBinding binding;
     SurveyViewModel surveyViewModel;
-    ImageButton backButton;
-    ImageButton nextButton;
+    ImageButton backButton, nextButton, expandCollapseButton;
     Button homeButton;
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
     ProgressBar progressBar;
+    boolean isExpanded = false;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -61,6 +74,8 @@ public class SurveyFragment extends Fragment {
         homeButton = binding.home;
         progressBar = binding.progressBar;
         hideQuestion();
+        expandCollapseButton = binding.expandCollapseButton;
+
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
@@ -74,6 +89,9 @@ public class SurveyFragment extends Fragment {
         });
 
         setHomeOnClickListener();
+        setExpandCollapseOnClickListener();
+
+
         return root;
     }
 
@@ -96,8 +114,90 @@ public class SurveyFragment extends Fragment {
         });
     }
 
+    private void setExpandCollapseOnClickListener() {
+        expandCollapseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isExpanded) {
+                    collapseQuestionText();
+                } else {
+                    expandQuestionText();
+                }
+
+            }
+        });
+    }
+
+    private static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    private void collapseQuestionText() {
+        questionTextView.setMovementMethod(null);
+        questionTextView.setMaxLines(5);
+        isExpanded = false;
+        expandCollapseButton.setImageResource(R.drawable.ic_round_expand_more_24);
+        questionFragmentContainer.setVisibility(View.VISIBLE);
+    }
+
+    private void expandQuestionText() {
+        ConstraintLayout card = binding.card;
+        int h = card.getHeight();
+        questionTextView.setMaxHeight(h - dpToPx(84));
+        isExpanded = true;
+        expandCollapseButton.setImageResource(R.drawable.ic_round_expand_less_24);
+        questionFragmentContainer.setVisibility(View.INVISIBLE);
+        questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int lh = questionTextView.getLineHeight();
+                if (questionTextView.getLineCount() > h/lh) {
+                    questionTextView.setMovementMethod(new ScrollingMovementMethod());
+                }
+                questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+    }
+
+    private void configureQuestionText(String text) {
+        resetQuestionTextFormat();
+        questionTextView.setText(text);
+
+        questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (questionTextView.getLineCount() > 4) {
+                    questionTextView.setMaxLines(5);
+                    questionTextView.setTextSize(20);
+                    questionTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            if (questionTextView.getLineCount() > 5) {
+                                collapseQuestionText();
+                                expandCollapseButton.setVisibility(View.VISIBLE);
+                                questionTextView.setEllipsize(TextUtils.TruncateAt.END);
+                            }
+                            questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    });
+                }
+                questionTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+    }
+
+    private void resetQuestionTextFormat() {
+        questionTextView.setEllipsize(null);
+        questionTextView.setTextSize(24);
+        questionTextView.setMovementMethod(null);
+        questionTextView.setMaxLines(4);
+        expandCollapseButton.setVisibility(View.INVISIBLE);
+    }
+
     private void thingsToDoAfterJsonIsSet() {
-        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), questionTextView::setText);
+        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), text -> {
+            configureQuestionText(text);
+        });
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             progressBar.setProgress(surveyViewModel.getProgressPercentage());
