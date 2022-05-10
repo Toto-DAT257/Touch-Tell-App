@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class RegisterFragment extends Fragment {
     Button confirmButton;
     TextView errorIdIsEmpty;
     TextView errorIdNotFound;
+    ProgressBar loading;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class RegisterFragment extends Fragment {
         confirmButton = binding.buttonConfirmIdCode;
         errorIdIsEmpty = binding.errorIdIsEmpty;
         errorIdNotFound = binding.errorIdNotFound;
+        loading = binding.loadingProgressBar;
 
         confirmButton.setOnClickListener(view1 -> identify());
 
@@ -63,6 +66,7 @@ public class RegisterFragment extends Fragment {
                 saveIdentifier(identifier);
                 Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_homeFragment);
             } else {
+                stopLoading();
                 errorIdNotFound.setVisibility(View.VISIBLE);
             }
         });
@@ -89,7 +93,18 @@ public class RegisterFragment extends Fragment {
         } else {
             // Identification is done by RegisterViewModel
             registerViewModel.identify(identifier);
+            startLoading();
         }
+    }
+
+    private void startLoading() {
+        loading.setVisibility(View.VISIBLE);
+        confirmButton.setVisibility(View.INVISIBLE);
+    }
+
+    private void stopLoading() {
+        loading.setVisibility(View.INVISIBLE);
+        confirmButton.setVisibility(View.VISIBLE);
     }
 
     private void saveIdentifier(String identifier) {

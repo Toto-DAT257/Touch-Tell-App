@@ -3,15 +3,6 @@ package com.example.ttapp.survey.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +10,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
@@ -45,7 +45,9 @@ public class SurveyFragment extends Fragment {
     Button homeButton;
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
-    ProgressBar progressBar;
+    ProgressBar progressBar, loading;
+    ConstraintLayout separator;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,9 @@ public class SurveyFragment extends Fragment {
         questionTextView = binding.questionTextView;
         homeButton = binding.home;
         progressBar = binding.progressBar;
+        separator = binding.seperator;
+        loading = binding.loadingProgressBar;
+
         hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
@@ -80,17 +85,22 @@ public class SurveyFragment extends Fragment {
     private void hideQuestion() {
         questionFragmentContainer.setVisibility(View.INVISIBLE);
         questionTextView.setVisibility(View.INVISIBLE);
+        separator.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
     }
 
     private void showQuestion() {
         questionFragmentContainer.setVisibility(View.VISIBLE);
         questionTextView.setVisibility(View.VISIBLE);
+        separator.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.INVISIBLE);
     }
 
     private void setHomeOnClickListener() {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                surveyViewModel.resetSurvey();
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
             }
         });
