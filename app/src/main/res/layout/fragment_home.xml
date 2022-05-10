@@ -9,60 +9,95 @@
     android:orientation="vertical"
     tools:context=".fragments.HomeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-430dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_illustration_home"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
     <TextView
         android:id="@+id/textViewHomeHeader"
         style="@style/Header_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/home_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:alpha="0.2"
-        android:background="@drawable/separator"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:text="@string/home_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHomeHeader" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/Header_2"
+    <ImageButton
+        android:id="@+id/buttonUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/statistics"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#424242"
+        android:paddingBottom="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="toto1@touchandtell.se"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.widget.Button
+            android:id="@+id/buttonSignOut"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:width="220dp"
+            android:height="47dp"
+            android:background="@drawable/button"
+            android:includeFontPadding="false"
+            android:text="@string/log_out"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <ImageButton
+            android:id="@+id/buttonCloseUserSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/toto_transparent"
+            android:src="@drawable/ic_arrow_up_36"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="80dp"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_statistics"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartSurvey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        tools:ignore="ContentDescription" />
 
     <android.widget.Button
         android:id="@+id/buttonStartSurvey"

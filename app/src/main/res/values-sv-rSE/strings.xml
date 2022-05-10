@@ -19,6 +19,7 @@
 
     <!-- home page -->
     <string name="home_header">Hem</string>
+    <string name="log_out">Logga ut</string>
     <string name="home_start_survey_button">Starta enkät</string>
     <string name="home_settings_button">Inställningar</string>
 
