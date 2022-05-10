@@ -35,23 +35,19 @@ public class IntroductionFragment extends Fragment {
         // Creating shared preferences in order to keep track if the application has been run before
         SharedPreferences settings = getActivity().getPreferences(Context.MODE_PRIVATE);
 
-        if (settings.getBoolean("my_first_time", true)) {
-            TextView introductionHeader = view.findViewById(R.id.introductionHeader);
-            TextView introductionText = view.findViewById(R.id.introductionText);
-            Button introductionButton = view.findViewById(R.id.introductionButton);
-            introductionHeader.setText(getString(R.string.introduction_header));
-            introductionText.setText(getString(R.string.introduction_text));
-            introductionButton.setText(R.string.introduction_button);
+        TextView introductionHeader = view.findViewById(R.id.introductionHeader);
+        TextView introductionText = view.findViewById(R.id.introductionText);
+        Button introductionButton = view.findViewById(R.id.introductionButton);
+        introductionHeader.setText(getString(R.string.introduction_header));
+        introductionText.setText(getString(R.string.introduction_text));
+        introductionButton.setText(R.string.introduction_button);
 
-            introductionButton.setOnClickListener(view1 -> {
+        introductionButton.setOnClickListener(view1 -> {
 
-                settings.edit().putBoolean("my_first_time", false).apply();
-                Navigation.findNavController(view).navigate(R.id.action_introductionFragment_to_registerFragment2);
-            });
+            settings.edit().putBoolean("my_first_time", false).apply();
+            Navigation.findNavController(view).navigate(R.id.action_introductionFragment_to_registerFragment2);
+        });
 
-        } else {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_introductionFragment_to_registerFragment2);
-        }
         return view;
     }
 }

@@ -47,12 +47,6 @@ public class RegisterFragment extends Fragment {
         observeIdentification(root);
         observeDatabaseAccess();
 
-        String previousIdentifier = sharedPref.getString("identifier", "");
-
-        if (!previousIdentifier.isEmpty()) {
-            identifier = previousIdentifier;
-            registerViewModel.identify(previousIdentifier);
-        }
         idEditText = binding.textField;
         confirmButton = binding.buttonConfirmIdCode;
         errorIdIsEmpty = binding.errorIdIsEmpty;
