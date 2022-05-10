@@ -1,6 +1,7 @@
 package com.example.ttapp.APIRequester;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -9,7 +10,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ttapp.survey.model.Survey;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Singleton for making requests to Touch&Tell's API. Before usage the instance must be initialized.
@@ -20,9 +25,11 @@ public class TTRequester {
     private static final String URL_PREFIX = "https://api.touch-and-tell.se/";
     private static final String URL_CHECK_IN_SUFFIX = "checkin/";
     private static final String URL_LOG_SUFFIX = "log";
+    private static final String RESPONSE_SAVE_PREFIX = "saved-response-number-";
 
     private static TTRequester instance = null;
     private RequestQueue requestQueue;
+    private static SharedPreferences sharedPreferences = null;
 
 
     private TTRequester() {}
@@ -41,6 +48,13 @@ public class TTRequester {
             instance = new TTRequester(context);
         }
         return instance;
+    }
+
+    public static synchronized void enableLocalSave(SharedPreferences sharedPreferences) {
+        if (instance == null)
+            throw new IllegalStateException(TTRequester.class.getSimpleName() + " is not initialized," +
+                    "call initialize(...) first");
+        TTRequester.sharedPreferences = sharedPreferences;
     }
 
     /**
@@ -81,18 +95,49 @@ public class TTRequester {
      * Submits a json-document to Touch&Tells API.
      * @param jsonObject the document to send.
      */
-    public void submitResponse(JSONObject jsonObject) {
-        long unixTime = System.currentTimeMillis();
-        String URL = URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
-
+    public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail) {
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.POST,
-                URL,
+                getSubmissionURL(),
                 jsonObject,
                 rest_response -> Log.v(TAG, rest_response.toString()),
-                error -> Log.e(TAG, error.toString())
+                error -> {
+                    Log.e(TAG, error.toString());
+                    if (saveLocallyOnFail) {
+                        onResponseFail(jsonObject);
+                    }
+                }
         );
         requestQueue.add(objectRequest);
+    }
+
+
+    public void sendOldResponses() {
+
+        if (sharedPreferences == null) {
+            Log.e("TAG", "Cannot send old responses since local save is not enabled.");
+            return;
+        }
+
+        List<JSONObject> oldResponses = getOldResponsesToSend();
+        int index = 1;
+
+        for (JSONObject oldResponse : oldResponses) {
+
+            int finalIndex = index;
+            submitResponse(oldResponse, false, new Response<String>() {
+                @Override
+                public void response(String object) {
+                    removeOldResponse(finalIndex);
+                }
+
+                @Override
+                public void error(String object) {
+
+                }
+            });
+            index++;
+        }
     }
 
     /**
@@ -101,13 +146,11 @@ public class TTRequester {
      * @param response the response object defined by the client, determining how to evaluate the
      *                 response.
      */
-    public void submitResponse(JSONObject jsonObject, final Response<String> response) {
-        long unixTime = System.currentTimeMillis();
-        String URL = URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
+    public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail, final Response<String> response) {
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.POST,
-                URL,
+                getSubmissionURL(),
                 jsonObject,
                 rest_response -> {
                     response.response(rest_response.toString());
@@ -116,8 +159,61 @@ public class TTRequester {
                 error -> {
                     response.error(error.toString());
                     Log.e(TAG, error.toString());
+                    if (saveLocallyOnFail) {
+                        onResponseFail(jsonObject);
+                    }
                 }
         );
         requestQueue.add(objectRequest);
+    }
+
+    private String getSubmissionURL() {
+        long unixTime = System.currentTimeMillis();
+        return URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
+    }
+
+    private void saveResponse(String response) {
+        if (sharedPreferences == null) {
+            Log.e(TAG, "Cannot save response; local save is not enabled");
+            return;
+        }
+
+        int responseSaveSuffix = 1;
+        String JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
+
+        while (!JSONString.isEmpty()) {
+            responseSaveSuffix++;
+            JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
+        }
+        sharedPreferences.edit().putString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, response).apply();
+    }
+
+    private void removeOldResponse(int index) {
+        sharedPreferences.edit().remove(RESPONSE_SAVE_PREFIX + index).apply();
+    }
+
+    private List<JSONObject> getOldResponsesToSend() {
+        List<JSONObject> oldResponses = new ArrayList<>();
+        int responseSaveSuffix = 1;
+        String JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
+
+        while (!JSONString.isEmpty()) {
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(JSONString);
+                oldResponses.add(jsonObject);
+            } catch (JSONException e) {
+                Log.e(TAG, "Couldn't serialize saved json response");
+            }
+            responseSaveSuffix++;
+            JSONString = sharedPreferences.getString(RESPONSE_SAVE_PREFIX + responseSaveSuffix, "");
+        }
+
+        return oldResponses;
+    }
+
+    private void onResponseFail(JSONObject jsonObject) {
+        Log.e(TAG, "response was not sent, saving response in preferences");
+        saveResponse(jsonObject.toString());
     }
 }
