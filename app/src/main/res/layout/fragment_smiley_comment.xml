@@ -7,7 +7,7 @@
     tools:context=".survey.fragments.SmileyCommentFragment" >
 
     <TableLayout
-        android:id="@+id/tableLayout2"
+        android:id="@+id/tableSmileys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,12 +23,14 @@
                 android:id="@+id/smileyCResponseoption4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:src="@drawable/ic_most_happy" />
 
             <ImageView
                 android:id="@+id/smileyCResponseoption3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:src="@drawable/ic_happy" />
         </TableRow>
 
@@ -40,12 +42,14 @@
                 android:id="@+id/smileyCResponseoption2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:src="@drawable/ic_angry" />
 
             <ImageView
                 android:id="@+id/smileyCResponseoption1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:src="@drawable/ic_most_angry" />
         </TableRow>
 
@@ -55,12 +59,34 @@
         android:id="@+id/smileyCComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="588dp"
         android:ems="10"
         android:hint="@string/comment_hinttext"
         android:textSize="@dimen/responseTextSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/buttonCommentSmiley"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="51dp"
+        android:layout_marginBottom="60dp"
+        android:width="220dp"
+        android:height="47dp"
+        android:background="@drawable/button"
+        android:includeFontPadding="false"
+        android:text="@string/button_comment_smiley"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/tableSmileys" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
