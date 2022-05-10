@@ -61,7 +61,7 @@ public class SurveyFragment extends Fragment {
         questionTextView = binding.questionTextView;
         homeButton = binding.home;
         progressBar = binding.progressBar;
-        separator = binding.seperator;
+        separator = binding.separator;
         loading = binding.loadingProgressBar;
 
         hideQuestion();
