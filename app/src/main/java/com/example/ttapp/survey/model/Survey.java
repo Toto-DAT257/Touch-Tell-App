@@ -168,8 +168,8 @@ public class Survey {
      * @param comment      The comment answer to the question.
      */
     public void saveResponse(ArrayList<Integer> answerOption, String comment) {
-        if (!comment.isEmpty() || !answerOption.isEmpty()) {
-            QuestionResponse questionResponse = createResponseObject(answerOption, comment);
+        QuestionResponse questionResponse = createResponseObject(answerOption, comment);
+        if (!questionResponse.isEmpty()) {
             putResponse(currentQuestionId, questionResponse);
         }
     }
