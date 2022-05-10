@@ -29,6 +29,10 @@ public class QuestionResponse {
         this.questionId = questionId;
     }
 
+    public boolean isEmpty() {
+        return answeredOptions.isEmpty() && comment.isEmpty();
+    }
+
     public List<Integer> getAnsweredOptions() {
         return answeredOptions;
     }

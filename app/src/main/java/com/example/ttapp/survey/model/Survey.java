@@ -169,7 +169,9 @@ public class Survey {
      */
     public void saveResponse(ArrayList<Integer> answerOption, String comment) {
         QuestionResponse questionResponse = createResponseObject(answerOption, comment);
-        putResponse(currentQuestionId, questionResponse);
+        if (!questionResponse.isEmpty()) {
+            putResponse(currentQuestionId, questionResponse);
+        }
     }
 
     protected Map<String, QuestionResponse> getResponses() {
