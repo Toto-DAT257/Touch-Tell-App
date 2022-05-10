@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,8 +14,17 @@ public class QuestionResponse {
     private final String questionId;
 
     public QuestionResponse(List<Integer> options, String comment, String questionType, String questionId) {
-        this.answeredOptions = options;
-        this.comment = comment;
+        if (options == null) {
+            this.answeredOptions = new ArrayList<Integer>();
+        } else {
+            this.answeredOptions = options;
+        }
+
+        if (comment == null) {
+            this.comment = "";
+        } else {
+            this.comment = comment;
+        }
         this.questionType = questionType;
         this.questionId = questionId;
     }
