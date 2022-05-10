@@ -6,15 +6,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -78,10 +69,9 @@ public class SurveyFragment extends Fragment {
         progressBar = binding.progressBar;
         separator = binding.separator;
         loading = binding.loadingProgressBar;
-
-        hideQuestion();
         expandCollapseButton = binding.expandCollapseButton;
 
+        hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
@@ -97,7 +87,6 @@ public class SurveyFragment extends Fragment {
         setHomeOnClickListener();
         setExpandCollapseOnClickListener();
 
-
         return root;
     }
 
@@ -106,6 +95,7 @@ public class SurveyFragment extends Fragment {
         questionTextView.setVisibility(View.INVISIBLE);
         separator.setVisibility(View.INVISIBLE);
         loading.setVisibility(View.VISIBLE);
+        expandCollapseButton.setVisibility(View.INVISIBLE);
     }
 
     private void showQuestion() {
@@ -113,6 +103,7 @@ public class SurveyFragment extends Fragment {
         questionTextView.setVisibility(View.VISIBLE);
         separator.setVisibility(View.VISIBLE);
         loading.setVisibility(View.INVISIBLE);
+        expandCollapseButton.setVisibility(View.VISIBLE);
     }
 
     private void setHomeOnClickListener() {
@@ -123,16 +114,13 @@ public class SurveyFragment extends Fragment {
     }
 
     private void setExpandCollapseOnClickListener() {
-        expandCollapseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isExpanded) {
-                    collapseQuestionText();
-                } else {
-                    expandQuestionText();
-                }
-
+        expandCollapseButton.setOnClickListener(view -> {
+            if (isExpanded) {
+                collapseQuestionText();
+            } else {
+                expandQuestionText();
             }
+
         });
     }
 
@@ -203,9 +191,7 @@ public class SurveyFragment extends Fragment {
     }
 
     private void thingsToDoAfterJsonIsSet() {
-        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), text -> {
-            configureQuestionText(text);
-        });
+        surveyViewModel.newQuestionText().observe(getViewLifecycleOwner(), text -> configureQuestionText(text));
 
         surveyViewModel.newQuestionType().observe(getViewLifecycleOwner(), questionType -> {
             progressBar.setProgress(surveyViewModel.getProgressPercentage());
