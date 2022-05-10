@@ -7,6 +7,15 @@
     android:background="@drawable/gradient_background"
     tools:context=".survey.fragments.SurveyFragment">
 
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/surveyBackButton"
@@ -21,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_arrow_back"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,RtlSymmetry,SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/surveyNextButton"
@@ -36,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_arrow_next"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="ContentDescription,RtlSymmetry,SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/card"
@@ -74,22 +83,24 @@
             android:layout_height="0dp"
 
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seperator" />
+            app:layout_constraintTop_toBottomOf="@+id/separator"
+            app:layout_constraintVertical_bias="0.481" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/seperator"
+            android:id="@+id/separator"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="19dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/separator"
+            android:visibility="invisible"
             android:paddingBottom="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,8 +115,9 @@
             android:layout_marginBottom="-2dp"
             android:background="@color/toto_transparent"
             android:src="@drawable/ic_round_expand_more_24"
-            app:layout_constraintBottom_toTopOf="@+id/seperator"
-            app:layout_constraintEnd_toEndOf="@+id/seperator" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/separator"
+            app:layout_constraintEnd_toEndOf="@+id/separator" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -117,7 +129,8 @@
         android:alpha="0.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/touchntell_logo" />
+        app:srcCompat="@drawable/touchntell_logo"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/home"
