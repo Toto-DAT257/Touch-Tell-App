@@ -250,7 +250,7 @@ public class Survey {
             e.printStackTrace();
         }
         TTRequester ttRequester = TTRequester.getInstance();
-        ttRequester.submitResponse(toSend);
+        ttRequester.submitResponse(toSend, true);
         responses.clear();
     }
 

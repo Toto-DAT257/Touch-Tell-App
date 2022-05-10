@@ -1,9 +1,8 @@
 package com.example.ttapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.example.ttapp.APIRequester.TTRequester;
@@ -16,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TTRequester.initialize(this.getApplicationContext());
+        TTRequester.enableLocalStorage(this.getPreferences(Context.MODE_PRIVATE));
+        TTRequester.getInstance().sendOldResponses();
         MongoDB.initialize(this.getApplicationContext());
     }
 

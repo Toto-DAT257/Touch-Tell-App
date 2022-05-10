@@ -1,15 +1,17 @@
 package com.example.ttapp.APIRequester;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ttapp.survey.model.Survey;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Singleton for making requests to Touch&Tell's API. Before usage the instance must be initialized.
@@ -20,12 +22,14 @@ public class TTRequester {
     private static final String URL_PREFIX = "https://api.touch-and-tell.se/";
     private static final String URL_CHECK_IN_SUFFIX = "checkin/";
     private static final String URL_LOG_SUFFIX = "log";
-
+    private static IResponseStorage<JSONObject> storage = null;
     private static TTRequester instance = null;
+
     private RequestQueue requestQueue;
 
 
-    private TTRequester() {}
+    private TTRequester() {
+    }
 
     private TTRequester(Context context) {
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -33,6 +37,7 @@ public class TTRequester {
 
     /**
      * Initializes the requester, enabling api calls to Touch&Tell.
+     *
      * @param context The application context necessary for Volley.
      * @return returns the requester-singleton.
      */
@@ -44,7 +49,16 @@ public class TTRequester {
     }
 
     /**
+     * Enables saving of data locally if a submission fails.
+     * @param sharedPreferences SharedPreference object to determine where the data should be saved.
+     */
+    public static synchronized void enableLocalStorage(SharedPreferences sharedPreferences) {
+        TTRequester.storage = new PreferenceStorage(sharedPreferences);
+    }
+
+    /**
      * Returns the requester-singleton given that it has been initialized.
+     *
      * @return the requester-singleton
      */
     public static synchronized TTRequester getInstance() {
@@ -56,6 +70,7 @@ public class TTRequester {
 
     /**
      * Makes a request for the survey for the given deviceId.
+     *
      * @param deviceId the deviceId you want questions for.
      * @param response the response-object defined by the client, determining how to evaluate the
      *                 response.
@@ -79,35 +94,64 @@ public class TTRequester {
 
     /**
      * Submits a json-document to Touch&Tells API.
+     *
      * @param jsonObject the document to send.
+     * @param saveLocallyOnFail whether the data should be stored locally if the request fails.
      */
-    public void submitResponse(JSONObject jsonObject) {
-        long unixTime = System.currentTimeMillis();
-        String URL = URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
-
+    public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail) {
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.POST,
-                URL,
+                getSubmissionURL(),
                 jsonObject,
                 rest_response -> Log.v(TAG, rest_response.toString()),
-                error -> Log.e(TAG, error.toString())
+                error -> {
+                    Log.e(TAG, error.toString());
+                    if (saveLocallyOnFail) {
+                        saveResponse(jsonObject);
+                    }
+                }
         );
         requestQueue.add(objectRequest);
     }
 
     /**
-     * Submits a json-document to Touch&Tells API.
-     * @param jsonObject the document to send.
-     * @param response the response object defined by the client, determining how to evaluate the
-     *                 response.
+     * Sends all locally saved data to Touch&Tell if possible. If successful the saved data will be
+     * cleared.
      */
-    public void submitResponse(JSONObject jsonObject, final Response<String> response) {
-        long unixTime = System.currentTimeMillis();
-        String URL = URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
+    public void sendOldResponses() {
+        if (storage == null) {
+            Log.e("TAG", "Cannot send old responses since local save is not enabled.");
+            return;
+        }
 
+        List<JSONObject> oldResponses = storage.getAllResponses();
+
+        for (JSONObject oldResponse : oldResponses) {
+            submitResponse(oldResponse, false, new Response<String>() {
+                @Override
+                public void response(String object) {
+                    storage.removeResponse(oldResponse);
+                }
+
+                @Override
+                public void error(String object) {
+                }
+            });
+        }
+    }
+
+    /**
+     * Submits a json-document to Touch&Tells API.
+     *
+     * @param jsonObject the document to send.
+     * @param saveLocallyOnFail whether the data should be stored locally if the request fails.
+     * @param response   the response object defined by the client, determining how to evaluate the
+     *                   response.
+     */
+    public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail, final Response<String> response) {
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.POST,
-                URL,
+                getSubmissionURL(),
                 jsonObject,
                 rest_response -> {
                     response.response(rest_response.toString());
@@ -116,8 +160,25 @@ public class TTRequester {
                 error -> {
                     response.error(error.toString());
                     Log.e(TAG, error.toString());
+                    if (saveLocallyOnFail) {
+                        saveResponse(jsonObject);
+                    }
                 }
         );
         requestQueue.add(objectRequest);
+    }
+
+    private String getSubmissionURL() {
+        long unixTime = System.currentTimeMillis();
+        return URL_PREFIX + URL_LOG_SUFFIX + "?cachekiller=" + unixTime;
+    }
+
+    private void saveResponse(JSONObject jsonObject) {
+        if (storage == null) {
+            Log.e("TAG", "Cannot save response since local save is not enabled.");
+            return;
+        }
+        Log.e(TAG, "response could not be sent, saving response locally instead");
+        storage.saveResponse(jsonObject);
     }
 }
