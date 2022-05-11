@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import androidx.lifecycle.Observer;
 
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
@@ -42,10 +43,10 @@ public class MultipleChoiceFragment extends QuestionFragment {
                 MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
                 response.add(option.getValue());
                 surveyViewModel.saveResponse(response);
-                surveyViewModel.nextQuestion();
                 clearSelected();
                 option.setSelected(true);
                 redrawList();
+                surveyViewModel.nextQuestion();
             }
         });
     }
@@ -78,8 +79,12 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     @Override
     protected void initResponseObserver() {
-        // todo
-        //options.get(1).setSelected(true); // TODO not hardcoded
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
+            @Override
+            public void onChanged(List<Integer> integers) {
+                options.get(integers.get(0)-1).setSelected(true);
+            }
+        });
     }
 
 }
