@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,15 +38,17 @@ public class ListAdapter extends ArrayAdapter<MultipleChoiceOption> {
                     parent, false);
         }
 
-
         MultipleChoiceOption option = getItem(position);
         String text = option.getText();
         TextView textView = convertView.findViewById(R.id.textview_multibutton);
         textView.setText(text);
         ConstraintLayout multiConstraintLayout = convertView.findViewById(R.id.multiConstraintLayout);
+        ImageView multiCheck = convertView.findViewById(R.id.check_multibutton);
         if (option.isSelected()) {
+            multiCheck.setVisibility(View.VISIBLE);
             multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
         } else {
+            multiCheck.setVisibility(View.INVISIBLE);
             multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton);
         }
 
@@ -64,7 +67,5 @@ public class ListAdapter extends ArrayAdapter<MultipleChoiceOption> {
 
         return position;
     }
-
-
 
 }
