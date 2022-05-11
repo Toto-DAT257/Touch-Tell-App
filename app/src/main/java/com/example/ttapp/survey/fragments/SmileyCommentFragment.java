@@ -2,6 +2,7 @@ package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -26,6 +27,7 @@ public class SmileyCommentFragment extends QuestionFragment {
     private ImageView smileyCResponseoption4;
 
     private EditText smileyCComment;
+    Button buttonCommentSmiley;
 
     ArrayList<Integer> responseOption = new ArrayList<>();
     String comment;
@@ -43,6 +45,8 @@ public class SmileyCommentFragment extends QuestionFragment {
         smileyCResponseoption2 = view.findViewById(R.id.smileyCResponseoption2);
         smileyCResponseoption3 = view.findViewById(R.id.smileyCResponseoption3);
         smileyCResponseoption4 = view.findViewById(R.id.smileyCResponseoption4);
+
+        buttonCommentSmiley = view.findViewById(R.id.buttonCommentSmiley);
 
         initOnClickListeners();
         // TODO implement logic when design is done
