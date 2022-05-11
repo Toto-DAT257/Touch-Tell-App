@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,32 +38,37 @@ public class RegisterFragment extends Fragment {
     Button confirmButton;
     TextView errorIdIsEmpty;
     TextView errorIdNotFound;
+    ProgressBar loading;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentRegisterBinding binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
+        changeStatusBarColor(R.color.toto_background_gradient_blue);
+
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
-        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
+        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         registerViewModel.setDatabase(MongoDB.getInstance());
         observeIdentification(root);
         observeDatabaseAccess();
 
-        String previousIdentifier = sharedPref.getString("identifier", "");
-
-        if (!previousIdentifier.isEmpty()) {
-            identifier = previousIdentifier;
-            registerViewModel.identify(previousIdentifier);
-        }
         idEditText = binding.textField;
         confirmButton = binding.buttonConfirmIdCode;
         errorIdIsEmpty = binding.errorIdIsEmpty;
         errorIdNotFound = binding.errorIdNotFound;
+        loading = binding.loadingProgressBar;
 
         confirmButton.setOnClickListener(view1 -> identify());
 
         return root;
+    }
+
+    private void changeStatusBarColor(int color) {
+        Window window = requireActivity().getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(getResources().getColor(color));
     }
 
     private void observeIdentification(View root) {
@@ -69,6 +77,7 @@ public class RegisterFragment extends Fragment {
                 saveIdentifier(identifier);
                 Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_homeFragment);
             } else {
+                stopLoading();
                 errorIdNotFound.setVisibility(View.VISIBLE);
             }
         });
@@ -95,7 +104,18 @@ public class RegisterFragment extends Fragment {
         } else {
             // Identification is done by RegisterViewModel
             registerViewModel.identify(identifier);
+            startLoading();
         }
+    }
+
+    private void startLoading() {
+        loading.setVisibility(View.VISIBLE);
+        confirmButton.setVisibility(View.INVISIBLE);
+    }
+
+    private void stopLoading() {
+        loading.setVisibility(View.INVISIBLE);
+        confirmButton.setVisibility(View.VISIBLE);
     }
 
     private void saveIdentifier(String identifier) {

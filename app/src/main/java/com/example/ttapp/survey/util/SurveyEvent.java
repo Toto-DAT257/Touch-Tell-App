@@ -6,7 +6,8 @@ package com.example.ttapp.survey.util;
  */
 public interface SurveyEvent {
 
-    String NEW_QUESTION = "new-question";
+    String NEXT_QUESTION = "next-question";
+    String PREVIOUS_QUESTION = "previous-question";
     String SURVEY_DONE = "survey-done";
     String SAVE_RESPONSE = "save-response";
 

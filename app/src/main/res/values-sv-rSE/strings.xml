@@ -19,6 +19,7 @@
 
     <!-- home page -->
     <string name="home_header">Hem</string>
+    <string name="log_out">Logga ut</string>
     <string name="home_start_survey_button">Starta enkät</string>
     <string name="home_settings_button">Inställningar</string>
 
@@ -30,7 +31,7 @@
     <!-- done with survey response -->
     <string name="done_with_survey_header">Bra jobbat!</string>
     <string name="done_with_survey_body">Genom att göra dessa enkäter kan du och dina kollegor påverka din arbetsmiljö till det bättre.</string>
-    <string name="done_with_survey_button">Klar</string>
+    <string name="done_with_survey_button">Återgå till hem</string>
 
     <!-- yes no question -->
     <string name="yesno_responseoption1">Ja</string>

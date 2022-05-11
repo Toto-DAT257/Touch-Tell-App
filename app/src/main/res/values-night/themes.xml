@@ -6,8 +6,8 @@
         <item name="colorPrimaryVariant">@color/Touch_and_tell_blue_dark</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/white</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- App window. -->
         <item name="android:statusBarColor">@color/toto_background_gradient_blue</item>

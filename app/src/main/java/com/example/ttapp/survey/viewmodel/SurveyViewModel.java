@@ -46,6 +46,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<Boolean> isLastQuestion;
     private MutableLiveData<String> commentResponse;
     private MutableLiveData<List<Integer>> answeroptionsResponse;
+    private boolean transitionForward = true;
 
     public SurveyViewModel() {
         jsonIsReceived = new MutableLiveData<>();
@@ -62,6 +63,10 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         jsonIsReceived.setValue(false);
         surveyIsDone.setValue(false);
         isLastQuestion.setValue(false);
+    }
+
+    public boolean isTransitionForward() {
+        return transitionForward;
     }
 
     /**
@@ -145,10 +150,17 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 surveyIsDone.setValue(true);
                 break;
             }
-            case SurveyEvent.NEW_QUESTION: {
+            case SurveyEvent.NEXT_QUESTION: {
                 if (survey.isLastQuestion()) {
                     isLastQuestion.setValue(true);
                 }
+                transitionForward = true;
+                questionType.setValue(survey.getCurrentQuestionType());
+                questionText.setValue(survey.getCurrentQuestionText());
+                break;
+            }
+            case SurveyEvent.PREVIOUS_QUESTION: {
+                transitionForward = false;
                 questionType.setValue(survey.getCurrentQuestionType());
                 questionText.setValue(survey.getCurrentQuestionText());
                 break;
