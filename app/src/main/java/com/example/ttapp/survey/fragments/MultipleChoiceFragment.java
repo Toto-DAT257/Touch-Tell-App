@@ -5,10 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
     private final ArrayList<Integer> response = new ArrayList<>();
 
     private ListView listView;
+    List<MultipleChoiceOption> options;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -41,13 +43,27 @@ public class MultipleChoiceFragment extends QuestionFragment {
                 response.add(option.getValue());
                 surveyViewModel.saveResponse(response);
                 surveyViewModel.nextQuestion();
+                clearSelected();
+                option.setSelected(true);
+                redrawList();
             }
         });
     }
 
+    private void clearSelected() {
+        for (MultipleChoiceOption o : options) {
+            o.setSelected(false);
+        }
+    }
+
+    private void redrawList() {
+        ListAdapter adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
+        listView.setAdapter(adapter);
+    }
+
     @Override
     protected void initResponseOptions() {
-        List<MultipleChoiceOption> options = surveyViewModel.getResponseOptions();
+        options = surveyViewModel.getResponseOptions();
         ListAdapter adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
         listView.setAdapter(adapter);
         initClickOnListItem();
@@ -63,6 +79,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
     @Override
     protected void initResponseObserver() {
         // todo
+        //options.get(1).setSelected(true); // TODO not hardcoded
     }
 
 }

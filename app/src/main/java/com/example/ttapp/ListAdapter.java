@@ -1,8 +1,6 @@
 package com.example.ttapp;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.ttapp.survey.model.MultipleChoiceOption;
 
@@ -33,15 +32,22 @@ public class ListAdapter extends ArrayAdapter<MultipleChoiceOption> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_row,
                     parent, false);
         }
+
 
         MultipleChoiceOption option = getItem(position);
         String text = option.getText();
         TextView textView = convertView.findViewById(R.id.textview_multibutton);
         textView.setText(text);
+        ConstraintLayout multiConstraintLayout = convertView.findViewById(R.id.multiConstraintLayout);
+        if (option.isSelected()) {
+            multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
+        } else {
+            multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton);
+        }
 
         return convertView;
     }
