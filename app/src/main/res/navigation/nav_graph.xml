@@ -56,6 +56,12 @@
         <action
             android:id="@+id/action_homeFragment_to_surveyFragment"
             app:destination="@id/surveyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
