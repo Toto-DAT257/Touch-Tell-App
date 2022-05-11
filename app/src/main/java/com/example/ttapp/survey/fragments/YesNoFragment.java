@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
 import androidx.lifecycle.Observer;
 
 import com.example.ttapp.R;
@@ -55,9 +56,11 @@ public class YesNoFragment extends QuestionFragment {
             @Override
             public void onChanged(List<Integer> integers) {
                 if (integers.get(0) == 1) {
-                    yesnoResponseoption2.setBackgroundResource(R.drawable.yesno_button_not_chosen);
+                    yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
+                    yesnoResponseoption2.setTextColor(getResources().getColor(R.color.grey));
                 } else {
-                    yesnoResponseoption1.setBackgroundResource(R.drawable.yesno_button_not_chosen);
+                    yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
+                    yesnoResponseoption1.setTextColor(getResources().getColor(R.color.grey));
                 }
             }
         });

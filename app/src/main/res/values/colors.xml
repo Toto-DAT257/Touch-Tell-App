@@ -31,4 +31,6 @@
 
     <color name="toto_transparent">#00FFFFFF</color>
 
+    <color name="grey">#949090</color>
+
 </resources>
