@@ -18,7 +18,8 @@
         android:layout_marginTop="30dp"
         android:text="@string/home_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <ImageButton
         android:id="@+id/buttonUser"
@@ -30,6 +31,18 @@
         android:src="@drawable/ic_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/ic_illustration_home"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +57,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewIdentifierPreview"
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +65,8 @@
             android:layout_marginTop="30dp"
             android:text="toto1@touchandtell.se"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
         <android.widget.Button
             android:id="@+id/buttonSignOut"
@@ -70,7 +84,7 @@
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewIdentifierPreview" />
 
         <ImageButton
             android:id="@+id/buttonCloseUserSection"
@@ -81,17 +95,19 @@
             android:background="@color/toto_transparent"
             android:src="@drawable/ic_arrow_up_36"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="50dp"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_statistics"
         app:layout_constraintBottom_toTopOf="@+id/buttonStartSurvey"
@@ -116,7 +132,8 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

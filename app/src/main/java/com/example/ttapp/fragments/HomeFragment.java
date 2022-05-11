@@ -4,8 +4,6 @@ import static android.view.View.GONE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -28,35 +26,38 @@ import com.example.ttapp.databinding.FragmentHomeBinding;
 
 /**
  * Class for a fragment that presents the home page to the application
- *
+ * <p>
  * Used by: -
  * Uses: -
- *
+ * <p>
  * Created by
+ *
  * @author Amanda Cyrén & Philip Winsnes
  */
 public class HomeFragment extends Fragment {
 
     private SharedPreferences sharedPref;
 
-    private Button buttonStartSurvey, buttonSignOut;
     private ImageButton buttonUser, buttonCloseUserSection;
-    private TextView textViewIdentifier, textViewHomeHeader;
     ConstraintLayout userContainer;
 
     private boolean userSectionIsOpen;
+
+    private final int DELAY_ANIMATION = 500;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentHomeBinding binding = FragmentHomeBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
+        sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
-        buttonStartSurvey = binding.buttonStartSurvey;
-        buttonSignOut = binding.buttonSignOut;
+        Button buttonStartSurvey = binding.buttonStartSurvey;
+        Button buttonSignOut = binding.buttonSignOut;
         buttonUser = binding.buttonUser;
         buttonCloseUserSection = binding.buttonCloseUserSection;
         userContainer = binding.userContainer;
-        textViewHomeHeader = binding.textViewHomeHeader;
+        TextView textViewIdentifier = binding.textViewIdentifierPreview;
+        textViewIdentifier.setText(sharedPref.getString("identifier", "Error previewing the identifier"));
 
         buttonStartSurvey.setOnClickListener(view1 -> startSurvey(root));
 
@@ -65,7 +66,6 @@ public class HomeFragment extends Fragment {
         buttonCloseUserSection.setOnClickListener(view -> onUserSectionButtonClick());
 
         buttonUser.setOnClickListener(view -> onUserSectionButtonClick());
-            //FragmentTransaction ft = getChildFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left).hide().commit();
 
         return root;
     }
@@ -89,13 +89,14 @@ public class HomeFragment extends Fragment {
                 0,
                 0,
                 -userContainer.getHeight());
-        animate.setDuration(500);
+        animate.setDuration(DELAY_ANIMATION);
         animate.setFillAfter(true);
         userContainer.startAnimation(animate);
         userContainer.setVisibility(GONE);
-        new CountDownTimer(500,1000) {
+        new CountDownTimer(DELAY_ANIMATION, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) { }
+            public void onTick(long millisUntilFinished) {
+            }
 
             @Override
             public void onFinish() {
@@ -116,12 +117,13 @@ public class HomeFragment extends Fragment {
                 0,
                 -userContainer.getHeight(),
                 0);
-        animate.setDuration(500);
+        animate.setDuration(DELAY_ANIMATION);
         animate.setFillAfter(true);
         userContainer.startAnimation(animate);
-        new CountDownTimer(500,1000) {
+        new CountDownTimer(DELAY_ANIMATION, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) { }
+            public void onTick(long millisUntilFinished) {
+            }
 
             @Override
             public void onFinish() {
@@ -141,14 +143,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void changeStatusBarColor(int color) {
-        Window window = getActivity().getWindow();
+        Window window = requireActivity().getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(color));
     }
 
     private void forgetIdentifier() {
-        sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("identifier", "");
         editor.apply();
