@@ -5,9 +5,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.lifecycle.Observer;
+
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for a fragment that presents a yesno-question
@@ -21,8 +24,8 @@ import java.util.ArrayList;
  */
 public class YesNoFragment extends QuestionFragment {
 
-    private ImageView yesnoResponseoption1;
-    private ImageView yesnoResponseoption2;
+    private Button yesnoResponseoption1;
+    private Button yesnoResponseoption2;
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -48,6 +51,16 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     protected void initResponseObserver() {
         // todo
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
+            @Override
+            public void onChanged(List<Integer> integers) {
+                if (integers.get(0) == 1) {
+                    yesnoResponseoption2.setBackgroundResource(R.drawable.yesno_button_not_chosen);
+                } else {
+                    yesnoResponseoption1.setBackgroundResource(R.drawable.yesno_button_not_chosen);
+                }
+            }
+        });
     }
 
     private void initOnClickListeners() {
