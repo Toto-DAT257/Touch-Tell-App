@@ -142,8 +142,12 @@ public class Survey {
     /**
      * Changes the current question to the previous one and fires a new question event. If the
      * current question is the first one then nothing is done.
+     * A save response event telling all listeners they must save their answers now otherwise
+     * the circumstancing info will be lost. This event is always announced.
      */
     public void previousQuestion() {
+        support.firePropertyChange(SurveyEvent.SAVE_RESPONSE, "must write something", "");
+
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
         if (isFirstQuestion) {
             return;
