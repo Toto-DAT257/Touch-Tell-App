@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -43,6 +45,8 @@ public class RegisterFragment extends Fragment {
         FragmentRegisterBinding binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
+        changeStatusBarColor(R.color.toto_background_gradient_blue);
+
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         registerViewModel.setDatabase(MongoDB.getInstance());
@@ -58,6 +62,13 @@ public class RegisterFragment extends Fragment {
         confirmButton.setOnClickListener(view1 -> identify());
 
         return root;
+    }
+
+    private void changeStatusBarColor(int color) {
+        Window window = requireActivity().getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(getResources().getColor(color));
     }
 
     private void observeIdentification(View root) {

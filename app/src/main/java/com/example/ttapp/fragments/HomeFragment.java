@@ -76,7 +76,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void signOut(View view) {
-        changeStatusBarColor(R.color.toto_background_gradient_blue);
         forgetIdentifier();
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_registerFragment);
     }
