@@ -14,9 +14,7 @@ import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
-import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
-import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.util.SurveyEvent;
 
 import org.bson.Document;

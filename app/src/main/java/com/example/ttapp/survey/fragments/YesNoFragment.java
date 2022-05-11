@@ -3,15 +3,10 @@ package com.example.ttapp.survey.fragments;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-
-import androidx.annotation.ColorInt;
-import androidx.lifecycle.Observer;
 
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class for a fragment that presents a yesno-question
@@ -44,24 +39,19 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response);
-        });
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> surveyViewModel.saveResponse(response));
     }
 
     @Override
     protected void initResponseObserver() {
         // todo
-        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
-            @Override
-            public void onChanged(List<Integer> integers) {
-                if (integers.get(0) == 1) {
-                    yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
-                    yesnoResponseoption2.setTextColor(getResources().getColor(R.color.grey));
-                } else {
-                    yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
-                    yesnoResponseoption1.setTextColor(getResources().getColor(R.color.grey));
-                }
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            if (integers.get(0) == 1) {
+                yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
+                yesnoResponseoption2.setTextColor(getResources().getColor(R.color.grey));
+            } else {
+                yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
+                yesnoResponseoption1.setTextColor(getResources().getColor(R.color.grey));
             }
         });
     }

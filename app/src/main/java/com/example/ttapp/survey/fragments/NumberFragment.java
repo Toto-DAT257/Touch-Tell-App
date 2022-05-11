@@ -4,8 +4,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import androidx.lifecycle.Observer;
-
 import com.example.ttapp.R;
 
 /**
@@ -42,12 +40,7 @@ public class NumberFragment extends QuestionFragment {
 
     @Override
     protected void initResponseObserver() {
-        surveyViewModel.containsCommentresponse().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                numberResponse.setText(s);
-            }
-        });
+        surveyViewModel.containsCommentresponse().observe(getViewLifecycleOwner(), s -> numberResponse.setText(s));
     }
 
 }

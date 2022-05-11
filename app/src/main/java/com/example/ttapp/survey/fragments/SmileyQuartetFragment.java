@@ -4,12 +4,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import androidx.lifecycle.Observer;
-
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class for a fragment that presents a smiley-quartet question
@@ -47,30 +44,25 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response);
-        });
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> surveyViewModel.saveResponse(response));
     }
 
     @Override
     protected void initResponseObserver() {
-        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
-            @Override
-            public void onChanged(List<Integer> integers) {
-                switch (integers.get(0)) {
-                    case 1:
-                        setSmiley1Chosen();
-                        break;
-                    case 2:
-                        setSmiley2Chosen();
-                        break;
-                    case 3:
-                        setSmiley3Chosen();
-                        break;
-                    case 4:
-                        setSmiley4Chosen();
-                        break;
-                }
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            switch (integers.get(0)) {
+                case 1:
+                    setSmiley1Chosen();
+                    break;
+                case 2:
+                    setSmiley2Chosen();
+                    break;
+                case 3:
+                    setSmiley3Chosen();
+                    break;
+                case 4:
+                    setSmiley4Chosen();
+                    break;
             }
         });
     }

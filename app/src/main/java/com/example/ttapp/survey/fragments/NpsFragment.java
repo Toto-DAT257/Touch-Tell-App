@@ -5,13 +5,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
 
 import com.example.ttapp.R;
 import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class for a fragment that presents a nps-question
@@ -62,19 +60,14 @@ public class NpsFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response);
-        });
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> surveyViewModel.saveResponse(response));
     }
 
     @Override
     protected void initResponseObserver() {
-        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
-            @Override
-            public void onChanged(List<Integer> integers) {
-                response.set(0, integers.get(0));
-                slider.setValue(response.get(0));
-            }
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            response.set(0, integers.get(0));
+            slider.setValue(response.get(0));
         });
     }
 

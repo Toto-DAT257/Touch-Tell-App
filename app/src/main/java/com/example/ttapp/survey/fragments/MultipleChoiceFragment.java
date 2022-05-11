@@ -1,11 +1,8 @@
 package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import androidx.lifecycle.Observer;
 
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
@@ -37,17 +34,14 @@ public class MultipleChoiceFragment extends QuestionFragment {
     }
 
     private void initClickOnListItem() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
-                response.add(option.getValue());
-                surveyViewModel.saveResponse(response);
-                clearSelected();
-                option.setSelected(true);
-                redrawList();
-                surveyViewModel.nextQuestion();
-            }
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
+            response.add(option.getValue());
+            surveyViewModel.saveResponse(response);
+            clearSelected();
+            option.setSelected(true);
+            redrawList();
+            surveyViewModel.nextQuestion();
         });
     }
 
@@ -72,19 +66,12 @@ public class MultipleChoiceFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response);
-        });
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> surveyViewModel.saveResponse(response));
     }
 
     @Override
     protected void initResponseObserver() {
-        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
-            @Override
-            public void onChanged(List<Integer> integers) {
-                options.get(integers.get(0)-1).setSelected(true);
-            }
-        });
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> options.get(integers.get(0)-1).setSelected(true));
     }
 
 }
