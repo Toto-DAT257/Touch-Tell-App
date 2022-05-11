@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 
 import com.example.ttapp.R;
 import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for a fragment that presents a nps-question
@@ -23,6 +25,8 @@ import java.util.ArrayList;
  */
 public class NpsFragment extends QuestionFragment {
 
+    private Slider slider;
+
     private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
@@ -32,13 +36,13 @@ public class NpsFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        Slider slider = view.findViewById(R.id.slider);
+        slider = view.findViewById(R.id.NPSslider);
+
         if (response.isEmpty()) {
             response.add((int) slider.getValue());
         } else {
             response.set(0, (int) slider.getValue());
         }
-        surveyViewModel.saveResponse(response); // save 5 as default TODO give user opportunity to skip question
 
         slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @SuppressLint("RestrictedApi")
@@ -59,13 +63,19 @@ public class NpsFragment extends QuestionFragment {
     @Override
     protected void initSaveResponseObserver() {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response); // Not working, very strange. SmileyQuartet seems to trigger instead but to late. cant find the bug.
+            surveyViewModel.saveResponse(response);
         });
     }
 
     @Override
     protected void initResponseObserver() {
-        // todo
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
+            @Override
+            public void onChanged(List<Integer> integers) {
+                response.set(0, integers.get(0));
+                slider.setValue(response.get(0));
+            }
+        });
     }
 
 }
