@@ -28,7 +28,7 @@ public class MultipleChoiceFragment extends QuestionFragment {
     private final ArrayList<Integer> response = new ArrayList<>();
 
     private ListView listView;
-    List<MultipleChoiceOption> options;
+    private List<MultipleChoiceOption> options;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
