@@ -55,9 +55,9 @@ public class YesNoFragment extends QuestionFragment {
             @Override
             public void onChanged(List<Integer> integers) {
                 if (integers.get(0) == 1) {
-                    yesnoResponseoption2.setBackgroundResource(R.drawable.button_state_pressed);
+                    yesnoResponseoption2.setBackgroundResource(R.drawable.yesno_button_not_chosen);
                 } else {
-                    yesnoResponseoption1.setBackgroundResource(R.drawable.button_state_pressed);
+                    yesnoResponseoption1.setBackgroundResource(R.drawable.yesno_button_not_chosen);
                 }
             }
         });

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/yesnoMargin"
             android:layout_weight="1"
-            android:background="@drawable/button"
+            android:background="@drawable/yes_button"
             android:text="@string/yes_no_responseoption1"
             android:textAllCaps="false" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/yesnoMargin"
             android:layout_weight="1"
-            android:background="@drawable/button"
+            android:background="@drawable/no_button"
             android:includeFontPadding="true"
             android:text="@string/yes_no_responseoption2"
             android:textAllCaps="false" />
