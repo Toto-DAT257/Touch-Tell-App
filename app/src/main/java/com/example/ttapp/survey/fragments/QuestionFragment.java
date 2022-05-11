@@ -33,6 +33,8 @@ public abstract class QuestionFragment extends Fragment {
         setSurveyViewModel();
         initResponseOptions();
         initSaveResponseObserver();
+        initResponseObserver();
+        repopulate();
 
         return view;
     }
@@ -46,5 +48,11 @@ public abstract class QuestionFragment extends Fragment {
     protected abstract void initResponseOptions();
 
     protected abstract void initSaveResponseObserver();
+
+    protected abstract void initResponseObserver();
+
+    protected void repopulate() {
+        surveyViewModel.repopulate();
+    }
 
 }

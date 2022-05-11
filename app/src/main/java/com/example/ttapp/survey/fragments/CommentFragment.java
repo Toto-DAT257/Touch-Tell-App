@@ -38,4 +38,9 @@ public class CommentFragment extends QuestionFragment {
         });
     }
 
+    @Override
+    protected void initResponseObserver() {
+        surveyViewModel.containsCommentresponse().observe(getViewLifecycleOwner(), s -> commentResponse.setText(s));
+    }
+
 }

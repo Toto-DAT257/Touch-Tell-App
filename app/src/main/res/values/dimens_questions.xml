@@ -9,4 +9,7 @@
     <dimen name="npsSeekbarMargin">36dp</dimen>
     <dimen name="npsSeekbarScale">2</dimen>
 
+    <!-- yes no -->
+    <dimen name="yesnoMargin">6dp</dimen>
+
 </resources>

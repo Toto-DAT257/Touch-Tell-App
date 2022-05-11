@@ -7,10 +7,12 @@ public class MultipleChoiceOption {
 
     private final String text;
     private final int value;
+    private boolean isSelected;
 
     public MultipleChoiceOption(String text, int value) {
         this.text = text;
         this.value = value;
+        this.isSelected = false;
     }
 
     public String getText() {
@@ -19,5 +21,13 @@ public class MultipleChoiceOption {
 
     public int getValue() {
         return value;
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
     }
 }
