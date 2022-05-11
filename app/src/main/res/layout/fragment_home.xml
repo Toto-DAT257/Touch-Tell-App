@@ -36,7 +36,7 @@
         android:id="@+id/userContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#424242"
+        android:background="@color/toto_dark_grey"
         android:paddingBottom="30dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
