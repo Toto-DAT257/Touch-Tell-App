@@ -13,6 +13,7 @@
         android:overScrollMode="never"
         android:divider="@null"
         android:dividerHeight="20dp"
+        android:listSelector="@drawable/background_multibutton_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
