@@ -49,13 +49,12 @@ public class SmileyCommentFragment extends QuestionFragment {
         buttonCommentSmiley = view.findViewById(R.id.buttonCommentSmiley);
 
         initOnClickListeners();
-        // TODO implement logic when design is done
     }
 
     @Override
     protected void initSaveResponseObserver() {
         surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            //comment = smileyCommentResponse.getText().toString(); // TODO change to actual ID when design is done
+            comment = smileyCComment.getText().toString();
             // TODO set responseOption when design is done
             surveyViewModel.saveResponse(responseOption, comment);
         });
