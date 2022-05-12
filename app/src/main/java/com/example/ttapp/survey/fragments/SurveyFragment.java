@@ -84,6 +84,7 @@ public class SurveyFragment extends Fragment {
             }
         });
 
+        backButton.setVisibility(View.INVISIBLE);
         setHomeOnClickListener();
         setExpandCollapseOnClickListener();
 
