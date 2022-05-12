@@ -70,23 +70,31 @@ public class SmileyCommentFragment extends QuestionFragment {
         });
     }
 
+    private void responseClearer (ArrayList<Integer> responseOption ) {
+        responseOption.clear();
+    }
+
     private void initOnClickListeners() {
         smileyCResponseoption1.setOnClickListener(view -> {
+            responseClearer(responseOption);
             responseOption.add(1);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
         });
 
         smileyCResponseoption2.setOnClickListener(view -> {
+            responseClearer(responseOption);
             responseOption.add(2);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
         });
 
         smileyCResponseoption3.setOnClickListener(view -> {
+            responseClearer(responseOption);
             responseOption.add(3);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
         });
 
         smileyCResponseoption4.setOnClickListener(view -> {
+            responseClearer(responseOption);  
             responseOption.add(4);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
         });

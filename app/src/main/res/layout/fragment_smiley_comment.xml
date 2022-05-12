@@ -59,16 +59,19 @@
     <EditText
         android:id="@+id/smileyCComment"
         style="@style/Body"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/comment_background"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="@string/comment_hinttext"
+        android:lines="12"
         android:textColorHint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCommentSmiley"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
 
     <android.widget.Button
         android:id="@+id/buttonCommentSmiley"
