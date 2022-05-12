@@ -165,6 +165,12 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 break;
             }
             case SurveyEvent.PREVIOUS_QUESTION: {
+                if(survey.isFirstQuestion()) {
+                    isFirstQuestion.setValue(true);
+                }
+                else
+                    isFirstQuestion.setValue(false);
+
                 transitionForward = false;
                 questionType.setValue(survey.getCurrentQuestionType());
                 questionText.setValue(survey.getCurrentQuestionText());

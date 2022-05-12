@@ -244,7 +244,12 @@ public class SurveyFragment extends Fragment {
         });
 
         surveyViewModel.isFirstQuestion().observe(getViewLifecycleOwner(), aBoolean -> {
-            backButton.setVisibility(View.INVISIBLE);
+            if(aBoolean) {
+                backButton.setVisibility(View.INVISIBLE);
+            }
+            else {
+                backButton.setVisibility(View.VISIBLE);
+            }
         });
 
         backButton.setOnClickListener(click -> previous());
