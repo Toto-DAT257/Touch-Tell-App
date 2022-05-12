@@ -66,5 +66,6 @@
     <string name="start_survey">Starta enkät</string>
     <string name="home">Hem</string>
     <string name="button_comment_smiley">Kommentera</string>
+    <string name="button_back_smiley">Tillbaka</string>
 
 </resources>
