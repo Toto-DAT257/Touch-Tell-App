@@ -247,6 +247,10 @@ public class SurveyFragment extends Fragment {
                 nextButton.setVisibility(View.INVISIBLE);
                 submitButton.setVisibility(View.VISIBLE);
             }
+            else {
+                nextButton.setVisibility(View.VISIBLE);
+                submitButton.setVisibility(View.INVISIBLE);
+            }
         });
 
         backButton.setOnClickListener(click -> previous());
