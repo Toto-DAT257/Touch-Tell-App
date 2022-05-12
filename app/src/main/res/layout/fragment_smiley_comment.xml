@@ -90,4 +90,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableSmileys" />
 
+    <android.widget.Button
+        android:id="@+id/buttonBackSmiley"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:width="220dp"
+        android:height="47dp"
+        android:background="@drawable/button"
+        android:includeFontPadding="false"
+        android:text="@string/button_back_smiley"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableSmileys" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

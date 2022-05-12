@@ -65,4 +65,5 @@
     <string name="start_survey">Start Survey</string>
     <string name="home">Home</string>
     <string name="button_comment_smiley">Comment</string>
+    <string name="button_back_smiley">Back</string>
 </resources>
