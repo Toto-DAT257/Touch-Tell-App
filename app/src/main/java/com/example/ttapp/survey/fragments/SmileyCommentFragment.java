@@ -66,6 +66,27 @@ public class SmileyCommentFragment extends QuestionFragment {
         });
     }
 
+    @Override
+    protected void initResponseObserver() {
+        surveyViewModel.containsCommentresponse().observe(getViewLifecycleOwner(), s -> smileyCComment.setText(s));
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            switch (integers.get(0)) {
+                case 1:
+                    setSmiley1Chosen();
+                    break;
+                case 2:
+                    setSmiley2Chosen();
+                    break;
+                case 3:
+                    setSmiley3Chosen();
+                    break;
+                case 4:
+                    setSmiley4Chosen();
+                    break;
+            }
+        });
+    }
+
     private void responseClearer(ArrayList<Integer> responseOption) {
         responseOption.clear();
     }
@@ -116,6 +137,37 @@ public class SmileyCommentFragment extends QuestionFragment {
             tableSmileys.setVisibility(View.INVISIBLE);
             smileyCComment.setVisibility(View.VISIBLE);
         });
+
+        buttonBackSmiley.setOnClickListener(view -> {
+            buttonCommentSmiley.setVisibility(View.VISIBLE);
+            buttonBackSmiley.setVisibility(View.INVISIBLE);
+            tableSmileys.setVisibility(View.VISIBLE);
+            smileyCComment.setVisibility(View.INVISIBLE);
+        });
+    }
+
+    private void setSmiley1Chosen() {
+        smileyCResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
+        smileyCResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
+        smileyCResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley2Chosen() {
+        smileyCResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
+        smileyCResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
+        smileyCResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley3Chosen() {
+        smileyCResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
+        smileyCResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
+        smileyCResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+    }
+
+    private void setSmiley4Chosen() {
+        smileyCResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
+        smileyCResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
+        smileyCResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
     }
 
 }
