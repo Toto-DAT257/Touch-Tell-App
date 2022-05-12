@@ -8,14 +8,19 @@
 
     <EditText
         android:id="@+id/emailResponse"
-        android:layout_width="wrap_content"
+        style="@style/Body"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:background="@drawable/edit_text_comment"
+        android:gravity="top"
         android:hint="@string/email_hinttext"
         android:inputType="textEmailAddress"
-        android:textSize="@dimen/responseTextSize"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:lines="1"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 </androidx.constraintlayout.widget.ConstraintLayout>
