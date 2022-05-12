@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.fragments;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -93,28 +94,31 @@ public class SmileyQuartetFragment extends QuestionFragment {
 
     private void initOnClickListeners() {
         smileyqResponseoption1.setOnClickListener(view -> {
+            smileyqResponseoption1.setColorFilter(Color.argb(150,118,118,118));
             response.add(1);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption2.setOnClickListener(view -> {
+            smileyqResponseoption2.setColorFilter(Color.argb(150,118,118,118));
             response.add(2);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption3.setOnClickListener(view -> {
+            smileyqResponseoption3.setColorFilter(Color.argb(150,118,118,118));
             response.add(3);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption4.setOnClickListener(view -> {
+            smileyqResponseoption4.setColorFilter(Color.argb(150,118,118,118));
             response.add(4);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
     }
-
 }

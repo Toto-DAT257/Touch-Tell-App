@@ -1,5 +1,6 @@
 package com.example.ttapp.survey.fragments;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
