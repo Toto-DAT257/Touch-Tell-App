@@ -43,7 +43,7 @@
     <string name="smileyq_responseoption4">Gladast</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Skriv ditt svar här…</string>
+    <string name="comment_hinttext">Vänligen förklara ditt val...</string>
 
     <!-- NPS question -->
     <string name="nps_slider_label_right">Extremt</string>

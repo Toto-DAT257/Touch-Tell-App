@@ -42,7 +42,7 @@
     <string name="smileyq_responseoption4">Happiest</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Write your answer here…</string>
+    <string name="comment_hinttext">Please explain why you choose this smiley...</string>
 
     <!-- NPS question -->
     <string name="nps_slider_label_right">Extremely</string>

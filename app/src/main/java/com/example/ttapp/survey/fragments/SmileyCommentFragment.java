@@ -15,12 +15,13 @@ import java.util.ArrayList;
 
 /**
  * Class for a fragment that presents a smileycomment-question
- *
+ * <p>
  * Used by: -
  * Uses: -
- *
+ * <p>
  * Created by
- * @author Emma Stålberg
+ *
+ * @author Fanny Söderling and Alva Jansson
  */
 public class SmileyCommentFragment extends QuestionFragment {
 
@@ -29,11 +30,9 @@ public class SmileyCommentFragment extends QuestionFragment {
     private ImageView smileyCResponseoption3;
     private ImageView smileyCResponseoption4;
     private TableLayout tableSmileys;
-
     private EditText smileyCComment;
     private Button buttonCommentSmiley;
     private Button buttonBackSmiley;
-
     ArrayList<Integer> responseOption = new ArrayList<>();
     String comment;
 
@@ -46,13 +45,11 @@ public class SmileyCommentFragment extends QuestionFragment {
     protected void initResponseOptions() {
         smileyCComment = view.findViewById(R.id.smileyCComment);
         smileyCComment.setVisibility(View.INVISIBLE);
-
         tableSmileys = view.findViewById(R.id.tableSmileys);
         smileyCResponseoption1 = view.findViewById(R.id.smileyCResponseoption1);
         smileyCResponseoption2 = view.findViewById(R.id.smileyCResponseoption2);
         smileyCResponseoption3 = view.findViewById(R.id.smileyCResponseoption3);
         smileyCResponseoption4 = view.findViewById(R.id.smileyCResponseoption4);
-
         buttonCommentSmiley = view.findViewById(R.id.buttonCommentSmiley);
         buttonCommentSmiley.setVisibility(View.INVISIBLE);
         buttonBackSmiley = view.findViewById(R.id.buttonBackSmiley);
@@ -70,8 +67,15 @@ public class SmileyCommentFragment extends QuestionFragment {
         });
     }
 
-    private void responseClearer (ArrayList<Integer> responseOption ) {
+    private void responseClearer(ArrayList<Integer> responseOption) {
         responseOption.clear();
+    }
+
+    private void smileyClearer() {
+        smileyCResponseoption1.clearColorFilter();
+        smileyCResponseoption2.clearColorFilter();
+        smileyCResponseoption3.clearColorFilter();
+        smileyCResponseoption4.clearColorFilter();
     }
 
     private void initOnClickListeners() {
@@ -79,27 +83,35 @@ public class SmileyCommentFragment extends QuestionFragment {
             responseClearer(responseOption);
             responseOption.add(1);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
+            smileyClearer();
+            smileyCResponseoption1.setColorFilter(Color.argb(150, 118, 118, 118));
         });
 
         smileyCResponseoption2.setOnClickListener(view -> {
             responseClearer(responseOption);
             responseOption.add(2);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
+            smileyClearer();
+            smileyCResponseoption2.setColorFilter(Color.argb(150, 118, 118, 118));
         });
 
         smileyCResponseoption3.setOnClickListener(view -> {
             responseClearer(responseOption);
             responseOption.add(3);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
+            smileyClearer();
+            smileyCResponseoption3.setColorFilter(Color.argb(150, 118, 118, 118));
         });
 
         smileyCResponseoption4.setOnClickListener(view -> {
-            responseClearer(responseOption);  
+            responseClearer(responseOption);
             responseOption.add(4);
             buttonCommentSmiley.setVisibility(View.VISIBLE);
+            smileyClearer();
+            smileyCResponseoption4.setColorFilter(Color.argb(150, 118, 118, 118));
         });
 
-        buttonCommentSmiley.setOnClickListener(view ->{
+        buttonCommentSmiley.setOnClickListener(view -> {
             buttonCommentSmiley.setVisibility(View.INVISIBLE);
             buttonBackSmiley.setVisibility(View.VISIBLE);
             tableSmileys.setVisibility(View.INVISIBLE);
@@ -112,7 +124,5 @@ public class SmileyCommentFragment extends QuestionFragment {
             tableSmileys.setVisibility(View.VISIBLE);
             smileyCComment.setVisibility(View.INVISIBLE);
         });
-
     }
-
 }
