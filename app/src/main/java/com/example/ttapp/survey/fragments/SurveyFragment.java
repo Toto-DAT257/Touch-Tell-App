@@ -48,6 +48,7 @@ public class SurveyFragment extends Fragment {
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
     ProgressBar progressBar;
+    Button submitButton;
     boolean isExpanded = false;
 
     ProgressBar loading;
@@ -70,6 +71,8 @@ public class SurveyFragment extends Fragment {
         separator = binding.separator;
         loading = binding.loadingProgressBar;
         expandCollapseButton = binding.expandCollapseButton;
+        submitButton = binding.submitButton;
+        submitButton.setVisibility(View.INVISIBLE);
 
         hideQuestion();
 
@@ -240,11 +243,15 @@ public class SurveyFragment extends Fragment {
         });
 
         surveyViewModel.isLastQuestion().observe(getViewLifecycleOwner(), aBoolean -> {
-            // to be done further on, submitButton
+            if (aBoolean){
+                nextButton.setVisibility(View.INVISIBLE);
+                submitButton.setVisibility(View.VISIBLE);
+            }
         });
 
         backButton.setOnClickListener(click -> previous());
         nextButton.setOnClickListener(click -> next());
+        submitButton.setOnClickListener(click -> next());
     }
 
     private void next() {
