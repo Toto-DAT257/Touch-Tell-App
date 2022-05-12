@@ -32,8 +32,8 @@
     <string name="done_with_survey_button">Return home</string>
 
     <!-- yes no question -->
-    <string name="yesno_responseoption1">Yes</string>
-    <string name="yesno_responseoption2">No</string>
+    <string name="yes_no_responseoption1">Yes</string>
+    <string name="yes_no_responseoption2">No</string>
 
     <!-- smiley quartet question -->
     <string name="smileyq_responseoption1">Saddest</string>
@@ -42,7 +42,7 @@
     <string name="smileyq_responseoption4">Happiest</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Please explain why you choose this smiley...</string>
+    <string name="comment_hinttext">Please explain why you chose this smiley...</string>
 
     <!-- NPS question -->
     <string name="nps_slider_label_right">Extremely</string>
@@ -66,4 +66,6 @@
     <string name="home">Home</string>
     <string name="button_comment_smiley">Comment</string>
     <string name="button_back_smiley">Back</string>
+    <string name="log_out">Log Out</string>
+
 </resources>

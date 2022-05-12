@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="70dp"
+    android:paddingTop="120dp"
     android:orientation="vertical">
 
     <!-- Slider -->
     <com.google.android.material.slider.Slider
-        android:id="@+id/slider"
+        android:id="@+id/NPSslider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:labelFor="@id/slider"
+        android:labelFor="@id/NPSslider"
         android:stepSize="1"
         android:value="5"
         android:valueFrom="1"
-        android:valueTo="10"
 
+        android:valueTo="10"
         app:thumbColor="@color/toto_10"
         app:thumbStrokeColor="@color/white"
         app:thumbStrokeWidth="3dp"

@@ -15,7 +15,6 @@ import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
 import com.example.ttapp.survey.model.Survey;
-import com.example.ttapp.survey.model.jsonparsing.ResponseValues;
 import com.example.ttapp.survey.util.SurveyEvent;
 
 import org.bson.Document;
@@ -43,6 +42,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<Boolean> surveyIsDone;
     private final MutableLiveData<Boolean> saveResponse;
     private final MutableLiveData<Boolean> isLastQuestion;
+    private MutableLiveData<String> commentResponse;
+    private MutableLiveData<List<Integer>> answeroptionsResponse;
     private boolean transitionForward = true;
 
     public SurveyViewModel() {
@@ -52,6 +53,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         surveyIsDone = new MutableLiveData<>();
         saveResponse = new MutableLiveData<>();
         isLastQuestion = new MutableLiveData<>();
+        commentResponse = new MutableLiveData<>();
+        answeroptionsResponse = new MutableLiveData<>();
     }
 
     public void resetSurvey() {
@@ -180,6 +183,12 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     public void saveResponse(ArrayList<Integer> responseOption, String comment) {
         survey.saveResponse(responseOption, comment);
+        clearResponses();
+    }
+
+    private void clearResponses() {
+        commentResponse = new MutableLiveData<>();
+        answeroptionsResponse = new MutableLiveData<>();
     }
 
     public void submitResponse(){
@@ -192,6 +201,28 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     public int getProgressPercentage(){
         return survey.getProgressPercentage();
+    }
+
+    public void repopulate() {
+        String currentQResponseComment = survey.getCurrentQResponseComment();
+        List<Integer> currentQResponseAnsweredOptions = survey.getCurrentQResponseAnsweredOptions();
+        if (!currentQResponseComment.isEmpty()) {
+            commentResponse.setValue(currentQResponseComment);
+            containsCommentresponse();
+        }
+
+        if(!currentQResponseAnsweredOptions.isEmpty()) {
+            answeroptionsResponse.setValue(currentQResponseAnsweredOptions);
+            containsAnsweredOptionsResponse();
+        }
+    }
+
+    public LiveData<String> containsCommentresponse() {
+        return commentResponse;
+    }
+
+    public LiveData<List<Integer>> containsAnsweredOptionsResponse() {
+        return answeroptionsResponse;
     }
 
 }

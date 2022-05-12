@@ -3,11 +3,8 @@ package com.example.ttapp.survey.fragments;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.ttapp.ListAdapter;
 import com.example.ttapp.R;
@@ -34,6 +31,8 @@ public class SelectManyFragment extends QuestionFragment {
     private ListView listView;
     private final Set<Integer> pressedOptions = new HashSet<>();
 
+    private List<MultipleChoiceOption> options;
+
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_select_many, container, false);
@@ -42,7 +41,7 @@ public class SelectManyFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        List<MultipleChoiceOption> options = surveyViewModel.getResponseOptions();
+        options = surveyViewModel.getResponseOptions();
         ListAdapter adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
         listView.setAdapter(adapter);
         initClickOnListItem();
@@ -56,26 +55,39 @@ public class SelectManyFragment extends QuestionFragment {
         });
     }
 
-    private void initClickOnListItem() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
-                ConstraintLayout multiConstraintLayout = view.findViewById(R.id.multiConstraintLayout);
-                ImageView multiCheck = view.findViewById(R.id.check_multibutton);
-
-                if (multiCheck.getVisibility() == View.INVISIBLE) {
-                    multiCheck.setVisibility(View.VISIBLE);
-                    multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton_light);
-                    pressedOptions.add(option.getValue());
-                } else {
-                    multiCheck.setVisibility(View.INVISIBLE);
-                    multiConstraintLayout.setBackgroundResource(R.drawable.background_multibutton);
-                    pressedOptions.remove(option.getValue());
-                }
+    @Override
+    protected void initResponseObserver() {
+        // todo
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            for (int i = 0; i < integers.size(); i++) {
+                System.out.println(integers.get(i));
+                options.get(integers.get(i)-1).setSelected(true);
+                pressedOptions.add(integers.get(i));
             }
         });
+    }
+
+    private void initClickOnListItem() {
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+
+            MultipleChoiceOption option = (MultipleChoiceOption) adapterView.getItemAtPosition(i);
+            ImageView multiCheck = view.findViewById(R.id.check_multibutton);
+
+            if (multiCheck.getVisibility() == View.INVISIBLE) {
+                pressedOptions.add(option.getValue());
+                option.setSelected(true);
+            } else {
+                pressedOptions.remove(option.getValue());
+                option.setSelected(false);
+            }
+
+            redrawList();
+        });
+    }
+
+    private void redrawList() {
+        ListAdapter adapter = new ListAdapter(requireActivity().getApplicationContext(), options);
+        listView.setAdapter(adapter);
     }
 
 }

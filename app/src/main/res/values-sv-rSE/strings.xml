@@ -19,6 +19,7 @@
 
     <!-- home page -->
     <string name="home_header">Hem</string>
+    <string name="log_out">Logga ut</string>
     <string name="home_start_survey_button">Starta enkät</string>
     <string name="home_settings_button">Inställningar</string>
 
@@ -33,8 +34,8 @@
     <string name="done_with_survey_button">Återgå till hem</string>
 
     <!-- yes no question -->
-    <string name="yesno_responseoption1">Ja</string>
-    <string name="yesno_responseoption2">Nej</string>
+    <string name="yes_no_responseoption1">Ja</string>
+    <string name="yes_no_responseoption2">Nej</string>
 
     <!-- smiley quartet question -->
     <string name="smileyq_responseoption1">Ledsnast</string>

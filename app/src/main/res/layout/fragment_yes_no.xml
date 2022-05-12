@@ -17,18 +17,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <android.widget.Button
             android:id="@+id/yesnoResponseoption1"
+            style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/yesnoMargin"
             android:layout_weight="1"
-            android:src="@drawable/ic_vector_up" />
+            android:background="@drawable/yes_button"
+            android:text="@string/yes_no_responseoption1"
+            android:textAllCaps="false" />
 
-        <ImageView
+        <android.widget.Button
             android:id="@+id/yesnoResponseoption2"
+            style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/yesnoMargin"
             android:layout_weight="1"
-            android:src="@drawable/ic_vector_down" />
+            android:background="@drawable/no_button"
+            android:includeFontPadding="true"
+            android:text="@string/yes_no_responseoption2"
+            android:textAllCaps="false" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

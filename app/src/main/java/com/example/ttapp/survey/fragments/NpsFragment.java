@@ -23,6 +23,8 @@ import java.util.ArrayList;
  */
 public class NpsFragment extends QuestionFragment {
 
+    private Slider slider;
+
     private final ArrayList<Integer> response = new ArrayList<>();
 
     @Override
@@ -32,13 +34,13 @@ public class NpsFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        Slider slider = view.findViewById(R.id.slider);
+        slider = view.findViewById(R.id.NPSslider);
+
         if (response.isEmpty()) {
             response.add((int) slider.getValue());
         } else {
             response.set(0, (int) slider.getValue());
         }
-        surveyViewModel.saveResponse(response); // save 5 as default TODO give user opportunity to skip question
 
         slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @SuppressLint("RestrictedApi")
@@ -58,8 +60,14 @@ public class NpsFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response); // Not working, very strange. SmileyQuartet seems to trigger instead but to late. cant find the bug.
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> surveyViewModel.saveResponse(response));
+    }
+
+    @Override
+    protected void initResponseObserver() {
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            response.set(0, integers.get(0));
+            slider.setValue(response.get(0));
         });
     }
 

@@ -1,9 +1,9 @@
 package com.example.ttapp.survey.fragments;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.example.ttapp.R;
 
@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 public class YesNoFragment extends QuestionFragment {
 
-    private ImageView yesnoResponseoption1;
-    private ImageView yesnoResponseoption2;
+    private Button yesnoResponseoption1;
+    private Button yesnoResponseoption2;
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -40,8 +40,20 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            surveyViewModel.saveResponse(response);
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> surveyViewModel.saveResponse(response));
+    }
+
+    @Override
+    protected void initResponseObserver() {
+        // todo
+        surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+            if (integers.get(0) == 1) {
+                yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
+                yesnoResponseoption2.setTextColor(getResources().getColor(R.color.grey));
+            } else {
+                yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
+                yesnoResponseoption1.setTextColor(getResources().getColor(R.color.grey));
+            }
         });
     }
 

@@ -15,13 +15,12 @@ import java.util.ArrayList;
 
 /**
  * Class for a fragment that presents a smileycomment-question
- * <p>
+ *
  * Used by: -
  * Uses: -
- * <p>
- * Created by
  *
- * @author Fanny Söderling and Alva Jansson
+ * Created by
+ * @author Emma Stålberg
  */
 public class SmileyCommentFragment extends QuestionFragment {
 
@@ -117,12 +116,6 @@ public class SmileyCommentFragment extends QuestionFragment {
             tableSmileys.setVisibility(View.INVISIBLE);
             smileyCComment.setVisibility(View.VISIBLE);
         });
-
-        buttonBackSmiley.setOnClickListener(view -> {
-            buttonCommentSmiley.setVisibility(View.VISIBLE);
-            buttonBackSmiley.setVisibility(View.INVISIBLE);
-            tableSmileys.setVisibility(View.VISIBLE);
-            smileyCComment.setVisibility(View.INVISIBLE);
-        });
     }
+
 }

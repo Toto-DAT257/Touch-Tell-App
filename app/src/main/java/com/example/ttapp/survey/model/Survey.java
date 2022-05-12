@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Main class of the model package. This class serves as the interface to be used by clients.
@@ -141,8 +142,12 @@ public class Survey {
     /**
      * Changes the current question to the previous one and fires a new question event. If the
      * current question is the first one then nothing is done.
+     * A save response event telling all listeners they must save their answers now otherwise
+     * the circumstancing info will be lost. This event is always announced.
      */
     public void previousQuestion() {
+        support.firePropertyChange(SurveyEvent.SAVE_RESPONSE, "must write something", "");
+
         boolean isFirstQuestion = jsonQuestionsParser.isFirstQuestion(currentQuestionId);
         if (isFirstQuestion) {
             return;
@@ -155,10 +160,6 @@ public class Survey {
 
     public void putResponse(String questionId, QuestionResponse response) {
         responses.put(questionId, response);
-    }
-
-    public QuestionResponse getResponse(String questionId) {
-        return responses.get(questionId);
     }
 
     /**
@@ -262,7 +263,6 @@ public class Survey {
         return jsonQuestionsParser.getResponseOptions(currentQuestionId);
     }
 
-
     /**
      * Calculates the survey progress percentage.
      * Adapts the number if conditional questions are skipped to even out the progress jumps between questions.
@@ -277,4 +277,25 @@ public class Survey {
         int progress = 100 / adaptedTotal * adaptedQuestionNumber;
         return progress;
     }
+
+    // If the survey taker has responded to the question before, the earlier
+    // comment response is returned.
+    public String getCurrentQResponseComment() {
+        if (responses.containsKey(getCurrentQuestionId())) {
+            return Objects.requireNonNull(responses.get(getCurrentQuestionId())).getComment();
+        } else {
+            return "";
+        }
+    }
+
+    // If the survey taker has responded to the question before, the earlier
+    // answeroptions response is returned.
+    public List<Integer> getCurrentQResponseAnsweredOptions() {
+        if (responses.containsKey(getCurrentQuestionId())) {
+            return Objects.requireNonNull(responses.get(getCurrentQuestionId())).getAnsweredOptions();
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
 }
