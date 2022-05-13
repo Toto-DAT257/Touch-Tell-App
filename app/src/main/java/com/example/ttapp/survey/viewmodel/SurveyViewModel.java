@@ -58,13 +58,14 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         isFirstQuestion = new MutableLiveData<>();
         commentResponse = new MutableLiveData<>();
         answeroptionsResponse = new MutableLiveData<>();
+
     }
 
     public void resetSurvey() {
         jsonIsReceived.setValue(false);
         surveyIsDone.setValue(false);
-        isLastQuestion.setValue(false);
         isFirstQuestion.setValue(true);
+        isLastQuestion.setValue(false);
     }
 
     public boolean isTransitionForward() {
@@ -167,6 +168,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 break;
             }
             case SurveyEvent.PREVIOUS_QUESTION: {
+                isLastQuestion.setValue(false);
                 if(survey.isFirstQuestion()) {
                     isFirstQuestion.setValue(true);
                 }
