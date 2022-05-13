@@ -87,6 +87,7 @@ public class SurveyFragment extends Fragment {
             }
         });
 
+        backButton.setVisibility(View.INVISIBLE);
         setHomeOnClickListener();
         setExpandCollapseOnClickListener();
 
@@ -250,6 +251,15 @@ public class SurveyFragment extends Fragment {
             else {
                 nextButton.setVisibility(View.VISIBLE);
                 submitButton.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        surveyViewModel.isFirstQuestion().observe(getViewLifecycleOwner(), aBoolean -> {
+            if(aBoolean) {
+                backButton.setVisibility(View.INVISIBLE);
+            }
+            else {
+                backButton.setVisibility(View.VISIBLE);
             }
         });
 

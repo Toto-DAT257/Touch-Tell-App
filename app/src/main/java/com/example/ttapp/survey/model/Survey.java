@@ -73,6 +73,9 @@ public class Survey {
     public Boolean isLastQuestion() {
         return jsonQuestionsParser.isLastQuestion(currentQuestionId);
     }
+    public Boolean isFirstQuestion() {
+        return jsonQuestionsParser.isFirstQuestion(currentQuestionId);
+    }
 
     /**
      * Changes the current question to the next with one exception; if

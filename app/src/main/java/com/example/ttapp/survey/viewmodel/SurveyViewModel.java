@@ -42,6 +42,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<Boolean> surveyIsDone;
     private final MutableLiveData<Boolean> saveResponse;
     private final MutableLiveData<Boolean> isLastQuestion;
+    private final MutableLiveData<Boolean> isFirstQuestion;
+
     private MutableLiveData<String> commentResponse;
     private MutableLiveData<List<Integer>> answeroptionsResponse;
     private boolean transitionForward = true;
@@ -53,6 +55,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         surveyIsDone = new MutableLiveData<>();
         saveResponse = new MutableLiveData<>();
         isLastQuestion = new MutableLiveData<>();
+        isFirstQuestion = new MutableLiveData<>();
         commentResponse = new MutableLiveData<>();
         answeroptionsResponse = new MutableLiveData<>();
     }
@@ -61,6 +64,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         jsonIsReceived.setValue(false);
         surveyIsDone.setValue(false);
         isLastQuestion.setValue(false);
+        isFirstQuestion.setValue(true);
     }
 
     public boolean isTransitionForward() {
@@ -114,6 +118,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     }
 
     public void nextQuestion() {
+        isFirstQuestion.setValue(false);
         survey.nextQuestion();
     }
 
@@ -141,6 +146,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return isLastQuestion;
     }
 
+    public LiveData<Boolean> isFirstQuestion() { return isFirstQuestion;}
+
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         switch (propertyChangeEvent.getPropertyName()) {
@@ -160,6 +167,12 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 break;
             }
             case SurveyEvent.PREVIOUS_QUESTION: {
+                if(survey.isFirstQuestion()) {
+                    isFirstQuestion.setValue(true);
+                }
+                else
+                    isFirstQuestion.setValue(false);
+
                 transitionForward = false;
                 questionType.setValue(survey.getCurrentQuestionType());
                 questionText.setValue(survey.getCurrentQuestionText());
