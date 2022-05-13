@@ -87,10 +87,6 @@ public class SmileyCommentFragment extends QuestionFragment {
         });
     }
 
-    private void responseClearer(ArrayList<Integer> responseOption) {
-        responseOption.clear();
-    }
-
     private void smileyClearer() {
         smileyCResponseoption1.clearColorFilter();
         smileyCResponseoption2.clearColorFilter();
@@ -98,37 +94,32 @@ public class SmileyCommentFragment extends QuestionFragment {
         smileyCResponseoption4.clearColorFilter();
     }
 
+    private void changeSmiley(int i, ImageView smiley) {
+        responseOption.clear();
+        responseOption.add(i);
+        buttonCommentSmiley.setVisibility(View.VISIBLE);
+        smileyClearer();
+        smiley.setColorFilter(Color.argb(150, 118, 118, 118));
+
+    }
+
     private void initOnClickListeners() {
+
+
         smileyCResponseoption1.setOnClickListener(view -> {
-            responseClearer(responseOption);
-            responseOption.add(1);
-            buttonCommentSmiley.setVisibility(View.VISIBLE);
-            smileyClearer();
-            smileyCResponseoption1.setColorFilter(Color.argb(150, 118, 118, 118));
+            changeSmiley(1, smileyCResponseoption1);
         });
 
         smileyCResponseoption2.setOnClickListener(view -> {
-            responseClearer(responseOption);
-            responseOption.add(2);
-            buttonCommentSmiley.setVisibility(View.VISIBLE);
-            smileyClearer();
-            smileyCResponseoption2.setColorFilter(Color.argb(150, 118, 118, 118));
+            changeSmiley(2, smileyCResponseoption2);
         });
 
         smileyCResponseoption3.setOnClickListener(view -> {
-            responseClearer(responseOption);
-            responseOption.add(3);
-            buttonCommentSmiley.setVisibility(View.VISIBLE);
-            smileyClearer();
-            smileyCResponseoption3.setColorFilter(Color.argb(150, 118, 118, 118));
+            changeSmiley(3, smileyCResponseoption3);
         });
 
         smileyCResponseoption4.setOnClickListener(view -> {
-            responseClearer(responseOption);
-            responseOption.add(4);
-            buttonCommentSmiley.setVisibility(View.VISIBLE);
-            smileyClearer();
-            smileyCResponseoption4.setColorFilter(Color.argb(150, 118, 118, 118));
+            changeSmiley(4, smileyCResponseoption4);
         });
 
         buttonCommentSmiley.setOnClickListener(view -> {
