@@ -173,9 +173,7 @@ public class Survey {
      */
     public void saveResponse(ArrayList<Integer> answerOption, String comment) {
         QuestionResponse questionResponse = createResponseObject(answerOption, comment);
-        if (!questionResponse.isEmpty()) {
-            putResponse(currentQuestionId, questionResponse);
-        }
+        putResponse(currentQuestionId, questionResponse);
     }
 
     protected Map<String, QuestionResponse> getResponses() {
@@ -189,7 +187,7 @@ public class Survey {
     protected List<QuestionResponse> getResponsesToSend() {
         List<QuestionResponse> toSend = new ArrayList<>();
         for (QuestionResponse r : responses.values()) {
-            if (allConditionsAreMet(r.getQuestionId())) {
+            if (allConditionsAreMet(r.getQuestionId()) && !r.isEmpty()) {
                 toSend.add(r);
             }
         }
