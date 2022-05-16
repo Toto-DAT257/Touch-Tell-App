@@ -70,9 +70,30 @@ public class Survey {
         return jsonQuestionsParser.getType(currentQuestionId);
     }
 
-    public Boolean isLastQuestion() {
+    public boolean isLastQuestion() {
         return jsonQuestionsParser.isLastQuestion(currentQuestionId);
     }
+
+    /**
+     * Takes conditional questions into account. Returns true even when current is not last when the next coming questions are conditional with unmet conditions
+     *
+     * @return true if the current question is the last to be shown in the survey
+     * (must be called after the response of current is saved)
+     */
+    private Boolean isLastQuestionToBeShown() {
+        String id = currentQuestionId;
+        while (true) {
+            if (jsonQuestionsParser.isLastQuestion(id)) {
+                return true;
+            } else {
+                id = jsonQuestionsParser.getNextQuestionId(id);
+                if (allConditionsAreMet(id)) {
+                    return false;
+                }
+            }
+        }
+    }
+
     public Boolean isFirstQuestion() {
         return jsonQuestionsParser.isFirstQuestion(currentQuestionId);
     }
@@ -92,7 +113,7 @@ public class Survey {
     public void nextQuestion() {
         support.firePropertyChange(SurveyEvent.SAVE_RESPONSE, "must write something", "");
 
-        if (isLastQuestion()) {
+        if (isLastQuestionToBeShown()) {
             support.firePropertyChange(SurveyEvent.SURVEY_DONE, currentQuestionId, "");
             return;
         }
