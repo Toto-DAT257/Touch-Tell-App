@@ -109,6 +109,7 @@ public class SurveyFragment extends Fragment {
         questionTextView.setVisibility(View.VISIBLE);
         separator.setVisibility(View.VISIBLE);
         loading.setVisibility(View.INVISIBLE);
+        nextButton.setVisibility(View.VISIBLE);
     }
 
     private void setHomeOnClickListener() {
