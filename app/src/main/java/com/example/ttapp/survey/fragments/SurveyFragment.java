@@ -77,6 +77,8 @@ public class SurveyFragment extends Fragment {
         hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
+        surveyViewModel.resetSurvey();
+
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         String identifier = sharedPref.getString("identifier", "");
 
@@ -111,7 +113,6 @@ public class SurveyFragment extends Fragment {
 
     private void setHomeOnClickListener() {
         homeButton.setOnClickListener(view -> {
-            surveyViewModel.resetSurvey();
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
         });
     }
@@ -237,7 +238,6 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.surveyIsDone().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
-                surveyViewModel.resetSurvey();
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_doneWithSurveyFragment);
                 surveyViewModel.submitResponse();
             }
