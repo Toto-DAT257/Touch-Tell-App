@@ -63,6 +63,7 @@
     <string name="submitbutton">submit</string>
     <string name="statistics">Statistics</string>
     <string name="start_survey">Start Survey</string>
+    <string name="submit_survey">Submit Survey</string>
     <string name="home">Home</string>
     <string name="log_out">Log Out</string>
 

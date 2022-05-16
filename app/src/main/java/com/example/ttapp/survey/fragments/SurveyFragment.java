@@ -48,6 +48,7 @@ public class SurveyFragment extends Fragment {
     FragmentContainerView questionFragmentContainer;
     TextView questionTextView;
     ProgressBar progressBar;
+    Button submitButton;
     boolean isExpanded = false;
 
     ProgressBar loading;
@@ -70,10 +71,14 @@ public class SurveyFragment extends Fragment {
         separator = binding.separator;
         loading = binding.loadingProgressBar;
         expandCollapseButton = binding.expandCollapseButton;
+        submitButton = binding.submitButton;
+        submitButton.setVisibility(View.INVISIBLE);
 
         hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
+        surveyViewModel.resetSurvey();
+
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         String identifier = sharedPref.getString("identifier", "");
 
@@ -108,7 +113,6 @@ public class SurveyFragment extends Fragment {
 
     private void setHomeOnClickListener() {
         homeButton.setOnClickListener(view -> {
-            surveyViewModel.resetSurvey();
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
         });
     }
@@ -234,14 +238,20 @@ public class SurveyFragment extends Fragment {
 
         surveyViewModel.surveyIsDone().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
-                surveyViewModel.resetSurvey();
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_doneWithSurveyFragment);
                 surveyViewModel.submitResponse();
             }
         });
 
         surveyViewModel.isLastQuestion().observe(getViewLifecycleOwner(), aBoolean -> {
-            // to be done further on, submitButton
+            if (aBoolean){
+                nextButton.setVisibility(View.INVISIBLE);
+                submitButton.setVisibility(View.VISIBLE);
+            }
+            else {
+                nextButton.setVisibility(View.VISIBLE);
+                submitButton.setVisibility(View.INVISIBLE);
+            }
         });
 
         surveyViewModel.isFirstQuestion().observe(getViewLifecycleOwner(), aBoolean -> {
@@ -255,6 +265,7 @@ public class SurveyFragment extends Fragment {
 
         backButton.setOnClickListener(click -> previous());
         nextButton.setOnClickListener(click -> next());
+        submitButton.setOnClickListener(click -> next());
     }
 
     private void next() {
