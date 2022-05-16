@@ -42,6 +42,7 @@
         android:paddingVertical="10dp"
         android:paddingStart="5dp"
         android:scaleType="fitCenter"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_arrow_next"
