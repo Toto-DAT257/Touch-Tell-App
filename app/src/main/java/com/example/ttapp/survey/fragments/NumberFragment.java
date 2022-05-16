@@ -30,7 +30,7 @@ public class NumberFragment extends QuestionFragment {
         numberResponse = view.findViewById(R.id.numberResponse);
         numberResponse.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            if (actionId == EditorInfo.IME_ACTION_GO) {
                 save();
                 surveyViewModel.nextQuestion();
                 handled = true;

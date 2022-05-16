@@ -30,7 +30,7 @@ public class EmailFragment extends QuestionFragment {
         emailResponse = view.findViewById(R.id.emailResponse);
         emailResponse.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            if (actionId == EditorInfo.IME_ACTION_GO) {
                 save();
                 surveyViewModel.nextQuestion();
                 handled = true;

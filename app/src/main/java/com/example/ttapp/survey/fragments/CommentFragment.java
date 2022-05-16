@@ -28,9 +28,13 @@ public class CommentFragment extends QuestionFragment {
     @Override
     protected void initResponseOptions() {
         commentResponse = view.findViewById(R.id.commentResponse);
+
+        // To have multiline with an action as enter key
+        commentResponse.setHorizontallyScrolling(false);
+        commentResponse.setMaxLines(Integer.MAX_VALUE);
         commentResponse.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            if (actionId == EditorInfo.IME_ACTION_GO) {
                 save();
                 surveyViewModel.nextQuestion();
                 handled = true;
