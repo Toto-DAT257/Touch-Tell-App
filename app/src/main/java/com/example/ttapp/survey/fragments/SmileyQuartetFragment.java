@@ -68,6 +68,7 @@ public class SmileyQuartetFragment extends QuestionFragment {
         });
     }
 
+
     private void setSmiley1Chosen() {
         smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
         smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);

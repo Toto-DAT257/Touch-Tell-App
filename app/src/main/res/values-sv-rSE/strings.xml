@@ -44,7 +44,10 @@
     <string name="smileyq_responseoption4">Gladast</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Skriv ditt svar här…</string>
+    <string name="comment_hinttext">Skriv ditt svar här...</string>
+
+    <!-- comment smiley question -->
+    <string name="comment_smiley_hinttext">Vänligen förklara ditt val...</string>
 
     <!-- NPS question -->
     <string name="nps_slider_label_right">Extremt</string>
@@ -67,5 +70,7 @@
     <string name="start_survey">Starta enkät</string>
     <string name="submit_survey">Skicka in</string>
     <string name="home">Hem</string>
+    <string name="button_comment_smiley">Kommentera</string>
+    <string name="button_back_smiley">Tillbaka</string>
 
 </resources>
