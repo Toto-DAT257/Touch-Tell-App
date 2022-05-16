@@ -3,11 +3,13 @@ package com.example.ttapp.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -60,6 +62,18 @@ public class RegisterFragment extends Fragment {
         loading = binding.loadingProgressBar;
 
         confirmButton.setOnClickListener(view1 -> identify());
+
+        idEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    identify();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
         return root;
     }

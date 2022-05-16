@@ -16,6 +16,7 @@
         android:hint="@string/email_hinttext"
         android:inputType="textEmailAddress"
         android:lines="1"
+        android:imeOptions="actionNext"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
         android:textColorHint="@color/white"

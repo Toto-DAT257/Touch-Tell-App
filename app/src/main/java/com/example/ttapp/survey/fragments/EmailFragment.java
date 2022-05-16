@@ -2,6 +2,7 @@ package com.example.ttapp.survey.fragments;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import com.example.ttapp.R;
@@ -18,7 +19,6 @@ import com.example.ttapp.R;
 public class EmailFragment extends QuestionFragment {
 
     private EditText emailResponse;
-    private String response;
 
     @Override
     protected void setView(LayoutInflater inflater, ViewGroup container) {
@@ -28,14 +28,25 @@ public class EmailFragment extends QuestionFragment {
     @Override
     protected void initResponseOptions() {
         emailResponse = view.findViewById(R.id.emailResponse);
+        emailResponse.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            boolean handled = false;
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                save();
+                surveyViewModel.nextQuestion();
+                handled = true;
+            }
+            return handled;
+        });
     }
 
     @Override
     protected void initSaveResponseObserver() {
-        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> {
-            response = emailResponse.getText().toString();
-            surveyViewModel.saveResponse(response);
-        });
+        surveyViewModel.getSaveResponse().observe(getViewLifecycleOwner(), bool -> save());
+    }
+
+    private void save() {
+        String response = emailResponse.getText().toString();
+        surveyViewModel.saveResponse(response);
     }
 
     @Override
