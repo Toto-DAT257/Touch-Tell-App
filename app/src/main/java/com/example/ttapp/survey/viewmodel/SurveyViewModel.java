@@ -2,7 +2,6 @@ package com.example.ttapp.survey.viewmodel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
@@ -11,21 +10,18 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.ttapp.APIRequester.Response;
 import com.example.ttapp.APIRequester.TTRequester;
+import com.example.ttapp.database.Task;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
 import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.util.SurveyEvent;
 
-import org.bson.Document;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.mongodb.RealmResultTask;
 
 /**
  * ViewModel for {@link SurveyFragment} and all types of question fragments
@@ -79,19 +75,17 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
      */
     public void loadQuestions(String identifier) {
         MongoDB db = MongoDB.getInstance();
-        RealmResultTask<Document> task = db.getDeviceIdTask(identifier);
-        task.getAsync(result -> {
-            if (result.isSuccess()) {
-                if (result.get() != null) {
-                    Log.i("DEVICE ID", result.get().toString());
-                    String deviceId = result.get().get("deviceId").toString();
+        db.getDeviceId(identifier, new Task() {
+            @Override
+            public void result(String deviceId) {
+                if (!deviceId.isEmpty()) {
                     requestFromAPI(deviceId, identifier);
-
-                } else {
-                    Log.e("Database", "Identifier not found");
                 }
-            } else {
-                Log.e("Database", "No access");
+            }
+
+            @Override
+            public void error(String error) {
+
             }
         });
     }

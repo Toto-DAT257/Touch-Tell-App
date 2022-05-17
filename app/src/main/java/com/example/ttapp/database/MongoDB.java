@@ -3,8 +3,6 @@ package com.example.ttapp.database;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.ttapp.APIRequester.TTRequester;
-
 import org.bson.Document;
 
 import java.util.Arrays;
@@ -14,6 +12,7 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.RealmResultTask;
+import io.realm.mongodb.User;
 
 
 /**
@@ -35,12 +34,16 @@ public class MongoDB {
      *
      * @return the app
      */
-    public static App getMongoApp() {
+    protected static App getMongoApp() {
         if (APP == null) {
             APP = new App(new AppConfiguration.Builder(APP_ID)
                     .build());
         }
         return APP;
+    }
+
+    public static User getUser() {
+        return getMongoApp().currentUser();
     }
 
     /**
@@ -141,7 +144,26 @@ public class MongoDB {
      * @param identifier the unique identifier associated with the user.
      * @return returns task to find device id.
      */
-    public RealmResultTask<Document> getDeviceIdTask(String identifier) {
+    private RealmResultTask<Document> getDeviceIdTask(String identifier) {
         return userRepo.getDeviceIdTask(identifier);
+    }
+
+    public void getDeviceId(String identifier, final Task task) {
+        getDeviceIdTask(identifier).getAsync(result -> {
+            if (result.isSuccess()) {
+                if (result.get() != null) {
+                    String deviceId = result.get().get("deviceId").toString();
+                    task.result(deviceId);
+                    Log.v("LOGIN", "Identifier " + deviceId);
+                } else {
+                    task.result("");
+                    Log.v("LOGIN", "Identifier not registered");
+                }
+            } else {
+                task.error("No database access");
+                Log.v("LOGIN", "Database access failed." + result.getError().toString());
+                MongoDB.getUser().logOutAsync(result1 -> Log.v("LOGOUT:", String.valueOf(result1.isSuccess())));
+            }
+        });
     }
 }
