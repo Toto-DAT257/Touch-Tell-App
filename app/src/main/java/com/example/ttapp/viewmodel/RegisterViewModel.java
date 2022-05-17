@@ -4,9 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.ttapp.database.Database;
-import com.example.ttapp.database.DebugDB;
-import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.database.Task;
+import com.example.ttapp.ApplicationState;
 
 /**
  * ViewModel for {@link com.example.ttapp.fragments.RegisterFragment}
@@ -35,9 +34,7 @@ public class RegisterViewModel extends ViewModel {
     }
 
     public void identify(String identifier) {
-        if (identifier.equals("debug")) {
-            Database.setConcreteDatabase(new DebugDB());
-        }
+        ApplicationState.enterStateByIdentifier(identifier);
         database.getDeviceIdTask(identifier, new Task() {
             @Override
             public void result(String deviceId) {

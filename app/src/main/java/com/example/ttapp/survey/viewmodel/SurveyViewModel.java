@@ -8,11 +8,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.ttapp.APIRequester.APIRequester;
 import com.example.ttapp.APIRequester.Response;
-import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.Database;
 import com.example.ttapp.database.Task;
-import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
 import com.example.ttapp.survey.model.MultipleChoiceOption;
 import com.example.ttapp.survey.model.Survey;
@@ -93,8 +92,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
     private void requestFromAPI(String deviceId, String identifier) {
         SurveyViewModel listener = this;
-        TTRequester ttRequester = TTRequester.getInstance();
-        ttRequester.requestQuestionJSONString(deviceId, new Response<String>() {
+        APIRequester apiRequester = APIRequester.getInstance();
+        apiRequester.requestQuestionJSONString(deviceId, new Response<String>() {
             @Override
             public void response(String json) {
                 survey = new Survey(json, deviceId, identifier);

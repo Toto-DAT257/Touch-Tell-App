@@ -1,6 +1,6 @@
 package com.example.ttapp.database;
 
-public interface ConcreteDatabase {
+public interface IDatabase {
 
     public void getDeviceIdTask(String identifier, final Task task);
 

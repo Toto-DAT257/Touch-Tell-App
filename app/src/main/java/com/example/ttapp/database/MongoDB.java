@@ -22,10 +22,11 @@ import io.realm.mongodb.User;
  * "Get" methods will return a {@link RealmResultTask} of the object rather than the object itself.
  * They need to be used asynchronously.
  */
-public class MongoDB implements ConcreteDatabase {
+public class MongoDB implements IDatabase {
 
     private static final String APP_ID = "touchandtellmobile-zbhsu";
     private static App APP;
+    private static MongoDB instance;
     private final IUserRepo userRepo;
 
     /**
@@ -39,6 +40,15 @@ public class MongoDB implements ConcreteDatabase {
                     .build());
         }
         return APP;
+    }
+
+    public static MongoDB getInstance() {
+        assertInitialized();
+        return instance;
+    }
+
+    public static void initialize(Context context) {
+        instance = new MongoDB(context);
     }
 
     private static User getUser() {
@@ -64,7 +74,14 @@ public class MongoDB implements ConcreteDatabase {
         }
     }
 
-    public MongoDB(Context context) {
+    private static void assertInitialized() {
+        if (instance == null) {
+            throw new IllegalStateException(MongoDB.class.getSimpleName() + " is not initialized," +
+                    "call initialize(...) first");
+        }
+    }
+
+    private MongoDB(Context context) {
         Realm.init(context);
         Thread t = new Thread() {
             public void run() {
@@ -110,18 +127,8 @@ public class MongoDB implements ConcreteDatabase {
         }
     }
 
-    /**
-     * Returns the task for finding the device id necessary to collect questions.
-     *
-     * @param identifier the unique identifier associated with the user.
-     * @return returns task to find device id.
-     */
-    private RealmResultTask<Document> getDeviceIdTaskFromRealm(String identifier) {
-        return userRepo.getDeviceIdTask(identifier);
-    }
-
     public void getDeviceIdTask(String identifier, final Task task) {
-        getDeviceIdTaskFromRealm(identifier).getAsync(result -> {
+        userRepo.getDeviceIdRealmTask(identifier).getAsync(result -> {
             if (result.isSuccess()) {
                 if (result.get() != null) {
                     String deviceId = result.get().get("deviceId").toString();
