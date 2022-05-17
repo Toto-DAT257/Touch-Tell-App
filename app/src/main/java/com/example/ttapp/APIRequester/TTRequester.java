@@ -52,7 +52,7 @@ public class TTRequester implements IAPIRequester {
      *
      * @return the requester-singleton
      */
-    public static synchronized TTRequester getInstance() {
+    public static TTRequester getInstance() {
         if (instance == null)
             throw new IllegalStateException(TTRequester.class.getSimpleName() + " is not initialized," +
                     "call initialize(...) first");

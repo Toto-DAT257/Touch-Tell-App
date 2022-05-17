@@ -1,0 +1,335 @@
+{
+  "version": "2.35.7",
+  "config": {},
+  "questions": [
+    {
+      "id": "6283c00f2f424b00046f2180",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Hur var din arbetsdag?"
+        },
+        {
+          "language": "en",
+          "text": "How was work today?"
+        }
+      ],
+      "type": "smiley-quartet",
+      "values": [
+        {
+          "image": "saddest",
+          "value": 1
+        },
+        {
+          "image": "sad",
+          "value": 2
+        },
+        {
+          "image": "happy",
+          "value": 3
+        },
+        {
+          "image": "happiest",
+          "value": 4
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c0302f424b00046f2181",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Skulle du rekommendera den här arbetsplatsen till andra?"
+        },
+        {
+          "language": "en",
+          "text": "Would you recommend this establishment to others?"
+        }
+      ],
+      "type": "yes-no",
+      "values": [
+        {
+          "image": "no",
+          "value": 1
+        },
+        {
+          "image": "yes",
+          "value": 2
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c07facd413000431a297",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Hur svåra anser du att dina arbetsuppgifter är?"
+        },
+        {
+          "language": "en",
+          "text": "How difficult do your find your tasks at work?"
+        }
+      ],
+      "type": "nps",
+      "values": [
+        {
+          "value": 0
+        },
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 4
+        },
+        {
+          "value": 5
+        },
+        {
+          "value": 6
+        },
+        {
+          "value": 7
+        },
+        {
+          "value": 8
+        },
+        {
+          "value": 9
+        },
+        {
+          "value": 10
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c0e1acd413000431a298",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Vilken veckodag tycker du är det jobbigaste arbetsdagen?"
+        },
+        {
+          "language": "en",
+          "text": "Which week-day at work do you usually find hardest?"
+        }
+      ],
+      "type": "multiple-choice",
+      "values": [
+        {
+          "value": 1,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Måndag"
+            },
+            {
+              "language": "en",
+              "text": "Monday"
+            }
+          ]
+        },
+        {
+          "value": 2,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Tisdag"
+            },
+            {
+              "language": "en",
+              "text": "Tuesday"
+            }
+          ]
+        },
+        {
+          "value": 3,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Onsdag"
+            },
+            {
+              "language": "en",
+              "text": "Wednesday"
+            }
+          ]
+        },
+        {
+          "value": 4,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Torsdag"
+            },
+            {
+              "language": "en",
+              "text": "Thursday"
+            }
+          ]
+        },
+        {
+          "value": 5,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Fredag"
+            },
+            {
+              "language": "en",
+              "text": "Friday"
+            }
+          ]
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c1802f424b00046f218f",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Vilka frukter tycker du om?"
+        },
+        {
+          "language": "sv",
+          "text": "Which fruits do you like?"
+        }
+      ],
+      "type": "select-many",
+      "values": [
+        {
+          "value": 1,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Äpplen"
+            },
+            {
+              "language": "en",
+              "text": "Apples"
+            }
+          ]
+        },
+        {
+          "value": 2,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Bananer"
+            },
+            {
+              "language": "en",
+              "text": "Bananas"
+            }
+          ]
+        },
+        {
+          "value": 3,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Päron"
+            },
+            {
+              "language": "en",
+              "text": "Pears"
+            }
+          ]
+        },
+        {
+          "value": 4,
+          "text": [
+            {
+              "language": "sv",
+              "text": "Apelsiner"
+            },
+            {
+              "language": "en",
+              "text": "Oranges"
+            }
+          ]
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c45aacd413000431a2cf",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Om du hade möjligheten, hade du sökt ditt nuvarande jobb igen?"
+        },
+        {
+          "language": "en",
+          "text": "If you hade the opportunity, would you apply for your current job again today?"
+        }
+      ],
+      "type": "yes-no",
+      "values": [
+        {
+          "image": "no",
+          "value": 1
+        },
+        {
+          "image": "yes",
+          "value": 2
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c50cacd413000431a2d0",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Om du bestämde dig för att säga upp dig imorgon, vad hade anledningen varit?"
+        },
+        {
+          "language": "en",
+          "text": "If you hade the opportunity, would you apply for your current job again today?"
+        }
+      ],
+      "type": "comment",
+      "values": [],
+      "conditions": [
+        {
+          "questions": [
+            {
+              "id": "6283c45aacd413000431a2cf",
+              "options": [
+                "1"
+              ]
+            }
+          ]
+        }
+      ],
+      "suggestedAnswers": []
+    },
+    {
+      "id": "6283c54f2f424b00046f21a2",
+      "text": [
+        {
+          "language": "sv",
+          "text": "Vänligen fyll i ditt telefonnummer för uppföljning"
+        },
+        {
+          "language": "sv",
+          "text": "Kindly enter your phone number for a follow-up"
+        }
+      ],
+      "type": "number",
+      "values": [],
+      "suggestedAnswers": []
+    }
+  ],
+  "error": null
+}

@@ -18,7 +18,7 @@ public class ApplicationState {
         switch (state) {
             case DEBUG:
                 Database.setConcreteDatabase(new DebugDB());
-                APIRequester.setConcreteAPIRequester(new DebugRequester());
+                APIRequester.setConcreteAPIRequester(DebugRequester.getInstance());
                 break;
             case PRODUCTION:
                 Database.setConcreteDatabase(MongoDB.getInstance());
