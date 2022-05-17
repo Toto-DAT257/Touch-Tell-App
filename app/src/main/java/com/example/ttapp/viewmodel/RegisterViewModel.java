@@ -3,6 +3,8 @@ package com.example.ttapp.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.ttapp.database.Database;
+import com.example.ttapp.database.DebugDB;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.database.Task;
 
@@ -11,11 +13,11 @@ import com.example.ttapp.database.Task;
  */
 public class RegisterViewModel extends ViewModel {
 
-    MongoDB database;
+    Database database;
     MutableLiveData<Boolean> identified;
     MutableLiveData<Boolean> databaseAccess;
 
-    public void setDatabase(MongoDB database) {
+    public void setDatabase(Database database) {
         this.database = database;
     }
 
@@ -33,7 +35,10 @@ public class RegisterViewModel extends ViewModel {
     }
 
     public void identify(String identifier) {
-        database.getDeviceId(identifier, new Task() {
+        if (identifier.equals("debug")) {
+            Database.setConcreteDatabase(new DebugDB());
+        }
+        database.getDeviceIdTask(identifier, new Task() {
             @Override
             public void result(String deviceId) {
                 if (!deviceId.isEmpty()) {

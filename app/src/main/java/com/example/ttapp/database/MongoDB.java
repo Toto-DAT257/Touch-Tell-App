@@ -22,12 +22,11 @@ import io.realm.mongodb.User;
  * "Get" methods will return a {@link RealmResultTask} of the object rather than the object itself.
  * They need to be used asynchronously.
  */
-public class MongoDB {
+public class MongoDB implements ConcreteDatabase {
 
     private static final String APP_ID = "touchandtellmobile-zbhsu";
     private static App APP;
-    private static MongoDB instance;
-    private static IUserRepo userRepo;
+    private final IUserRepo userRepo;
 
     /**
      * Gets the app for the database
@@ -42,38 +41,11 @@ public class MongoDB {
         return APP;
     }
 
-    public static User getUser() {
+    private static User getUser() {
         return getMongoApp().currentUser();
     }
 
-    /**
-     * Gets the database instance.
-     * @return the database instance.
-     */
-    public static MongoDB getInstance() {
-        if (instance == null)
-            throw new IllegalStateException(MongoDB.class.getSimpleName() + " is not initialized," +
-                    "call initialize(...) first");
-        return instance;
-    }
-
-    /**
-     * Initializes the database. This is required before using the database.
-     *
-     * @param context required to initialize the Mongo Realm.
-     *                Example:
-     *                From an activity use 'this'
-     *                From a fragment use 'getActivity()' or 'getContext()'
-     * @return the database
-     */
-    public static MongoDB initialize(Context context) {
-        if (instance == null) {
-            instance = new MongoDB(context);
-        }
-        return instance;
-    }
-
-    public static void assertLoggedIn() {
+    private static void assertLoggedIn() {
         assertAppNotNull();
         if (APP.currentUser() == null) {
             Log.v("LOGIN", "User was null, trying to log in");
@@ -92,7 +64,7 @@ public class MongoDB {
         }
     }
 
-    private MongoDB(Context context) {
+    public MongoDB(Context context) {
         Realm.init(context);
         Thread t = new Thread() {
             public void run() {
@@ -113,7 +85,7 @@ public class MongoDB {
      * Used to ensure that the user is logged in and can access the database.
      * If that is not the case it will run a new thread trying to log the user in before continuing.
      */
-    public static void assertDatabaseAccess() {
+    protected static void assertDatabaseAccess() {
         boolean access = false;
         try {
             if (APP.currentUser().isLoggedIn()) {
@@ -144,12 +116,12 @@ public class MongoDB {
      * @param identifier the unique identifier associated with the user.
      * @return returns task to find device id.
      */
-    private RealmResultTask<Document> getDeviceIdTask(String identifier) {
+    private RealmResultTask<Document> getDeviceIdTaskFromRealm(String identifier) {
         return userRepo.getDeviceIdTask(identifier);
     }
 
-    public void getDeviceId(String identifier, final Task task) {
-        getDeviceIdTask(identifier).getAsync(result -> {
+    public void getDeviceIdTask(String identifier, final Task task) {
+        getDeviceIdTaskFromRealm(identifier).getAsync(result -> {
             if (result.isSuccess()) {
                 if (result.get() != null) {
                     String deviceId = result.get().get("deviceId").toString();

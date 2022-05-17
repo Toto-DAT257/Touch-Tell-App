@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.example.ttapp.APIRequester.TTRequester;
+import com.example.ttapp.database.Database;
+import com.example.ttapp.database.DebugDB;
 import com.example.ttapp.database.MongoDB;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         TTRequester.initialize(this.getApplicationContext());
         TTRequester.enableLocalStorage(this.getPreferences(Context.MODE_PRIVATE));
         TTRequester.getInstance().sendOldResponses();
-        MongoDB.initialize(this.getApplicationContext());
+        Database.initialize(new MongoDB(this.getApplicationContext()));
     }
 
 }

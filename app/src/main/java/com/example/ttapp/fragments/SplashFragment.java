@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
+import com.example.ttapp.database.Database;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.viewmodel.RegisterViewModel;
 
@@ -27,7 +28,7 @@ public class SplashFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        registerViewModel.setDatabase(MongoDB.getInstance());
+        registerViewModel.setDatabase(Database.getInstance());
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
         observeIdentification(view);
 

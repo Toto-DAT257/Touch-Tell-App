@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.ttapp.APIRequester.Response;
 import com.example.ttapp.APIRequester.TTRequester;
+import com.example.ttapp.database.Database;
 import com.example.ttapp.database.Task;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.survey.fragments.SurveyFragment;
@@ -74,8 +75,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
      * @param identifier the identifier for the deviceId you want questions for.
      */
     public void loadQuestions(String identifier) {
-        MongoDB db = MongoDB.getInstance();
-        db.getDeviceId(identifier, new Task() {
+        Database db = Database.getInstance();
+        db.getDeviceIdTask(identifier, new Task() {
             @Override
             public void result(String deviceId) {
                 if (!deviceId.isEmpty()) {
