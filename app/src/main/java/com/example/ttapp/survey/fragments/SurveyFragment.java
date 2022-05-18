@@ -86,6 +86,8 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 thingsToDoAfterJsonIsSet();
+            } else {
+                signOut();
             }
         });
 
@@ -94,6 +96,14 @@ public class SurveyFragment extends Fragment {
         setExpandCollapseOnClickListener();
 
         return root;
+    }
+
+    private void signOut() {
+        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("identifier", "");
+        editor.apply();
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_registerFragment);
     }
 
     private void hideQuestion() {
@@ -113,9 +123,7 @@ public class SurveyFragment extends Fragment {
     }
 
     private void setHomeOnClickListener() {
-        homeButton.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
-        });
+        homeButton.setOnClickListener(view -> Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment));
     }
 
     private void setExpandCollapseOnClickListener() {

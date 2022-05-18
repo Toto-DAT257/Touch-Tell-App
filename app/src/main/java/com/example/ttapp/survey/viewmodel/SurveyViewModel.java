@@ -21,7 +21,6 @@ import org.bson.Document;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +88,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
 
                 } else {
                     Log.e("Database", "Identifier not found");
+                    jsonIsReceived.setValue(false);
                 }
             } else {
                 Log.e("Database", "No access");
