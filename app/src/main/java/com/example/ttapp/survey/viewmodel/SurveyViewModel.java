@@ -19,7 +19,6 @@ import com.example.ttapp.survey.util.SurveyEvent;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +79,8 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
             public void result(String deviceId) {
                 if (!deviceId.isEmpty()) {
                     requestFromAPI(deviceId, identifier);
+                } else {
+                    jsonIsReceived.setValue(false);
                 }
             }
 

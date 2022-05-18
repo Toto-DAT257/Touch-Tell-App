@@ -1,13 +1,16 @@
 package com.example.ttapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ttapp.APIRequester.APIRequester;
 import com.example.ttapp.debug.DebugRequester;
 import com.example.ttapp.APIRequester.TTRequester;
+import com.example.ttapp.Network.NetworkCallbackObservable;
 import com.example.ttapp.database.MongoDB;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
         ApplicationState.initializeComponentsRequiringActivity(this);
         ApplicationState.enterState(ApplicationState.State.PRODUCTION);
         APIRequester.getInstance().sendOldResponses();
+        NetworkCallbackObservable.initialize(this);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() == null) {
+            return true;
+        }
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 
 }

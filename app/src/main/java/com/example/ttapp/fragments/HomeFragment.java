@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.ttapp.Network.NetworkCallbackObservable;
+import com.example.ttapp.Network.NetworkCallbackObserver;
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentHomeBinding;
 
@@ -34,12 +37,14 @@ import com.example.ttapp.databinding.FragmentHomeBinding;
  *
  * @author Amanda Cyrén & Philip Winsnes
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements NetworkCallbackObserver {
 
     private SharedPreferences sharedPref;
 
     private ImageButton buttonUser, buttonCloseUserSection;
-    ConstraintLayout userContainer;
+    private Button buttonStartSurvey;
+    private TextView textViewErrorNoInternetConnection;
+    private ConstraintLayout userContainer;
 
     private boolean userSectionIsOpen;
 
@@ -51,10 +56,11 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
-        Button buttonStartSurvey = binding.buttonStartSurvey;
+        buttonStartSurvey = binding.buttonStartSurvey;
         Button buttonSignOut = binding.buttonSignOut;
         buttonUser = binding.buttonUser;
         buttonCloseUserSection = binding.buttonCloseUserSection;
+        textViewErrorNoInternetConnection = binding.errorNoInternetConnection;
         userContainer = binding.userContainer;
         TextView textViewIdentifier = binding.textViewIdentifierPreview;
         textViewIdentifier.setText(sharedPref.getString("identifier", "Error previewing the identifier"));
@@ -66,6 +72,14 @@ public class HomeFragment extends Fragment {
         buttonCloseUserSection.setOnClickListener(view -> onUserSectionButtonClick());
 
         buttonUser.setOnClickListener(view -> onUserSectionButtonClick());
+
+        if (NetworkCallbackObservable.getInstance().isNetworkAvailable(requireContext())) {
+            enableStartSurveyButton();
+        } else {
+            disableStartSurveyButton();
+        }
+
+        NetworkCallbackObservable.getInstance().observe(this);
 
         return root;
     }
@@ -152,6 +166,32 @@ public class HomeFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("identifier", "");
         editor.apply();
+    }
+
+    @Override
+    public void onNetworkAvailibe() {
+        enableStartSurveyButton();
+    }
+
+    @Override
+    public void onNetworkLost() {
+        disableStartSurveyButton();
+    }
+
+    private void enableStartSurveyButton() {
+        requireActivity().runOnUiThread(() -> {
+            buttonStartSurvey.setEnabled(true);
+            buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
+            textViewErrorNoInternetConnection.setVisibility(View.INVISIBLE);
+        });
+    }
+
+    private void disableStartSurveyButton() {
+        requireActivity().runOnUiThread(() -> {
+            buttonStartSurvey.setEnabled(false);
+            buttonStartSurvey.setTextColor(Color.parseColor("#66FFFFFF"));
+            textViewErrorNoInternetConnection.setVisibility(View.VISIBLE);
+        });
     }
 
 }

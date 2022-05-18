@@ -19,38 +19,49 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/smileyqResponseoption4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/ic_most_happy" />
+                android:background="@null"
+                android:padding="@dimen/smileypadding"
+                android:src="@drawable/button_most_happy"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/smileyqResponseoption3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/ic_happy" />
+                android:background="@null"
+                android:foregroundGravity="center"
+                android:padding="@dimen/smileypadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_happy"
+                tools:ignore="SpeakableTextPresentCheck" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/smileyqResponseoption2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/ic_angry" />
+                android:background="@null"
+                android:padding="@dimen/smileypadding"
+                android:src="@drawable/button_angry"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/smileyqResponseoption1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/ic_most_angry" />
+                android:background="@null"
+                android:padding="@dimen/smileypadding"
+                android:src="@drawable/button_most_angry"
+                tools:ignore="SpeakableTextPresentCheck" />
         </TableRow>
 
     </TableLayout>

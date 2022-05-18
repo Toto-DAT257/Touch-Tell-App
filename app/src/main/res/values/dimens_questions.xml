@@ -12,4 +12,7 @@
     <!-- yes no -->
     <dimen name="yesnoMargin">6dp</dimen>
 
+    <!-- smileys -->
+    <dimen name="smileypadding">7dp</dimen>
+
 </resources>

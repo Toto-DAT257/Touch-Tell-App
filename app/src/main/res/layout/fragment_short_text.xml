@@ -11,9 +11,10 @@
         android:id="@+id/shortTextResponse"
         style="@style/Body"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/edit_text_comment"
         android:gravity="top"
+        android:minHeight="100dp"
         android:hint="@string/comment_hinttext"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
@@ -21,6 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:imeOptions="actionGo"
+        android:inputType="text"
         tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
