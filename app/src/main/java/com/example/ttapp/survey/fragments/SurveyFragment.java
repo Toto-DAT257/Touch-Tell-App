@@ -86,8 +86,12 @@ public class SurveyFragment extends Fragment {
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 thingsToDoAfterJsonIsSet();
-            } else {
-                //signOut();
+            }
+        });
+
+        surveyViewModel.identifierNotFound().observe(getViewLifecycleOwner(), notFound -> {
+            if (notFound) {
+                signOut();
             }
         });
 
