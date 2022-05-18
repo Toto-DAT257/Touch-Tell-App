@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -94,6 +95,7 @@ public class HomeFragment extends Fragment {
                         // Stuff that updates the UI
                         Log.e("internet2", "Yey");
                         buttonStartSurvey.setEnabled(true);
+                        buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
                     }
                 });
             }
@@ -109,6 +111,7 @@ public class HomeFragment extends Fragment {
                         // Stuff that updates the UI
                         Log.e("internet2", "Ney");
                         buttonStartSurvey.setEnabled(false);
+                        buttonStartSurvey.setTextColor(Color.parseColor("#CCCCCC"));
                     }
                 });
 
