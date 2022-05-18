@@ -1,4 +1,4 @@
-package com.example.ttapp.APIRequester;
+package com.example.ttapp.debug;
 
 import android.content.Context;
 import android.os.Build;
@@ -6,12 +6,19 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.ttapp.APIRequester.IAPIRequester;
+import com.example.ttapp.APIRequester.Response;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+/**
+ * Singleton which gets the survey-JSON from a local asset. This class makes no requests to external
+ * resources.
+ */
 public class DebugRequester implements IAPIRequester {
 
     private static final String TAG = "DebugRequester";

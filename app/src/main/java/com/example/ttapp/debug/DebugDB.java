@@ -1,6 +1,9 @@
-package com.example.ttapp.database;
+package com.example.ttapp.debug;
 
 import android.util.Log;
+
+import com.example.ttapp.database.IDatabase;
+import com.example.ttapp.database.Task;
 
 public class DebugDB implements IDatabase {
 
