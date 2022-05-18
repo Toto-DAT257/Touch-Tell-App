@@ -87,7 +87,7 @@ public class SurveyFragment extends Fragment {
             if (aBoolean) {
                 thingsToDoAfterJsonIsSet();
             } else {
-                signOut();
+                //signOut();
             }
         });
 
