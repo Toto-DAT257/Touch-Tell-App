@@ -38,6 +38,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
     private final MutableLiveData<Boolean> saveResponse;
     private final MutableLiveData<Boolean> isLastQuestion;
     private final MutableLiveData<Boolean> isFirstQuestion;
+    private final MutableLiveData<Boolean> identifierNotFound;
 
     private MutableLiveData<String> commentResponse;
     private MutableLiveData<List<Integer>> answeroptionsResponse;
@@ -53,6 +54,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         isFirstQuestion = new MutableLiveData<>();
         commentResponse = new MutableLiveData<>();
         answeroptionsResponse = new MutableLiveData<>();
+        identifierNotFound = new MutableLiveData<>();
 
     }
 
@@ -61,6 +63,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         surveyIsDone.setValue(false);
         isFirstQuestion.setValue(true);
         isLastQuestion.setValue(false);
+        identifierNotFound.setValue(false);
     }
 
     public boolean isTransitionForward() {
@@ -80,7 +83,7 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
                 if (!deviceId.isEmpty()) {
                     requestFromAPI(deviceId, identifier);
                 } else {
-                    jsonIsReceived.setValue(false);
+                    identifierNotFound.setValue(false);
                 }
             }
 
@@ -142,7 +145,13 @@ public class SurveyViewModel extends ViewModel implements PropertyChangeListener
         return isLastQuestion;
     }
 
-    public LiveData<Boolean> isFirstQuestion() { return isFirstQuestion;}
+    public LiveData<Boolean> isFirstQuestion() {
+        return isFirstQuestion;
+    }
+
+    public LiveData<Boolean> identifierNotFound() {
+        return identifierNotFound;
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
