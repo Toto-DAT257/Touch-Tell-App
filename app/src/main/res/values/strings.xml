@@ -14,6 +14,7 @@
     <string name="email_header">E-mail:</string>
     <string name="error_id_is_empty">Not valid: You need to enter your mail</string>
     <string name="error_id_not_found">Not valid: Mail is not registered</string>
+    <string name="error_database_or_network">Could not connect to database or network</string>
     <string name="session_expired_toast">Session expired, please try again</string>
 
     <!-- home page -->

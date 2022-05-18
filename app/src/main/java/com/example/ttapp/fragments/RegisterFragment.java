@@ -36,11 +36,10 @@ public class RegisterFragment extends Fragment {
     private SharedPreferences sharedPref;
     private RegisterViewModel registerViewModel;
     private String identifier;
-    EditText idEditText;
-    Button confirmButton;
-    TextView errorIdIsEmpty;
-    TextView errorIdNotFound;
-    ProgressBar loading;
+    private EditText idEditText;
+    private Button confirmButton;
+    private TextView errorMessage;
+    private ProgressBar loading;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,8 +56,7 @@ public class RegisterFragment extends Fragment {
 
         idEditText = binding.textField;
         confirmButton = binding.buttonConfirmIdCode;
-        errorIdIsEmpty = binding.errorIdIsEmpty;
-        errorIdNotFound = binding.errorIdNotFound;
+        errorMessage = binding.errorMessage;
         loading = binding.loadingProgressBar;
 
         confirmButton.setOnClickListener(view1 -> identify());
@@ -92,7 +90,7 @@ public class RegisterFragment extends Fragment {
                 Navigation.findNavController(root).navigate(R.id.action_registerFragment_to_homeFragment);
             } else {
                 stopLoading();
-                errorIdNotFound.setVisibility(View.VISIBLE);
+                errorMessage.setText(R.string.error_id_not_found);
             }
         });
     }
@@ -100,7 +98,9 @@ public class RegisterFragment extends Fragment {
     private void observeDatabaseAccess() {
         registerViewModel.getDatabaseAccess().observe(getViewLifecycleOwner(), databaseAccess -> {
             if (!databaseAccess) {
-                Toast.makeText(getContext(), R.string.session_expired_toast, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), R.string.session_expired_toast, Toast.LENGTH_SHORT).show();
+                errorMessage.setText(R.string.error_database_or_network);
+                stopLoading();
             }
         });
     }
@@ -108,13 +108,12 @@ public class RegisterFragment extends Fragment {
 
     private void identify() {
         // Reset error messages
-        errorIdIsEmpty.setVisibility(View.INVISIBLE);
-        errorIdNotFound.setVisibility(View.INVISIBLE);
+        errorMessage.setText("");
 
         identifier = idEditText.getText().toString();
         if (identifier.isEmpty()) {
             // No identifier have been entered
-            errorIdIsEmpty.setVisibility(View.VISIBLE);
+            errorMessage.setText(R.string.error_id_is_empty);
         } else {
             // Identification is done by RegisterViewModel
             registerViewModel.identify(identifier);
@@ -137,4 +136,5 @@ public class RegisterFragment extends Fragment {
         editor.putString("identifier", identifier);
         editor.apply();
     }
+
 }
