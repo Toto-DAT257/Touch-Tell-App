@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
     private SharedPreferences sharedPref;
 
     private ImageButton buttonUser, buttonCloseUserSection;
+    private Button buttonStartSurvey, buttonSignOut;
     ConstraintLayout userContainer;
 
     private boolean userSectionIsOpen;
@@ -58,8 +59,8 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
-        Button buttonStartSurvey = binding.buttonStartSurvey;
-        Button buttonSignOut = binding.buttonSignOut;
+        buttonStartSurvey = binding.buttonStartSurvey;
+        buttonSignOut = binding.buttonSignOut;
         buttonUser = binding.buttonUser;
         buttonCloseUserSection = binding.buttonCloseUserSection;
         userContainer = binding.userContainer;
@@ -86,12 +87,14 @@ public class HomeFragment extends Fragment {
             public void onAvailable(Network network) {
                 // network available
                 Log.e("internet2", "Yey");
+                buttonStartSurvey.setEnabled(true);
             }
 
             @Override
             public void onLost(Network network) {
                 // network unavailable
                 Log.e("internet2", "Ney");
+                buttonStartSurvey.setEnabled(false);
             }
         };
 
