@@ -1,10 +1,13 @@
 package com.example.ttapp;
 
+import android.app.Activity;
+import android.content.Context;
+
 import com.example.ttapp.APIRequester.APIRequester;
-import com.example.ttapp.APIRequester.DebugRequester;
+import com.example.ttapp.debug.DebugRequester;
 import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.Database;
-import com.example.ttapp.database.DebugDB;
+import com.example.ttapp.debug.DebugDB;
 import com.example.ttapp.database.MongoDB;
 
 public class ApplicationState {
@@ -33,5 +36,13 @@ public class ApplicationState {
         } else {
             enterState(State.PRODUCTION);
         }
+    }
+
+    public static void initializeComponentsRequiringActivity(Activity activity) {
+        TTRequester.initialize(
+                activity.getApplicationContext(),
+                activity.getPreferences(Context.MODE_PRIVATE));
+        DebugRequester.initialize(activity.getApplicationContext());
+        MongoDB.initialize(activity.getApplicationContext());
     }
 }
