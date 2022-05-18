@@ -1,4 +1,4 @@
-package com.example.ttapp.Network;
+package com.example.ttapp.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

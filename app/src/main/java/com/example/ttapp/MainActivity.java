@@ -8,8 +8,8 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ttapp.APIRequester.TTRequester;
-import com.example.ttapp.Network.NetworkCallbackObservable;
 import com.example.ttapp.database.MongoDB;
+import com.example.ttapp.network.NetworkCallbackObservable;
 
 public class MainActivity extends AppCompatActivity {
 

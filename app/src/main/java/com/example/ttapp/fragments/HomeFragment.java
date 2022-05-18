@@ -22,10 +22,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.ttapp.Network.NetworkCallbackObservable;
-import com.example.ttapp.Network.NetworkCallbackObserver;
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentHomeBinding;
+import com.example.ttapp.network.NetworkCallbackObservable;
+import com.example.ttapp.network.NetworkCallbackObserver;
 
 /**
  * Class for a fragment that presents the home page to the application
