@@ -54,16 +54,16 @@ public class SmileyQuartetFragment extends QuestionFragment {
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             switch (integers.get(0)) {
                 case 1:
-                    changeSmiley(smileyqResponseoption1);
+                    changeSmiley(1, smileyqResponseoption1);
                     break;
                 case 2:
-                    changeSmiley(smileyqResponseoption2);
+                    changeSmiley(2, smileyqResponseoption2);
                     break;
                 case 3:
-                    changeSmiley(smileyqResponseoption3);
+                    changeSmiley(3, smileyqResponseoption3);
                     break;
                 case 4:
-                    changeSmiley(smileyqResponseoption4);
+                    changeSmiley(4, smileyqResponseoption4);
                     break;
             }
         });
@@ -76,36 +76,34 @@ public class SmileyQuartetFragment extends QuestionFragment {
         smileyqResponseoption4.setBackgroundResource(0);
     }
 
-    private void changeSmiley(ImageButton chosenSmiley) {
+    private void changeSmiley(int chosen, ImageButton chosenSmiley) {
         clearSmileys();
         chosenSmiley.setBackgroundResource(R.drawable.ic_smiley_chosen);
+        response.clear();
+        response.add(chosen);
     }
 
     private void initOnClickListeners() {
         smileyqResponseoption1.setOnClickListener(view -> {
-            changeSmiley(smileyqResponseoption1);
-            response.add(1);
+            changeSmiley(1, smileyqResponseoption1);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption2.setOnClickListener(view -> {
-            changeSmiley(smileyqResponseoption2);
-            response.add(2);
+            changeSmiley(2, smileyqResponseoption2);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption3.setOnClickListener(view -> {
-            changeSmiley(smileyqResponseoption3);
-            response.add(3);
+            changeSmiley(3, smileyqResponseoption3);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption4.setOnClickListener(view -> {
-            changeSmiley(smileyqResponseoption4);
-            response.add(4);
+            changeSmiley(4, smileyqResponseoption4);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
