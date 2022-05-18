@@ -1,17 +1,24 @@
 package com.example.ttapp.survey.fragments;
 
+import static android.view.View.GONE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -51,6 +58,17 @@ public class SurveyFragment extends Fragment {
     Button submitButton;
     boolean isExpanded = false;
 
+    //lagt på popupskärm i klass
+    ConstraintLayout homePopup;
+    TextView textViewLeavesurvey;
+    Button buttonLeaveSurveyNoSave;
+    ImageView buttonCloseHomePopup;
+
+
+    private boolean homePopupSectionOpen;
+    private final int DELAY_ANIMATION = 500;
+
+
     ProgressBar loading;
     ConstraintLayout separator;
 
@@ -74,6 +92,18 @@ public class SurveyFragment extends Fragment {
         submitButton = binding.submitButton;
         submitButton.setVisibility(View.INVISIBLE);
 
+       // fixat popupskärm
+        homePopup = binding.homePopup;
+        textViewLeavesurvey = binding.textViewLeavesurvey;
+        buttonLeaveSurveyNoSave = binding.buttonLeaveSurveyNoSave;
+        buttonCloseHomePopup = binding.buttonCloseHomePopup;
+       /*
+        homePopup.setVisibility(View.INVISIBLE);
+        textViewLeavesurvey.setVisibility(View.INVISIBLE);
+        buttonCloseUserSection.setVisibility(View.INVISIBLE);
+
+*/
+
         hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
@@ -90,8 +120,11 @@ public class SurveyFragment extends Fragment {
         });
 
         backButton.setVisibility(View.INVISIBLE);
-        setHomeOnClickListener();
+        //setHomeOnClickListener();
         setExpandCollapseOnClickListener();
+
+        homeButton.setOnClickListener(view -> popupOnClick());
+        buttonCloseHomePopup.setOnClickListener(view -> popupOnClick());
 
         return root;
     }
@@ -111,11 +144,89 @@ public class SurveyFragment extends Fragment {
         loading.setVisibility(View.INVISIBLE);
         nextButton.setVisibility(View.VISIBLE);
     }
-
+/*
     private void setHomeOnClickListener() {
         homeButton.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+            openPopupHome();
+
+
+           // Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
         });
+    }
+
+*/
+    public void popupOnClick() {
+        if(homePopupSectionOpen) {
+            cloePopupHome();
+        }
+        else {openPopupHome();}
+
+        homePopupSectionOpen =! homePopupSectionOpen;
+    }
+
+
+    public void openPopupHome() {
+        homeButton.setEnabled(false);
+        buttonCloseHomePopup.setEnabled(true);
+        changeStatusBarColor(R.color.toto_dark_grey);
+        homePopup.setVisibility(View.VISIBLE);
+
+        TranslateAnimation animate = new TranslateAnimation(
+                0,
+                0,
+                -homePopup.getHeight(),
+                0);
+        animate.setDuration(DELAY_ANIMATION);
+        animate.setFillAfter(true);
+        homePopup.startAnimation(animate);
+
+        new CountDownTimer(DELAY_ANIMATION, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                textViewLeavesurvey.setVisibility(View.VISIBLE);
+                buttonLeaveSurveyNoSave.setVisibility(View.VISIBLE);
+
+            }
+        }.start();
+    }
+
+    public void cloePopupHome() {
+        homeButton.setEnabled(false);
+        buttonCloseHomePopup.setEnabled(false);
+        TranslateAnimation animate = new TranslateAnimation(
+                0,
+                0,
+                0,
+                -homePopup.getHeight());
+        animate.setDuration(DELAY_ANIMATION);
+        animate.setFillAfter(true);
+        homePopup.startAnimation(animate);
+        homePopup.setVisibility(GONE);
+        new CountDownTimer(DELAY_ANIMATION, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                homeButton.setEnabled(true);
+                buttonCloseHomePopup.setEnabled(true);
+                changeStatusBarColor(R.color.toto_background_gradient_blue);
+            }
+        }.start();
+    }
+
+    private void changeStatusBarColor(int color) {
+        Window window = requireActivity().getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(getResources().getColor(color));
     }
 
     private void setExpandCollapseOnClickListener() {

@@ -71,5 +71,13 @@
     <string name="button_comment_smiley">Comment</string>
     <string name="button_back_smiley">Back</string>
     <string name="log_out">Log Out</string>
+    <string name="text_view_leave_survey">Your answers will not be saved if you leave. Do you want to send them now?</string>
+    <string name="quit_without_saving">Quit without saving</string>
+    <string name="quit_and_send">Quit and send</string>
+
+
+
+
+
 
 </resources>
