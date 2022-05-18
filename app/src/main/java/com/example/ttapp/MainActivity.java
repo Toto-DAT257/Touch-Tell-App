@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ttapp.APIRequester.TTRequester;
+import com.example.ttapp.Network.NetworkCallbackObservable;
 import com.example.ttapp.database.MongoDB;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         TTRequester.enableLocalStorage(this.getPreferences(Context.MODE_PRIVATE));
         TTRequester.getInstance().sendOldResponses();
         MongoDB.initialize(this.getApplicationContext());
+        NetworkCallbackObservable.initialize(this);
     }
 
     @Override

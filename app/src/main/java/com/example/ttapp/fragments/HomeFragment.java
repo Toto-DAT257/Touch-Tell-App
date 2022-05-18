@@ -5,15 +5,8 @@ import static android.view.View.GONE;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
-import android.net.NetworkRequest;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +22,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.ttapp.Network.NetworkCallbackObservable;
+import com.example.ttapp.Network.NetworkCallbackObserver;
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentHomeBinding;
 
@@ -42,7 +37,7 @@ import com.example.ttapp.databinding.FragmentHomeBinding;
  *
  * @author Amanda Cyrén & Philip Winsnes
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements NetworkCallbackObserver {
 
     private SharedPreferences sharedPref;
 
@@ -78,61 +73,15 @@ public class HomeFragment extends Fragment {
 
         buttonUser.setOnClickListener(view -> onUserSectionButtonClick());
 
-
-        if (isNetworkAvailable()) {
-            Log.e("internet", "Yey");
+        if (NetworkCallbackObservable.getInstance().isNetworkAvailable(requireContext())) {
+            enableStartSurveyButton();
         } else {
-            Log.e("internet", "Ney");
+            disableStartSurveyButton();
         }
 
-        ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(Network network) {
-                // network available
-                requireActivity().runOnUiThread(() -> {
-
-                    // Stuff that updates the UI
-                    Log.e("internet2", "Yey");
-                    buttonStartSurvey.setEnabled(true);
-                    buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
-                    textViewErrorNoInternetConnection.setVisibility(View.INVISIBLE);
-                });
-            }
-
-            @Override
-            public void onLost(Network network) {
-                // network unavailable
-                requireActivity().runOnUiThread(() -> {
-
-                    // Stuff that updates the UI
-                    Log.e("internet2", "Ney");
-                    buttonStartSurvey.setEnabled(false);
-                    buttonStartSurvey.setTextColor(Color.parseColor("#66FFFFFF"));
-                    textViewErrorNoInternetConnection.setVisibility(View.VISIBLE);
-                });
-
-            }
-        };
-
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connectivityManager.registerDefaultNetworkCallback(networkCallback);
-        } else {
-            NetworkRequest request = new NetworkRequest.Builder()
-                    .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).build();
-            connectivityManager.registerNetworkCallback(request, networkCallback);
-        }
+        NetworkCallbackObservable.getInstance().observe(this);
 
         return root;
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void startSurvey(View view) {
@@ -217,6 +166,32 @@ public class HomeFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("identifier", "");
         editor.apply();
+    }
+
+    @Override
+    public void onNetworkAvailibe() {
+        enableStartSurveyButton();
+    }
+
+    @Override
+    public void onNetworkLost() {
+        disableStartSurveyButton();
+    }
+
+    private void enableStartSurveyButton() {
+        requireActivity().runOnUiThread(() -> {
+            buttonStartSurvey.setEnabled(true);
+            buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
+            textViewErrorNoInternetConnection.setVisibility(View.INVISIBLE);
+        });
+    }
+
+    private void disableStartSurveyButton() {
+        requireActivity().runOnUiThread(() -> {
+            buttonStartSurvey.setEnabled(false);
+            buttonStartSurvey.setTextColor(Color.parseColor("#66FFFFFF"));
+            textViewErrorNoInternetConnection.setVisibility(View.VISIBLE);
+        });
     }
 
 }
