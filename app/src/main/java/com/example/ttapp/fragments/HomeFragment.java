@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
     private SharedPreferences sharedPref;
 
     private ImageButton buttonUser, buttonCloseUserSection;
-    private Button buttonStartSurvey, buttonSignOut;
+    private Button buttonStartSurvey;
     ConstraintLayout userContainer;
 
     private boolean userSectionIsOpen;
@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
         buttonStartSurvey = binding.buttonStartSurvey;
-        buttonSignOut = binding.buttonSignOut;
+        Button buttonSignOut = binding.buttonSignOut;
         buttonUser = binding.buttonUser;
         buttonCloseUserSection = binding.buttonCloseUserSection;
         userContainer = binding.userContainer;
@@ -87,32 +87,24 @@ public class HomeFragment extends Fragment {
             @Override
             public void onAvailable(Network network) {
                 // network available
-                requireActivity().runOnUiThread(new Runnable() {
+                requireActivity().runOnUiThread(() -> {
 
-                    @Override
-                    public void run() {
-
-                        // Stuff that updates the UI
-                        Log.e("internet2", "Yey");
-                        buttonStartSurvey.setEnabled(true);
-                        buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
-                    }
+                    // Stuff that updates the UI
+                    Log.e("internet2", "Yey");
+                    buttonStartSurvey.setEnabled(true);
+                    buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
                 });
             }
 
             @Override
             public void onLost(Network network) {
                 // network unavailable
-                requireActivity().runOnUiThread(new Runnable() {
+                requireActivity().runOnUiThread(() -> {
 
-                    @Override
-                    public void run() {
-
-                        // Stuff that updates the UI
-                        Log.e("internet2", "Ney");
-                        buttonStartSurvey.setEnabled(false);
-                        buttonStartSurvey.setTextColor(Color.parseColor("#CCCCCC"));
-                    }
+                    // Stuff that updates the UI
+                    Log.e("internet2", "Ney");
+                    buttonStartSurvey.setEnabled(false);
+                    buttonStartSurvey.setTextColor(Color.parseColor("#66FFFFFF"));
                 });
 
             }
