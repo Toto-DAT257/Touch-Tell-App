@@ -3,6 +3,7 @@ package com.example.ttapp.survey.fragments;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.ttapp.R;
@@ -21,10 +22,10 @@ import java.util.ArrayList;
  */
 public class SmileyQuartetFragment extends QuestionFragment {
 
-    private ImageView smileyqResponseoption1;
-    private ImageView smileyqResponseoption2;
-    private ImageView smileyqResponseoption3;
-    private ImageView smileyqResponseoption4;
+    private ImageButton smileyqResponseoption1;
+    private ImageButton smileyqResponseoption2;
+    private ImageButton smileyqResponseoption3;
+    private ImageButton smileyqResponseoption4;
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -68,29 +69,25 @@ public class SmileyQuartetFragment extends QuestionFragment {
         });
     }
 
-
     private void setSmiley1Chosen() {
-        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
-        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+        smileyqResponseoption1.setBackgroundResource(R.drawable.ic_smiley_chosen);
     }
 
     private void setSmiley2Chosen() {
-        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
-        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+        smileyqResponseoption2.setBackgroundResource(R.drawable.ic_smiley_chosen);
     }
 
     private void setSmiley3Chosen() {
-        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+        smileyqResponseoption3.setBackgroundResource(R.drawable.ic_smiley_chosen);
     }
 
     private void setSmiley4Chosen() {
-        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
+        smileyqResponseoption4.setBackgroundResource(R.drawable.ic_smiley_chosen);
+    }
+
+    private void changeSmiley(ImageButton chosenSmiley) {
+        clearSmileys();
+        chosenSmiley.setBackgroundResource(R.drawable.ic_smiley_chosen);
     }
 
     private void initOnClickListeners() {
@@ -122,4 +119,5 @@ public class SmileyQuartetFragment extends QuestionFragment {
             surveyViewModel.nextQuestion();
         });
     }
+
 }
