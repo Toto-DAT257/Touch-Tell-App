@@ -42,6 +42,13 @@ public class TTRequester implements IAPIRequester {
         }
     }
 
+    /**
+     * Initializes the requester, enabling calls to Touch&Tell as well as storing failed requests
+     * locally.
+     *
+     * @param context           The application context necessary for Volley.
+     * @param sharedPreferences SharedPreferences object to determine where the data should be saved.
+     */
     public static void initialize(Context context, SharedPreferences sharedPreferences) {
         TTRequester.initialize(context);
         enableLocalStorage(sharedPreferences);
@@ -61,7 +68,8 @@ public class TTRequester implements IAPIRequester {
 
     /**
      * Enables saving of data locally if a submission fails.
-     * @param sharedPreferences SharedPreference object to determine where the data should be saved.
+     *
+     * @param sharedPreferences SharedPreferences object to determine where the data should be saved.
      */
     public static void enableLocalStorage(SharedPreferences sharedPreferences) {
         storage = new PreferenceStorage(sharedPreferences);
@@ -95,7 +103,7 @@ public class TTRequester implements IAPIRequester {
     /**
      * Submits a json-document to Touch&Tells API.
      *
-     * @param jsonObject the document to send.
+     * @param jsonObject        the document to send.
      * @param saveLocallyOnFail whether the data should be stored locally if the request fails.
      */
     @Override
@@ -145,10 +153,10 @@ public class TTRequester implements IAPIRequester {
     /**
      * Submits a json-document to Touch&Tells API.
      *
-     * @param jsonObject the document to send.
+     * @param jsonObject        the document to send.
      * @param saveLocallyOnFail whether the data should be stored locally if the request fails.
-     * @param response   the response object defined by the client, determining how to evaluate the
-     *                   response.
+     * @param response          the response object defined by the client, determining how to evaluate the
+     *                          response.
      */
     @Override
     public void submitResponse(JSONObject jsonObject, boolean saveLocallyOnFail, final Response<String> response) {

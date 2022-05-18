@@ -10,6 +10,9 @@ import com.example.ttapp.database.Database;
 import com.example.ttapp.debug.DebugDB;
 import com.example.ttapp.database.MongoDB;
 
+/**
+ * Class for handling the application state.
+ */
 public class ApplicationState {
 
     public enum State {
@@ -17,6 +20,11 @@ public class ApplicationState {
         PRODUCTION
     }
 
+    /**
+     * Makes necessary changes to the backend depending on the state supplied.
+     *
+     * @param state the state that application should enter.
+     */
     public static void enterState(State state) {
         switch (state) {
             case DEBUG:
@@ -30,6 +38,11 @@ public class ApplicationState {
         }
     }
 
+    /**
+     * Enters an application state determined by the identification of the user.
+     *
+     * @param identifier the identifier for the user.
+     */
     public static void enterStateByIdentifier(String identifier) {
         if (identifier.equalsIgnoreCase("debug")) {
             enterState(State.DEBUG);
@@ -38,6 +51,11 @@ public class ApplicationState {
         }
     }
 
+    /**
+     * Supplies the backend with the necessary context.
+     *
+     * @param activity the activity that the backend should attach to.
+     */
     public static void initializeComponentsRequiringActivity(Activity activity) {
         TTRequester.initialize(
                 activity.getApplicationContext(),
