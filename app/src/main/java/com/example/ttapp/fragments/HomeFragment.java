@@ -48,7 +48,8 @@ public class HomeFragment extends Fragment {
 
     private ImageButton buttonUser, buttonCloseUserSection;
     private Button buttonStartSurvey;
-    ConstraintLayout userContainer;
+    private TextView textViewErrorNoInternetConnection;
+    private ConstraintLayout userContainer;
 
     private boolean userSectionIsOpen;
 
@@ -64,6 +65,7 @@ public class HomeFragment extends Fragment {
         Button buttonSignOut = binding.buttonSignOut;
         buttonUser = binding.buttonUser;
         buttonCloseUserSection = binding.buttonCloseUserSection;
+        textViewErrorNoInternetConnection = binding.errorNoInternetConnection;
         userContainer = binding.userContainer;
         TextView textViewIdentifier = binding.textViewIdentifierPreview;
         textViewIdentifier.setText(sharedPref.getString("identifier", "Error previewing the identifier"));
@@ -93,6 +95,7 @@ public class HomeFragment extends Fragment {
                     Log.e("internet2", "Yey");
                     buttonStartSurvey.setEnabled(true);
                     buttonStartSurvey.setTextColor(Color.parseColor("#FFFFFF"));
+                    textViewErrorNoInternetConnection.setVisibility(View.INVISIBLE);
                 });
             }
 
@@ -105,6 +108,7 @@ public class HomeFragment extends Fragment {
                     Log.e("internet2", "Ney");
                     buttonStartSurvey.setEnabled(false);
                     buttonStartSurvey.setTextColor(Color.parseColor("#66FFFFFF"));
+                    textViewErrorNoInternetConnection.setVisibility(View.VISIBLE);
                 });
 
             }
