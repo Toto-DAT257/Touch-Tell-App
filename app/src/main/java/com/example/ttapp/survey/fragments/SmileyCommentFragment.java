@@ -1,6 +1,5 @@
 package com.example.ttapp.survey.fragments;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,21 +121,13 @@ public class SmileyCommentFragment extends QuestionFragment {
 
     private void initOnClickListeners() {
 
-        smileyCResponseoption1.setOnClickListener(view -> {
-            changeSmiley(1, smileyCResponseoption1);
-        });
+        smileyCResponseoption1.setOnClickListener(view -> changeSmiley(1, smileyCResponseoption1));
 
-        smileyCResponseoption2.setOnClickListener(view -> {
-            changeSmiley(2, smileyCResponseoption2);
-        });
+        smileyCResponseoption2.setOnClickListener(view -> changeSmiley(2, smileyCResponseoption2));
 
-        smileyCResponseoption3.setOnClickListener(view -> {
-            changeSmiley(3, smileyCResponseoption3);
-        });
+        smileyCResponseoption3.setOnClickListener(view -> changeSmiley(3, smileyCResponseoption3));
 
-        smileyCResponseoption4.setOnClickListener(view -> {
-            changeSmiley(4, smileyCResponseoption4);
-        });
+        smileyCResponseoption4.setOnClickListener(view -> changeSmiley(4, smileyCResponseoption4));
 
         buttonCommentSmiley.setOnClickListener(view -> {
             buttonCommentSmiley.setVisibility(View.INVISIBLE);
