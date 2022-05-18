@@ -1,9 +1,11 @@
 package com.example.ttapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.MongoDB;
@@ -18,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
         TTRequester.enableLocalStorage(this.getPreferences(Context.MODE_PRIVATE));
         TTRequester.getInstance().sendOldResponses();
         MongoDB.initialize(this.getApplicationContext());
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() == null) {
+            return true;
+        }
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 
 }

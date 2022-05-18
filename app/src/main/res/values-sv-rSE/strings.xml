@@ -44,23 +44,23 @@
     <string name="smileyq_responseoption4">Gladast</string>
 
     <!-- comment question -->
-    <string name="comment_hinttext">Skriv ditt svar här...</string>
+    <string name="comment_hinttext">Skriv ditt svar här…</string>
 
     <!-- comment smiley question -->
-    <string name="comment_smiley_hinttext">Vänligen förklara ditt val...</string>
+    <string name="comment_smiley_hinttext">Vänligen förklara ditt val…</string>
 
     <!-- NPS question -->
     <string name="nps_slider_label_right">Extremt</string>
     <string name="nps_slider_label_left">Inte alls</string>
 
     <!-- short text question -->
-    <string name="short_text_hinttext">Skriv ditt svar här</string>
+    <string name="short_text_hinttext">Skriv ditt svar här…</string>
 
     <!-- number question -->
-    <string name="number_hinttext">Skriv ditt nummer här</string>
+    <string name="number_hinttext">Skriv nummer här…</string>
 
     <!-- email question -->
-    <string name="email_hinttext">Skriv din mail här</string>
+    <string name="email_hinttext">Skriv e-mail här…</string>
 
     <!-- survey -->
     <string name="backbutton">bakåt</string>

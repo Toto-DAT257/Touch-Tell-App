@@ -16,6 +16,7 @@
         android:hint="@string/number_hinttext"
         android:inputType="number"
         android:lines="1"
+        android:imeOptions="actionGo"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
         android:textColorHint="@color/white"
