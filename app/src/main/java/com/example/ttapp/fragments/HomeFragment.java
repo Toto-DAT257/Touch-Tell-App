@@ -86,15 +86,32 @@ public class HomeFragment extends Fragment {
             @Override
             public void onAvailable(Network network) {
                 // network available
-                Log.e("internet2", "Yey");
-                buttonStartSurvey.setEnabled(true);
+                requireActivity().runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        // Stuff that updates the UI
+                        Log.e("internet2", "Yey");
+                        buttonStartSurvey.setEnabled(true);
+                    }
+                });
             }
 
             @Override
             public void onLost(Network network) {
                 // network unavailable
-                Log.e("internet2", "Ney");
-                buttonStartSurvey.setEnabled(false);
+                requireActivity().runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        // Stuff that updates the UI
+                        Log.e("internet2", "Ney");
+                        buttonStartSurvey.setEnabled(false);
+                    }
+                });
+
             }
         };
 
