@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.example.ttapp.survey.model.QuestionResponse;
 import com.example.ttapp.survey.model.Survey;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,16 +21,8 @@ public class SurveyTest {
     TestSurveyClass survey;
 
     @Before
-    public void init() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        byte[] bytes = new byte[0];
-        try {
-            bytes = Files.readAllBytes(Paths.get("src/test/java/com/example/ttapp/responseNew.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String json = new String(bytes);
+    public void init() throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get("src/test/java/com/example/ttapp/responseNew.json")));
         String deviceId = "624b4f6fa23e9500043e154b";
         survey = new TestSurveyClass(json, deviceId, "user1");
     }

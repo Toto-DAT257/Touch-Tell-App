@@ -1,6 +1,5 @@
 package com.example.ttapp.survey.fragments;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,8 +20,11 @@ import java.util.ArrayList;
  */
 public class YesNoFragment extends QuestionFragment {
 
-    private Button yesnoResponseoption1;
-    private Button yesnoResponseoption2;
+    private Button responseOptionYes;
+    private Button responseOptionNo;
+    private static final int NO = 1;
+    private static final int YES = 2;
+
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -33,8 +35,8 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        yesnoResponseoption1 = view.findViewById(R.id.yesnoResponseoption1);
-        yesnoResponseoption2 = view.findViewById(R.id.yesnoResponseoption2);
+        responseOptionYes = view.findViewById(R.id.responseOptionYes);
+        responseOptionNo = view.findViewById(R.id.responseOptionNo);
         initOnClickListeners();
     }
 
@@ -47,25 +49,25 @@ public class YesNoFragment extends QuestionFragment {
     protected void initResponseObserver() {
         // todo
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
-            if (integers.get(0) == 1) {
-                yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
-                yesnoResponseoption2.setTextColor(getResources().getColor(R.color.grey));
+            if (integers.get(0) == NO) {
+                responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);
+                responseOptionNo.setTextColor(getResources().getColor(R.color.grey));
             } else {
-                yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
-                yesnoResponseoption1.setTextColor(getResources().getColor(R.color.grey));
+                responseOptionYes.setBackgroundResource(R.drawable.yes_button_state_pressed);
+                responseOptionYes.setTextColor(getResources().getColor(R.color.grey));
             }
         });
     }
 
     private void initOnClickListeners() {
-        yesnoResponseoption1.setOnClickListener(view -> {
-            response.add(1);
+        responseOptionYes.setOnClickListener(view -> {
+            response.add(YES);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
-        yesnoResponseoption2.setOnClickListener(view -> {
-            response.add(2);
+        responseOptionNo.setOnClickListener(view -> {
+            response.add(NO);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });

@@ -7,6 +7,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ttapp.APIRequester.APIRequester;
+import com.example.ttapp.debug.DebugRequester;
 import com.example.ttapp.APIRequester.TTRequester;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.network.NetworkCallbackObservable;
@@ -17,10 +19,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TTRequester.initialize(this.getApplicationContext());
-        TTRequester.enableLocalStorage(this.getPreferences(Context.MODE_PRIVATE));
-        TTRequester.getInstance().sendOldResponses();
-        MongoDB.initialize(this.getApplicationContext());
+        ApplicationState.initializeComponentsRequiringActivity(this);
+        ApplicationState.enterState(ApplicationState.State.PRODUCTION);
+        APIRequester.getInstance().sendOldResponses();
         NetworkCallbackObservable.initialize(this);
     }
 

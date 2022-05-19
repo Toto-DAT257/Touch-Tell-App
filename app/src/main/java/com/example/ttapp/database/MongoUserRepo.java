@@ -19,7 +19,7 @@ public class MongoUserRepo implements IUserRepo {
     private static final String COLLECTION = "Users";
 
     @Override
-    public RealmResultTask<Document> getDeviceIdTask(String identifier) {
+    public RealmResultTask<Document> getDeviceIdRealmTask(String identifier) {
         MongoCollection<Document> userCollection = getCollection();
         return getDeviceId(identifier, userCollection);
     }

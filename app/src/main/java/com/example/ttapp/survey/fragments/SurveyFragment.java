@@ -62,16 +62,7 @@ public class SurveyFragment extends Fragment {
         binding = FragmentSurveyBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
-        backButton = binding.surveyBackButton;
-        nextButton = binding.surveyNextButton;
-        questionFragmentContainer = binding.questionFragmentContainer;
-        questionTextView = binding.questionTextView;
-        homeButton = binding.home;
-        progressBar = binding.progressBar;
-        separator = binding.separator;
-        loading = binding.loadingProgressBar;
-        expandCollapseButton = binding.expandCollapseButton;
-        submitButton = binding.submitButton;
+        bindXMLElements();
         submitButton.setVisibility(View.INVISIBLE);
 
         hideQuestion();
@@ -100,6 +91,19 @@ public class SurveyFragment extends Fragment {
         setExpandCollapseOnClickListener();
 
         return root;
+    }
+
+    private void bindXMLElements() {
+        backButton = binding.surveyBackButton;
+        nextButton = binding.surveyNextButton;
+        questionFragmentContainer = binding.questionFragmentContainer;
+        questionTextView = binding.questionTextView;
+        homeButton = binding.home;
+        progressBar = binding.progressBar;
+        separator = binding.separator;
+        loading = binding.loadingProgressBar;
+        expandCollapseButton = binding.expandCollapseButton;
+        submitButton = binding.submitButton;
     }
 
     private void signOut() {
