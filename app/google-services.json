@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "384364112045",
+    "firebase_url": "https://email-test-35515-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "email-test-35515",
+    "storage_bucket": "email-test-35515.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384364112045:android:e5638da23758202306be24",
+        "android_client_info": {
+          "package_name": "com.example.email_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384364112045-73v9h7r18fglou0k0m2lfhcdoqorp8fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt9PKZ2jhlKrWyVCcB4QagKpr7mgzYs74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384364112045-73v9h7r18fglou0k0m2lfhcdoqorp8fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384364112045:android:922eec544479502306be24",
+        "android_client_info": {
+          "package_name": "com.example.ttapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384364112045-73v9h7r18fglou0k0m2lfhcdoqorp8fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt9PKZ2jhlKrWyVCcB4QagKpr7mgzYs74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384364112045-73v9h7r18fglou0k0m2lfhcdoqorp8fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
