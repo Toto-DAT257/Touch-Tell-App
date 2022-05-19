@@ -94,21 +94,12 @@ public class SurveyFragment extends Fragment {
         expandCollapseButton = binding.expandCollapseButton;
         submitButton = binding.submitButton;
         submitButton.setVisibility(View.INVISIBLE);
-
-       // fixat popupskärm
         homePopup = binding.homePopup;
         textViewLeavesurvey = binding.textViewLeavesurvey;
         buttonLeaveSurveyNoSave = binding.buttonLeaveSurveyNoSave;
         buttonCloseHomePopup = binding.buttonCloseHomePopup;
         QuitNoSave = binding.buttonLeaveSurveyNoSave;
         QuitAndSend = binding.buttonLeaveSurveySendAnswer;
-
-       /*
-        homePopup.setVisibility(View.INVISIBLE);
-        textViewLeavesurvey.setVisibility(View.INVISIBLE);
-        buttonCloseUserSection.setVisibility(View.INVISIBLE);
-
-*/
 
         hideQuestion();
 
@@ -135,7 +126,6 @@ public class SurveyFragment extends Fragment {
             surveyViewModel.submitResponse();
             Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
         });
-
 
         setExpandCollapseOnClickListener();
 
