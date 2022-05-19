@@ -39,7 +39,7 @@ public class NetworkCallbackObservable {
             @Override
             public void onAvailable(Network network) {
                 for (NetworkCallbackObserver observer : observers) {
-                    observer.onNetworkAvailibe();
+                    observer.onNetworkAvailable();
                 }
             }
 

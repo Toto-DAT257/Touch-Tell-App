@@ -15,7 +15,8 @@
     <string name="email_header">E-mail:</string>
     <string name="error_id_is_empty">Inte giltig: Du behöver skriva in din mail</string>
     <string name="error_id_not_found">Inte giltig: Mailen är inte registrerad</string>
-    <string name="error_database_or_network">Kunde inte ansluta till databasen eller internet</string>
+    <string name="error_database">Kunde inte ansluta till databasen. Vänligen starta om appen och försök igen.</string>
+    <string name="error_network">Kunde inte ansluta till internet. Vänligen kontrollera din internetanslutning och försök igen.</string>
     <string name="session_expired_toast">Sessionen har utgått, vänligen försök igen</string>
 
     <!-- home page -->

@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,8 +22,8 @@ import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
 import com.example.ttapp.database.Database;
-import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.databinding.FragmentRegisterBinding;
+import com.example.ttapp.network.NetworkCallbackObservable;
 import com.example.ttapp.viewmodel.RegisterViewModel;
 
 /**
@@ -60,15 +59,25 @@ public class RegisterFragment extends Fragment {
         errorMessage = binding.errorMessage;
         loading = binding.loadingProgressBar;
 
-        confirmButton.setOnClickListener(view1 -> identify());
+        confirmButton.setOnClickListener(view1 -> {
+            if (NetworkCallbackObservable.getInstance().isNetworkAvailable(requireContext())) {
+                identify();
+            } else {
+                errorMessage.setText(R.string.error_network);
+            }
+        });
 
         idEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    identify();
-                    handled = true;
+                    if (NetworkCallbackObservable.getInstance().isNetworkAvailable(requireContext())) {
+                        identify();
+                        handled = true;
+                    } else {
+                        errorMessage.setText(R.string.error_network);
+                    }
                 }
                 return handled;
             }
@@ -100,12 +109,11 @@ public class RegisterFragment extends Fragment {
         registerViewModel.getDatabaseAccess().observe(getViewLifecycleOwner(), databaseAccess -> {
             if (!databaseAccess) {
                 //Toast.makeText(getContext(), R.string.session_expired_toast, Toast.LENGTH_SHORT).show();
-                errorMessage.setText(R.string.error_database_or_network);
+                errorMessage.setText(R.string.error_database);
                 stopLoading();
             }
         });
     }
-
 
     private void identify() {
         // Reset error messages

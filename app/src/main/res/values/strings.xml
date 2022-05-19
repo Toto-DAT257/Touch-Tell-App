@@ -14,7 +14,8 @@
     <string name="email_header">E-mail:</string>
     <string name="error_id_is_empty">Not valid: You need to enter your mail</string>
     <string name="error_id_not_found">Not valid: Mail is not registered</string>
-    <string name="error_database_or_network">Could not connect to database or network</string>
+    <string name="error_database">Could not connect to the database. Please restart the app and try again.</string>
+    <string name="error_network">Could not connect to the internet. Please check your internet connection and try again.</string>
     <string name="session_expired_toast">Session expired, please try again</string>
 
     <!-- home page -->
