@@ -72,6 +72,7 @@
     <string name="button_comment_smiley">Comment</string>
     <string name="button_back_smiley">Back</string>
     <string name="log_out">Log Out</string>
+    <string name="default_notification_channel_id">survey-channel</string>
 
 
 </resources>
