@@ -184,4 +184,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homePopup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toto_dark_grey"
+        android:paddingBottom="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewLeavesurvey"
+            style="@style/Body"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/text_view_leave_survey"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCloseHomePopup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ImageButton
+            android:id="@+id/buttonCloseHomePopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@color/toto_transparent"
+            android:src="@drawable/ic_arrow_up_36"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLeavesurvey">
+
+            <android.widget.Button
+                android:id="@+id/buttonLeaveSurveyNoSave"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:width="220dp"
+                android:height="47dp"
+                android:background="@drawable/button"
+                android:includeFontPadding="false"
+                android:text="@string/quit_without_saving"
+                android:textAllCaps="false" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <android.widget.Button
+                android:id="@+id/buttonLeaveSurveySendAnswer"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:width="220dp"
+                android:height="47dp"
+                android:background="@drawable/button"
+                android:includeFontPadding="false"
+                android:text="@string/quit_and_send"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
