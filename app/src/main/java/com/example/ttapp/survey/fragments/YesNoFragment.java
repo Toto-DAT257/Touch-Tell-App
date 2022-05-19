@@ -50,11 +50,9 @@ public class YesNoFragment extends QuestionFragment {
     protected void initResponseObserver() {
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             if (integers.get(0) == NO) {
-                responseOptionNo.setBackgroundResource(R.drawable.yesno_button_state_pressed);
-                response.add(NO);
+                chooseAnswer(NO);
             } else {
-                responseOptionYes.setBackgroundResource(R.drawable.yesno_button_state_pressed);
-                response.add(YES);
+                chooseAnswer(YES);
             }
         });
     }
@@ -72,18 +70,26 @@ public class YesNoFragment extends QuestionFragment {
 
     private void initOnClickListeners() {
         responseOptionNo.setOnClickListener(view -> {
-            changeUIAnswerTo(NO);
-            response.add(NO);
+            chooseAnswer(NO);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         responseOptionYes.setOnClickListener(view -> {
-            changeUIAnswerTo(YES);
-            response.add(YES);
+            chooseAnswer(YES);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
+    }
+
+    private void chooseAnswer(int answer) {
+        changeUIAnswerTo(answer);
+        addResponse(answer);
+    }
+
+    private void addResponse(int answer) {
+        response.clear();
+        response.add(answer);
     }
 
 }
