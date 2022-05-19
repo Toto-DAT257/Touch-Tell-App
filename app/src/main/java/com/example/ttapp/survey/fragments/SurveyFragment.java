@@ -83,23 +83,40 @@ public class SurveyFragment extends Fragment {
         View root = binding.getRoot();
 
         bindXMLElements();
-        submitButton.setVisibility(View.INVISIBLE);
-        homePopup = binding.homePopup;
-        textViewLeavesurvey = binding.textViewLeavesurvey;
-        buttonLeaveSurveyNoSave = binding.buttonLeaveSurveyNoSave;
-        buttonCloseHomePopup = binding.buttonCloseHomePopup;
-        QuitNoSave = binding.buttonLeaveSurveyNoSave;
-        QuitAndSend = binding.buttonLeaveSurveySendAnswer;
-
-        hideQuestion();
 
         surveyViewModel = new ViewModelProvider(requireActivity()).get(SurveyViewModel.class);
         surveyViewModel.resetSurvey();
 
+        loadQuestions();
+        setObservers();
+        setOnClickListeners();
+        hideQuestion();
+        submitButton.setVisibility(View.INVISIBLE);
+        backButton.setVisibility(View.INVISIBLE);
+        return root;
+    }
+
+    private void loadQuestions() {
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         String identifier = sharedPref.getString("identifier", "");
-
         surveyViewModel.loadQuestions(identifier);
+    }
+
+    private void setOnClickListeners() {
+        QuitNoSave.setOnClickListener(view -> closePopupHome(true));
+
+        QuitAndSend.setOnClickListener(view -> {
+            surveyViewModel.submitResponse();
+            closePopupHome(true);
+        });
+
+        setExpandCollapseOnClickListener();
+
+        homeButton.setOnClickListener(view -> popupOnClick());
+        buttonCloseHomePopup.setOnClickListener(view -> popupOnClick());
+    }
+
+    private void setObservers() {
         surveyViewModel.getJsonIsReceivedIndicator().observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 thingsToDoAfterJsonIsSet();
@@ -111,24 +128,6 @@ public class SurveyFragment extends Fragment {
                 signOut();
             }
         });
-
-        backButton.setVisibility(View.INVISIBLE);
-
-        QuitNoSave.setOnClickListener(view -> {
-            closePopupHome(true);
-        });
-
-        QuitAndSend.setOnClickListener(view -> {
-            surveyViewModel.submitResponse();
-            closePopupHome(true);
-        });
-
-        setExpandCollapseOnClickListener();
-
-        homeButton.setOnClickListener(view -> popupOnClick());
-        buttonCloseHomePopup.setOnClickListener(view -> popupOnClick());
-
-        return root;
     }
 
     private void bindXMLElements() {
@@ -142,6 +141,12 @@ public class SurveyFragment extends Fragment {
         loading = binding.loadingProgressBar;
         expandCollapseButton = binding.expandCollapseButton;
         submitButton = binding.submitButton;
+        homePopup = binding.homePopup;
+        textViewLeavesurvey = binding.textViewLeavesurvey;
+        buttonLeaveSurveyNoSave = binding.buttonLeaveSurveyNoSave;
+        buttonCloseHomePopup = binding.buttonCloseHomePopup;
+        QuitNoSave = binding.buttonLeaveSurveyNoSave;
+        QuitAndSend = binding.buttonLeaveSurveySendAnswer;
     }
 
     private void signOut() {
