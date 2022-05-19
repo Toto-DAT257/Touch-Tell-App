@@ -36,8 +36,8 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        responseOptionYes = view.findViewById(R.id.yesnoResponseoption1);
-        responseOptionNo = view.findViewById(R.id.yesnoResponseoption2);
+        responseOptionYes = view.findViewById(R.id.responseOptionYes);
+        responseOptionNo = view.findViewById(R.id.responseOptionNo);
         initOnClickListeners();
     }
 
@@ -50,34 +50,36 @@ public class YesNoFragment extends QuestionFragment {
     protected void initResponseObserver() {
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             if (integers.get(0) == NO) {
-                responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);
+                responseOptionNo.setBackgroundResource(R.drawable.yesno_button_state_pressed);
+                response.add(NO);
             } else {
-                responseOptionYes.setBackgroundResource(R.drawable.yes_button_state_pressed);
+                responseOptionYes.setBackgroundResource(R.drawable.yesno_button_state_pressed);
+                response.add(YES);
             }
         });
     }
 
-    private void changeYesNoButton(int chosen) {
-        if(chosen == NO) {
-            responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);
-            responseOptionYes.setBackgroundResource(R.drawable.no_button_state_not_pressed);
+    private void changeUIAnswerTo(int answer) {
+        if(answer == NO) {
+            responseOptionNo.setBackgroundResource(R.drawable.yesno_button_state_pressed);
+            responseOptionYes.setBackgroundResource(R.drawable.yesno_button_state_not_pressed);
         }
-        if(chosen == YES){
-            responseOptionNo.setBackgroundResource(R.drawable.no_button_state_not_pressed);
-            responseOptionYes.setBackgroundResource(R.drawable.no_button_state_pressed);
+        if(answer == YES){
+            responseOptionNo.setBackgroundResource(R.drawable.yesno_button_state_not_pressed);
+            responseOptionYes.setBackgroundResource(R.drawable.yesno_button_state_pressed);
         }
     }
 
     private void initOnClickListeners() {
         responseOptionNo.setOnClickListener(view -> {
-            changeYesNoButton(NO);
+            changeUIAnswerTo(NO);
             response.add(NO);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         responseOptionYes.setOnClickListener(view -> {
-            changeYesNoButton(YES);
+            changeUIAnswerTo(YES);
             response.add(YES);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
