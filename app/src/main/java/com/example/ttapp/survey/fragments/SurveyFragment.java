@@ -33,6 +33,7 @@ import androidx.navigation.Navigation;
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
 import com.example.ttapp.survey.fragments.util.QuestionType;
+import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
@@ -63,6 +64,8 @@ public class SurveyFragment extends Fragment {
     TextView textViewLeavesurvey;
     Button buttonLeaveSurveyNoSave;
     ImageView buttonCloseHomePopup;
+    Button QuitNoSave;
+    Button QuitAndSend;
 
 
     private boolean homePopupSectionOpen;
@@ -97,6 +100,9 @@ public class SurveyFragment extends Fragment {
         textViewLeavesurvey = binding.textViewLeavesurvey;
         buttonLeaveSurveyNoSave = binding.buttonLeaveSurveyNoSave;
         buttonCloseHomePopup = binding.buttonCloseHomePopup;
+        QuitNoSave = binding.buttonLeaveSurveyNoSave;
+        QuitAndSend = binding.buttonLeaveSurveySendAnswer;
+
        /*
         homePopup.setVisibility(View.INVISIBLE);
         textViewLeavesurvey.setVisibility(View.INVISIBLE);
@@ -120,7 +126,17 @@ public class SurveyFragment extends Fragment {
         });
 
         backButton.setVisibility(View.INVISIBLE);
-        //setHomeOnClickListener();
+
+        QuitNoSave.setOnClickListener(view -> {
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+        });
+
+        QuitAndSend.setOnClickListener(view -> {
+            surveyViewModel.submitResponse();
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+        });
+
+
         setExpandCollapseOnClickListener();
 
         homeButton.setOnClickListener(view -> popupOnClick());
@@ -144,17 +160,8 @@ public class SurveyFragment extends Fragment {
         loading.setVisibility(View.INVISIBLE);
         nextButton.setVisibility(View.VISIBLE);
     }
-/*
-    private void setHomeOnClickListener() {
-        homeButton.setOnClickListener(view -> {
-            openPopupHome();
 
 
-           // Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
-        });
-    }
-
-*/
     public void popupOnClick() {
         if(homePopupSectionOpen) {
             cloePopupHome();
