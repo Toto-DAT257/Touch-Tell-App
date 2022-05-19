@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.widget.Button
-            android:id="@+id/yesnoResponseoption1"
+            android:id="@+id/responseOptionYes"
             style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:textAllCaps="false" />
 
         <android.widget.Button
-            android:id="@+id/yesnoResponseoption2"
+            android:id="@+id/responseOptionNo"
             style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,5 +39,7 @@
             android:includeFontPadding="true"
             android:text="@string/yes_no_responseoption2"
             android:textAllCaps="false" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

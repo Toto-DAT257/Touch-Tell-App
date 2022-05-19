@@ -20,6 +20,7 @@
     <string name="home_header">Home</string>
     <string name="home_start_survey_button">Start survey</string>
     <string name="home_settings_button">Settings</string>
+    <string name="error_no_internet_connection">No internet connection</string>
 
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>
@@ -74,6 +75,7 @@
     <string name="text_view_leave_survey">Your answers will not be saved if you leave. Do you want to send them now?</string>
     <string name="quit_without_saving">Quit without saving</string>
     <string name="quit_and_send">Quit and send</string>
+
 
 
 

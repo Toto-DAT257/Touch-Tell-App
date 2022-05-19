@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
+import com.example.ttapp.database.Database;
 import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.databinding.FragmentRegisterBinding;
 import com.example.ttapp.viewmodel.RegisterViewModel;
@@ -51,7 +52,7 @@ public class RegisterFragment extends Fragment {
 
         sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        registerViewModel.setDatabase(MongoDB.getInstance());
+        registerViewModel.setDatabase(Database.getInstance());
         observeIdentification(root);
         observeDatabaseAccess();
 
