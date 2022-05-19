@@ -9,6 +9,6 @@ import io.realm.mongodb.RealmResultTask;
  */
 public interface IUserRepo {
 
-    RealmResultTask<Document> getDeviceIdTask(String identifier);
+    RealmResultTask<Document> getDeviceIdRealmTask(String identifier);
 
 }

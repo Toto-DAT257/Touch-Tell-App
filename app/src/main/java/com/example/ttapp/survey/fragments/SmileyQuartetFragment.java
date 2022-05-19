@@ -1,9 +1,8 @@
 package com.example.ttapp.survey.fragments;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 
 import com.example.ttapp.R;
 
@@ -21,10 +20,10 @@ import java.util.ArrayList;
  */
 public class SmileyQuartetFragment extends QuestionFragment {
 
-    private ImageView smileyqResponseoption1;
-    private ImageView smileyqResponseoption2;
-    private ImageView smileyqResponseoption3;
-    private ImageView smileyqResponseoption4;
+    private ImageButton smileyqResponseoption1;
+    private ImageButton smileyqResponseoption2;
+    private ImageButton smileyqResponseoption3;
+    private ImageButton smileyqResponseoption4;
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -53,73 +52,59 @@ public class SmileyQuartetFragment extends QuestionFragment {
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             switch (integers.get(0)) {
                 case 1:
-                    setSmiley1Chosen();
+                    changeSmiley(1, smileyqResponseoption1);
                     break;
                 case 2:
-                    setSmiley2Chosen();
+                    changeSmiley(2, smileyqResponseoption2);
                     break;
                 case 3:
-                    setSmiley3Chosen();
+                    changeSmiley(3, smileyqResponseoption3);
                     break;
                 case 4:
-                    setSmiley4Chosen();
+                    changeSmiley(4, smileyqResponseoption4);
                     break;
             }
         });
     }
 
-
-    private void setSmiley1Chosen() {
-        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
-        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
+    private void clearSmileys() {
+        smileyqResponseoption1.setBackgroundResource(0);
+        smileyqResponseoption2.setBackgroundResource(0);
+        smileyqResponseoption3.setBackgroundResource(0);
+        smileyqResponseoption4.setBackgroundResource(0);
     }
 
-    private void setSmiley2Chosen() {
-        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
-        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
-    }
-
-    private void setSmiley3Chosen() {
-        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption4.setImageResource(R.drawable.ic_most_happy_not_chosen);
-    }
-
-    private void setSmiley4Chosen() {
-        smileyqResponseoption1.setImageResource(R.drawable.ic_most_angry_not_chosen);
-        smileyqResponseoption2.setImageResource(R.drawable.ic_angry_not_chosen);
-        smileyqResponseoption3.setImageResource(R.drawable.ic_happy_not_chosen);
+    private void changeSmiley(int chosen, ImageButton chosenSmiley) {
+        clearSmileys();
+        chosenSmiley.setBackgroundResource(R.drawable.ic_smiley_chosen);
+        response.clear();
+        response.add(chosen);
     }
 
     private void initOnClickListeners() {
         smileyqResponseoption1.setOnClickListener(view -> {
-            smileyqResponseoption1.setColorFilter(Color.argb(150,118,118,118));
-            response.add(1);
+            changeSmiley(1, smileyqResponseoption1);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption2.setOnClickListener(view -> {
-            smileyqResponseoption2.setColorFilter(Color.argb(150,118,118,118));
-            response.add(2);
+            changeSmiley(2, smileyqResponseoption2);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption3.setOnClickListener(view -> {
-            smileyqResponseoption3.setColorFilter(Color.argb(150,118,118,118));
-            response.add(3);
+            changeSmiley(3, smileyqResponseoption3);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         smileyqResponseoption4.setOnClickListener(view -> {
-            smileyqResponseoption4.setColorFilter(Color.argb(150,118,118,118));
-            response.add(4);
+            changeSmiley(4, smileyqResponseoption4);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
     }
+
 }

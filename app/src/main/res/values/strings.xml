@@ -21,6 +21,7 @@
     <string name="home_header">Home</string>
     <string name="home_start_survey_button">Start survey</string>
     <string name="home_settings_button">Settings</string>
+    <string name="error_no_internet_connection">No internet connection</string>
 
     <!-- first question -->
     <string name="first_question">Do you like your job?</string>
@@ -72,5 +73,6 @@
     <string name="button_comment_smiley">Comment</string>
     <string name="button_back_smiley">Back</string>
     <string name="log_out">Log Out</string>
+
 
 </resources>

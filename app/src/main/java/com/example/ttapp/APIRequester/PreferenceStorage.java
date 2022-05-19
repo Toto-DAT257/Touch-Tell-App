@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Concrete IResponseStorage class utilizing Android's {@link SharedPreferences} to store data.
- *
+ * <p>
  * Maximum capacity is 10 elements. Realistically only 1 should be needed.
  */
 public class PreferenceStorage implements IResponseStorage<JSONObject> {
@@ -27,6 +27,7 @@ public class PreferenceStorage implements IResponseStorage<JSONObject> {
     /**
      * Saves the {@link JSONObject} as a string in {@link SharedPreferences}. If maximum capacity is
      * reached no data will be saved.
+     *
      * @param response the object to be saved.
      */
     @Override
@@ -42,6 +43,7 @@ public class PreferenceStorage implements IResponseStorage<JSONObject> {
 
     /**
      * Removes the corresponding object in stored in {@link SharedPreferences} if there is one.
+     *
      * @param objectToRemove the object to be removed from storage.
      */
     @Override
@@ -57,6 +59,7 @@ public class PreferenceStorage implements IResponseStorage<JSONObject> {
 
     /**
      * Gets all the responses stored in {@link SharedPreferences}
+     *
      * @return all responses stored in {@link SharedPreferences}
      */
     @Override

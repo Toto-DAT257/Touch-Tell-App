@@ -23,6 +23,7 @@
     <string name="log_out">Logga ut</string>
     <string name="home_start_survey_button">Starta enkät</string>
     <string name="home_settings_button">Inställningar</string>
+    <string name="error_no_internet_connection">Ingen internetanslutning</string>
 
     <!-- first question -->
     <string name="first_question">Gillar du ditt jobb?</string>

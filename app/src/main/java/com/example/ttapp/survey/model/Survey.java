@@ -1,6 +1,6 @@
 package com.example.ttapp.survey.model;
 
-import com.example.ttapp.APIRequester.TTRequester;
+import com.example.ttapp.APIRequester.APIRequester;
 import com.example.ttapp.survey.model.jsonparsing.Condition;
 import com.example.ttapp.survey.model.jsonparsing.ConditionQuestion;
 import com.example.ttapp.survey.util.SurveyEvent;
@@ -272,8 +272,8 @@ public class Survey {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        TTRequester ttRequester = TTRequester.getInstance();
-        ttRequester.submitResponse(toSend, true);
+        APIRequester apiRequester = APIRequester.getInstance();
+        apiRequester.submitResponse(toSend, true);
         responses.clear();
     }
 
