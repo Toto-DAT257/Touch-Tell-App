@@ -2,8 +2,11 @@ package com.example.ttapp.survey.fragments;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.ttapp.R;
 
@@ -45,26 +48,37 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initResponseObserver() {
-        // todo
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
+
             if (integers.get(0) == 1) {
-                yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
-                yesnoResponseoption2.setTextColor(getResources().getColor(R.color.grey));
-            } else {
                 yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
-                yesnoResponseoption1.setTextColor(getResources().getColor(R.color.grey));
+            } else {
+                yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
             }
         });
     }
 
+    private void changeYesNoButton(int chosen) {
+        if(chosen == 1) {
+            yesnoResponseoption1.setBackgroundResource(R.drawable.no_button_state_pressed);
+            yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_not_pressed);
+        }
+        if(chosen == 2){
+            yesnoResponseoption1.setBackgroundResource(R.drawable.no_button_state_not_pressed);
+            yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
+        }
+    }
+
     private void initOnClickListeners() {
         yesnoResponseoption1.setOnClickListener(view -> {
+            changeYesNoButton(1);
             response.add(1);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
         yesnoResponseoption2.setOnClickListener(view -> {
+            changeYesNoButton(2);
             response.add(2);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();

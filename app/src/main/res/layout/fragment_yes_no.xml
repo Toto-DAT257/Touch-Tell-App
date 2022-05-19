@@ -39,5 +39,7 @@
             android:includeFontPadding="true"
             android:text="@string/yes_no_responseoption2"
             android:textAllCaps="false" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
