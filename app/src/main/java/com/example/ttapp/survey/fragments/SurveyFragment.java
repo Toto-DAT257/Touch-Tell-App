@@ -58,9 +58,8 @@ public class SurveyFragment extends Fragment {
     Button submitButton;
     boolean isExpanded = false;
 
-    //lagt på popupskärm i klass
     ConstraintLayout homePopup;
-    TextView textViewLeavesurvey;
+    TextView textViewLeaveSurvey;
     Button buttonLeaveSurveyNoSave;
     ImageView buttonCloseHomePopup;
     Button QuitNoSave;
@@ -142,7 +141,7 @@ public class SurveyFragment extends Fragment {
         expandCollapseButton = binding.expandCollapseButton;
         submitButton = binding.submitButton;
         homePopup = binding.homePopup;
-        textViewLeavesurvey = binding.textViewLeavesurvey;
+        textViewLeaveSurvey = binding.textViewLeavesurvey;
         buttonLeaveSurveyNoSave = binding.buttonLeaveSurveyNoSave;
         buttonCloseHomePopup = binding.buttonCloseHomePopup;
         QuitNoSave = binding.buttonLeaveSurveyNoSave;
@@ -210,7 +209,7 @@ public class SurveyFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                textViewLeavesurvey.setVisibility(View.VISIBLE);
+                textViewLeaveSurvey.setVisibility(View.VISIBLE);
                 buttonLeaveSurveyNoSave.setVisibility(View.VISIBLE);
 
             }
