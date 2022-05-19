@@ -47,7 +47,6 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initResponseObserver() {
-        // todo
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             if (integers.get(0) == NO) {
                 responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);

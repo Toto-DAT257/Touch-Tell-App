@@ -57,7 +57,6 @@ public class SelectManyFragment extends QuestionFragment {
 
     @Override
     protected void initResponseObserver() {
-        // todo
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             for (int i = 0; i < integers.size(); i++) {
                 System.out.println(integers.get(i));

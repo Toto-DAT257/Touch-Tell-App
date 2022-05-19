@@ -169,7 +169,7 @@ public class HomeFragment extends Fragment implements NetworkCallbackObserver {
     }
 
     @Override
-    public void onNetworkAvailibe() {
+    public void onNetworkAvailable() {
         enableStartSurveyButton();
     }
 
