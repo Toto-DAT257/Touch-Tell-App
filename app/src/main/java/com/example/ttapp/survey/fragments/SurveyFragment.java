@@ -33,7 +33,6 @@ import androidx.navigation.Navigation;
 import com.example.ttapp.R;
 import com.example.ttapp.databinding.FragmentSurveyBinding;
 import com.example.ttapp.survey.fragments.util.QuestionType;
-import com.example.ttapp.survey.model.Survey;
 import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
@@ -119,12 +118,12 @@ public class SurveyFragment extends Fragment {
         backButton.setVisibility(View.INVISIBLE);
 
         QuitNoSave.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+            closePopupHome(true);
         });
 
         QuitAndSend.setOnClickListener(view -> {
             surveyViewModel.submitResponse();
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+            closePopupHome(true);
         });
 
         setExpandCollapseOnClickListener();
@@ -154,7 +153,7 @@ public class SurveyFragment extends Fragment {
 
     public void popupOnClick() {
         if(homePopupSectionOpen) {
-            cloePopupHome();
+            closePopupHome(false);
         }
         else {openPopupHome();}
 
@@ -162,7 +161,7 @@ public class SurveyFragment extends Fragment {
     }
 
 
-    public void openPopupHome() {
+    private void openPopupHome() {
         homeButton.setEnabled(false);
         buttonCloseHomePopup.setEnabled(true);
         changeStatusBarColor(R.color.toto_dark_grey);
@@ -193,7 +192,7 @@ public class SurveyFragment extends Fragment {
         }.start();
     }
 
-    public void cloePopupHome() {
+    private void closePopupHome(boolean goHome) {
         homeButton.setEnabled(false);
         buttonCloseHomePopup.setEnabled(false);
         TranslateAnimation animate = new TranslateAnimation(
@@ -215,6 +214,9 @@ public class SurveyFragment extends Fragment {
                 homeButton.setEnabled(true);
                 buttonCloseHomePopup.setEnabled(true);
                 changeStatusBarColor(R.color.toto_background_gradient_blue);
+                if (goHome) {
+                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.action_surveyFragment_to_homeFragment);
+                }
             }
         }.start();
     }
