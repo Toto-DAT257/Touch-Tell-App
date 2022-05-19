@@ -62,16 +62,7 @@ public class SurveyFragment extends Fragment {
         binding = FragmentSurveyBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
 
-        backButton = binding.surveyBackButton;
-        nextButton = binding.surveyNextButton;
-        questionFragmentContainer = binding.questionFragmentContainer;
-        questionTextView = binding.questionTextView;
-        homeButton = binding.home;
-        progressBar = binding.progressBar;
-        separator = binding.separator;
-        loading = binding.loadingProgressBar;
-        expandCollapseButton = binding.expandCollapseButton;
-        submitButton = binding.submitButton;
+        bindXMLElements();
         submitButton.setVisibility(View.INVISIBLE);
 
         hideQuestion();
@@ -102,6 +93,19 @@ public class SurveyFragment extends Fragment {
         return root;
     }
 
+    private void bindXMLElements() {
+        backButton = binding.surveyBackButton;
+        nextButton = binding.surveyNextButton;
+        questionFragmentContainer = binding.questionFragmentContainer;
+        questionTextView = binding.questionTextView;
+        homeButton = binding.home;
+        progressBar = binding.progressBar;
+        separator = binding.separator;
+        loading = binding.loadingProgressBar;
+        expandCollapseButton = binding.expandCollapseButton;
+        submitButton = binding.submitButton;
+    }
+
     private void signOut() {
         SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -123,7 +127,9 @@ public class SurveyFragment extends Fragment {
         questionTextView.setVisibility(View.VISIBLE);
         separator.setVisibility(View.VISIBLE);
         loading.setVisibility(View.INVISIBLE);
-        nextButton.setVisibility(View.VISIBLE);
+        if (Boolean.FALSE.equals(surveyViewModel.isLastQuestion().getValue())) {
+            nextButton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setHomeOnClickListener() {

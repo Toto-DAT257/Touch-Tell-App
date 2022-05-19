@@ -3,8 +3,6 @@ package com.example.ttapp.database;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.ttapp.APIRequester.TTRequester;
-
 import org.bson.Document;
 
 import java.util.Arrays;
@@ -14,6 +12,7 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.RealmResultTask;
+import io.realm.mongodb.User;
 
 
 /**
@@ -23,19 +22,19 @@ import io.realm.mongodb.RealmResultTask;
  * "Get" methods will return a {@link RealmResultTask} of the object rather than the object itself.
  * They need to be used asynchronously.
  */
-public class MongoDB {
+public class MongoDB implements IDatabase {
 
     private static final String APP_ID = "touchandtellmobile-zbhsu";
     private static App APP;
     private static MongoDB instance;
-    private static IUserRepo userRepo;
+    private final IUserRepo userRepo;
 
     /**
      * Gets the app for the database
      *
      * @return the app
      */
-    public static App getMongoApp() {
+    protected static App getMongoApp() {
         if (APP == null) {
             APP = new App(new AppConfiguration.Builder(APP_ID)
                     .build());
@@ -43,34 +42,20 @@ public class MongoDB {
         return APP;
     }
 
-    /**
-     * Gets the database instance.
-     * @return the database instance.
-     */
     public static MongoDB getInstance() {
-        if (instance == null)
-            throw new IllegalStateException(MongoDB.class.getSimpleName() + " is not initialized," +
-                    "call initialize(...) first");
+        assertInitialized();
         return instance;
     }
 
-    /**
-     * Initializes the database. This is required before using the database.
-     *
-     * @param context required to initialize the Mongo Realm.
-     *                Example:
-     *                From an activity use 'this'
-     *                From a fragment use 'getActivity()' or 'getContext()'
-     * @return the database
-     */
-    public static MongoDB initialize(Context context) {
-        if (instance == null) {
-            instance = new MongoDB(context);
-        }
-        return instance;
+    public static void initialize(Context context) {
+        instance = new MongoDB(context);
     }
 
-    public static void assertLoggedIn() {
+    private static User getUser() {
+        return getMongoApp().currentUser();
+    }
+
+    private static void assertLoggedIn() {
         assertAppNotNull();
         if (APP.currentUser() == null) {
             Log.v("LOGIN", "User was null, trying to log in");
@@ -86,6 +71,13 @@ public class MongoDB {
                     .build());
         } else {
             Log.v("DATABASE", "App was not null");
+        }
+    }
+
+    private static void assertInitialized() {
+        if (instance == null) {
+            throw new IllegalStateException(MongoDB.class.getSimpleName() + " is not initialized," +
+                    "call initialize(...) first");
         }
     }
 
@@ -110,7 +102,7 @@ public class MongoDB {
      * Used to ensure that the user is logged in and can access the database.
      * If that is not the case it will run a new thread trying to log the user in before continuing.
      */
-    public static void assertDatabaseAccess() {
+    protected static void assertDatabaseAccess() {
         boolean access = false;
         try {
             if (APP.currentUser().isLoggedIn()) {
@@ -135,13 +127,22 @@ public class MongoDB {
         }
     }
 
-    /**
-     * Returns the task for finding the device id necessary to collect questions.
-     *
-     * @param identifier the unique identifier associated with the user.
-     * @return returns task to find device id.
-     */
-    public RealmResultTask<Document> getDeviceIdTask(String identifier) {
-        return userRepo.getDeviceIdTask(identifier);
+    public void getDeviceIdTask(String identifier, final Task task) {
+        userRepo.getDeviceIdRealmTask(identifier).getAsync(result -> {
+            if (result.isSuccess()) {
+                if (result.get() != null) {
+                    String deviceId = result.get().get("deviceId").toString();
+                    task.result(deviceId);
+                    Log.v("LOGIN", "Identifier " + deviceId);
+                } else {
+                    task.result("");
+                    Log.v("LOGIN", "Identifier not registered");
+                }
+            } else {
+                task.error("No database access");
+                Log.v("LOGIN", "Database access failed." + result.getError().toString());
+                MongoDB.getUser().logOutAsync(result1 -> Log.v("LOGOUT:", String.valueOf(result1.isSuccess())));
+            }
+        });
     }
 }

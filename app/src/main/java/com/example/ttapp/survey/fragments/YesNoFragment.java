@@ -1,12 +1,9 @@
 package com.example.ttapp.survey.fragments;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+
 
 import com.example.ttapp.R;
 
@@ -24,8 +21,11 @@ import java.util.ArrayList;
  */
 public class YesNoFragment extends QuestionFragment {
 
-    private Button yesnoResponseoption1;
-    private Button yesnoResponseoption2;
+    private Button responseOptionYes;
+    private Button responseOptionNo;
+    private static final int NO = 1;
+    private static final int YES = 2;
+
 
     private final ArrayList<Integer> response = new ArrayList<>();
 
@@ -36,8 +36,8 @@ public class YesNoFragment extends QuestionFragment {
 
     @Override
     protected void initResponseOptions() {
-        yesnoResponseoption1 = view.findViewById(R.id.yesnoResponseoption1);
-        yesnoResponseoption2 = view.findViewById(R.id.yesnoResponseoption2);
+        responseOptionYes = view.findViewById(R.id.yesnoResponseoption1);
+        responseOptionNo = view.findViewById(R.id.yesnoResponseoption2);
         initOnClickListeners();
     }
 
@@ -49,37 +49,36 @@ public class YesNoFragment extends QuestionFragment {
     @Override
     protected void initResponseObserver() {
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
-
-            if (integers.get(0) == 1) {
-                yesnoResponseoption1.setBackgroundResource(R.drawable.yes_button_state_pressed);
+            if (integers.get(0) == NO) {
+                responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);
             } else {
-                yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
+                responseOptionYes.setBackgroundResource(R.drawable.yes_button_state_pressed);
             }
         });
     }
 
     private void changeYesNoButton(int chosen) {
-        if(chosen == 1) {
-            yesnoResponseoption1.setBackgroundResource(R.drawable.no_button_state_pressed);
-            yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_not_pressed);
+        if(chosen == NO) {
+            responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);
+            responseOptionYes.setBackgroundResource(R.drawable.no_button_state_not_pressed);
         }
-        if(chosen == 2){
-            yesnoResponseoption1.setBackgroundResource(R.drawable.no_button_state_not_pressed);
-            yesnoResponseoption2.setBackgroundResource(R.drawable.no_button_state_pressed);
+        if(chosen == YES){
+            responseOptionNo.setBackgroundResource(R.drawable.no_button_state_not_pressed);
+            responseOptionYes.setBackgroundResource(R.drawable.no_button_state_pressed);
         }
     }
 
     private void initOnClickListeners() {
-        yesnoResponseoption1.setOnClickListener(view -> {
-            changeYesNoButton(1);
-            response.add(1);
+        responseOptionNo.setOnClickListener(view -> {
+            changeYesNoButton(NO);
+            response.add(NO);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
-        yesnoResponseoption2.setOnClickListener(view -> {
-            changeYesNoButton(2);
-            response.add(2);
+        responseOptionYes.setOnClickListener(view -> {
+            changeYesNoButton(YES);
+            response.add(YES);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
