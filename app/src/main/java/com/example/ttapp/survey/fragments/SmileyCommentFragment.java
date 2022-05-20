@@ -64,6 +64,7 @@ public class SmileyCommentFragment extends QuestionFragment {
         smileyComment.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             boolean handled = false;
             if (actionId == EditorInfo.IME_ACTION_GO) {
+                closeKeyboard();
                 save();
                 surveyViewModel.nextQuestion();
                 handled = true;

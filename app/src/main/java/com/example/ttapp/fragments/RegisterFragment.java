@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -23,7 +24,6 @@ import androidx.navigation.Navigation;
 
 import com.example.ttapp.R;
 import com.example.ttapp.database.Database;
-import com.example.ttapp.database.MongoDB;
 import com.example.ttapp.databinding.FragmentRegisterBinding;
 import com.example.ttapp.viewmodel.RegisterViewModel;
 
@@ -69,6 +69,7 @@ public class RegisterFragment extends Fragment {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    closeKeyboard();
                     identify();
                     handled = true;
                 }
@@ -77,6 +78,14 @@ public class RegisterFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void closeKeyboard() {
+        View view = requireActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager manager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void changeStatusBarColor(int color) {
