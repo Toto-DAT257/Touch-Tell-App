@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+
 import com.example.ttapp.R;
 
 import java.util.ArrayList;
@@ -49,27 +50,46 @@ public class YesNoFragment extends QuestionFragment {
     protected void initResponseObserver() {
         surveyViewModel.containsAnsweredOptionsResponse().observe(getViewLifecycleOwner(), integers -> {
             if (integers.get(0) == NO) {
-                responseOptionNo.setBackgroundResource(R.drawable.no_button_state_pressed);
-                responseOptionNo.setTextColor(getResources().getColor(R.color.grey));
+                chooseAnswer(NO);
             } else {
-                responseOptionYes.setBackgroundResource(R.drawable.yes_button_state_pressed);
-                responseOptionYes.setTextColor(getResources().getColor(R.color.grey));
+                chooseAnswer(YES);
             }
         });
     }
 
+    private void changeUIAnswerTo(int answer) {
+        if(answer == NO) {
+            responseOptionNo.setBackgroundResource(R.drawable.yesno_button_state_pressed);
+            responseOptionYes.setBackgroundResource(R.drawable.yesno_button_state_not_pressed);
+        }
+        if(answer == YES){
+            responseOptionNo.setBackgroundResource(R.drawable.yesno_button_state_not_pressed);
+            responseOptionYes.setBackgroundResource(R.drawable.yesno_button_state_pressed);
+        }
+    }
+
     private void initOnClickListeners() {
-        responseOptionYes.setOnClickListener(view -> {
-            response.add(YES);
+        responseOptionNo.setOnClickListener(view -> {
+            chooseAnswer(NO);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
 
-        responseOptionNo.setOnClickListener(view -> {
-            response.add(NO);
+        responseOptionYes.setOnClickListener(view -> {
+            chooseAnswer(YES);
             surveyViewModel.saveResponse(response);
             surveyViewModel.nextQuestion();
         });
+    }
+
+    private void chooseAnswer(int answer) {
+        changeUIAnswerTo(answer);
+        addResponse(answer);
+    }
+
+    private void addResponse(int answer) {
+        response.clear();
+        response.add(answer);
     }
 
 }

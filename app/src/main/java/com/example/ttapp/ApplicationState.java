@@ -2,6 +2,7 @@ package com.example.ttapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.ttapp.APIRequester.APIRequester;
 import com.example.ttapp.debug.DebugRequester;
@@ -49,6 +50,11 @@ public class ApplicationState {
         } else {
             enterState(State.PRODUCTION);
         }
+    }
+
+    public static void enterStateByIdentifier(SharedPreferences sharedPreferences) {
+        String identifier = sharedPreferences.getString("identifier", "");
+        enterStateByIdentifier(identifier);
     }
 
     /**

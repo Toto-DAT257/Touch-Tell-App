@@ -35,6 +35,7 @@ public class CommentFragment extends QuestionFragment {
         commentResponse.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             boolean handled = false;
             if (actionId == EditorInfo.IME_ACTION_GO) {
+                closeKeyboard();
                 save();
                 surveyViewModel.nextQuestion();
                 handled = true;

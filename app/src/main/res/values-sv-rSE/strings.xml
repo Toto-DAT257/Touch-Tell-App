@@ -75,5 +75,9 @@
     <string name="home">Hem</string>
     <string name="button_comment_smiley">Kommentera</string>
     <string name="button_back_smiley">Tillbaka</string>
+    <string name="text_view_leave_survey">Dina svar kommer inte sparas om du lämnar. Vill du skicka dem nu?</string>
+    <string name="quit_without_saving">Lämna utan att spara</string>
+    <string name="quit_and_send">Lämna och skicka</string>
+
 
 </resources>

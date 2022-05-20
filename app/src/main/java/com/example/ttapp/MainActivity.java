@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ApplicationState.initializeComponentsRequiringActivity(this);
-        ApplicationState.enterState(ApplicationState.State.PRODUCTION);
+        ApplicationState.enterStateByIdentifier(this.getPreferences(Context.MODE_PRIVATE));
         APIRequester.getInstance().sendOldResponses();
         NetworkCallbackObservable.initialize(this);
     }
