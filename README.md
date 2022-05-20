@@ -14,7 +14,7 @@ _This project is created by the group Toto. It is apart of the course Agile soft
 - Philip Winsnes
 
 ## Installation
-On an Android device, download the [latest apk build](https://github.com/Toto-DAT257/Touch-Tell-App/releases/download/v1.0.0/tt_app.apk). Follow the instructions and complete the installation.
+On an Android device, download the [latest apk build](https://github.com/Toto-DAT257/Touch-Tell-App/releases/download/v1.0.1/app-debug.apk). Follow the instructions and complete the installation.
 
 ## Documentation
 All documentations can be found [here](Documentation).
