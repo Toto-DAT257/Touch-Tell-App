@@ -32,9 +32,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/layoutMargin"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/layoutMargin"
         android:alpha="0.2"
         android:background="@drawable/separator"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         style="@style/Header_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/layoutMargin"
         android:layout_marginTop="16dp"
         android:text="@string/email_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,26 +54,26 @@
 
     <EditText
         android:id="@+id/text_field"
+        style="@style/Body"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:imeOptions="actionDone"
-        style="@style/Body"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/layoutMargin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/layoutMargin"
+        android:autofillHints=""
+        android:background="@drawable/edit_text_register"
         android:hint="@string/enter_e_mail_here"
+        android:imeOptions="actionDone"
+        android:inputType="textEmailAddress"
         android:paddingStart="16dp"
         android:singleLine="true"
         android:textColorHint="@color/white"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/edit_text_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:ignore="RtlSymmetry"
-        android:autofillHints=""
-        android:inputType="textEmailAddress" />
+        tools:ignore="RtlSymmetry" />
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"
@@ -109,27 +109,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/errorIdIsEmpty"
+        android:id="@+id/errorMessage"
         style="@style/Body"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layoutMargin"
         android:layout_marginTop="16dp"
-        android:text="@string/error_id_is_empty"
-        android:visibility="invisible"
+        android:layout_marginEnd="@dimen/layoutMargin"
+        android:text=""
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field" />
-
-    <TextView
-        android:id="@+id/errorIdNotFound"
-        style="@style/Body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/error_id_not_found"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
