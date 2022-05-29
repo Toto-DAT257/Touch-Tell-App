@@ -9,13 +9,6 @@ import com.example.ttapp.R;
 
 /**
  * Class for a fragment that presents a shortText-question
- * <p>
- * Used by: -
- * Uses: -
- * <p>
- * Created by
- *
- * @author Emma Stålberg
  */
 public class ShortTextFragment extends QuestionFragment {
 

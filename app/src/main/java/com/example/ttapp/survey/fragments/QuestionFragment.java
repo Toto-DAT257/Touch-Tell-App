@@ -15,13 +15,6 @@ import com.example.ttapp.survey.viewmodel.SurveyViewModel;
 
 /**
  * An abstract class for the question fragments.
- * <p>
- * Used by: -
- * Uses: -
- * <p>
- * Created by
- *
- * @author Emma Stålberg, Amanda Cyrén
  */
 public abstract class QuestionFragment extends Fragment {
 

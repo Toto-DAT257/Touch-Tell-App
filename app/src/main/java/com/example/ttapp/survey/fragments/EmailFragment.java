@@ -9,12 +9,6 @@ import com.example.ttapp.R;
 
 /**
  * Class for a fragment that presents an email-question
- *
- * Used by: -
- * Uses: -
- *
- * Created by
- * @author Emma Stålberg
  */
 public class EmailFragment extends QuestionFragment {
 

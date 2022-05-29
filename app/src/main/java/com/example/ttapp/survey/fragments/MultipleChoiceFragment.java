@@ -13,12 +13,6 @@ import java.util.List;
 
 /**
  * Class for a fragment that presents a multiplechoice-question
- *
- * Used by: -
- * Uses: -
- *
- * Created by
- * @author Emma Stålberg
  */
 public class MultipleChoiceFragment extends QuestionFragment {
 

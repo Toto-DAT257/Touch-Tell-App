@@ -10,13 +10,6 @@ import java.util.ArrayList;
 
 /**
  * Class for a fragment that presents a smiley-quartet question
- * <p>
- * Used by: -
- * Uses: -
- * <p>
- * Created by
- *
- * @author Emma Stålberg
  */
 public class SmileyQuartetFragment extends QuestionFragment {
 

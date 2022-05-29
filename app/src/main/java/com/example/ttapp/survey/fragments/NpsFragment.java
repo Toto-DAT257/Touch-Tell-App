@@ -13,13 +13,6 @@ import java.util.ArrayList;
 
 /**
  * Class for a fragment that presents a nps-question
- * <p>
- * Used by: -
- * Uses: -
- * <p>
- * Created by
- *
- * @author Emma Stålberg
  */
 public class NpsFragment extends QuestionFragment {
 

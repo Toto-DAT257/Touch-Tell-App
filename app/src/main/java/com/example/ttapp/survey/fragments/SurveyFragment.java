@@ -43,8 +43,6 @@ import com.example.ttapp.survey.viewmodel.SurveyViewModel;
  *     <li>{@link YesNoFragment}</li>
  *     <li>{@link NpsFragment}</li>
  * </ul>
- *
- * @author Simon Holst, Amanda Cyrén, Emma Stålberg
  */
 public class SurveyFragment extends Fragment {
 

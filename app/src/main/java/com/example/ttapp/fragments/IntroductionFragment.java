@@ -17,12 +17,6 @@ import com.example.ttapp.R;
 
 /**
  * Class for a fragment that presents the introduction page to the application
- *
- * Used by: -
- * Uses: -
- *
- * Created by
- * @author Alva Jansson, Fanny Söderling & Simon Holst
  */
 public class IntroductionFragment extends Fragment {
 

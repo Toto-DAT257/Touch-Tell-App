@@ -9,12 +9,6 @@ import com.example.ttapp.R;
 
 /**
  * Class for a fragment that presents a comment-question
- *
- * Used by: -
- * Uses: -
- *
- * Created by
- * @author Emma Stålberg
  */
 public class CommentFragment extends QuestionFragment {
 

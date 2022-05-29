@@ -29,8 +29,6 @@ import com.example.ttapp.viewmodel.RegisterViewModel;
 
 /**
  * Class for a fragment that presents the sign in screen
- *
- * @author Emelie Edberg
  */
 public class RegisterFragment extends Fragment {
 

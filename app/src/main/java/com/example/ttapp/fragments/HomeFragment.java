@@ -29,13 +29,6 @@ import com.example.ttapp.network.NetworkCallbackObserver;
 
 /**
  * Class for a fragment that presents the home page to the application
- * <p>
- * Used by: -
- * Uses: -
- * <p>
- * Created by
- *
- * @author Amanda Cyrén & Philip Winsnes
  */
 public class HomeFragment extends Fragment implements NetworkCallbackObserver {
 

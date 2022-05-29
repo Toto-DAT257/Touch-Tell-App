@@ -10,14 +10,7 @@ import com.example.ttapp.R;
 import java.util.ArrayList;
 
 /**
- * Class for a fragment that presents a yesno-question
- * <p>
- * Used by: -
- * Uses: -
- * <p>
- * Created by
- *
- * @author Emma Stålberg
+ * Class for a fragment that presents a yes / no question
  */
 public class YesNoFragment extends QuestionFragment {
 

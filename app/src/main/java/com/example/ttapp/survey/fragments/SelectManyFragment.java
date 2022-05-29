@@ -17,12 +17,6 @@ import java.util.Set;
 
 /**
  * Class for a fragment that presents a selectmany-question
- *
- * Used by: -
- * Uses: -
- *
- * Created by
- * @author Emma Stålberg
  */
 public class SelectManyFragment extends QuestionFragment {
 
