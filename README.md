@@ -19,3 +19,6 @@ On an Android device, download the [latest apk build](https://github.com/Toto-DA
 ## Documentation
 All documentations can be found [here](Documentation).
 The design can be found [here](https://www.figma.com/file/MEnIyDx8N99qo5V0hlLP9L/Design-Theme?node-id=0%3A1).
+
+### Scrumboard
+Håkan and Jan-Philipp have been invited to the Toto Jira [organisation](https://dat257toto.atlassian.net/jira) where all full deatiled user stories can be viewed. A PDF overview of the user storiey backlog can be found [here](Documentation/Product%20Documentation/Backlog.pdf).
