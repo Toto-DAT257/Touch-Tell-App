@@ -7,7 +7,7 @@
     <!-- introduction page -->
     <string name="introduction_header">Välkommen till applikationen Touch&amp;Tell </string>
     <string name="introduction_text">Detta är ett samarbete mellan ditt företag och Touch&amp;Tell. Genom att svara på frågor om ditt arbete kommer du ha chansen att påverka din arbetsmiljö och din arbetsbelastning. Alla dina svar kommer vara anonyma.</string>
-    <string name="introduction_button">Ta mig vidare</string>
+    <string name="introduction_button">Fortsätt</string>
 
     <!-- Registration -->
     <string name="enter_e_mail_here">Ange e-mail…</string>
@@ -77,6 +77,7 @@
     <string name="button_back_smiley">Tillbaka</string>
     <string name="text_view_leave_survey">Dina svar kommer inte sparas om du lämnar. Vill du skicka dem nu?</string>
     <string name="quit_without_saving">Lämna utan att spara</string>
+    <string name="default_notification_channel_id">survey-channel</string>
     <string name="quit_and_send">Lämna och skicka</string>
 
 
