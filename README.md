@@ -28,6 +28,7 @@ _This project was created by the group Toto for the course DAT257 - Agile Softwa
 </ul>
 
 <h2 id="installation"> Installation </h2>
+
 On an Android device, download the [latest apk build](https://github.com/Toto-DAT257/Touch-Tell-App/releases/download/v1.0.1/app-debug.apk). Follow the instructions and complete the installation.
 
 <h2 id="documentation"> Documentation </h2>
