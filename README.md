@@ -31,11 +31,13 @@ _This project was created by the group Toto for the course DAT257 - Agile Softwa
 On an Android device, download the [latest apk build](https://github.com/Toto-DAT257/Touch-Tell-App/releases/download/v1.0.1/app-debug.apk). Follow the instructions and complete the installation.
 
 <h2 id="documentation"> Documentation </h2>
+
 All documentations can be found [here](Documentation).
 
 The design can be found [here](https://www.figma.com/file/MEnIyDx8N99qo5V0hlLP9L/Design-Theme?node-id=0%3A1).
 
 <h2 id="scrumboard"> Scrum board </h2>
+
 Jira scrum board with all user stories can be found [here](https://dat257toto.atlassian.net/jira) (requires permission).
 
 A PDF overview of the user story backlog can be found [here](Documentation/Product%20Documentation/Backlog.pdf).
