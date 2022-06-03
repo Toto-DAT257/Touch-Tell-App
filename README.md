@@ -5,7 +5,7 @@ This android application provides a way for companies to collect information by 
 _This project was created by the group Toto for the course DAT257 - Agile Software Project Management at Chalmers University of Technology._
 
 ## Contents
-<a href="#participants"> ➤ Pariticipants </a>
+<a href="#participants"> ➤ Participants </a>
 
 <a href="#installation"> ➤ Installation </a>
 
